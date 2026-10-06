@@ -46,14 +46,14 @@ a{color:inherit}
 .grupo-titulo small{display:block;font:500 18px/1.4 var(--f-mono);letter-spacing:.04em;color:var(--tenue);margin-top:12px;text-transform:uppercase}
 .grupo-titulo .ok{color:var(--vivo)}
 .marco.dato{display:none}
-body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"],body[data-dentro="diseno"] .marco.dato[data-sala="diseno"],body[data-dentro="comunidad"] .marco.dato[data-sala="comunidad"],body[data-dentro="seo"] .marco.dato[data-sala="seo"]{display:block;animation:entra .45s ease-out both}
+body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"],body[data-dentro="diseno"] .marco.dato[data-sala="diseno"],body[data-dentro="comunidad"] .marco.dato[data-sala="comunidad"],body[data-dentro="seo"] .marco.dato[data-sala="seo"],body[data-dentro="paid"] .marco.dato[data-sala="paid"]{display:block;animation:entra .45s ease-out both}
 @keyframes entra{from{opacity:0}}
-#m-radar,#m-competencia,#m-control,#m-diseno,#m-comunidad,#m-seo{cursor:pointer}
-body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control,body[data-dentro="diseno"] #m-diseno,body[data-dentro="comunidad"] #m-comunidad,body[data-dentro="seo"] #m-seo{cursor:inherit}
+#m-radar,#m-competencia,#m-control,#m-diseno,#m-comunidad,#m-seo,#m-paid{cursor:pointer}
+body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control,body[data-dentro="diseno"] #m-diseno,body[data-dentro="comunidad"] #m-comunidad,body[data-dentro="seo"] #m-seo,body[data-dentro="paid"] #m-paid{cursor:inherit}
 .entrar-pista{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--sel);padding:6px 9px;border-radius:4px;box-shadow:0 0 18px rgba(61,123,255,.5)}
-body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista,body[data-dentro="comunidad"] #m-comunidad .entrar-pista,body[data-dentro="seo"] #m-seo .entrar-pista,body[data-dentro="diseno"] #m-diseno .entrar-pista{display:none}
+body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista,body[data-dentro="comunidad"] #m-comunidad .entrar-pista,body[data-dentro="seo"] #m-seo .entrar-pista,body[data-dentro="paid"] #m-paid .entrar-pista,body[data-dentro="diseno"] #m-diseno .entrar-pista{display:none}
 .salir{display:none}
-body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir,body[data-dentro="comunidad"] #m-comunidad .salir,body[data-dentro="seo"] #m-seo .salir{display:inline-flex}
+body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir,body[data-dentro="comunidad"] #m-comunidad .salir,body[data-dentro="seo"] #m-seo .salir,body[data-dentro="paid"] #m-paid .salir{display:inline-flex}
 #m-control{border-color:#4a4128}
 #chat[hidden]{display:none}
 .vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:16px 20px 20px}
@@ -81,6 +81,7 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
 .ctrl-sello.validada{border-color:#2f5b1d;color:#b5dd4a;background:#0f1a09}
 .ctrl-sello.ajustar{border-color:#6b3a1d;color:#ffb38a;background:#1d120b}
 .ctrl-nota{font-size:12px;line-height:1.45;color:#e8d9a8;border-left:2px solid #c9a227;padding-left:8px}
+#m-paid:hover{box-shadow:0 0 0 1px rgba(244,114,182,.5),0 0 70px rgba(244,114,182,.18),0 30px 80px rgba(0,0,0,.6)}
 #m-seo:hover{box-shadow:0 0 0 1px rgba(45,212,191,.5),0 0 70px rgba(45,212,191,.18),0 30px 80px rgba(0,0,0,.6)}
 #m-comunidad:hover{box-shadow:0 0 0 1px rgba(192,132,252,.5),0 0 70px rgba(192,132,252,.18),0 30px 80px rgba(0,0,0,.6)}
 .k-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 20px 4px}
@@ -533,10 +534,13 @@ const MARCOS=[
   {id:"seo",grupo:"seo",nombre:"SEO / Sala",x:3900,y:1300,w:1200},
   {id:"o_audit",grupo:"seo",dato:true,nombre:"SEO / Auditoría técnica",x:5260,y:1300,w:1500},
   {id:"o_plan",grupo:"seo",dato:true,nombre:"SEO / Conexiones, rutas y plan",x:6860,y:1300,w:1200},
-  {id:"paid",grupo:"obras",nombre:"Paid Media",x:3900,y:2250,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
+  {id:"paid",grupo:"paid",nombre:"Paid Media / Sala",x:3900,y:2250,w:1200},
+  {id:"p_rend",grupo:"paid",dato:true,nombre:"Paid Media / Meta Ads: rendimiento",x:5260,y:2250,w:1500},
+  {id:"p_plan",grupo:"paid",dato:true,nombre:"Paid Media / Diagnóstico y plan",x:6860,y:2250,w:1200},
+  {id:"p_brief",grupo:"paid",dato:true,nombre:"Paid Media / Briefing del equipo",x:8160,y:2250,w:1300},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula","cerebro"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"],seo:["seo","o_audit","o_plan"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula","cerebro"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"],seo:["seo","o_audit","o_plan"],paid:["paid","p_rend","p_plan","p_brief"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
@@ -545,7 +549,7 @@ const PASILLOS_DEF=[
   {id:"pa7",d:"M400 2156 V3400",c:"#f5d76e",txt:"Directrices → Competencia",sub:"control.directrices.competencia",lx:340,ly:2800,fin:true},
   {id:"pa2",d:"M2300 656 V1100 H1000 V1500",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada 4 h",lx:2240,ly:880,fin:true},
   {id:"pa14",d:"M1200 1650 H3900",c:"#2dd4bf",txt:"Directrices y SEO ↔ Control",sub:"seo.auditoria · control.directrices.seo",lx:3000,ly:1610},
-  {id:"pa15",d:"M1200 2000 H3500 V2550 H3900",c:"#f472b6",txt:"Control → Paid Media",sub:"en obras",lx:3000,ly:1960},
+  {id:"pa15",d:"M1200 2000 H3500 V2550 H3900",c:"#f472b6",txt:"Paid Media ↔ Control",sub:"paid.analisis · control.directrices.paid",lx:3000,ly:1960},
   {id:"pa13",d:"M1150 1500 V1300 H2700 V656",c:"#f5d76e",txt:"Directrices → Comunidad",sub:"control.directrices.comunidad",lx:2760,ly:880},
   {id:"pa11",d:"M1200 270 H1900",c:"#3d7bff",txt:"Lo viral → Comunidad",sub:"radar.hallazgos",lx:1250,ly:215},
   {id:"pa12",d:"M1900 450 H1200",c:"#c084fc",txt:"Lo que pregunta tu audiencia → Radar",sub:"comunidad.preguntas",lx:1250,ly:540},
@@ -554,7 +558,7 @@ const PASILLOS_DEF=[
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,chatSala:"control",dis:{piezas:[],tend:null,estado:null,videos:[],biblio:[],bFiltro:"todo"},seo:{audit:null,estado:null},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{},cerebro:null},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,chatSala:"control",dis:{piezas:[],tend:null,estado:null,videos:[],biblio:[],bFiltro:"todo"},seo:{audit:null,estado:null},paid:{analisis:null,estado:null,briefing:null},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{},cerebro:null},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -614,7 +618,7 @@ function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;
   st.marcoSel=id;marcarSel();volarA(caja(m))}
 function verTodo(){if(st.dentro)salir(false);st.marcoSel=null;marcarSel();volarA(cajaTotal())}
 function entrar(sala="radar",foco){
-  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();pintarSeo();if(sala==="comunidad")suscribirComunidad();
+  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();pintarSeo();pintarPaid();if(sala==="comunidad")suscribirComunidad();
   requestAnimationFrame(()=>volarA(foco&&foco!==sala?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(SALAS_ACT[sala]),50));
 }
 function salir(volar=true){
@@ -700,7 +704,7 @@ function construir(){
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
          <div class="grupo-titulo" style="left:1900px;top:-230px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
          <div class="grupo-titulo" style="left:3900px;top:1070px;color:#5eead4;font-size:56px">SEO<small><span class="ok">● Activa</span> · 6 especialistas · auditoría, palabras clave y analítica</small></div>
-         <div class="grupo-titulo" style="left:3900px;top:2020px;color:#5d6774;font-size:56px">Paid Media</div>`;
+         <div class="grupo-titulo" style="left:3900px;top:2020px;color:#f9a8d4;font-size:56px">Paid Media<small><span class="ok">● Activa</span> · 7 especialistas · Meta Ads conectado</small></div>`;
   for(const m of MARCOS){
     h+=`<section class="marco${m.dato?" dato":""}" ${m.dato?`data-sala="${m.sala}"`:""} id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px${m.arriba?";transform:translateY(-100%)":""}"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
@@ -711,14 +715,15 @@ function construir(){
   $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn" data-abrirchat="competencia">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
   $("#c-comunidad").innerHTML=`<div class="mcab"><div><h2>Comunidad · Escucha social</h2></div><div class="meta"><span class="vivo off" id="vivoCom">Conectando</span><span id="comN">Analizando comentarios</span><span class="entrar-pista" style="background:#9b5de5">Pulsa para entrar</span><button class="btn" data-abrirchat="comunidad">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-comunidad">${svgComunidad()}</div>`;
   $("#c-seo").innerHTML=`<div class="mcab"><div><h2>SEO · Búsqueda orgánica</h2></div><div class="meta"><span class="vivo off" id="vivoSeo">Conectando</span><span id="seoN">Auditoría en marcha</span><span class="entrar-pista" style="background:#14b8a6">Pulsa para entrar</span><button class="btn" data-abrirchat="seo">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-seo">${svgSeo()}</div>`;
+  $("#c-paid").innerHTML=`<div class="mcab"><div><h2>Paid Media · Inversión publicitaria</h2></div><div class="meta"><span class="vivo off" id="vivoPaid">Conectando</span><span id="paidN">Extrayendo campañas</span><span class="entrar-pista" style="background:#db2777">Pulsa para entrar</span><button class="btn" data-abrirchat="paid">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-paid">${svgPaid()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
   pintarCapas();
-  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C,...EQUIPO_K,...EQUIPO_O].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
+  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C,...EQUIPO_K,...EQUIPO_O,...EQUIPO_P].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
 }
 function pintarCapas(){
   $("#listaCapas").innerHTML=`
     <button class="capa-it" data-todo>${ICO_MARCO}Edificio completo</button>
-    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"],["diseno","Diseño"],["comunidad","Comunidad"],["seo","SEO"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
+    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"],["diseno","Diseño"],["comunidad","Comunidad"],["seo","SEO"],["paid","Paid Media"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
     ${st.dentro===id?MARCOS.filter(m=>m.grupo===id).map(m=>`<button class="capa-it hijo" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1])}</button>`).join(""):""}`).join("")}
     ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
@@ -751,6 +756,7 @@ document.addEventListener("click",e=>{
   if(st.dentro!=="diseno"&&e.target.closest("#m-diseno")){entrar("diseno");return}
   if(st.dentro!=="comunidad"&&e.target.closest("#m-comunidad")){entrar("comunidad");return}
   if(st.dentro!=="seo"&&e.target.closest("#m-seo")){entrar("seo");return}
+  if(st.dentro!=="paid"&&e.target.closest("#m-paid")){entrar("paid");return}
 });
 
 /* ---------- Plano del Radar ---------- */
@@ -867,6 +873,9 @@ function iniciarMundos(){
   mundos.push(crearMundo({cont:$("#plano-diseno"),equipo:EQUIPO_S,puestos:PUESTOS_S,sillaDy:34,pref:"s-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
     corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealS,fraseMesa:fraseMesaS,
     visita:(p,q)=>q.a.id==="arte"?`Paula, ¿esto cumple el brandbook?`:p.a.id==="arte"?`${q.a.n}, un solo subrayado por pieza`:`${q.a.n}, ¿probamos este gancho?`}));
+  mundos.push(crearMundo({cont:$("#plano-paid"),equipo:EQUIPO_P,puestos:PUESTOS_P,sillaDy:34,pref:"p-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
+    corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealP,fraseMesa:fraseMesaP,
+    visita:(p,q)=>q.a.id==="jefe"?`Ricardo, esta campaña no está trayendo leads`:p.a.id==="jefe"?`${q.a.n}, ¿cuál es el coste por lead en USA?`:`${q.a.n}, ¿lo probamos en un test?`}));
   mundos.push(crearMundo({cont:$("#plano-seo"),equipo:EQUIPO_O,puestos:PUESTOS_O,sillaDy:34,pref:"o-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
     corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealO,fraseMesa:fraseMesaO,
     visita:(p,q)=>q.a.id==="jefa"?`Elisa, esto afecta a las rutas en inglés`:p.a.id==="jefa"?`${q.a.n}, ¿cuántas URLs afecta?`:`${q.a.n}, cruza esto con lo tuyo`}));
@@ -1383,6 +1392,80 @@ async function analizarComentarios(){
 document.addEventListener("submit",e=>{if(e.target.id!=="kForm")return;e.preventDefault();if(!st.com.ocupado)analizarComentarios()});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-kmk]");if(b){kv.mk=b.dataset.kmk;suscribirComunidad();pintarKVivo()}});
 
+/* ---------- Sala de Paid Media ---------- */
+const EQUIPO_P=[
+  {id:"jefe",n:"Ricardo",rol:"Paid Media Manager: 14 años en turismo premium y viajes de experiencia; lidera y responde ante la Sala de Control",c:"#f472b6"},
+  {id:"meta",n:"Nerea",rol:"Meta Ads: estructura, públicos, pujas y Advantage+",c:"#3d7bff"},
+  {id:"crea",n:"Gonzalo",rol:"Creatividades y copy de anuncios: vídeo primero y brandbook 2027",c:"#9ccc2a"},
+  {id:"medicion",n:"Mónica",rol:"Medición y atribución: píxel, API de conversiones, GA4 y CRM",c:"#22d3ee"},
+  {id:"intl",n:"Adrián",rol:"Mercados de alto ticket: USA, UK, Canadá y Alemania",c:"#f5d76e"},
+  {id:"funnel",n:"Celia",rol:"Funnel y conversión: landings, presupuesto y remarketing",c:"#fb923c"},
+  {id:"google",n:"Lucas",rol:"Google Ads y YouTube Ads (pendiente de conexión)",c:"#a78bfa"},
+];
+const PUESTOS_P={jefe:[300,96],meta:[120,95],crea:[480,95],medicion:[120,200],intl:[300,200],funnel:[480,200],google:[300,268]};
+const FRASES_P={jefe:["¿Cuánto nos cuesta cada lead por mercado?","Margen antes que volumen","Esto va a la Sala de Control"],
+  meta:["Revisando la estructura de campañas","Esta campaña está saturando: frecuencia alta","Probemos Advantage+ en USA"],
+  crea:["El vídeo vertical gana en Reels","Gancho en los dos primeros segundos","El mito de los albergues como anuncio"],
+  medicion:["¿Está bien configurado el píxel?","Sin conversiones no hay optimización","Cruzar leads con Zoho"],
+  intl:["USA paga el doble por viajero","Richard busca habitaciones privadas","UK y Alemania: Portugués y Norte"],
+  funnel:["El formulario de presupuesto pierde gente","Remarketing a quien vio el Francés","WhatsApp para Laura"],
+  google:["Esperando la conexión de Google Ads","YouTube como buscador del Camino","Búsquedas de marca en USA"]};
+function fraseRealP(p){const A=st.paid.analisis;if(!A)return azar(FRASES_P[p.a.id]);
+  if(p.a.id==="jefe"&&(A.kpis||[]).length){const k=azar(A.kpis);return`${k.nombre}: ${k.valor}`}
+  if(p.a.id==="meta"&&(A.campanas||[]).length){const c=azar(A.campanas.slice(0,6));return`${corta(c.nombre,40)}: ${c.gasto} y CTR ${c.ctr}`}
+  if(p.a.id==="crea"&&(A.anuncios_top||[]).length){const c=azar(A.anuncios_top);return`«${corta(c.texto||c.nombre,50)}»: CTR ${c.ctr}`}
+  if((A.recomendaciones||[]).length&&Math.random()<.5){const r=azar(A.recomendaciones.filter(x=>x.quien===p.a.n));if(r)return corta(r.titulo,90)}
+  return azar(FRASES_P[p.a.id])}
+function fraseMesaP(p){const b=(st.paid.estado?.bitacora||[]).filter(x=>x.quien===p.a.n);return b.length&&Math.random()<.5?corta(b[0].texto,120):azar(FRASES_P[p.a.id])}
+function svgPaid(){
+  let d=`<svg viewBox="0 0 600 300" aria-hidden="true"><defs>
+    <pattern id="rejP" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1a1016" stroke-width=".6"/></pattern>
+    <filter id="brilloP2" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="haloP"><stop offset="0" stop-color="#f472b6" stop-opacity=".12"/><stop offset="1" stop-color="#f472b6" stop-opacity="0"/></radialGradient></defs>
+  <rect width="600" height="300" fill="#0b0709"/><rect width="600" height="300" fill="url(#rejP)"/><ellipse cx="300" cy="150" rx="300" ry="150" fill="url(#haloP)"/>
+  <rect x="6" y="6" width="588" height="288" rx="3" fill="none" stroke="#3b2232" stroke-width="1.5"/>
+  <path d="M6 20V6H20M580 6H594V20M594 280V294H580M20 294H6V280" fill="none" stroke="#f472b6" stroke-width="1.5"/>
+  <rect x="160" y="12" width="280" height="40" rx="3" fill="#120b10" stroke="#5a2f4a"/>
+  <text x="172" y="27" font-family="Geist Mono" font-size="7.5" fill="#f9a8d4">META ADS · GASTO DEL PERIODO</text>
+  <text x="172" y="44" font-family="Geist" font-weight="700" font-size="13" fill="#fde7f3" id="pantP">conectando…</text>
+  <path d="M352 44 L366 36 L378 40 L392 26 L406 30 L420 18" fill="none" stroke="#3ddc97" stroke-width="1.6" filter="url(#brilloP2)"/>
+  <rect x="16" y="236" width="38" height="22" rx="2" fill="none" stroke="#3b2232"/><circle cx="26" cy="247" r="2.5" fill="#f5c518" filter="url(#brilloP2)"/><text x="16" y="270" font-family="Geist Mono" font-size="7" fill="#7a5a6c">CAFÉ</text>
+  ${[0,1,2,3].map(k=>`<g transform="translate(556 ${80+k*38})"><rect width="28" height="24" rx="3" fill="none" stroke="#5a2f4a"/><rect x="5" y="${14-k*2}" width="4" height="${6+k*2}" fill="#f472b6" class="glow" style="animation-delay:-${k*.3}s"/><rect x="12" y="${10-k}" width="4" height="${10+k}" fill="#f472b6" opacity=".7"/><rect x="19" y="6" width="4" height="14" fill="#f472b6" opacity=".45"/></g>`).join("")}`;
+  EQUIPO_P.forEach((a,i)=>{const[x,y]=PUESTOS_P[a.id];d+=`<rect x="${x-46}" y="${y-17}" width="92" height="34" rx="2" fill="#120b10" stroke="#3b2232"/>
+    <rect x="${x-26}" y="${y-14}" width="28" height="18" rx="1" fill="#1b1018" stroke="#5a2f4a"/><rect x="${x-23}" y="${y-10}" width="18" height="3" fill="${a.c}" class="glow" style="animation-delay:-${(i*.4).toFixed(2)}s"/><rect x="${x-23}" y="${y-4}" width="12" height="3" fill="#5a2f4a"/>
+    <path d="M${x+8} ${y-2}h4v-6h4v-4h4v10" fill="none" stroke="${a.c}" stroke-width="1.1"/>
+    <circle cx="${x}" cy="${y+34}" r="11" fill="none" stroke="#2a1822" stroke-dasharray="2 2"/>
+    <text x="${x+46}" y="${y-21}" text-anchor="end" font-family="Geist Mono" font-size="7" fill="#7a5a6c">${a.id.toUpperCase()}</text>`});
+  EQUIPO_P.forEach(a=>{const ancho=a.n.length*6.4+12;const oscuro=["intl","crea"].includes(a.id);d+=`<g id="p-${a.id}"><g class="cuerpo"><circle r="13" fill="${a.c}" opacity=".13"/><circle r="7" fill="${a.c}" filter="url(#brilloP2)"/><circle r="2.6" fill="#fff"/></g>
+    <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
+  return d+`</svg>`;
+}
+const PRIO_C={alta:"#ff6b3d",media:"#f5d76e",baja:"#8fb3ff"};
+function pintarPaid(){
+  const A=st.paid.analisis,E=st.paid.estado||{},B=st.paid.briefing,set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  const g=(A?.kpis||[]).find(k=>/gasto/i.test(k.nombre));
+  set("paidN",A?`${g?g.valor+" invertidos · ":""}${(A.campanas||[]).length} campañas`:"Extrayendo campañas");set("pantP",g?g.valor:(A?"sin gasto":"conectando…"));
+  const v=document.getElementById("vivoPaid");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
+  if(st.dentro!=="paid")return;
+  const tabla=(cols,filas)=>`<div class="mc-sec"><table class="tabla"><thead><tr>${cols.map((c,i)=>`<th${i?"":` style="text-align:left"`}>${c}</th>`).join("")}</tr></thead><tbody>${filas}</tbody></table></div>`;
+  $("#c-p_rend").innerHTML=`<div class="mcab"><div><h2>Meta Ads: rendimiento</h2><div class="fuente-mc" style="margin-top:6px">Windsor.ai · cuenta publicitaria Santiago Ways · ${esc(A?.periodo||"")}</div></div><div class="meta">${A?.fecha?`actualizado ${esc(hace(A.fecha))}`:""}</div></div>
+   ${A?`${A.resumen?`<p style="padding:14px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(A.resumen)}</p>`:""}
+   <div class="k-grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">${(A.kpis||[]).map(k=>`<div class="k-c"><div class="k-num" style="color:#f9a8d4;font-size:22px">${esc(k.valor)}</div><p>${esc(k.nombre)}</p></div>`).join("")}</div>
+   ${(A.campanas||[]).length?`<div class="seccion-t">Campañas</div>${tabla(["Campaña","Objetivo","Gasto","Impr.","CTR","CPC","Resultados","Coste/res."],A.campanas.map(c=>`<tr><td style="text-align:left">${esc(c.nombre)}<span class="sub">${esc(c.estado||"")}</span></td><td>${esc(c.objetivo||"")}</td><td>${esc(c.gasto||"")}</td><td>${esc(c.impresiones||"")}</td><td>${esc(c.ctr||"")}</td><td>${esc(c.cpc||"")}</td><td>${esc(c.resultados||"")}</td><td>${esc(c.cpr||"")}</td></tr>`).join(""))}`:""}
+   ${(A.paises||[]).length?`<div class="seccion-t">Por país</div>${tabla(["País","Gasto","Clics","CTR","CPC","Resultados"],A.paises.map(c=>`<tr><td style="text-align:left">${esc(c.pais)}</td><td>${esc(c.gasto||"")}</td><td>${esc(c.clics||"")}</td><td>${esc(c.ctr||"")}</td><td>${esc(c.cpc||"")}</td><td>${esc(c.resultados||"")}</td></tr>`).join(""))}`:""}
+   ${(A.ubicaciones||[]).length?`<div class="seccion-t">Por ubicación</div>${tabla(["Ubicación","Gasto","CTR","CPC","CPM"],A.ubicaciones.map(c=>`<tr><td style="text-align:left">${esc(c.ubicacion)}</td><td>${esc(c.gasto||"")}</td><td>${esc(c.ctr||"")}</td><td>${esc(c.cpc||"")}</td><td>${esc(c.cpm||"")}</td></tr>`).join(""))}`:""}
+   ${(A.anuncios_top||[]).length?`<div class="seccion-t">Anuncios destacados</div><div class="k-grid">${A.anuncios_top.map(x=>`<div class="k-c"><h4>${esc(corta(x.nombre||"",70))}</h4>${x.texto?`<p>${esc(corta(x.texto,220))}</p>`:""}<div class="k-ref">${esc(x.metricas||"")}</div></div>`).join("")}</div>`:""}
+   ${A.limitaciones?`<div class="k-aviso">${esc(A.limitaciones)}</div>`:""}`:`<div class="vacio">Nerea está extrayendo las campañas de Meta Ads.</div>`}`;
+  $("#c-p_plan").innerHTML=`<div class="mcab"><div><h2>Diagnóstico y plan del equipo</h2><div class="fuente-mc" style="margin-top:6px">Lidera Ricardo · todo pasa por la revisión de la Sala de Control</div></div></div>
+   ${A?`<div style="padding:12px 20px 0">${selloControl(A.control)}</div>`:""}
+   ${(A?.diagnostico||[]).length?`<div class="seccion-t">Diagnóstico</div><ol class="prios">${A.diagnostico.map(x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.titulo)} ${x.gravedad?`<span class="k-tag" style="background:${PRIO_C[x.gravedad]||"#555"}22;color:${PRIO_C[x.gravedad]||"#ccc"}">${esc(x.gravedad)}</span>`:""}</p><p style="margin-top:4px">${esc(x.detalle||"")}</p>${x.quien?`<div class="imeta"><span>${esc(x.quien)}</span></div>`:""}</div></li>`).join("")}</ol>`:""}
+   ${(A?.recomendaciones||[]).length?`<div class="seccion-t">Recomendaciones</div><ol class="prios">${A.recomendaciones.map(x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.titulo)} ${x.prioridad?`<span class="k-tag" style="background:${PRIO_C[x.prioridad]||"#555"}22;color:${PRIO_C[x.prioridad]||"#ccc"}">${esc(x.prioridad)}</span>`:""}</p><p style="margin-top:4px">${esc(x.detalle||"")}</p>${x.porque?`<p style="color:#a8b3c0;margin-top:4px"><b style="color:#dfe4ea">Por qué:</b> ${esc(x.porque)}</p>`:""}${x.quien?`<div class="imeta"><span>${esc(x.quien)}</span></div>`:""}</div></li>`).join("")}</ol>`:`<div class="vacio">El equipo prepara el diagnóstico en cuanto lleguen los datos.</div>`}
+   <div class="seccion-t">Bitácora de la sala</div><ol class="bit">${(E.bitacora||[]).slice(0,20).map(b=>{const a=EQUIPO_P.find(y=>y.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")}</ol>`;
+  $("#c-p_brief").innerHTML=`<div class="mcab"><div><h2>Briefing del equipo</h2><div class="fuente-mc" style="margin-top:6px">Lo que cada agente sabe de Santiago Ways: research, competencia, análisis interno, valores y contenidos</div></div></div>
+   ${B?`<div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${(B.secciones||[]).map(s=>`<div class="k-c"><h4>${esc(s.titulo)}</h4><ul style="margin:0;padding-left:16px;display:grid;gap:5px">${(s.puntos||[]).map(p=>`<li style="font-size:13px;line-height:1.45;color:#d6dde5">${esc(p)}</li>`).join("")}</ul></div>`).join("")}</div>
+   <div class="seccion-t">Misión de cada agente</div><div class="k-grid">${(B.agentes||[]).map(a=>{const e=EQUIPO_P.find(y=>y.n===a.nombre);return`<div class="k-c" style="border-left:3px solid ${e?e.c:"#666"}"><h4>${esc(a.nombre)} · ${esc(a.rol)}</h4><p>${esc(a.mision)}</p>${(a.kpis||[]).length?`<p style="font-family:var(--f-mono);font-size:11.5px;color:#f9a8d4">KPIs: ${esc(a.kpis.join(" · "))}</p>`:""}${(a.claves||[]).length?`<ul style="margin:0;padding-left:16px;display:grid;gap:4px">${a.claves.map(c=>`<li style="font-size:12.5px;color:#c9d1da">${esc(c)}</li>`).join("")}</ul>`:""}</div>`}).join("")}</div>`:`<div class="vacio">Cargando briefing…</div>`}`;
+}
+
 /* ---------- Sala SEO ---------- */
 const EQUIPO_O=[
   {id:"jefa",n:"Elisa",rol:"Jefa de SEO: prioriza y reporta a la Sala de Control",c:"#2dd4bf"},
@@ -1505,6 +1588,9 @@ const CHAT_SALAS={
   diseno:{nombre:"Diseño",equipo:()=>EQUIPO_S,saludo:"Hola, Álvaro. Somos el estudio creativo: piezas con el brandbook 2027 y ediciones de vídeo con tu material de Drive. ¿Qué te parecen?",
     persona:"Eres el estudio de Diseño: Paula (dirección de arte y guardiana del brandbook 2027), Nico (Instagram), Sara (edición de vídeo), Leo (YouTube), Irene (copy y LinkedIn) y Bruno (TikTok).",
     sug:["Haz una versión más corta del reel","¿Qué pieza publicarías primero?","Quiero más vídeo con personas reales"]},
+  paid:{nombre:"Paid Media",equipo:()=>EQUIPO_P,saludo:"Hola, Álvaro. Soy Ricardo, Paid Media Manager. Con el equipo analizamos tus campañas de Meta Ads y proponemos cómo invertir mejor. ¿Por dónde empezamos?",
+    persona:"Eres el equipo de Paid Media de Santiago Ways, liderado por Ricardo (Paid Media Manager con 14 años en turismo premium y viajes de experiencia). Equipo: Nerea (Meta Ads), Gonzalo (creatividades y copy), Mónica (medición y atribución), Adrián (mercados de alto ticket: USA, UK, Canadá, Alemania), Celia (funnel y conversión) y Lucas (Google Ads, pendiente de conexión). Conocéis a fondo el research de 2026, las buyer personas, la competencia y el brandbook. Hablad con cifras de las campañas cuando estén en los datos; si no están, decidlo.",
+    sug:["¿Qué campaña pausaríais hoy?","¿Cómo atacamos USA con 1.000 € al mes?","¿Qué creatividades deberíamos probar?"]},
   seo:{nombre:"SEO",equipo:()=>EQUIPO_O,saludo:"Hola, Álvaro. Somos el equipo de SEO: auditoría técnica, palabras clave y analítica. ¿Qué quieres posicionar?",
     persona:"Eres el equipo de SEO de Santiago Ways: Elisa (jefa de SEO), Jaime (palabras clave, Semrush), Noelia (analítica web, Google Analytics), Pedro (SEO técnico), Carlota (contenidos SEO en cinco idiomas) y Óscar (competencia orgánica y enlaces). Si un dato depende de Semrush o de Google Analytics y no está en los datos, di que la conexión está pendiente.",
     sug:["¿Qué arreglaríais primero en la web?","¿Qué rutas faltan en inglés o alemán?","¿Cómo atacamos el Año Santo 2027 en búsquedas?"]},
@@ -1551,6 +1637,7 @@ function contextoSala(s){
   const C=st.ctrl,base={briefingControl:C.briefing?{titular:C.briefing.titular,prioridades:(C.briefing.prioridades||[]).filter(p=>p.sala===s||p.sala==="global").map(p=>p.titulo+": "+(p.porque||""))}:null,directricesDeControl:C.directrices?.[s]?{resumen:C.directrices[s].resumen,foco:C.directrices[s].foco}:"sin directrices específicas todavía"};
   const compartido=s==="radar"?{deComunidad:st.com.analisis?{preguntas:(st.com.analisis.preguntas||[]).slice(0,10).map(p=>p.tema+": "+p.que),queGeneraComentarios:(st.com.analisis.porFormato||[]).slice(0,5).map(x=>x.tipo+" ("+x.media+" coment./post)")}:null}:s==="comunidad"?{delRadar:activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,10).map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),metricas:i.metricas||null}))}:{};
   Object.assign(base,compartido);
+  if(s==="paid")Object.assign(base,{metaAds:st.paid.analisis?{periodo:st.paid.analisis.periodo,kpis:st.paid.analisis.kpis,campanas:st.paid.analisis.campanas,paises:st.paid.analisis.paises,ubicaciones:st.paid.analisis.ubicaciones,anuncios_top:st.paid.analisis.anuncios_top,diagnostico:st.paid.analisis.diagnostico,recomendaciones:st.paid.analisis.recomendaciones}:"extracción en curso",briefing:st.paid.briefing?{secciones:st.paid.briefing.secciones}:null});
   if(s==="seo"){const A=st.seo.audit||{};Object.assign(base,{auditoria:{urls:A.urls_sitemap,rastreadas:A.urls_rastreadas,por_idioma:A.por_idioma,problemas:(A.problemas||[]).map(p=>({tipo:p.tipo,gravedad:p.gravedad,n:p.n,solucion:p.solucion})),arquitectura:A.arquitectura,puntos_fuertes:A.puntos_fuertes},estado:st.seo.estado?{conexiones:st.seo.estado.conexiones,plan:st.seo.estado.plan}:null})}
   if(s==="radar")Object.assign(base,{radar:activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,15).map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),buzz:i.buzz,fuente:i.fuente,metricas:i.metricas||null,porque:i.porque})),bitacora:(st.estado?.bitacora||[]).slice(0,6)});
   if(s==="competencia")Object.assign(base,{cambios:st.cambios.slice(0,15).map(c=>({player:c.player,tipo:c.tipo,titulo:c.titulo,impacto:c.impacto,detectado:c.detectado})),players:st.players.map(p=>p.nombre||p.id),bitacora:(st.estadoC?.bitacora||[]).slice(0,6)});
@@ -1821,11 +1908,11 @@ async function exportar(){
 }
 
 /* ---------- Arranque ---------- */
-construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();pintarSeo();iniciarMundos();
+construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();pintarSeo();pintarPaid();iniciarMundos();
 (async()=>{sampleFn=await window.claude?.use?.("sample")})();
 (async()=>{const m=await window.claude?.use?.("mcp");mc.mcp=m;mc.disponible=!!m;suscribirMetricool();suscribirMetricoolComp()})();
 const inicioRadar=location.hash==="#radar";
-requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#comunidad")entrar("comunidad");else if(location.hash==="#seo")entrar("seo");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
+requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#comunidad")entrar("comunidad");else if(location.hash==="#seo")entrar("seo");else if(location.hash==="#paid")entrar("paid");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
 setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
 
 (async()=>{
@@ -1840,6 +1927,9 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
   db.collection("control_chat").orderBy("t","asc").limit(300).onSnapshot(s=>{st.chat=s.docs.map(d=>({id:d.id,...d.data()}));pintarChat()});
   db.collection("diseno_piezas").limit(200).onSnapshot(s=>{st.dis.piezas=s.docs.map(d=>({id:d.id,...d.data()}));pintarDiseno()});
   db.doc("diseno_tendencias/actual").onSnapshot(s=>{st.dis.tend=s.exists?s.data():null;pintarDiseno()});
+  db.doc("paid_analisis/actual").onSnapshot(s=>{st.paid.analisis=s.exists?s.data():null;pintarPaid()});
+  db.doc("paid_contexto/briefing").onSnapshot(s=>{st.paid.briefing=s.exists?s.data():null;pintarPaid()});
+  db.doc("estado/paid").onSnapshot(s=>{st.paid.estado=s.exists?s.data():null;pintarPaid()});
   db.doc("seo_auditoria/actual").onSnapshot(s=>{st.seo.audit=s.exists?s.data():null;pintarSeo()});
   db.doc("estado/seo").onSnapshot(s=>{st.seo.estado=s.exists?s.data():null;pintarSeo()});
   db.doc("comunidad_analisis/actual").onSnapshot(s=>{st.com.analisis=s.exists?s.data():null;pintarComunidad()});
