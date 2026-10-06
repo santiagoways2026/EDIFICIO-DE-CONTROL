@@ -309,6 +309,18 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
 .mock .fotolbl{position:absolute;left:6%;bottom:4%;right:30%;font:500 8px/1.3 var(--f-mono);color:rgba(255,255,255,.75)}
 .mock.blanco .fotolbl{color:#6F6F6E}
 .mock.conimg .fotolbl{display:none}
+.flujo-c{animation:flujoC 1.2s linear infinite}@keyframes flujoC{to{stroke-dashoffset:-18}}
+.cb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:14px 20px 20px}
+.cb-col{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:14px;display:grid;gap:8px;align-content:start}
+.cb-col h4{margin:0;font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#22d3ee}
+.cb-col li{font-size:13px;line-height:1.45;color:#d6dde5}
+.cb-col ul{margin:0;padding-left:16px;display:grid;gap:6px}
+.cb-kpi{display:flex;justify-content:space-between;gap:10px;font-size:13px;border-bottom:1px dashed var(--borde);padding-bottom:6px}
+.cb-kpi b{color:#f5d76e;font-family:var(--f-mono);white-space:nowrap}
+.cb-hero{display:flex;gap:18px;align-items:center;padding:14px 20px 0;color:#c9d1da;font-size:14px;line-height:1.5}
+.cb-hero .n{font:700 30px/1 var(--f-ui);color:#22d3ee}
+.nuevo-tag{font:600 9.5px/1 var(--f-mono);background:#22d3ee;color:#00151a;padding:3px 5px;border-radius:3px;margin-left:6px;letter-spacing:.06em}
+@media (max-width:700px){.cb-grid{grid-template-columns:minmax(0,1fr)}}
 .mock.conimg{background-size:cover!important;background-position:center!important;color:#fff}
 .mock .iso{position:absolute;top:5%;right:5%;width:24px;height:auto}
 .mock.vid-mock{background:#000}.mock.vid-mock video{width:100%;height:100%;object-fit:cover;display:block}
@@ -493,6 +505,7 @@ const MARCOS=[
   {id:"briefing",grupo:"control",dato:true,nombre:"Sala de Control / Briefing estratégico",x:-1700,y:1300,w:1580},
   {id:"decisiones",grupo:"control",dato:true,nombre:"Sala de Control / Decisiones y directrices",x:1320,y:1300,w:1400},
   {id:"brujula",grupo:"control",dato:true,nombre:"Sala de Control / Brújula 2026",x:2820,y:1300,w:900},
+  {id:"cerebro",grupo:"control",dato:true,nombre:"Sala de Control / Cerebro",x:-260,y:2260,w:1720},
   {id:"diseno",grupo:"diseno",nombre:"Diseño / Sala",x:-3200,y:1500,w:1200},
   {id:"d_ig",grupo:"diseno",dato:true,nombre:"Diseño / Instagram · estáticos",x:-5400,y:0,w:1950},
   {id:"d_reel",grupo:"diseno",dato:true,nombre:"Diseño / Reels",x:-5400,y:1500,w:1950},
@@ -514,7 +527,7 @@ const MARCOS=[
   {id:"paid",grupo:"obras",nombre:"Paid Media",x:3900,y:2250,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula","cerebro"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
@@ -532,7 +545,7 @@ const PASILLOS_DEF=[
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,chatSala:"control",dis:{piezas:[],tend:null,estado:null,videos:[],biblio:[],bFiltro:"todo"},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,chatSala:"control",dis:{piezas:[],tend:null,estado:null,videos:[],biblio:[],bFiltro:"todo"},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{},cerebro:null},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -674,7 +687,7 @@ const ICO_MARCO=`<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stro
 function construir(){
   let h=svgPasillos()+`<div class="grupo-titulo" style="left:0;top:-230px">Radar Viral<small><span class="ok">● Sala activa</span> · Redes sociales · 11 especialistas · vídeo primero · ES EN DE IT PT</small></div>
          <div class="grupo-titulo" style="left:-3200px;top:1270px;font-size:56px;color:#a3cf2e">Diseño<small><span class="ok">● Activa</span> · 6 creativos · piezas con el brandbook 2027</small></div>
-         <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores de marketing · revisa y reorienta todo el flujo</small></div>
+         <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores, 5 especialistas y Cerebro · revisa y reorienta todo el flujo</small></div>
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
          <div class="grupo-titulo" style="left:1900px;top:-230px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
          <div class="grupo-titulo" style="left:3900px;top:1070px;color:#5d6774;font-size:56px">SEO</div>
@@ -975,15 +988,29 @@ const EQUIPO_D=[
   {id:"intl",n:"Iván",rol:"Mercados internacionales: USA, UK, DE, IT y PT",c:"#3d7bff"},
   {id:"crm",n:"Lola",rol:"CRM y lifecycle: leads, emails y recurrencia",c:"#a78bfa"},
   {id:"intel",n:"Tomás",rol:"Inteligencia competitiva y SEO",c:"#ff6b3d"},
+  {id:"datos",n:"Marina",rol:"Analista de datos: trabaja con Cerebro y consolida las métricas de todas las salas",c:"#22d3ee",nuevo:true},
+  {id:"calidad",n:"Sonia",rol:"Calidad y marca: revisa brandbook, imágenes y regla de métricas en cada pieza",c:"#9ccc2a",nuevo:true},
+  {id:"ops",n:"Raúl",rol:"Operaciones: gestiona la cola de revisión y los tiempos de cada sala",c:"#fb923c",nuevo:true},
+  {id:"paid",n:"Daniel",rol:"Paid media: prepara Meta Ads y Google Ads",c:"#f472b6",nuevo:true},
+  {id:"seo",n:"Alba",rol:"SEO y contenido orgánico",c:"#2dd4bf",nuevo:true},
 ];
-const PUESTOS_D={cmo:[300,98],growth:[200,104],marca:[400,104],intl:[200,222],crm:[300,228],intel:[400,222]};
+const PUESTOS_D={cmo:[300,98],growth:[200,104],marca:[400,104],intl:[200,222],crm:[300,228],intel:[400,222],datos:[150,150],calidad:[150,262],ops:[450,150],paid:[450,262],seo:[300,276]};
 const FRASES_D={cmo:["Revisando el briefing del día","¿Qué mueve hoy la aguja del margen?","Priorizando USA y UK sin perder España"],
   growth:["El ticket medio por pax manda","Revisando el funnel de presupuestos","Sarria escala volumen; St Jean da margen"],
   marca:["El vídeo es la palanca de 2026","Necesitamos creators y UGC","Comunidad: «soy peregrino»"],
   intl:["USA vale el doble por viajero","Alemania compra Portugués y Norte","Italia entra por Sarria"],
   crm:["Ningún competidor destaca en workflows","Recuperar presupuestos abandonados","España es la que repite"],
-  intel:["Cruzando alertas de la competencia","USA y UK los dominan CaminoWays y Follow the Camino","Necesitamos autoridad editorial en EN"]};
+  intel:["Cruzando alertas de la competencia","USA y UK los dominan CaminoWays y Follow the Camino","Necesitamos autoridad editorial en EN"],
+  datos:["Cerebro ha procesado la última ronda","Cruzando Metricool con el Radar","Este dato no cuadra, lo reviso"],
+  calidad:["¿Esta imagen casa con el texto?","Un solo subrayado por pieza","Vertical siempre, nada de horizontal"],
+  ops:["Cola de revisión al día","Diseño espera validación","Siguiente revisión a las 14:50"],
+  paid:["Esperando la conexión de Meta Ads","Preparando estructura de campañas por mercado","CPL y ROAS por ruta"],
+  seo:["Palabras clave del Año Santo 2027","¿Qué buscan en USA sobre Sarria?","YouTube también es buscador"]};
 function fraseRealD(p){
+  const K=st.ctrl.cerebro;
+  if(K&&p.a.id==="datos"&&(K.kpis||[]).length){const k=azar(K.kpis);return`${k.nombre}: ${k.valor}`}
+  if(K&&p.a.id==="ops"&&(K.colaRevision||[]).length)return`Cola: ${K.colaRevision.length} elementos pendientes de revisión`;
+  if(K&&p.a.id==="calidad"&&(K.memoria?.preferencias||[]).length)return corta(azar(K.memoria.preferencias),100);
   const d=st.ctrl.decisiones.filter(x=>x.director===p.a.n&&x.estado!=="descartada");
   if(d.length)return`Propongo: ${corta(azar(d.slice(0,4)).titulo,90)}`;
   const b=st.ctrl.briefing;if(p.a.id==="cmo"&&b?.titular)return corta(b.titular,110);
@@ -1005,9 +1032,12 @@ function svgControl(){
   <ellipse cx="300" cy="165" rx="70" ry="16" fill="none" stroke="#f5d76e" stroke-opacity=".35" stroke-dasharray="3 4"/>
   <circle cx="300" cy="165" r="8" fill="#f5d76e" filter="url(#brilloD)" class="glow"/>
   ${[[230,160],[270,152],[330,152],[370,160],[300,180]].map(([x,y],k)=>`<rect x="${x-9}" y="${y-4}" width="18" height="8" rx="1" fill="#1a1810" stroke="#6b5a26"/><rect x="${x-7}" y="${y-2}" width="14" height="2" fill="#f5d76e" fill-opacity=".6" class="glow" style="animation-delay:-${k*.4}s"/>`).join("")}
-  <rect x="16" y="70" width="70" height="150" rx="3" fill="#0d0c09" stroke="#3a3420"/>
-  ${["ES","EN","DE","IT","PT"].map((m,k)=>`<text x="24" y="${90+k*28}" font-family="Geist Mono" font-size="8" fill="#8f8466">${m}</text><rect x="40" y="${84+k*28}" width="${[38,30,12,6,5][k]}" height="6" rx="1" fill="#f5d76e" fill-opacity="${.85-k*.12}"/>`).join("")}
-  <text x="16" y="232" font-family="Geist Mono" font-size="7" fill="#6b6046">MIX POR MERCADO</text>
+  <g id="cerebro"><rect x="14" y="58" width="92" height="176" rx="4" fill="#06070b" stroke="#22d3ee" stroke-opacity=".55"/>
+  <rect x="20" y="64" width="80" height="20" rx="2" fill="#0b1220"/><text x="60" y="78" text-anchor="middle" font-family="Geist Mono" font-size="9" font-weight="700" fill="#22d3ee" letter-spacing="1.5">CEREBRO</text>
+  ${Array.from({length:9},(_,r)=>Array.from({length:6},(_,c)=>`<rect x="${24+c*12}" y="${92+r*12}" width="7" height="5" rx="1" fill="${["#22d3ee","#f5d76e","#3ddc97"][(r+c)%3]}" class="glow" style="animation-delay:-${((r*6+c)*.17%2.4).toFixed(2)}s" opacity=".85"/>`).join("")).join("")}
+  <circle cx="60" cy="214" r="9" fill="#22d3ee" filter="url(#brilloD)" class="glow"/><circle cx="60" cy="214" r="15" fill="none" stroke="#22d3ee" stroke-opacity=".35"/>
+  <text x="14" y="246" font-family="Geist Mono" font-size="7" fill="#22d3ee" id="pantC">PROCESANDO…</text>
+  <path class="flujo-c" d="M106 150 C150 150 170 165 182 165" fill="none" stroke="#22d3ee" stroke-width="1.4" stroke-dasharray="4 5" opacity=".8"/></g>
   <rect x="514" y="70" width="70" height="150" rx="3" fill="#0d0c09" stroke="#3a3420"/>
   <path d="M522 200 L536 180 L550 186 L564 150 L578 130" fill="none" stroke="#3ddc97" stroke-width="1.5"/>
   <text x="522" y="88" font-family="Geist Mono" font-size="8" fill="#8f8466">TICKET</text><text x="522" y="102" font-family="Geist Mono" font-size="11" fill="#f5d76e">+22 %</text>
@@ -1024,7 +1054,9 @@ function pintarControl(){
   set("ctrlN",`${abiertas.length} decisiones abiertas`);set("ctrlUlt",e.ultimaRevision?`Última revisión ${hace(e.ultimaRevision)}`:"");
   set("pantD",`${st.items.filter(i=>!i.descartado).length} hallazgos · ${st.cambios.length} alertas · ${abiertas.length} decisiones`);
   const v=document.getElementById("vivoCtrl");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
+  const K=C.cerebro;set("pantC",K?`${fmtK(K.procesado?.documentos||0)} DATOS`:"PROCESANDO…");
   if(st.dentro!=="control")return;
+  pintarCerebro();
   const b=C.briefing;
   $("#c-briefing").innerHTML=`<div class="mcab"><div><h2>Briefing estratégico</h2><div class="fuente-mc" style="margin-top:6px">Lo que la dirección de marketing concluye al cruzar el Radar, la Competencia y el research de 2026</div></div><div class="meta">${b?.fecha?`actualizado ${esc(hace(b.fecha))}`:""}</div></div>
     ${b?`<div class="titular"><div class="eye">Titular de la semana</div><h3>${esc(b.titular)}</h3><p>${esc(b.resumen||"")}</p></div>
@@ -1336,6 +1368,19 @@ async function analizarComentarios(){
 document.addEventListener("submit",e=>{if(e.target.id!=="kForm")return;e.preventDefault();if(!st.com.ocupado)analizarComentarios()});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-kmk]");if(b){kv.mk=b.dataset.kmk;suscribirComunidad();pintarKVivo()}});
 
+/* ---------- Cerebro de la Sala de Control ---------- */
+function pintarCerebro(){
+  const el=document.getElementById("c-cerebro");if(!el)return;const K=st.ctrl.cerebro;
+  if(!K){el.innerHTML=`<div class="mcab"><div><h2>Cerebro</h2></div></div><div class="vacio">Cerebro está arrancando.</div>`;return}
+  const P=K.procesado||{},M=K.memoria||{};
+  el.innerHTML=`<div class="mcab"><div><h2>Cerebro · superordenador de la Sala de Control</h2><div class="fuente-mc" style="margin-top:6px">Procesa todo lo que generan las salas antes de cada revisión y guarda la memoria del proyecto · Marina lo opera</div></div><div class="meta">${K.fecha?`procesado ${esc(hace(K.fecha))}`:""}</div></div>
+  <div class="cb-hero"><div><div class="n">${fmtK(P.documentos||0)}</div>datos procesados</div><div><div class="n">${fmtK(P.fuentes||0)}</div>fuentes</div><div><div class="n">${(K.colaRevision||[]).length}</div>en cola de revisión</div><div style="flex:1;min-width:220px">${esc(K.resumen||"")}</div></div>
+  <div class="cb-grid">
+    <div class="cb-col"><h4>Memoria: reglas del proyecto</h4><ul>${(M.preferencias||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${(M.aprendizajes||[]).length?`<h4 style="margin-top:8px">Aprendizajes</h4><ul>${M.aprendizajes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div>
+    <div class="cb-col"><h4>Indicadores clave</h4>${(K.kpis||[]).map(k=>`<div class="cb-kpi"><span>${esc(k.nombre)}<br><small style="color:var(--tenue);font-family:var(--f-mono);font-size:10.5px">${esc(k.fuente||"")}</small></span><b>${esc(k.valor)}</b></div>`).join("")}</div>
+    <div class="cb-col"><h4>Cola de revisión (Raúl)</h4><ul>${(K.colaRevision||[]).slice(0,10).map(x=>`<li><b style="color:#f5d76e">${esc(SALA_N[x.sala]||x.sala)}</b> · ${esc(x.titulo)}</li>`).join("")}</ul>${(K.alertas||[]).length?`<h4 style="margin-top:8px">Alertas</h4><ul>${K.alertas.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div>
+  </div>`;
+}
 /* ---------- Ediciones de vídeo y biblioteca de Drive ---------- */
 function pintarVideos(){
   const el=document.getElementById("c-d_vid");if(!el)return;const vs=st.dis.videos.filter(v=>v.estado!=="archivada");
@@ -1373,7 +1418,7 @@ Nunca uses guiones largos; usa punto, dos puntos o punto y coma. Tildes correcta
 const REVISION=`Regla de la casa: todo lo que hace tu sala pasa por la revisión de la Sala de Control (dirección de marketing) antes de aplicarse. Si Álvaro pide un cambio, explica cómo lo plantearíais y aclara que la Sala de Control lo revisará en su próxima revisión (8:50, 14:50 o 20:50) y fijará las directrices. Respeta las directrices actuales de Control para tu sala.`;
 const CHAT_SALAS={
   control:{nombre:"Sala de Control",equipo:()=>EQUIPO_D,saludo:"Hola, Álvaro. Somos la dirección de marketing. Pregúntanos por cualquier estrategia o danos feedback: lo aplicaremos en el briefing, las decisiones y las directrices de cada sala.",
-    persona:"Eres la Sala de Control de Santiago Ways: seis directores de marketing de primer nivel. Victoria (CMO), Hugo (growth y performance), Clara (marca, vídeo y comunidad), Iván (mercados internacionales), Lola (CRM y lifecycle) y Tomás (inteligencia competitiva y SEO). Revisáis y validáis todo lo que producen las demás salas. Si Álvaro da feedback que cambia la estrategia, di qué ajustaréis (briefing, decisiones o directrices de qué sala) y que se aplicará en la próxima revisión.",
+    persona:"Eres la Sala de Control de Santiago Ways: seis directores de marketing de primer nivel. Victoria (CMO), Hugo (growth y performance), Clara (marca, vídeo y comunidad), Iván (mercados internacionales), Lola (CRM y lifecycle) y Tomás (inteligencia competitiva). Os apoyan Marina (analista de datos, opera Cerebro, el superordenador que procesa todo), Sonia (calidad y marca), Raúl (operaciones y cola de revisión), Daniel (paid media) y Alba (SEO). Revisáis y validáis todo lo que producen las demás salas. Si Álvaro da feedback que cambia la estrategia, di qué ajustaréis (briefing, decisiones o directrices de qué sala) y que se aplicará en la próxima revisión.",
     sug:["¿Qué haríais esta semana con 2.000 € en Meta Ads?","Quiero más foco en el mercado alemán","¿Qué pieza de Diseño publicaríais primero?","No me convence la serie de mitos, ¿alternativas?"]},
   radar:{nombre:"Radar Viral",equipo:()=>EQUIPO,saludo:"Hola, Álvaro. Somos el Radar Viral: buscamos lo que más funciona del Camino en redes, prensa y foros. ¿Qué quieres que vigilemos?",
     persona:"Eres el equipo del Radar Viral: Marta (jefa), Mateo (YouTube ES), Emma (YouTube EN), Lucía (Shorts, Reels y TikTok), Carmen (competencia en redes), Pablo (Metricool), Lena (DE), Giulia (IT), Rita (PT), Andrés (prensa) e Inés (blogs y foros).",
@@ -1418,6 +1463,7 @@ function contextoControl(){
     diseno:st.dis.piezas.filter(x=>x.estado!=="archivada").slice(0,25).map(x=>({tipo:x.tipo,tema:x.tema,estado:x.estado,control:x.control?.estado||"pendiente"})),
     videos:(st.dis.videos||[]).map(v=>({titulo:v.titulo,estado:v.estado,control:v.control?.estado||"pendiente"})),
     comunidad:st.com.analisis?{resumen:st.com.analisis.resumen,formatos:(st.com.analisis.porFormato||[]).slice(0,6),preguntas:(st.com.analisis.preguntas||[]).slice(0,8).map(p=>p.tema+": "+p.que),sugerencias:(st.com.analisis.sugerencias||[]).slice(0,6).map(x=>x.titulo)}:null,
+    cerebro:st.ctrl.cerebro?{resumen:st.ctrl.cerebro.resumen,kpis:st.ctrl.cerebro.kpis,salas:st.ctrl.cerebro.salas,cola:(st.ctrl.cerebro.colaRevision||[]).length,alertas:st.ctrl.cerebro.alertas}:null,
     youtubeES:(mc.datos["es:ytVideos"]?.rows||[]).slice(0,5).map(r=>({titulo:r[2],vistas:+r[3],likes:+r[4],comentarios:+r[5]}))
   });
 }
@@ -1443,7 +1489,8 @@ async function enviarChat(texto){
   const hist=st.chat.filter(m=>salaDe(m)===sala).slice(-12).map(m=>({role:m.rol==="usuario"?"user":"assistant",content:m.texto}));
   if(!hist.length||hist[hist.length-1].content!==texto)hist.push({role:"user",content:texto});
   if(hist[0]?.role==="assistant")hist.shift();
-  const reglas=`${S.persona}\n${REGLAS_COMUNES}\n${sala==="control"?"":REVISION+"\n"}DATOS ACTUALES DE LA SALA (JSON):\n`;
+  const mem=(st.ctrl.cerebro?.memoria?.preferencias||[]).map(x=>"- "+x).join("\n");
+  const reglas=`${S.persona}\n${REGLAS_COMUNES}\n${mem?"REGLAS DEL PROYECTO (memoria de Cerebro, obligatorias):\n"+mem+"\n":""}${sala==="control"?"":REVISION+"\n"}DATOS ACTUALES DE LA SALA (JSON):\n`;
   const turns=[];for(const m of [{role:"user",content:reglas+contextoSala(sala)},{role:"assistant",content:"Entendido. Seguimos la conversación con Álvaro."},...hist]){const u=turns[turns.length-1];if(u&&u.role===m.role)u.content+="\n\n"+m.content;else turns.push({...m})}
   if(turns[turns.length-1].role!=="user")turns.push({role:"user",content:texto});
   st.chatOcupado=true;chatVivo="";chatCtl=new AbortController();pintarChat();
@@ -1724,6 +1771,7 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
   db.collection("control_decisiones").orderBy("creado","desc").limit(200).onSnapshot(s=>{st.ctrl.decisiones=s.docs.map(d=>({id:d.id,...d.data()}));pintarControl()});
   db.collection("control_directrices").limit(20).onSnapshot(s=>{const o={};s.docs.forEach(d=>o[d.id]=d.data());st.ctrl.directrices=o;pintarControl()});
   db.doc("control_contexto/research").onSnapshot(s=>{st.ctrl.research=s.exists?s.data():null;pintarControl()});
+  db.doc("control_cerebro/actual").onSnapshot(s=>{st.ctrl.cerebro=s.exists?s.data():null;pintarControl()});
   db.doc("estado/control").onSnapshot(s=>{st.ctrl.estado=s.exists?s.data():null;pintarControl()});
   db.collection("players").limit(100).onSnapshot(s=>{st.players=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.orden??99)-(b.orden??99));pintarCompetencia()});
   db.collection("comp_cambios").orderBy("detectado","desc").limit(400).onSnapshot(s=>{st.cambios=s.docs.map(d=>({id:d.id,...d.data()}));pintarCompetencia()});

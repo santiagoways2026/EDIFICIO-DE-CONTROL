@@ -14,3 +14,9 @@ Regla de métricas: cualquier mención a un post o vídeo de redes incluye sus m
 - Desde la página, el botón "Hablar con la dirección" abre un chat en vivo: los directores responden al momento con todo el contexto de las salas (briefing, decisiones, directrices, research, radar con métricas, competencia y diseño).
 - Cada mensaje del usuario se guarda como `{rol: "usuario", texto, t, procesado: false}`; las respuestas en vivo como `{rol: "direccion", texto, t, origen: "chat"}`.
 - En cada revisión programada, el feedback pendiente (`procesado: false`) tiene máxima prioridad: se aplica en briefing, decisiones y directrices, se responde con un documento `{rol: "direccion", origen: "revision"}` que explica los cambios firmados por director, y se marcan los mensajes como `procesado: true`.
+
+## Cerebro y equipo ampliado
+
+- Cerebro es el superordenador de la sala. Su rutina se ejecuta 20 minutos antes de cada revisión (8:28, 14:28 y 20:28, hora de Madrid), lee todas las colecciones y escribe `control_cerebro/actual`: resumen, nº de datos y fuentes procesados, memoria del proyecto (`memoria.preferencias`: reglas dadas por el usuario; `memoria.aprendizajes`: lo que demuestran los datos), KPIs, resumen por sala, cola de revisión y alertas.
+- La revisión de Control parte siempre de Cerebro y respeta su memoria. Los chats de todas las salas reciben esas reglas.
+- Incorporaciones: Marina (datos, opera Cerebro), Sonia (calidad y marca, revisión de producción), Raúl (operaciones y cola de revisión), Daniel (paid media) y Alba (SEO).
