@@ -1,0 +1,14 @@
+# Salas del Camino
+
+Sistema de salas con especialistas de IA trabajando sobre el Camino de Santiago.
+
+- Interfaz en vivo: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (fuente: `salas/index.html`)
+- Datos: base de datos compartida del artifact (colecciones `radar` y `estado`)
+
+## Salas
+
+| Sala | Estado | Protocolo |
+|---|---|---|
+| Radar Viral (con métricas de interacción) | Activa, barrida automática cada 2 h (minuto 18, hora UTC) | `salas/radar-viral/AGENTE.md` |
+| Redacción | En obras | |
+| Análisis | En obras | |
