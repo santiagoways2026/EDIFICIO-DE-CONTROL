@@ -56,6 +56,31 @@ body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"]
 body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir,body[data-dentro="comunidad"] #m-comunidad .salir{display:inline-flex}
 #m-control{border-color:#4a4128}
 #chat[hidden]{display:none}
+.vids{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:16px 20px 20px}
+.vid{background:var(--marco-2);border:1px solid var(--borde);border-radius:8px;overflow:hidden;display:grid;align-content:start}
+.vid video{width:100%;aspect-ratio:9/16;background:#000;display:block;object-fit:cover}
+.vid .pz-info{gap:8px}
+.vid.descartada{opacity:.45}
+.vid .acc{display:flex;gap:8px;flex-wrap:wrap}
+.bib-f{display:flex;gap:6px;flex-wrap:wrap;padding:14px 20px 0}
+.bib{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:14px 20px 20px}
+.bib a{display:grid;gap:6px;background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;overflow:hidden;color:inherit;text-decoration:none}
+.bib .im{aspect-ratio:1;background:#0b0e12 center/cover no-repeat;position:relative}
+.bib .im.sin{display:grid;place-items:center;color:var(--tenue);font:11px/1.4 var(--f-mono);padding:10px;text-align:center}
+.bib .im b{position:absolute;left:6px;top:6px;font:600 10px/1 var(--f-mono);background:rgba(0,0,0,.65);color:#fff;padding:4px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
+.bib .tx{padding:0 9px 10px;font-size:12px;line-height:1.4;color:#c9d1da}
+.bib .tx small{display:block;font:10.5px/1.4 var(--f-mono);color:var(--tenue);margin-top:4px}
+@media (max-width:700px){.vids{grid-template-columns:minmax(0,1fr)}.bib{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chat-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0}
+.chat-tabs .chip{font-size:11.5px;padding:4px 9px}
+.chat-tabs .chip[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:#fff}
+.msg.rev{border-color:#c9a227;background:#1d190b}
+.rev-tag{display:block;font:600 10px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#f5d76e;margin-bottom:6px}
+.ok-ctrl{font:10.5px/1.2 var(--f-mono);color:var(--vivo)}
+.ctrl-sello{display:inline-flex;align-items:center;gap:5px;font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;padding:4px 7px;border-radius:3px;border:1px solid #4a4128;color:#f5d76e;background:#17150d}
+.ctrl-sello.validada{border-color:#2f5b1d;color:#b5dd4a;background:#0f1a09}
+.ctrl-sello.ajustar{border-color:#6b3a1d;color:#ffb38a;background:#1d120b}
+.ctrl-nota{font-size:12px;line-height:1.45;color:#e8d9a8;border-left:2px solid #c9a227;padding-left:8px}
 #m-comunidad:hover{box-shadow:0 0 0 1px rgba(192,132,252,.5),0 0 70px rgba(192,132,252,.18),0 30px 80px rgba(0,0,0,.6)}
 .k-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 20px 4px}
 .k-c{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:14px;display:grid;gap:6px;align-content:start}
@@ -407,13 +432,14 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
   <button class="h" id="hMenos" title="Alejar (−)" aria-label="Alejar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
   <button class="h" id="hMas" title="Acercar (+)" aria-label="Acercar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
   <button class="h" id="hAjustar" title="Ver todo (1)" aria-label="Ver todo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg></button>
-  <button class="h" id="hChat" title="Chat con la Sala de Control" aria-label="Chat con la Sala de Control"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+  <button class="h" id="hChat" title="Chat con las salas" aria-label="Chat con las salas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
   <button class="h" id="hRadar" title="Ir al Radar (R)" aria-label="Ir al Radar Viral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 12l6-6"/></svg></button>
 </div>
 <div id="mapa" class="capa" aria-label="Minimapa"></div>
 <aside id="insp" class="capa" hidden aria-label="Inspector"></aside>
 <aside id="chat" class="capa" hidden aria-label="Chat con la Sala de Control">
-  <div class="chat-cab"><div><b>Chat con la Sala de Control</b><small>Victoria, Hugo, Clara, Iván, Lola y Tomás</small></div><button class="h" id="cerrarChat" aria-label="Cerrar chat" style="width:28px;height:28px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="chat-cab"><div><b id="chatTit">Chat con la Sala de Control</b><small id="chatSub">Victoria, Hugo, Clara, Iván, Lola y Tomás</small></div><button class="h" id="cerrarChat" aria-label="Cerrar chat" style="width:28px;height:28px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="chat-tabs" id="chatTabs"></div>
   <div class="chat-msgs" id="chatMsgs"></div>
   <div class="chat-sug" id="chatSug"></div>
   <div class="chat-nota" id="chatNota">Tus comentarios se guardan y la dirección los aplica en su siguiente revisión (8:50, 14:50 y 20:50).</div>
@@ -454,9 +480,9 @@ const esVideo=i=>["video","short","reel"].includes(i.formato)||["youtube","tikto
 const MARCOS=[
   {id:"radar",grupo:"radar",nombre:"Radar Viral / Sala",x:0,y:0,w:1200},
   {id:"metricool",grupo:"radar",dato:true,nombre:"Radar Viral / Metricool en vivo",x:-1660,y:0,w:1540},
-  {id:"metricas",grupo:"radar",dato:true,nombre:"Radar Viral / Métricas",x:1320,y:0,w:1520},
-  {id:"listado",grupo:"radar",dato:true,nombre:"Radar Viral / Listado en vivo",x:1320,y:560,w:900},
-  {id:"bitacora",grupo:"radar",dato:true,nombre:"Radar Viral / Equipo y bitácora",x:2280,y:560,w:560},
+  {id:"metricas",grupo:"radar",dato:true,nombre:"Radar Viral / Métricas",x:-320,y:-340,w:1520,arriba:true},
+  {id:"listado",grupo:"radar",dato:true,nombre:"Radar Viral / Listado en vivo",x:1300,y:-340,w:900,arriba:true},
+  {id:"bitacora",grupo:"radar",dato:true,nombre:"Radar Viral / Equipo y bitácora",x:2300,y:-340,w:560,arriba:true},
   {id:"control",grupo:"control",nombre:"Sala de Control / Sala",x:0,y:1500,w:1200},
   {id:"briefing",grupo:"control",dato:true,nombre:"Sala de Control / Briefing estratégico",x:-1700,y:1300,w:1580},
   {id:"decisiones",grupo:"control",dato:true,nombre:"Sala de Control / Decisiones y directrices",x:1320,y:1300,w:1400},
@@ -468,22 +494,24 @@ const MARCOS=[
   {id:"d_li",grupo:"diseno",dato:true,nombre:"Diseño / LinkedIn",x:-5400,y:4500,w:1950},
   {id:"d_tk",grupo:"diseno",dato:true,nombre:"Diseño / TikTok",x:-5400,y:6000,w:1950},
   {id:"d_tend",grupo:"diseno",dato:true,nombre:"Diseño / Tendencias y pautas para RRSS",x:-7500,y:0,w:1950},
+  {id:"d_vid",grupo:"diseno",dato:true,nombre:"Diseño / Ediciones de vídeo",x:-9600,y:0,w:1950},
+  {id:"d_bib",grupo:"diseno",dato:true,nombre:"Diseño / Biblioteca Drive",x:-11700,y:0,w:1950},
   {id:"competencia",grupo:"competencia",nombre:"Competencia / Sala",x:0,y:3400,w:1200},
   {id:"cambios",grupo:"competencia",dato:true,nombre:"Competencia / Alertas y cambios",x:0,y:4560,w:1240},
   {id:"players",grupo:"competencia",dato:true,nombre:"Competencia / Players vigilados",x:-1560,y:4560,w:1460},
   {id:"comprrss",grupo:"competencia",dato:true,nombre:"Competencia / Sus redes en Metricool",x:1340,y:4560,w:1100},
   {id:"compbit",grupo:"competencia",dato:true,nombre:"Competencia / Equipo y bitácora",x:2540,y:4560,w:560},
   {id:"redaccion",grupo:"obras",nombre:"Redacción",x:-1900,y:3400,w:1200,obra:"Convertirá las tendencias del Radar en publicaciones listas para tus redes."},
-  {id:"comunidad",grupo:"comunidad",nombre:"Comunidad / Sala",x:1900,y:3400,w:1200},
-  {id:"k_formatos",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué genera comentarios",x:3260,y:3400,w:1400},
-  {id:"k_preguntas",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué pregunta y comenta la gente",x:4900,y:3400,w:1250},
-  {id:"k_ideas",grupo:"comunidad",dato:true,nombre:"Comunidad / Ideas para más interacción",x:6400,y:3400,w:1250},
-  {id:"k_vivo",grupo:"comunidad",dato:true,nombre:"Comunidad / Tus comentarios en vivo y bitácora",x:7900,y:3400,w:1100},
-  {id:"seo",grupo:"obras",nombre:"SEO",x:-1900,y:-1700,w:1200,obra:"Posicionamiento orgánico: palabras clave, contenidos y la web frente a la competencia."},
-  {id:"paid",grupo:"obras",nombre:"Paid Media",x:1900,y:-1700,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
+  {id:"comunidad",grupo:"comunidad",nombre:"Comunidad / Sala",x:1900,y:0,w:1200},
+  {id:"k_formatos",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué genera comentarios",x:3260,y:0,w:1400},
+  {id:"k_preguntas",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué pregunta y comenta la gente",x:4900,y:0,w:1250},
+  {id:"k_ideas",grupo:"comunidad",dato:true,nombre:"Comunidad / Ideas para más interacción",x:6400,y:0,w:1250},
+  {id:"k_vivo",grupo:"comunidad",dato:true,nombre:"Comunidad / Tus comentarios en vivo y bitácora",x:7900,y:0,w:1100},
+  {id:"seo",grupo:"obras",nombre:"SEO",x:1900,y:3400,w:1200,obra:"Posicionamiento orgánico: palabras clave, contenidos y la web frente a la competencia."},
+  {id:"paid",grupo:"obras",nombre:"Paid Media",x:3800,y:3400,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend","d_vid","d_bib"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
@@ -491,15 +519,18 @@ const PASILLOS_DEF=[
   {id:"pa4",d:"M800 3400 V2156",c:"#ff6b3d",txt:"Alertas de competencia → Control",sub:"competencia.cambios · cada 4 h",lx:860,ly:2800},
   {id:"pa7",d:"M400 2156 V3400",c:"#f5d76e",txt:"Directrices → Competencia",sub:"control.directrices.competencia",lx:340,ly:2800,fin:true},
   {id:"pa1",d:"M150 2156 V2380 H-1300 V3400",c:"#f5c518",txt:"Briefings y prioridades → Redacción",sub:"control.briefing · en obras",lx:-1250,ly:2330},
-  {id:"pa2",d:"M2500 3400 V2380 H1050 V2156",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada día",lx:1100,ly:2330},
+  {id:"pa2",d:"M2300 656 V1700 H1200",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada día",lx:2240,ly:1180,fin:true},
+  {id:"pa13",d:"M1200 1950 H2700 V656",c:"#f5d76e",txt:"Directrices → Comunidad",sub:"control.directrices.comunidad",lx:2800,ly:1320},
+  {id:"pa11",d:"M1200 270 H1900",c:"#3d7bff",txt:"Lo viral → Comunidad",sub:"radar.hallazgos",lx:1250,ly:215},
+  {id:"pa12",d:"M1900 450 H1200",c:"#c084fc",txt:"Lo que pregunta tu audiencia → Radar",sub:"comunidad.preguntas",lx:1250,ly:540},
   {id:"pa8",d:"M0 1700 H-2000",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-1960,ly:1660},
   {id:"pa9",d:"M-2000 1960 H0",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-1960,ly:2030},
   {id:"pa10",d:"M-2600 2156 V2900 H-1700 V3400",c:"#7AA606",txt:"Piezas aprobadas → Redacción",sub:"diseno.aprobadas · en obras",lx:-2560,ly:2860},
-  {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Piezas publicadas → Comunidad",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
+  {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Contenidos publicados → SEO",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,dis:{piezas:[],tend:null,estado:null},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,chatSala:"control",dis:{piezas:[],tend:null,estado:null,videos:[],biblio:[],bFiltro:"todo"},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -538,7 +569,7 @@ function aplicar(){
 }
 const limZ=z=>Math.min(4,Math.max(.06,z));
 function zoomEn(sx,sy,f){cancelAnimationFrame(vuelo);const wx=(sx-cam.x)/cam.z,wy=(sy-cam.y)/cam.z;cam.z=limZ(cam.z*f);cam.x=sx-wx*cam.z;cam.y=sy-wy*cam.z;aplicar()}
-function caja(m){const el=document.getElementById("m-"+m.id);return{x:m.x,y:m.y,w:m.w,h:el&&el.offsetHeight?el.offsetHeight:656}}
+function caja(m){const el=document.getElementById("m-"+m.id);const h=el&&el.offsetHeight?el.offsetHeight:656;return{x:m.x,y:m.arriba?m.y-h:m.y,w:m.w,h}}
 function cajaTotal(ids){const bs=(ids?MARCOS.filter(m=>ids.includes(m.id)):visibles()).map(caja);
   const x0=Math.min(...bs.map(b=>b.x)),y0=Math.min(...bs.map(b=>b.y))-(ids?0:200),x1=Math.max(...bs.map(b=>b.x+b.w)),y1=Math.max(...bs.map(b=>b.y+b.h));return{x:x0,y:y0,w:x1-x0,h:y1-y0}}
 function volarA(b,pad=70,inst=false){
@@ -644,18 +675,18 @@ function construir(){
          <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores de marketing · revisa y reorienta todo el flujo</small></div>
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
          <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
-         <div class="grupo-titulo" style="left:1900px;top:3170px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
-         <div class="grupo-titulo" style="left:-1900px;top:-1930px;color:#5d6774;font-size:56px">SEO</div>
-         <div class="grupo-titulo" style="left:1900px;top:-1930px;color:#5d6774;font-size:56px">Paid Media</div>`;
+         <div class="grupo-titulo" style="left:1900px;top:-230px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
+         <div class="grupo-titulo" style="left:1900px;top:3170px;color:#5d6774;font-size:56px">SEO</div>
+         <div class="grupo-titulo" style="left:3800px;top:3170px;color:#5d6774;font-size:56px">Paid Media</div>`;
   for(const m of MARCOS){
-    h+=`<section class="marco${m.dato?" dato":""}" ${m.dato?`data-sala="${m.sala}"`:""} id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
+    h+=`<section class="marco${m.dato?" dato":""}" ${m.dato?`data-sala="${m.sala}"`:""} id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px${m.arriba?";transform:translateY(-100%)":""}"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
   mundo.innerHTML=h;
-  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral · RRSS</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
-  $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn" data-abrirchat>Hablar con la dirección</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
-  $("#c-diseno").innerHTML=`<div class="mcab"><div><h2>Diseño · Estudio creativo</h2></div><div class="meta"><span class="vivo off" id="vivoDis">Conectando</span><span id="disN">0 piezas</span><span class="entrar-pista" style="background:#7AA606">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-diseno">${svgDiseno()}</div>`;
-  $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
-  $("#c-comunidad").innerHTML=`<div class="mcab"><div><h2>Comunidad · Escucha social</h2></div><div class="meta"><span class="vivo off" id="vivoCom">Conectando</span><span id="comN">Analizando comentarios</span><span class="entrar-pista" style="background:#9b5de5">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-comunidad">${svgComunidad()}</div>`;
+  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral · RRSS</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn" data-abrirchat="radar">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
+  $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn" data-abrirchat="control">Hablar con la dirección</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
+  $("#c-diseno").innerHTML=`<div class="mcab"><div><h2>Diseño · Estudio creativo</h2></div><div class="meta"><span class="vivo off" id="vivoDis">Conectando</span><span id="disN">0 piezas</span><span class="entrar-pista" style="background:#7AA606">Pulsa para entrar</span><button class="btn" data-abrirchat="diseno">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-diseno">${svgDiseno()}</div>`;
+  $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn" data-abrirchat="competencia">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
+  $("#c-comunidad").innerHTML=`<div class="mcab"><div><h2>Comunidad · Escucha social</h2></div><div class="meta"><span class="vivo off" id="vivoCom">Conectando</span><span id="comN">Analizando comentarios</span><span class="entrar-pista" style="background:#9b5de5">Pulsa para entrar</span><button class="btn" data-abrirchat="comunidad">Hablar con el equipo</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-comunidad">${svgComunidad()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
   pintarCapas();
   $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C,...EQUIPO_K].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
@@ -668,7 +699,7 @@ function pintarCapas(){
     ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
 function svgPasillos(){
-  const X=-2800,Y=500,W=6300,H=4100;
+  const X=-2800,Y=0,W=6300,H=4600;
   let d=`<svg class="pasillos" style="left:${X}px;top:${Y}px" width="${W}" height="${H}" viewBox="${X} ${Y} ${W} ${H}" aria-hidden="true"><defs>
     <filter id="brilloP" x="-100%" y="-300%" width="300%" height="700%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
   for(const p of PASILLOS_DEF){
@@ -677,11 +708,11 @@ function svgPasillos(){
       <path d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".08" stroke-width="40"/>
       <path class="flujo" d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".45" stroke-width="2" stroke-dasharray="8 32"/>
       <text x="${p.lx}" y="${p.ly}" class="p-txt"${p.fin?' text-anchor="end"':""}><tspan fill="${p.c}">■ </tspan>${esc(p.txt)}</text><text x="${p.fin?p.lx:p.lx+30}" y="${p.ly+28}" class="p-sub"${p.fin?' text-anchor="end"':""}>${esc(p.sub)}</text>`;
-    if(!quieto){const N=["pa4","pa5","pa6","pa7","pa8","pa9"].includes(p.id)?5:7,dur={pa3:16,pa4:7,pa5:6,pa6:7,pa7:7,pa8:7,pa9:7,pa10:9}[p.id]||14;for(let k=0;k<N;k++){const col=p.id==="pa5"?Object.values(PLAT)[k%Object.values(PLAT).length].c:p.c;
+    if(!quieto){const N=["pa4","pa5","pa6","pa7","pa8","pa9","pa11","pa12"].includes(p.id)?4:7,dur={pa3:16,pa4:7,pa5:6,pa6:7,pa7:7,pa8:7,pa9:7,pa10:9,pa11:4,pa12:4,pa2:8,pa13:9}[p.id]||14;for(let k=0;k<N;k++){const col=p.id==="pa5"?Object.values(PLAT)[k%Object.values(PLAT).length].c:p.c;
       d+=`<g><rect x="-11" y="-4" width="22" height="8" rx="2" fill="${col}" filter="url(#brilloP)"/><animateMotion dur="${dur}s" begin="-${(k*dur/N).toFixed(2)}s" repeatCount="indefinite" rotate="auto"${p.inv?' keyPoints="1;0" keyTimes="0;1" calcMode="linear"':""}><mpath href="#${p.id}"/></animateMotion></g>`}}
   }
   // nodos en los giros
-  const nodos=[[150,2380],[-1300,2380],[1050,2380],[2500,2380]];
+  const nodos=[[150,2380],[-1300,2380],[2300,1700],[2700,1950]];
   for(const[x,y]of nodos)d+=`<rect x="${x-14}" y="${y-14}" width="28" height="28" fill="#05070a" stroke="#3d7bff" stroke-width="2"/><rect x="${x-4}" y="${y-4}" width="8" height="8" fill="#3d7bff" filter="url(#brilloP)"/>`;
   return d+`</svg>`;
 }
@@ -1101,6 +1132,10 @@ function mockPieza(x){
     <div class="in" style="${just}">${x.tipo==="yt"?"":ante}<h5>${sw}</h5>${sub}${lista}${etq}</div>${vert}${dur}
     ${x.foto&&fondo==="foto"?`<div class="fotolbl">Foto: ${esc(corta(x.foto,90))}</div>`:""}</div>`;
 }
+function selloControl(c){
+  if(!c||!c.estado)return`<div><span class="ctrl-sello">◷ Pendiente de revisión de la Sala de Control</span></div>`;
+  return`<div style="display:grid;gap:6px"><span class="ctrl-sello ${esc(c.estado)}">${c.estado==="validada"?"✓ Validada por la Sala de Control":"↺ Control pide ajustes"}${c.director?" · "+esc(c.director):""}</span>${c.nota?`<div class="ctrl-nota">${esc(c.nota)}</div>`:""}</div>`;
+}
 function tarjetaPieza(x){
   const g=(x.guion||[]).length?`<details><summary>Guion</summary><ol class="guion">${x.guion.map(l=>`<li><b>${esc(l.t)}</b> · ${esc(l.plano)}: ${esc(l.texto)}</li>`).join("")}</ol></details>`:"";
   const c=(x.cuerpo||[]).length&&x.tipo==="ig"?`<details><summary>Diapositivas y textos</summary><ul>${x.cuerpo.map(l=>`<li>${esc(l)}</li>`).join("")}</ul></details>`:"";
@@ -1109,7 +1144,7 @@ function tarjetaPieza(x){
   const cap=x.caption?`<details><summary>Copy para publicar</summary><p>${esc(x.caption)}${(x.hashtags||[]).length&&!/#/.test(x.caption)?"\n\n"+x.hashtags.map(h=>"#"+h).join(" "):""}</p></details>`:"";
   const acc=x.estado==="propuesta"?`<button class="btn prim" data-pacc="aprobada">Aprobar</button><button class="btn" data-pacc="descartada">Descartar</button>`:`<button class="btn" data-pacc="propuesta">Reabrir</button>`;
   return`<div class="pieza ${esc(x.estado)}" data-pieza="${esc(x.id)}">${mockPieza(x)}
-    <div class="pz-info"><div class="pz-meta"><span class="estado-dec ${esc(x.estado==="aprobada"?"aprobada":x.estado==="descartada"?"descartada":"propuesta")}">${esc(x.estado)}</span><span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>
+    <div class="pz-info">${selloControl(x.control)}<div class="pz-meta"><span class="estado-dec ${esc(x.estado==="aprobada"?"aprobada":x.estado==="descartada"?"descartada":"propuesta")}">${esc(x.estado)}</span><span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>
       <h4>${esc(x.tema)}</h4><div class="pz-meta">${esc(x.formato||"")}</div>
       <div class="pz-por">${esc(x.porque||"")}</div>
       <div class="pz-ref">${(x.referencias||[]).map(r=>r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.texto)} ↗</a>`:`<span>${esc(r.texto)}</span>`).join("")}</div>
@@ -1127,6 +1162,7 @@ function pintarDiseno(){
     $("#c-"+id).innerHTML=`<div class="mcab"><div><h2>${esc(nom)}</h2><div class="fuente-mc" style="margin-top:6px">${t==="linkedin"?"Basados en los valores del brandbook y la actualidad del sector":"Basadas en lo que funciona en tu cuenta, la competencia y el mercado"} · cada pieza cita sus referencias con métricas</div></div><div class="meta">${ps.filter(x=>x.estado==="aprobada").length} de ${ps.length} aprobadas</div></div>
       <div class="piezas">${ps.length?ps.map(tarjetaPieza).join(""):`<div class="vacio">El equipo está preparando estas piezas.</div>`}</div>`;
   }
+  pintarVideos();pintarBiblio();
   const T=D.tend;
   $("#c-d_tend").innerHTML=`<div class="mcab"><div><h2>Tendencias del sector y pautas para RRSS</h2><div class="fuente-mc" style="margin-top:6px">Para la responsable de redes: qué está pasando, cómo aprovecharlo y reglas de trabajo</div></div><div class="meta">${T?.fecha?`actualizado ${esc(hace(T.fecha))}`:""}</div></div>
     ${T?`<div class="seccion-t">Tendencias y cómo aprovecharlas</div><div class="tend">${(T.tendencias||[]).map(x=>`<div class="tend-c"><h4>${esc(x.titulo)}</h4><p>${esc(x.que)}</p><p><b style="color:var(--texto)">Cómo aprovecharlo:</b> ${esc(x.aprovechar)}</p><div class="ev">${esc(x.evidencia)}</div></div>`).join("")}</div>
@@ -1224,7 +1260,7 @@ function pintarComunidad(){
       <div class="fila"><select id="kRed">${Object.entries(RED_K).map(([k,n])=>`<option value="${k}">${n}</option>`).join("")}</select><select id="kMk"><option value="es">ES</option><option value="en">EN</option><option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option></select><button class="btn" id="kBtn" type="submit">${C.ocupado?"Analizando…":"Analizar comentarios"}</button></div></form>
     ${C.lotes.length?`<div class="seccion-t">Lotes analizados</div><div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${C.lotes.slice(0,8).map(l=>{const r=l.resultado||{};return`<div class="k-c"><h4>${esc(RED_K[l.red]||l.red)} · ${esc((l.mercado||"").toUpperCase())} · ${fmtK(l.n)} comentarios <span style="color:var(--tenue);font-weight:400;font-size:12px">${esc(hace(l.t))}</span></h4><p>${esc(r.resumen||"")}</p>${(r.temas||[]).length?`<p><b style="color:#f1f3f5">Temas:</b> ${r.temas.map(t=>esc(t.tema)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${(r.preguntas||[]).length?`<p><b style="color:#f1f3f5">Preguntas:</b> ${r.preguntas.map(t=>esc(t.pregunta)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${r.sentimiento?`<p style="font-family:var(--f-mono);font-size:12px">Positivo ${esc(String(r.sentimiento.positivo??"?"))} · neutro ${esc(String(r.sentimiento.neutro??"?"))} · negativo ${esc(String(r.sentimiento.negativo??"?"))}</p>`:""}${(r.oportunidades||[]).length?`<p style="color:#b5dd4a">${r.oportunidades.map(esc).join(" · ")}</p>`:""}</div>`}).join("")}</div>`:""}`;
   // 3. Ideas
-  $("#c-k_ideas").innerHTML=`<div class="mcab"><div><h2>Ideas para captar y aumentar interacciones</h2><div class="fuente-mc" style="margin-top:6px">Basadas en tu cuenta, la competencia y el mercado · cada idea cita su referencia con métricas</div></div><div class="meta">${upd}</div></div>
+  $("#c-k_ideas").innerHTML=`<div class="mcab"><div><h2>Ideas para captar y aumentar interacciones</h2><div class="fuente-mc" style="margin-top:6px">Basadas en tu cuenta, la competencia y el mercado · cada idea cita su referencia con métricas</div></div><div class="meta">${upd}</div></div><div style="padding:12px 20px 0">${selloControl(A?.control)}</div>
     ${A?`<div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${(A.sugerencias||[]).map(x=>`<div class="k-c"><div><span class="k-tag ${esc(x.tipo||"")}">${esc(x.tipo||"idea")}</span>${x.red?`<span class="k-tag">${esc(x.red)}</span>`:""}</div><h4>${esc(x.titulo)}</h4><p>${esc(x.detalle||"")}</p>${x.porque?`<p style="color:#a8b3c0"><b style="color:#dfe4ea">Por qué:</b> ${esc(x.porque)}</p>`:""}${(x.referencias||[]).map(refK).join("")}</div>`).join("")}</div>
     ${(A.competencia||[]).length?`<div class="seccion-t">Lo que más comentarios genera en la competencia</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Tipo</th><th>Coment.</th><th>Me gusta</th></tr></thead><tbody>${A.competencia.slice(0,15).map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto,80))}</a><span class="sub">${esc(x.cuenta||"")} · ${esc(RED_K[x.red]||x.red||"")} · ${esc(fechaK(x.fecha))}</span></td><td>${esc(x.tipo||"")}</td><td>${fmtK(x.comentarios)}</td><td>${x.likes!=null?fmtK(x.likes):""}</td></tr>`).join("")}</tbody></table></div>`:""}
     ${(A.benchmarks||[]).length?`<div class="seccion-t">Benchmarks del mercado</div><ol class="prios">${A.benchmarks.map(b=>`<li class="prio"><div><p style="color:#dfe4ea;font-size:13.5px">${esc(b.texto)}</p>${b.fuente?`<div class="k-ref" style="margin-top:6px"><a href="${esc(safeUrl(b.fuente))}" target="_blank" rel="noopener">${esc(corta(b.fuenteNombre||b.fuente,70))}</a></div>`:""}</div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Cargando…</div>`}`;
@@ -1297,19 +1333,75 @@ async function analizarComentarios(){
 document.addEventListener("submit",e=>{if(e.target.id!=="kForm")return;e.preventDefault();if(!st.com.ocupado)analizarComentarios()});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-kmk]");if(b){kv.mk=b.dataset.kmk;suscribirComunidad();pintarKVivo()}});
 
+/* ---------- Ediciones de vídeo y biblioteca de Drive ---------- */
+function pintarVideos(){
+  const el=document.getElementById("c-d_vid");if(!el)return;const vs=st.dis.videos.filter(v=>v.estado!=="archivada");
+  el.innerHTML=`<div class="mcab"><div><h2>Ediciones de vídeo</h2><div class="fuente-mc" style="margin-top:6px">Montadas por Sara con el material de tu carpeta de Drive y el brandbook 2027 · pasan por la revisión de la Sala de Control</div></div><div class="meta">${vs.filter(v=>v.estado==="aprobada").length} de ${vs.length} aprobadas</div></div>
+  <div class="vids">${vs.length?vs.map(v=>`<div class="vid ${esc(v.estado)}" data-video="${esc(v.id)}"><video controls playsinline preload="none" poster="${esc(v.poster||"")}" src="${esc(v.archivo||"")}"></video>
+    <div class="pz-info">${selloControl(v.control)}<div class="pz-meta"><span class="estado-dec ${esc(v.estado==="aprobada"?"aprobada":v.estado==="descartada"?"descartada":"propuesta")}">${esc(v.estado)}</span><span class="mk">${esc((v.mercado||"").toUpperCase())}</span><span>${esc(v.formato||"")} · ${esc(String(v.duracion||""))} s</span></div>
+      <h4>${esc(v.titulo)}</h4><div class="pz-por">${esc(v.porque||"")}</div>
+      <div class="pz-ref">${(v.referencias||[]).map(r=>r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.texto)} ↗</a>`:`<span>${esc(r.texto)}</span>`).join("")}</div>
+      ${(v.guion||[]).length?`<details><summary>Montaje</summary><ol class="guion">${v.guion.map(l=>`<li><b>${esc(l.t)}</b> · ${esc(l.plano)}: ${esc(l.texto)}</li>`).join("")}</ol></details>`:""}
+      ${v.caption?`<details><summary>Copy para publicar</summary><p>${esc(v.caption)}</p></details>`:""}
+      ${v.nota?`<p style="color:var(--tenue);font-size:12px;margin:0">${esc(v.nota)}</p>`:""}
+      <div class="acc">${v.estado==="propuesta"?`<button class="btn prim" data-vacc="aprobada">Aprobar</button><button class="btn" data-vacc="descartada">Descartar</button>`:`<button class="btn" data-vacc="propuesta">Reabrir</button>`}<a class="btn" href="${esc(v.archivo||"#")}" download>Descargar MP4</a></div></div></div>`).join(""):`<div class="vacio">Sara está montando las primeras ediciones.</div>`}</div>`;
+}
+function pintarBiblio(){
+  const el=document.getElementById("c-d_bib");if(!el)return;const B=st.dis.biblio,f=st.dis.bFiltro;
+  const esc2=x=>f==="todo"||(f==="video"?x.carpeta==="video":f==="imagen"?x.carpeta==="imagen":x.escena===f);
+  const escenas=[...new Set(B.map(x=>x.escena).filter(Boolean))];
+  el.innerHTML=`<div class="mcab"><div><h2>Biblioteca de Drive</h2><div class="fuente-mc" style="margin-top:6px">Carpeta CLAUDE (IMÁGENES y VIDEO) · etiquetada por el estudio para usarla en las piezas</div></div><div class="meta">${B.length} archivos · ${B.filter(x=>x.descargado).length} revisados</div></div>
+  <div class="bib-f">${[["todo","Todo"],["video","Vídeos"],["imagen","Imágenes"],...escenas.map(e=>[e,e])].map(([k,n])=>`<button class="chip" data-bfil="${esc(k)}" aria-pressed="${f===k}">${esc(n)}</button>`).join("")}</div>
+  <div class="bib">${B.filter(esc2).map(x=>`<a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener" title="Abrir en Drive">${x.miniatura?`<div class="im" style="background-image:url('${esc(x.miniatura)}')"><b>${x.carpeta==="video"?"Vídeo"+(x.duracion?" · "+String(x.duracion).replace(".",",")+" s":""):"Foto"}</b></div>`:`<div class="im sin"><b>${x.carpeta==="video"?"Vídeo":"Foto"}</b>Más de 10 MB: abrir en Drive</div>`}<div class="tx">${esc(x.descripcion)}<small>${esc([x.orientacion,x.ancho&&x.alto?x.ancho+"×"+x.alto:"",(x.etiquetas||[]).join(", ")].filter(Boolean).join(" · "))}</small></div></a>`).join("")}</div>`;
+}
+document.addEventListener("click",async e=>{
+  const bf=e.target.closest("[data-bfil]");if(bf){st.dis.bFiltro=bf.dataset.bfil;pintarBiblio();return}
+  const a=e.target.closest("[data-vacc]");if(!a)return;
+  const id=a.closest("[data-video]")?.dataset.video;if(!id||!st.db){toast("Sin conexión con la sala");return}
+  try{await st.db.doc("diseno_videos/"+id).update({estado:a.dataset.vacc,revisado:new Date().toISOString()});toast({aprobada:"Vídeo aprobado",descartada:"Vídeo descartado",propuesta:"Vídeo reabierto"}[a.dataset.vacc])}
+  catch(_){toast("Solo el propietario puede decidir")}
+});
 /* ---------- Chat con la Sala de Control ---------- */
 let sampleFn=null,chatCtl=null,chatVivo="";
-const SUGERENCIAS=["¿Qué haríais esta semana con 2.000 € en Meta Ads?","Quiero más foco en el mercado alemán","¿Qué pieza de Diseño publicaríais primero?","No me convence la serie de mitos, ¿alternativas?"];
-function abrirChat(){$("#chat").hidden=false;pintarChat();setTimeout(()=>$("#chatTxt")?.focus(),50)}
+const REGLAS_COMUNES=`Hablas con Álvaro, responsable del proyecto en Santiago Ways (agencia premium del Camino de Santiago; mercados ES y EN principales, también DE, IT y PT).
+Responde en español, con criterio y concreción, en un máximo de 170 palabras. Que hable la persona o las dos personas más pertinentes del equipo, empezando cada intervención con su nombre y rol (por ejemplo «Victoria (CMO):»).
+Siempre que menciones un post o vídeo de redes, cita sus métricas tal como constan en los datos. No inventes cifras: si un dato no está, dilo.
+Nunca uses guiones largos; usa punto, dos puntos o punto y coma. Tildes correctas.`;
+const REVISION=`Regla de la casa: todo lo que hace tu sala pasa por la revisión de la Sala de Control (dirección de marketing) antes de aplicarse. Si Álvaro pide un cambio, explica cómo lo plantearíais y aclara que la Sala de Control lo revisará en su próxima revisión (8:50, 14:50 o 20:50) y fijará las directrices. Respeta las directrices actuales de Control para tu sala.`;
+const CHAT_SALAS={
+  control:{nombre:"Sala de Control",equipo:()=>EQUIPO_D,saludo:"Hola, Álvaro. Somos la dirección de marketing. Pregúntanos por cualquier estrategia o danos feedback: lo aplicaremos en el briefing, las decisiones y las directrices de cada sala.",
+    persona:"Eres la Sala de Control de Santiago Ways: seis directores de marketing de primer nivel. Victoria (CMO), Hugo (growth y performance), Clara (marca, vídeo y comunidad), Iván (mercados internacionales), Lola (CRM y lifecycle) y Tomás (inteligencia competitiva y SEO). Revisáis y validáis todo lo que producen las demás salas. Si Álvaro da feedback que cambia la estrategia, di qué ajustaréis (briefing, decisiones o directrices de qué sala) y que se aplicará en la próxima revisión.",
+    sug:["¿Qué haríais esta semana con 2.000 € en Meta Ads?","Quiero más foco en el mercado alemán","¿Qué pieza de Diseño publicaríais primero?","No me convence la serie de mitos, ¿alternativas?"]},
+  radar:{nombre:"Radar Viral",equipo:()=>EQUIPO,saludo:"Hola, Álvaro. Somos el Radar Viral: buscamos lo que más funciona del Camino en redes, prensa y foros. ¿Qué quieres que vigilemos?",
+    persona:"Eres el equipo del Radar Viral: Marta (jefa), Mateo (YouTube ES), Emma (YouTube EN), Lucía (Shorts, Reels y TikTok), Carmen (competencia en redes), Pablo (Metricool), Lena (DE), Giulia (IT), Rita (PT), Andrés (prensa) e Inés (blogs y foros).",
+    sug:["¿Qué vídeo del Camino está funcionando más esta semana?","Busca más contenido en alemán","¿Qué formato copiaríais ya?"]},
+  competencia:{nombre:"Competencia",equipo:()=>EQUIPO_C,saludo:"Hola, Álvaro. Somos la agencia de investigación: vigilamos webs, precios, noticias, redes y alianzas de la competencia. ¿Qué quieres saber?",
+    persona:"Eres el equipo de Competencia: Elena (directora de investigación), Sofía (vigilancia web), Diego (precios), Nuria (comunicación), Álex (sus redes) y Jorge (alianzas).",
+    sug:["¿Qué ha cambiado esta semana en la competencia?","Vigila más de cerca a Tu Buen Camino","¿Quién está bajando precios para 2027?"]},
+  diseno:{nombre:"Diseño",equipo:()=>EQUIPO_S,saludo:"Hola, Álvaro. Somos el estudio creativo: piezas con el brandbook 2027 y ediciones de vídeo con tu material de Drive. ¿Qué te parecen?",
+    persona:"Eres el estudio de Diseño: Paula (dirección de arte y guardiana del brandbook 2027), Nico (Instagram), Sara (edición de vídeo), Leo (YouTube), Irene (copy y LinkedIn) y Bruno (TikTok).",
+    sug:["Haz una versión más corta del reel","¿Qué pieza publicarías primero?","Quiero más vídeo con personas reales"]},
+  comunidad:{nombre:"Comunidad",equipo:()=>EQUIPO_K,saludo:"Hola, Álvaro. Somos el equipo de Comunidad: analizamos tus comentarios y lo que pregunta la gente. ¿En qué te ayudamos?",
+    persona:"Eres el equipo de Comunidad: Bea (jefa de comunidad), Carla (Instagram y Facebook), Rubén (YouTube y TikTok), Ana (preguntas frecuentes), Martín (benchmark) y Olga (community manager).",
+    sug:["¿Qué respondemos a quien pregunta por precios?","Dame 3 preguntas para cerrar posts esta semana","¿Por qué EN comenta tan poco?"]},
+};
+const salaDe=m=>m.sala||"control";
+function abrirChat(sala){st.chatSala=CHAT_SALAS[sala]?sala:(CHAT_SALAS[st.dentro]?st.dentro:"control");$("#chat").hidden=false;pintarChat();setTimeout(()=>$("#chatTxt")?.focus(),50)}
 function pintarChat(){
   const el=$("#chatMsgs");if(!el||$("#chat").hidden)return;
-  const ms=st.chat.slice(-60);
-  el.innerHTML=(ms.length?"":`<div class="msg direccion">Hola, Álvaro. Somos la dirección de marketing. Pregúntanos por cualquier estrategia o danos feedback: lo tendremos en cuenta en el briefing, las decisiones y las directrices de cada sala.</div>`)+
-    ms.map(m=>`<div class="msg ${m.rol==="usuario"?"usuario":"direccion"}">${esc(m.texto)}<time>${esc(hace(m.t))}${m.rol==="usuario"&&!m.procesado?' · <span class="pend">pendiente de aplicar</span>':""}</time></div>`).join("")+
-    (st.chatOcupado?`<div class="msg direccion" id="chatVivo">${esc(chatVivo||"La dirección está pensando…")}</div>`:"");
+  const S=CHAT_SALAS[st.chatSala]||CHAT_SALAS.control,ctrl=st.chatSala==="control";
+  $("#chatTit").textContent=ctrl?"Chat con la Sala de Control":"Chat con "+S.nombre;
+  $("#chatSub").textContent=S.equipo().map(a=>a.n).join(", ");
+  $("#chatNota").textContent=ctrl?"Tus comentarios se guardan y la dirección los aplica en su siguiente revisión (8:50, 14:50 y 20:50).":"El equipo te responde al momento. Todo pasa por la Sala de Control: revisa tu mensaje en su próxima revisión (8:50, 14:50 y 20:50) y fija las directrices de la sala.";
+  $("#chatTabs").innerHTML=Object.entries(CHAT_SALAS).map(([k,v])=>`<button class="chip" data-chatsala="${k}" aria-pressed="${k===st.chatSala}">${esc(v.nombre)}</button>`).join("");
+  const ms=st.chat.filter(m=>salaDe(m)===st.chatSala).slice(-60);
+  el.innerHTML=(ms.length?"":`<div class="msg direccion">${esc(S.saludo)}</div>`)+
+    ms.map(m=>`<div class="msg ${m.rol==="usuario"?"usuario":"direccion"}${m.origen==="revision"?" rev":""}">${m.origen==="revision"&&!ctrl?'<span class="rev-tag">Sala de Control</span>':""}${esc(m.texto)}<time>${esc(hace(m.t))}${m.rol==="usuario"?(m.procesado?' · <span class="ok-ctrl">revisado por Control</span>':' · <span class="pend">pendiente de revisión de Control</span>'):""}</time></div>`).join("")+
+    (st.chatOcupado?`<div class="msg direccion" id="chatVivo">${esc(chatVivo||"El equipo está pensando…")}</div>`:"");
   el.scrollTop=el.scrollHeight;
-  $("#chatSug").innerHTML=ms.length?"":SUGERENCIAS.map(x=>`<button class="chip" data-sug="${esc(x)}">${esc(x)}</button>`).join("");
+  $("#chatSug").innerHTML=ms.length?"":S.sug.map(x=>`<button class="chip" data-sug="${esc(x)}">${esc(x)}</button>`).join("");
   $("#chatEnviar").textContent=st.chatOcupado?"Parar":"Enviar";
+  $("#chatTxt").placeholder=ctrl?"Da feedback o pregunta a la dirección…":`Escribe al equipo de ${S.nombre}…`;
 }
 function contextoControl(){
   const C=st.ctrl,top=activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,10);
@@ -1320,40 +1412,50 @@ function contextoControl(){
     research:C.research?{objetivo:C.research.objetivo,datos:C.research.datos,personas:(C.research.personas||[]).map(p=>p.nombre+": "+p.resumen),palancas:C.research.palancas}:null,
     radar:top.map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),buzz:i.buzz,metricas:i.metricas||null})),
     competencia:st.cambios.slice(0,8).map(c=>({player:c.player,tipo:c.tipo,titulo:c.titulo,impacto:c.impacto})),
-    diseno:st.dis.piezas.filter(x=>x.estado!=="archivada").slice(0,25).map(x=>({tipo:x.tipo,tema:x.tema,estado:x.estado})),
+    diseno:st.dis.piezas.filter(x=>x.estado!=="archivada").slice(0,25).map(x=>({tipo:x.tipo,tema:x.tema,estado:x.estado,control:x.control?.estado||"pendiente"})),
+    videos:(st.dis.videos||[]).map(v=>({titulo:v.titulo,estado:v.estado,control:v.control?.estado||"pendiente"})),
     comunidad:st.com.analisis?{resumen:st.com.analisis.resumen,formatos:(st.com.analisis.porFormato||[]).slice(0,6),preguntas:(st.com.analisis.preguntas||[]).slice(0,8).map(p=>p.tema+": "+p.que),sugerencias:(st.com.analisis.sugerencias||[]).slice(0,6).map(x=>x.titulo)}:null,
     youtubeES:(mc.datos["es:ytVideos"]?.rows||[]).slice(0,5).map(r=>({titulo:r[2],vistas:+r[3],likes:+r[4],comentarios:+r[5]}))
   });
 }
-const REGLAS_CHAT=`Eres la Sala de Control de Santiago Ways (agencia premium del Camino de Santiago, mercados ES y EN principales, también DE, IT y PT): seis directores de marketing de primer nivel. Victoria (CMO), Hugo (growth y performance), Clara (marca, vídeo y comunidad), Iván (mercados internacionales), Lola (CRM y lifecycle) y Tomás (inteligencia competitiva y SEO). Hablas con Álvaro, responsable del proyecto.
-Responde en español, con criterio y concreción, en un máximo de 180 palabras. Que hable el director o los dos directores más pertinentes, empezando cada intervención con su nombre y rol (por ejemplo «Victoria (CMO):»).
-Si Álvaro da feedback que cambia la estrategia, di qué ajustaréis (briefing, decisiones o directrices de qué sala) y que se aplicará en la próxima revisión.
-Siempre que menciones un post o vídeo de redes, cita sus métricas tal como constan en los datos. No inventes cifras: si un dato no está, dilo.
-Nunca uses guiones largos; usa punto, dos puntos o punto y coma. Tildes correctas.
-DATOS ACTUALES DEL SISTEMA (JSON):
-`;
-function textoErrorSample(c){return{not_granted:"No has permitido que la página consulte a Claude. Puedes activarlo en los permisos del artifact. Tu mensaje queda guardado y la dirección lo verá en su próxima revisión.",rate_limited:"Hay demasiadas consultas a la vez. Espera un momento y vuelve a enviar.",cancelled:""}[c]??"La dirección no ha podido responder ahora. Tu mensaje queda guardado y lo verá en su próxima revisión."}
+function contextoSala(s){
+  if(s==="control")return contextoControl();
+  const C=st.ctrl,base={briefingControl:C.briefing?{titular:C.briefing.titular,prioridades:(C.briefing.prioridades||[]).filter(p=>p.sala===s||p.sala==="global").map(p=>p.titulo+": "+(p.porque||""))}:null,directricesDeControl:C.directrices?.[s]?{resumen:C.directrices[s].resumen,foco:C.directrices[s].foco}:"sin directrices específicas todavía"};
+  const compartido=s==="radar"?{deComunidad:st.com.analisis?{preguntas:(st.com.analisis.preguntas||[]).slice(0,10).map(p=>p.tema+": "+p.que),queGeneraComentarios:(st.com.analisis.porFormato||[]).slice(0,5).map(x=>x.tipo+" ("+x.media+" coment./post)")}:null}:s==="comunidad"?{delRadar:activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,10).map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),metricas:i.metricas||null}))}:{};
+  Object.assign(base,compartido);
+  if(s==="radar")Object.assign(base,{radar:activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,15).map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),buzz:i.buzz,fuente:i.fuente,metricas:i.metricas||null,porque:i.porque})),bitacora:(st.estado?.bitacora||[]).slice(0,6)});
+  if(s==="competencia")Object.assign(base,{cambios:st.cambios.slice(0,15).map(c=>({player:c.player,tipo:c.tipo,titulo:c.titulo,impacto:c.impacto,detectado:c.detectado})),players:st.players.map(p=>p.nombre||p.id),bitacora:(st.estadoC?.bitacora||[]).slice(0,6)});
+  if(s==="diseno")Object.assign(base,{piezas:st.dis.piezas.filter(x=>x.estado!=="archivada").map(x=>({tipo:x.tipo,tema:x.tema,titular:x.titular,estado:x.estado,revisionControl:x.control||"pendiente"})),videos:(st.dis.videos||[]).map(v=>({titulo:v.titulo,duracion:v.duracion,formato:v.formato,descripcion:v.descripcion,estado:v.estado,revisionControl:v.control||"pendiente"})),biblioteca:(st.dis.biblio||[]).slice(0,40).map(b=>({titulo:b.titulo,tipo:b.carpeta,etiquetas:b.etiquetas,escena:b.escena})),tendencias:(st.dis.tend?.tendencias||[]).map(t=>t.titulo)});
+  if(s==="comunidad"){const A=st.com.analisis||{};Object.assign(base,{resumen:A.resumen,totales:A.totales,porFormato:(A.porFormato||[]).map(x=>({tipo:x.tipo,media:x.media,posts:x.posts})),topPosts:(A.topPosts||[]).slice(0,10),preguntas:(A.preguntas||[]).map(p=>p.tema+": "+p.que),sugerencias:(A.sugerencias||[]).map(x=>x.titulo),lotes:st.com.lotes.slice(0,5).map(l=>l.resultado?.resumen)})}
+  return JSON.stringify(base);
+}
+function textoErrorSample(c){return{not_granted:"No has permitido que la página consulte a Claude. Puedes activarlo en los permisos del artifact. Tu mensaje queda guardado y la Sala de Control lo verá en su próxima revisión.",rate_limited:"Hay demasiadas consultas a la vez. Espera un momento y vuelve a enviar.",cancelled:""}[c]??"El equipo no ha podido responder ahora. Tu mensaje queda guardado y la Sala de Control lo verá en su próxima revisión."}
 async function enviarChat(texto){
   texto=texto.trim();if(!texto)return;
   if(!st.db){toast("Abre la página desde claude.ai para usar el chat");return}
-  const t=new Date().toISOString();
-  try{await st.db.collection("control_chat").add({rol:"usuario",texto,t,procesado:false})}catch(_){toast("No se pudo guardar el mensaje");return}
+  const sala=st.chatSala||"control",S=CHAT_SALAS[sala],t=new Date().toISOString();
+  try{await st.db.collection("control_chat").add({rol:"usuario",texto,t,procesado:false,sala})}catch(_){toast("No se pudo guardar el mensaje");return}
   $("#chatTxt").value="";
-  if(!sampleFn){toast("Mensaje guardado: la dirección lo responderá en su próxima revisión");return}
-  const hist=st.chat.slice(-12).map(m=>({role:m.rol==="usuario"?"user":"assistant",content:m.texto}));
+  if(!sampleFn){toast("Mensaje guardado: la Sala de Control lo revisará en su próxima revisión");return}
+  const hist=st.chat.filter(m=>salaDe(m)===sala).slice(-12).map(m=>({role:m.rol==="usuario"?"user":"assistant",content:m.texto}));
   if(!hist.length||hist[hist.length-1].content!==texto)hist.push({role:"user",content:texto});
-  const turns=[{role:"user",content:REGLAS_CHAT+contextoControl()},...hist];
+  if(hist[0]?.role==="assistant")hist.shift();
+  const reglas=`${S.persona}\n${REGLAS_COMUNES}\n${sala==="control"?"":REVISION+"\n"}DATOS ACTUALES DE LA SALA (JSON):\n`;
+  const turns=[];for(const m of [{role:"user",content:reglas+contextoSala(sala)},{role:"assistant",content:"Entendido. Seguimos la conversación con Álvaro."},...hist]){const u=turns[turns.length-1];if(u&&u.role===m.role)u.content+="\n\n"+m.content;else turns.push({...m})}
+  if(turns[turns.length-1].role!=="user")turns.push({role:"user",content:texto});
   st.chatOcupado=true;chatVivo="";chatCtl=new AbortController();pintarChat();
+  const rol=sala==="control"?"direccion":"equipo";
   try{
     const{text}=await sampleFn(turns,{cache:false,signal:chatCtl.signal,onText:({text})=>{chatVivo=text;const v=document.getElementById("chatVivo");if(v)v.textContent=text;const el=$("#chatMsgs");if(el)el.scrollTop=el.scrollHeight}});
-    await st.db.collection("control_chat").add({rol:"direccion",texto:text,t:new Date().toISOString(),origen:"chat"});
+    await st.db.collection("control_chat").add({rol,texto:text,t:new Date().toISOString(),origen:"chat",sala});
   }catch(e){
-    const keep=e?.text;if(keep)await st.db.collection("control_chat").add({rol:"direccion",texto:keep,t:new Date().toISOString(),origen:"chat"}).catch(()=>{});
+    const keep=e?.text;if(keep)await st.db.collection("control_chat").add({rol,texto:keep,t:new Date().toISOString(),origen:"chat",sala}).catch(()=>{});
     const msg=textoErrorSample(e?.code);if(msg)toast(msg);
   }finally{st.chatOcupado=false;chatVivo="";pintarChat()}
 }
 document.addEventListener("click",e=>{
-  if(e.target.closest("#hChat,[data-abrirchat]")){e.stopPropagation();abrirChat();return}
+  const ab=e.target.closest("#hChat,[data-abrirchat]");if(ab){e.stopPropagation();abrirChat(ab.dataset.abrirchat);return}
+  const cs=e.target.closest("[data-chatsala]");if(cs){if(!st.chatOcupado){st.chatSala=cs.dataset.chatsala;pintarChat()}return}
   if(e.target.closest("#cerrarChat")){$("#chat").hidden=true;return}
   const sg=e.target.closest("[data-sug]");if(sg){$("#chatTxt").value=sg.dataset.sug;$("#chatTxt").focus();return}
 });
@@ -1612,6 +1714,8 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
   db.doc("estado/comunidad").onSnapshot(s=>{st.com.estado=s.exists?s.data():null;pintarComunidad()});
   db.collection("comunidad_lotes").orderBy("t","desc").limit(30).onSnapshot(s=>{st.com.lotes=s.docs.map(d=>({id:d.id,...d.data()}));pintarComunidad()});
   db.collection("comunidad_snap").limit(10).onSnapshot(s=>{s.docs.forEach(d=>st.com.snapT[d.id]=d.data().t||"");});
+  db.collection("diseno_videos").limit(100).onSnapshot(s=>{st.dis.videos=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.orden||0)-(b.orden||0));pintarDiseno()});
+  db.collection("diseno_biblio").limit(500).onSnapshot(s=>{st.dis.biblio=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.orden||0)-(b.orden||0));pintarDiseno()});
   db.doc("estado/diseno").onSnapshot(s=>{st.dis.estado=s.exists?s.data():null;pintarDiseno()});
   db.doc("control_briefing/actual").onSnapshot(s=>{st.ctrl.briefing=s.exists?s.data():null;pintarControl()});
   db.collection("control_decisiones").orderBy("creado","desc").limit(200).onSnapshot(s=>{st.ctrl.decisiones=s.docs.map(d=>({id:d.id,...d.data()}));pintarControl()});

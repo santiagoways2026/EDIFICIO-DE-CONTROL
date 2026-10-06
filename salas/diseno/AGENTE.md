@@ -5,3 +5,9 @@ Rutina: lunes a las 8:47 (Madrid). Seis creativos (Paula dirección de arte, Nic
 Fuentes: Radar Viral (`radar`), Competencia (`comp_cambios`), Sala de Control (`control_briefing/actual`, `control_directrices`), piezas aprobadas o descartadas (`diseno_piezas`) y el Brandbook 2027 (colores #FFFFFF 50 %, #7AA606 30 %, #506718 10 %, #2E2E2D 7 %; Montserrat; subrayado SW girado -1,5°; concha arriba a la derecha; tono de experto cercano).
 
 Regla: cada pieza cita sus posts de referencia con métricas.
+
+## Biblioteca de Drive y ediciones de vídeo
+
+- `diseno_biblio`: índice etiquetado de la carpeta CLAUDE de Drive (IMÁGENES y VIDEO): descripción, escena, etiquetas, orientación, duración y enlace. Cada pieza cita en `foto` y en el guion el archivo concreto que hay que usar.
+- `diseno_videos`: ediciones montadas por el estudio (reels 9:16 con Montserrat, subrayado SW, concha y cierre verde Ways). Los MP4 y las miniaturas se publican junto a la página y no se suben a este repositorio, porque contienen fotos de clientes.
+- Todo pasa por la Sala de Control: escribe en cada pieza y vídeo `control = {estado: validada|ajustar, nota, director, t}`. El estudio corrige lo marcado como "ajustar" antes de proponer nada nuevo.
