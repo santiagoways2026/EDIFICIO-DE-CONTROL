@@ -46,15 +46,34 @@ a{color:inherit}
 .grupo-titulo small{display:block;font:500 18px/1.4 var(--f-mono);letter-spacing:.04em;color:var(--tenue);margin-top:12px;text-transform:uppercase}
 .grupo-titulo .ok{color:var(--vivo)}
 .marco.dato{display:none}
-body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"],body[data-dentro="diseno"] .marco.dato[data-sala="diseno"]{display:block;animation:entra .45s ease-out both}
+body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"],body[data-dentro="diseno"] .marco.dato[data-sala="diseno"],body[data-dentro="comunidad"] .marco.dato[data-sala="comunidad"]{display:block;animation:entra .45s ease-out both}
 @keyframes entra{from{opacity:0}}
-#m-radar,#m-competencia,#m-control,#m-diseno{cursor:pointer}
-body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control,body[data-dentro="diseno"] #m-diseno{cursor:inherit}
+#m-radar,#m-competencia,#m-control,#m-diseno,#m-comunidad{cursor:pointer}
+body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control,body[data-dentro="diseno"] #m-diseno,body[data-dentro="comunidad"] #m-comunidad{cursor:inherit}
 .entrar-pista{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--sel);padding:6px 9px;border-radius:4px;box-shadow:0 0 18px rgba(61,123,255,.5)}
-body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista,body[data-dentro="diseno"] #m-diseno .entrar-pista{display:none}
+body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista,body[data-dentro="comunidad"] #m-comunidad .entrar-pista,body[data-dentro="diseno"] #m-diseno .entrar-pista{display:none}
 .salir{display:none}
-body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir{display:inline-flex}
+body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir,body[data-dentro="comunidad"] #m-comunidad .salir{display:inline-flex}
 #m-control{border-color:#4a4128}
+#chat[hidden]{display:none}
+#m-comunidad:hover{box-shadow:0 0 0 1px rgba(192,132,252,.5),0 0 70px rgba(192,132,252,.18),0 30px 80px rgba(0,0,0,.6)}
+.k-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 20px 4px}
+.k-c{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:14px;display:grid;gap:6px;align-content:start}
+.k-c h4{margin:0;font-size:15px;color:#f1f3f5}
+.k-c p{margin:0;font-size:13.5px;line-height:1.5;color:#c9d1da}
+.k-num{font:700 26px/1 var(--f-ui);color:#d8b4fe}
+.k-num small{font:500 11px/1 var(--f-mono);color:var(--tenue);margin-left:6px;letter-spacing:.06em;text-transform:uppercase}
+.k-ref{font:500 12px/1.5 var(--f-mono);color:#a8b3c0;border-left:2px solid #c084fc;padding-left:8px}
+.k-ref a{color:#d8b4fe}
+.k-tag{display:inline-block;font:600 10.5px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:3px;background:rgba(192,132,252,.14);color:#d8b4fe;margin-right:6px}
+.k-tag.captar{background:rgba(61,123,255,.16);color:#8fb3ff}.k-tag.activar{background:rgba(122,166,6,.18);color:#b5dd4a}.k-tag.responder{background:rgba(245,197,24,.16);color:#f5d76e}
+.k-bar{height:8px;border-radius:2px;background:#c084fc;min-width:2px}
+.k-pegar{padding:12px 20px 18px;display:grid;gap:8px}
+.k-pegar textarea{width:100%;min-height:120px;resize:vertical;background:#07090c;color:var(--texto);border:1px solid var(--borde-2);border-radius:6px;padding:10px;font:13px/1.5 var(--f-ui)}
+.k-pegar .fila{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.k-pegar select{background:#07090c;color:var(--texto);border:1px solid var(--borde-2);border-radius:6px;padding:7px}
+.k-aviso{margin:14px 20px 0;padding:12px 14px;border:1px dashed #6b4f8a;border-radius:6px;font-size:13px;line-height:1.5;color:#cbb5e6}
+@media (max-width:700px){.k-grid{grid-template-columns:minmax(0,1fr)}}
 #m-control:hover{box-shadow:0 0 0 1px rgba(245,215,110,.5),0 0 70px rgba(245,215,110,.18),0 30px 80px rgba(0,0,0,.6)}
 #m-competencia:hover{box-shadow:0 0 0 1px rgba(255,107,61,.45),0 0 60px rgba(255,107,61,.16),0 30px 80px rgba(0,0,0,.6)}
 #m-radar:hover{box-shadow:0 0 0 1px rgba(61,123,255,.45),0 0 60px rgba(61,123,255,.18),0 30px 80px rgba(0,0,0,.6)}
@@ -455,10 +474,16 @@ const MARCOS=[
   {id:"comprrss",grupo:"competencia",dato:true,nombre:"Competencia / Sus redes en Metricool",x:1340,y:4560,w:1100},
   {id:"compbit",grupo:"competencia",dato:true,nombre:"Competencia / Equipo y bitácora",x:2540,y:4560,w:560},
   {id:"redaccion",grupo:"obras",nombre:"Redacción",x:-1900,y:3400,w:1200,obra:"Convertirá las tendencias del Radar en publicaciones listas para tus redes."},
-  {id:"analisis",grupo:"obras",nombre:"Análisis",x:1900,y:3400,w:1200,obra:"Medirá el rendimiento de tus propias redes y lo comparará con lo viral."},
+  {id:"comunidad",grupo:"comunidad",nombre:"Comunidad / Sala",x:1900,y:3400,w:1200},
+  {id:"k_formatos",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué genera comentarios",x:3260,y:3400,w:1400},
+  {id:"k_preguntas",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué pregunta y comenta la gente",x:4900,y:3400,w:1250},
+  {id:"k_ideas",grupo:"comunidad",dato:true,nombre:"Comunidad / Ideas para más interacción",x:6400,y:3400,w:1250},
+  {id:"k_vivo",grupo:"comunidad",dato:true,nombre:"Comunidad / Tus comentarios en vivo y bitácora",x:7900,y:3400,w:1100},
+  {id:"seo",grupo:"obras",nombre:"SEO",x:-1900,y:-1700,w:1200,obra:"Posicionamiento orgánico: palabras clave, contenidos y la web frente a la competencia."},
+  {id:"paid",grupo:"obras",nombre:"Paid Media",x:1900,y:-1700,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
@@ -466,15 +491,15 @@ const PASILLOS_DEF=[
   {id:"pa4",d:"M800 3400 V2156",c:"#ff6b3d",txt:"Alertas de competencia → Control",sub:"competencia.cambios · cada 4 h",lx:860,ly:2800},
   {id:"pa7",d:"M400 2156 V3400",c:"#f5d76e",txt:"Directrices → Competencia",sub:"control.directrices.competencia",lx:340,ly:2800,fin:true},
   {id:"pa1",d:"M150 2156 V2380 H-1300 V3400",c:"#f5c518",txt:"Briefings y prioridades → Redacción",sub:"control.briefing · en obras",lx:-1250,ly:2330},
-  {id:"pa2",d:"M2500 3400 V2380 H1050 V2156",c:"#22d3ee",txt:"Rendimiento de tus redes → Control",sub:"analisis.rendimiento · en obras",lx:1100,ly:2330},
+  {id:"pa2",d:"M2500 3400 V2380 H1050 V2156",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada día",lx:1100,ly:2330},
   {id:"pa8",d:"M0 1700 H-2000",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-1960,ly:1660},
   {id:"pa9",d:"M-2000 1960 H0",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-1960,ly:2030},
   {id:"pa10",d:"M-2600 2156 V2900 H-1700 V3400",c:"#7AA606",txt:"Piezas aprobadas → Redacción",sub:"diseno.aprobadas · en obras",lx:-2560,ly:2860},
-  {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Piezas publicadas → Análisis",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
+  {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Piezas publicadas → Comunidad",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,dis:{piezas:[],tend:null,estado:null},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,dis:{piezas:[],tend:null,estado:null},com:{analisis:null,estado:null,lotes:[],snapT:{},ocupado:false},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -534,7 +559,7 @@ function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;
   st.marcoSel=id;marcarSel();volarA(caja(m))}
 function verTodo(){if(st.dentro)salir(false);st.marcoSel=null;marcarSel();volarA(cajaTotal())}
 function entrar(sala="radar",foco){
-  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();
+  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();if(sala==="comunidad")suscribirComunidad();
   requestAnimationFrame(()=>volarA(foco&&foco!==sala?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(SALAS_ACT[sala]),50));
 }
 function salir(volar=true){
@@ -589,6 +614,7 @@ addEventListener("keydown",e=>{
   else if(e.key.toLowerCase()==="c")entrar("competencia");
   else if(e.key.toLowerCase()==="d")entrar("control");
   else if(e.key.toLowerCase()==="s")entrar("diseno");
+  else if(e.key.toLowerCase()==="m")entrar("comunidad");
   else if(e.key==="Escape"){if(st.sel)cerrarInsp();else if(st.dentro)salir()}
   else if(e.key.startsWith("Arrow")){const s=60;cam.x+=e.key==="ArrowLeft"?s:e.key==="ArrowRight"?-s:0;cam.y+=e.key==="ArrowUp"?s:e.key==="ArrowDown"?-s:0;aplicar()}
   else return;e.preventDefault();
@@ -618,7 +644,9 @@ function construir(){
          <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores de marketing · revisa y reorienta todo el flujo</small></div>
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
          <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
-         <div class="grupo-titulo" style="left:1900px;top:3170px;color:#5d6774;font-size:56px">Análisis</div>`;
+         <div class="grupo-titulo" style="left:1900px;top:3170px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
+         <div class="grupo-titulo" style="left:-1900px;top:-1930px;color:#5d6774;font-size:56px">SEO</div>
+         <div class="grupo-titulo" style="left:1900px;top:-1930px;color:#5d6774;font-size:56px">Paid Media</div>`;
   for(const m of MARCOS){
     h+=`<section class="marco${m.dato?" dato":""}" ${m.dato?`data-sala="${m.sala}"`:""} id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
@@ -627,14 +655,15 @@ function construir(){
   $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn" data-abrirchat>Hablar con la dirección</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
   $("#c-diseno").innerHTML=`<div class="mcab"><div><h2>Diseño · Estudio creativo</h2></div><div class="meta"><span class="vivo off" id="vivoDis">Conectando</span><span id="disN">0 piezas</span><span class="entrar-pista" style="background:#7AA606">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-diseno">${svgDiseno()}</div>`;
   $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
+  $("#c-comunidad").innerHTML=`<div class="mcab"><div><h2>Comunidad · Escucha social</h2></div><div class="meta"><span class="vivo off" id="vivoCom">Conectando</span><span id="comN">Analizando comentarios</span><span class="entrar-pista" style="background:#9b5de5">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-comunidad">${svgComunidad()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
   pintarCapas();
-  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
+  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C,...EQUIPO_K].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
 }
 function pintarCapas(){
   $("#listaCapas").innerHTML=`
     <button class="capa-it" data-todo>${ICO_MARCO}Edificio completo</button>
-    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"],["diseno","Diseño"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
+    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"],["diseno","Diseño"],["comunidad","Comunidad"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
     ${st.dentro===id?MARCOS.filter(m=>m.grupo===id).map(m=>`<button class="capa-it hijo" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1])}</button>`).join(""):""}`).join("")}
     ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
@@ -665,6 +694,7 @@ document.addEventListener("click",e=>{
   if(st.dentro!=="competencia"&&e.target.closest("#m-competencia")){entrar("competencia");return}
   if(st.dentro!=="control"&&e.target.closest("#m-control")){entrar("control");return}
   if(st.dentro!=="diseno"&&e.target.closest("#m-diseno")){entrar("diseno");return}
+  if(st.dentro!=="comunidad"&&e.target.closest("#m-comunidad")){entrar("comunidad");return}
 });
 
 /* ---------- Plano del Radar ---------- */
@@ -781,6 +811,9 @@ function iniciarMundos(){
   mundos.push(crearMundo({cont:$("#plano-diseno"),equipo:EQUIPO_S,puestos:PUESTOS_S,sillaDy:34,pref:"s-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
     corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealS,fraseMesa:fraseMesaS,
     visita:(p,q)=>q.a.id==="arte"?`Paula, ¿esto cumple el brandbook?`:p.a.id==="arte"?`${q.a.n}, un solo subrayado por pieza`:`${q.a.n}, ¿probamos este gancho?`}));
+  mundos.push(crearMundo({cont:$("#plano-comunidad"),equipo:EQUIPO_K,puestos:PUESTOS_K,sillaDy:34,pref:"k-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
+    corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealK,fraseMesa:fraseMesaK,
+    visita:(p,q)=>q.a.id==="jefa"?`Bea, esta pregunta se repite mucho: ${azar(["precios","mochilas","¿cuántos km al día?","Año Santo 2027"])}`:p.a.id==="jefa"?`${q.a.n}, ¿cuántos comentarios tiene ese post?`:`${q.a.n}, mira qué está preguntando la gente`}));
   ultM=performance.now();cancelAnimationFrame(rafM);
   const loop=ts=>{const dt=Math.min(.05,(ts-ultM)/1000);ultM=ts;mundos.forEach(w=>w.tick(ts,dt));rafM=requestAnimationFrame(loop)};
   rafM=requestAnimationFrame(loop);
@@ -952,7 +985,7 @@ function svgControl(){
     <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
   return d+`</svg>`;
 }
-const SALA_N={radar:"Radar Viral",competencia:"Competencia",redaccion:"Redacción",analisis:"Análisis",global:"Toda la empresa",control:"Control"};
+const SALA_N={radar:"Radar Viral",competencia:"Competencia",redaccion:"Redacción",comunidad:"Comunidad",diseno:"Diseño",seo:"SEO",paid:"Paid Media",global:"Toda la empresa",control:"Control"};
 function pintarControl(){
   const C=st.ctrl,e=C.estado||{},set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
   const abiertas=C.decisiones.filter(d=>d.estado==="propuesta"||d.estado==="aprobada");
@@ -1111,6 +1144,159 @@ document.addEventListener("click",async e=>{
   catch(_){toast("Solo el propietario puede decidir")}
 });
 
+/* ---------- Sala de Comunidad ---------- */
+const fmtK=n=>fmt(n)??"0";
+const EQUIPO_K=[
+  {id:"igfb",n:"Carla",rol:"Escucha Instagram y Facebook: comentarios por post",c:"#e1306c"},
+  {id:"video",n:"Rubén",rol:"YouTube y TikTok: comentarios en vídeo",c:"#ff3b30"},
+  {id:"faq",n:"Ana",rol:"Preguntas y dudas: la FAQ real de la comunidad",c:"#22d3ee"},
+  {id:"bench",n:"Martín",rol:"Benchmark: qué genera comentarios en competencia y mercado",c:"#ff6b3d"},
+  {id:"cm",n:"Olga",rol:"Community manager: respuestas y activación",c:"#7AA606"},
+  {id:"jefa",n:"Bea",rol:"Jefa de comunidad: insights para la Sala de Control",c:"#c084fc"},
+];
+const PUESTOS_K={igfb:[120,95],video:[300,95],faq:[480,95],bench:[120,200],cm:[300,200],jefa:[480,200]};
+const FRASES_K={igfb:["Contando comentarios por formato","Este carrusel tiene muchas preguntas","Los mitos generan debate"],
+  video:["Leyendo comentarios de YouTube","En TikTok preguntan por el equipaje","Este short tiene conversación"],
+  faq:["¿Cuántos km al día? Otra vez","Agrupando dudas sobre precios","La credencial sale mucho"],
+  bench:["pilgrim.es pregunta al público y funciona","Revisando sorteos de la competencia","¿Qué hace Follow the Camino en comentarios?"],
+  cm:["Respuesta en menos de 2 h","Pregunta abierta al final del copy","Fijando el mejor comentario"],
+  jefa:["Esto va al briefing de Control","¿Qué tipo de post comenta más la gente?","Insight del día listo"]};
+function fraseRealK(p){
+  const A=st.com.analisis;if(!A)return azar(FRASES_K[p.a.id]);
+  if(p.a.id==="faq"&&(A.preguntas||[]).length){const x=azar(A.preguntas);return`Preguntan mucho: ${corta(x.tema,70)}`}
+  if(p.a.id==="cm"&&(A.sugerencias||[]).length){const x=azar(A.sugerencias);return corta(x.titulo,90)}
+  if((p.a.id==="igfb"||p.a.id==="video")&&(A.topPosts||[]).length){const x=azar(A.topPosts.slice(0,10));return`«${corta(x.texto,50)}»: ${fmtK(x.comentarios)} comentarios`}
+  if(p.a.id==="bench"&&(A.competencia||[]).length){const x=azar(A.competencia);return`${x.cuenta}: ${fmtK(x.comentarios)} comentarios (${x.tipo||"post"})`}
+  if(p.a.id==="jefa"&&A.resumen)return corta(A.resumen,110);
+  return azar(FRASES_K[p.a.id]);
+}
+function fraseMesaK(p){const b=(st.com.estado?.bitacora||[]).filter(x=>x.quien===p.a.n);return b.length&&Math.random()<.5?corta(b[0].texto,120):azar(FRASES_K[p.a.id])}
+function svgComunidad(){
+  let d=`<svg viewBox="0 0 600 300" aria-hidden="true"><defs>
+    <pattern id="rejK" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#15111a" stroke-width=".6"/></pattern>
+    <filter id="brilloK" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="haloK"><stop offset="0" stop-color="#c084fc" stop-opacity=".14"/><stop offset="1" stop-color="#c084fc" stop-opacity="0"/></radialGradient></defs>
+  <rect width="600" height="300" fill="#09070b"/><rect width="600" height="300" fill="url(#rejK)"/><ellipse cx="300" cy="150" rx="300" ry="150" fill="url(#haloK)"/>
+  <rect x="6" y="6" width="588" height="288" rx="3" fill="none" stroke="#33263f" stroke-width="1.5"/>
+  <path d="M6 20V6H20M580 6H594V20M594 280V294H580M20 294H6V280" fill="none" stroke="#c084fc" stroke-width="1.5"/>
+  <rect x="190" y="14" width="220" height="38" rx="3" fill="#120d17" stroke="#4a3560"/>
+  <path d="M202 22h22a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-14l-6 5v-5h-2a3 3 0 0 1-3-3V25a3 3 0 0 1 3-3z" fill="none" stroke="#c084fc" stroke-width="1.6" filter="url(#brilloK)"/>
+  <text x="236" y="30" font-family="Geist Mono" font-size="7" fill="#8d7aa3">COMENTARIOS ANALIZADOS</text>
+  <text x="236" y="45" font-family="Geist" font-weight="700" font-size="13" fill="#e9d5ff" id="pantK">…</text>
+  <rect x="16" y="236" width="38" height="22" rx="2" fill="none" stroke="#33263f"/><circle cx="26" cy="247" r="2.5" fill="#f5c518" filter="url(#brilloK)"/><text x="16" y="270" font-family="Geist Mono" font-size="7" fill="#6e5d80">CAFÉ</text>
+  ${[0,1,2,3].map(k=>`<g transform="translate(556 ${78+k*38})"><rect width="28" height="22" rx="4" fill="none" stroke="#4a3560"/><circle cx="8" cy="11" r="1.6" fill="#c084fc" class="glow" style="animation-delay:-${k*.5}s"/><circle cx="14" cy="11" r="1.6" fill="#c084fc" class="glow" style="animation-delay:-${k*.5+.2}s"/><circle cx="20" cy="11" r="1.6" fill="#c084fc" class="glow" style="animation-delay:-${k*.5+.4}s"/></g>`).join("")}`;
+  EQUIPO_K.forEach((a,i)=>{const[x,y]=PUESTOS_K[a.id];d+=`<rect x="${x-46}" y="${y-17}" width="92" height="34" rx="2" fill="#0f0b13" stroke="#33263f"/>
+    <rect x="${x-26}" y="${y-14}" width="28" height="18" rx="1" fill="#1a1222" stroke="#4a3560"/><rect x="${x-23}" y="${y-10}" width="18" height="3" fill="${a.c}" class="glow" style="animation-delay:-${(i*.4).toFixed(2)}s"/><rect x="${x-23}" y="${y-4}" width="12" height="3" fill="#6e5d80"/>
+    <path d="M${x+8} ${y-12}h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-9l-4 3v-3h-1a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z" fill="none" stroke="${a.c}" stroke-width="1"/>
+    <circle cx="${x}" cy="${y+34}" r="11" fill="none" stroke="#221a2b" stroke-dasharray="2 2"/>
+    <text x="${x+46}" y="${y-21}" text-anchor="end" font-family="Geist Mono" font-size="7" fill="#6e5d80">${a.id.toUpperCase()}</text>`});
+  EQUIPO_K.forEach(a=>{const ancho=a.n.length*6.4+12;const oscuro=["cm"].includes(a.id);d+=`<g id="k-${a.id}"><g class="cuerpo"><circle r="13" fill="${a.c}" opacity=".13"/><circle r="7" fill="${a.c}" filter="url(#brilloK)"/><circle r="2.6" fill="#fff"/></g>
+    <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
+  return d+`</svg>`;
+}
+const RED_K={instagram:"Instagram",facebook:"Facebook",tiktok:"TikTok",youtube:"YouTube",linkedin:"LinkedIn"};
+const fechaK=t=>{t=String(t||"");if(/^\d{4}-\d{2}-\d{2}/.test(t))return t.slice(8,10)+"/"+t.slice(5,7)+"/"+t.slice(2,4);if(/^\d{8}/.test(t))return t.slice(6,8)+"/"+t.slice(4,6)+"/"+t.slice(2,4);return t.slice(0,10)};
+const refK=r=>r?`<div class="k-ref">${r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(corta(r.texto||r.titulo||"Ver post",90))}</a>`:esc(corta(r.texto||"",90))}<br>${esc([r.red&&(RED_K[r.red]||r.red),r.mercado&&r.mercado.toUpperCase(),r.cuenta].filter(Boolean).join(" · "))}${r.metricas?" · "+esc(r.metricas):""}</div>`:"";
+function metK(x){return[x.comentarios!=null?`${fmtK(x.comentarios)} coment.`:"",x.likes!=null?`${fmtK(x.likes)} me gusta`:"",x.views?`${fmtK(x.views)} vistas`:x.alcance?`${fmtK(x.alcance)} alcance`:"",x.guardados?`${fmtK(x.guardados)} guardados`:"",x.compartidos?`${fmtK(x.compartidos)} compartidos`:""].filter(Boolean).join(" · ")}
+function pintarComunidad(){
+  const C=st.com,A=C.analisis,set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  const tot=(A?.totales||[]).reduce((s,x)=>s+(+x.comentarios||0),0);
+  set("comN",A?`${fmtK(tot)} comentarios analizados · ${(A.preguntas||[]).length} temas de conversación`:"Analizando comentarios");set("pantK",A?fmtK(tot):"…");
+  const v=document.getElementById("vivoCom");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
+  if(st.dentro!=="comunidad")return;
+  const upd=A?.fecha?`actualizado ${esc(hace(A.fecha))}`:"";
+  // 1. Qué genera comentarios
+  const maxF=Math.max(1,...(A?.porFormato||[]).map(x=>+x.media||0));
+  $("#c-k_formatos").innerHTML=`<div class="mcab"><div><h2>Qué tipo de post genera más comentarios</h2><div class="fuente-mc" style="margin-top:6px">Tus cuentas en Metricool · ${esc(A?.periodo||"últimos 12 meses")} · todas las cifras son reales</div></div><div class="meta">${upd}</div></div>
+    ${A?`<p style="padding:14px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(A.resumen||"")}</p>
+    <div class="seccion-t">Comentarios por red y mercado</div><div class="mc-sec"><table class="tabla"><thead><tr><th>Red</th><th>Mercado</th><th>Posts</th><th>Comentarios</th><th>Media por post</th></tr></thead><tbody>${(A.totales||[]).map(x=>`<tr><td>${esc(RED_K[x.red]||x.red)}</td><td>${esc((x.mercado||"").toUpperCase())}</td><td>${fmtK(x.posts)}</td><td>${fmtK(x.comentarios)}</td><td>${esc(String(x.media??""))}</td></tr>`).join("")}</tbody></table></div>
+    <div class="seccion-t">Por tipo de post (media de comentarios)</div>
+    <div class="k-grid">${(A.porFormato||[]).map(x=>`<div class="k-c"><h4>${esc(x.tipo)}</h4><div class="k-num">${esc(String(x.media))}<small>coment./post · ${fmtK(x.posts)} posts</small></div><div class="k-bar" style="width:${Math.round((+x.media||0)/maxF*100)}%"></div><p>${esc(x.lectura||"")}</p>${refK(x.ejemplo)}</div>`).join("")}</div>
+    <div class="seccion-t">Los posts con más comentarios</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Coment.</th><th>Me gusta</th><th>Alcance / vistas</th></tr></thead><tbody>${(A.topPosts||[]).slice(0,15).map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto,90))}</a><span class="sub">${esc(RED_K[x.red]||x.red)} · ${esc((x.mercado||"").toUpperCase())} · ${esc(x.formato||"")} · ${esc(fechaK(x.fecha))}</span></td><td>${fmtK(x.comentarios)}</td><td>${x.likes!=null?fmtK(x.likes):""}</td><td>${fmtK(x.views||x.alcance||0)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="vacio">El equipo está contando los comentarios de tus cuentas.</div>`}`;
+  // 2. Qué pregunta la gente
+  $("#c-k_preguntas").innerHTML=`<div class="mcab"><div><h2>Qué pregunta y comenta la gente</h2><div class="fuente-mc" style="margin-top:6px">Tus comentarios analizados, foros, Reddit y grupos de peregrinos</div></div><div class="meta">${upd}</div></div>
+    ${A?.limitaciones?`<div class="k-aviso">${esc(A.limitaciones)}</div>`:""}
+    ${A?`<div class="seccion-t">Preguntas y temas que más se repiten</div><ol class="prios">${(A.preguntas||[]).map(x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.tema)}${x.mercado?` <span class="k-tag">${esc(x.mercado)}</span>`:""}</p><p style="color:#c9d1da;font-size:13.5px;margin-top:4px">${esc(x.que||"")}</p>${x.oportunidad?`<p style="color:#b5dd4a;font-size:13px;margin-top:6px">Oportunidad: ${esc(x.oportunidad)}</p>`:""}${x.fuente?`<div class="k-ref" style="margin-top:6px"><a href="${esc(safeUrl(x.fuente))}" target="_blank" rel="noopener">${esc(corta(x.fuenteNombre||x.fuente,70))}</a></div>`:""}</div></li>`).join("")}</ol>
+    ${(A.quejas||[]).length?`<div class="seccion-t">Miedos y quejas frecuentes</div><ol class="prios">${A.quejas.map(q=>`<li class="prio"><div><p style="color:#dfe4ea;font-size:13.5px">${esc(q)}</p></div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Cargando…</div>`}
+    <div class="seccion-t">Analiza tus comentarios</div>
+    <form class="k-pegar" id="kForm"><p style="margin:0;color:#a8b3c0;font-size:13px">Pega comentarios reales (bandeja de Metricool, Instagram, YouTube Studio, TikTok…). Bea los agrupa por temas y preguntas y lo guarda para la Sala de Control.</p>
+      <textarea id="kTxt" placeholder="Un comentario por línea"></textarea>
+      <div class="fila"><select id="kRed">${Object.entries(RED_K).map(([k,n])=>`<option value="${k}">${n}</option>`).join("")}</select><select id="kMk"><option value="es">ES</option><option value="en">EN</option><option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option></select><button class="btn" id="kBtn" type="submit">${C.ocupado?"Analizando…":"Analizar comentarios"}</button></div></form>
+    ${C.lotes.length?`<div class="seccion-t">Lotes analizados</div><div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${C.lotes.slice(0,8).map(l=>{const r=l.resultado||{};return`<div class="k-c"><h4>${esc(RED_K[l.red]||l.red)} · ${esc((l.mercado||"").toUpperCase())} · ${fmtK(l.n)} comentarios <span style="color:var(--tenue);font-weight:400;font-size:12px">${esc(hace(l.t))}</span></h4><p>${esc(r.resumen||"")}</p>${(r.temas||[]).length?`<p><b style="color:#f1f3f5">Temas:</b> ${r.temas.map(t=>esc(t.tema)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${(r.preguntas||[]).length?`<p><b style="color:#f1f3f5">Preguntas:</b> ${r.preguntas.map(t=>esc(t.pregunta)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${r.sentimiento?`<p style="font-family:var(--f-mono);font-size:12px">Positivo ${esc(String(r.sentimiento.positivo??"?"))} · neutro ${esc(String(r.sentimiento.neutro??"?"))} · negativo ${esc(String(r.sentimiento.negativo??"?"))}</p>`:""}${(r.oportunidades||[]).length?`<p style="color:#b5dd4a">${r.oportunidades.map(esc).join(" · ")}</p>`:""}</div>`}).join("")}</div>`:""}`;
+  // 3. Ideas
+  $("#c-k_ideas").innerHTML=`<div class="mcab"><div><h2>Ideas para captar y aumentar interacciones</h2><div class="fuente-mc" style="margin-top:6px">Basadas en tu cuenta, la competencia y el mercado · cada idea cita su referencia con métricas</div></div><div class="meta">${upd}</div></div>
+    ${A?`<div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${(A.sugerencias||[]).map(x=>`<div class="k-c"><div><span class="k-tag ${esc(x.tipo||"")}">${esc(x.tipo||"idea")}</span>${x.red?`<span class="k-tag">${esc(x.red)}</span>`:""}</div><h4>${esc(x.titulo)}</h4><p>${esc(x.detalle||"")}</p>${x.porque?`<p style="color:#a8b3c0"><b style="color:#dfe4ea">Por qué:</b> ${esc(x.porque)}</p>`:""}${(x.referencias||[]).map(refK).join("")}</div>`).join("")}</div>
+    ${(A.competencia||[]).length?`<div class="seccion-t">Lo que más comentarios genera en la competencia</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Tipo</th><th>Coment.</th><th>Me gusta</th></tr></thead><tbody>${A.competencia.slice(0,15).map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto,80))}</a><span class="sub">${esc(x.cuenta||"")} · ${esc(RED_K[x.red]||x.red||"")} · ${esc(fechaK(x.fecha))}</span></td><td>${esc(x.tipo||"")}</td><td>${fmtK(x.comentarios)}</td><td>${x.likes!=null?fmtK(x.likes):""}</td></tr>`).join("")}</tbody></table></div>`:""}
+    ${(A.benchmarks||[]).length?`<div class="seccion-t">Benchmarks del mercado</div><ol class="prios">${A.benchmarks.map(b=>`<li class="prio"><div><p style="color:#dfe4ea;font-size:13.5px">${esc(b.texto)}</p>${b.fuente?`<div class="k-ref" style="margin-top:6px"><a href="${esc(safeUrl(b.fuente))}" target="_blank" rel="noopener">${esc(corta(b.fuenteNombre||b.fuente,70))}</a></div>`:""}</div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Cargando…</div>`}`;
+  pintarKVivo();
+}
+/* Comentarios en vivo desde Metricool */
+const K_MK=[{id:"es",n:"ES",brand:"3306533",redes:["igPosts","igReels","fb","tk"]},{id:"en",n:"EN",brand:"3306535",redes:["igPosts","igReels","fb","tk"]},{id:"de",n:"DE",brand:"3306537",redes:["igPosts","igReels","fb"]}];
+const CONSULTAS_K={igPosts:["IGPO02","IGPO03","IGPO06","IGPO07","IGPO08","IGPO13","IGPO14"],igReels:["IGRE02","IGRE03","IGRE06","IGRE07","IGRE10","IGRE11"],fb:["FBPO02","FBPO03","FBPO06","FBPO07","FBPO08","FBPO13","FBPO12"],tk:["TKPO02","TKPO05","TKPO03","TKPO09","TKPO08","TKPO07"]};
+const kv={mk:"es",subs:[],datos:{},err:{}};
+function normK(k,r){
+  if(k==="igPosts")return{red:"instagram",fecha:r[0],texto:r[1],url:r[2],formato:String(r[3]||"post").toLowerCase(),comentarios:+r[4]||0,likes:+r[5]||0,alcance:+r[6]||0};
+  if(k==="igReels")return{red:"instagram",fecha:r[0],texto:r[1],url:r[2],formato:"reel",comentarios:+r[3]||0,likes:+r[4]||0,alcance:+r[5]||0};
+  if(k==="fb")return{red:"facebook",fecha:r[0],texto:r[1],url:r[2],formato:String(r[3]||"post").toLowerCase(),comentarios:+r[4]||0,likes:+r[5]||0,alcance:+r[6]||0};
+  return{red:"tiktok",fecha:r[0],texto:r[1],url:r[2],formato:"vídeo",comentarios:+r[3]||0,likes:+r[4]||0,views:+r[5]||0};
+}
+function postsK(mk){const vistos=new Set(),out=[];for(const k of Object.keys(CONSULTAS_K)){for(const r of kv.datos[mk+":"+k]?.rows||[]){if(!Array.isArray(r))continue;const x=normK(k,r);const u=x.url||Math.random();if(vistos.has(u))continue;vistos.add(u);out.push(x)}}return out}
+function suscribirComunidad(){
+  if(!mc.mcp)return;const m=K_MK.find(x=>x.id===kv.mk);if(kv.subs.length&&kv.subsMk===m.id)return;
+  kv.subs.forEach(u=>{try{u()}catch(_){}});kv.subs=[];kv.subsMk=m.id;const r=rango(90);
+  for(const k of m.redes){const clave=m.id+":"+k;
+    kv.subs.push(mc.mcp.watchTool(MC,MCT,{brandId:m.brand,from:r.from,to:r.to,metrics:CONSULTAS_K[k]},ev=>{
+      if(ev.type==="data"){const pl=ev.result.payload;kv.datos[clave]={rows:Array.isArray(pl?.rows)?pl.rows:[],at:ev.result.cache?.storedAt||Date.now()};delete kv.err[clave];guardarSnapK(m)}
+      else{kv.err[clave]=ev.error;if(DENEGADOS.includes(ev.error.code))delete kv.datos[clave]}
+      pintarKVivo();
+    },{refetchInterval:60*60000}));}
+  pintarKVivo();
+}
+async function guardarSnapK(m){
+  if(!st.db||!m.redes.every(k=>kv.datos[m.id+":"+k]))return;
+  const prev=st.com.snapT[m.id];if(prev&&Date.now()-new Date(prev)<6*36e5)return;
+  const t=new Date().toISOString();st.com.snapT[m.id]=t;
+  const posts=postsK(m.id).sort((a,b)=>b.comentarios-a.comentarios).slice(0,80).map(x=>({...x,texto:corta(x.texto||"",220)}));
+  try{await st.db.doc("comunidad_snap/"+m.id).set({t,dias:90,posts})}catch(_){}
+}
+function pintarKVivo(){
+  const el=document.getElementById("c-k_vivo");if(!el||st.dentro!=="comunidad")return;
+  const m=K_MK.find(x=>x.id===kv.mk),ps=postsK(m.id),errs=m.redes.map(k=>kv.err[m.id+":"+k]).filter(Boolean);
+  const cargando=mc.mcp&&m.redes.some(k=>!kv.datos[m.id+":"+k]&&!kv.err[m.id+":"+k]);
+  const porRed={};ps.forEach(x=>{const o=porRed[x.red]||(porRed[x.red]={posts:0,com:0});o.posts++;o.com+=x.comentarios});
+  const top=[...ps].sort((a,b)=>b.comentarios-a.comentarios).slice(0,12);
+  const E=st.com.estado;
+  el.innerHTML=`<div class="mcab"><div><h2>Tus comentarios en vivo</h2><div class="fuente-mc" style="margin-top:6px">Metricool · últimos 90 días · se guarda una foto para el equipo cada 6 h</div></div></div>
+    <div class="tabs" style="padding:12px 20px 0">${K_MK.map(x=>`<button class="tab" data-kmk="${x.id}" aria-pressed="${kv.mk===x.id}">${x.n}</button>`).join("")}</div>
+    ${!mc.disponible&&mc.disponible!==null?`<div class="vacio">Metricool no está disponible en este visor.</div>`:""}
+    ${errs.length?`<div class="k-aviso">${esc(textoError(errs[0]))}</div>`:""}
+    ${cargando?`<div class="vacio">Leyendo Metricool…</div>`:""}
+    ${ps.length?`<div class="mc-sec"><table class="tabla"><thead><tr><th>Red</th><th>Posts</th><th>Comentarios</th><th>Media</th></tr></thead><tbody>${Object.entries(porRed).map(([r,o])=>`<tr><td>${esc(RED_K[r]||r)}</td><td>${fmtK(o.posts)}</td><td>${fmtK(o.com)}</td><td>${(o.com/Math.max(1,o.posts)).toFixed(1).replace(".",",")}</td></tr>`).join("")}</tbody></table></div>
+    <div class="seccion-t">Más comentados · ${esc(m.n)}</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Coment.</th><th>Me gusta</th></tr></thead><tbody>${top.map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto||"(sin texto)",70))}</a><span class="sub">${esc(RED_K[x.red])} · ${esc(x.formato)} · ${esc(fechaK(x.fecha))} · ${fmtK(x.views||x.alcance)} ${x.views?"vistas":"alcance"}</span></td><td>${fmtK(x.comentarios)}</td><td>${fmtK(x.likes)}</td></tr>`).join("")}</tbody></table></div>`:""}
+    <div class="seccion-t">Bitácora de la sala</div><ol class="bit">${(E?.bitacora||[]).slice(0,20).map(b=>{const a=EQUIPO_K.find(y=>y.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")}</ol>`;
+}
+const PROMPT_K=`Eres Bea, jefa de comunidad de Santiago Ways (agencia premium del Camino de Santiago). Analiza estos comentarios reales de redes sociales. Agrúpalos en temas, detecta las preguntas que se repiten, el sentimiento y oportunidades de contenido o de venta. No inventes: cuenta solo lo que está en el texto.
+Responde SOLO con un objeto JSON válido, sin texto antes ni después, con esta forma:
+{"resumen":"2-3 frases","temas":[{"tema":"","n":0,"ejemplo":"cita breve"}],"preguntas":[{"pregunta":"","n":0}],"sentimiento":{"positivo":"%","neutro":"%","negativo":"%"},"oportunidades":["idea concreta"],"respuestas":["respuesta modelo para la pregunta más repetida"]}
+En español, con tildes correctas y sin guiones largos.`;
+async function analizarComentarios(){
+  const txt=($("#kTxt")?.value||"").trim();if(!txt){toast("Pega primero algunos comentarios");return}
+  if(!st.db){toast("Abre la página desde claude.ai");return}
+  if(!sampleFn){toast("La página no puede consultar a Claude en este visor");return}
+  const red=$("#kRed").value,mk=$("#kMk").value,n=txt.split(/\n+/).filter(l=>l.trim()).length;
+  st.com.ocupado=true;pintarComunidad();
+  try{
+    const{text}=await sampleFn([{role:"user",content:`${PROMPT_K}\n\nRed: ${red}. Mercado: ${mk}. Comentarios (${n}):\n${txt.slice(0,30000)}`}],{cache:false});
+    const i=text.indexOf("{"),j=text.lastIndexOf("}");let resultado;
+    try{resultado=JSON.parse(text.slice(i,j+1))}catch(_){resultado={resumen:text.slice(0,1200)}}
+    await st.db.collection("comunidad_lotes").add({t:new Date().toISOString(),red,mercado:mk,n,resultado,texto:txt.slice(0,20000),procesado:false});
+    toast("Comentarios analizados");
+  }catch(e){const msg=textoErrorSample(e?.code);toast(msg||"No se pudo analizar")}
+  finally{st.com.ocupado=false;pintarComunidad()}
+}
+document.addEventListener("submit",e=>{if(e.target.id!=="kForm")return;e.preventDefault();if(!st.com.ocupado)analizarComentarios()});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-kmk]");if(b){kv.mk=b.dataset.kmk;suscribirComunidad();pintarKVivo()}});
+
 /* ---------- Chat con la Sala de Control ---------- */
 let sampleFn=null,chatCtl=null,chatVivo="";
 const SUGERENCIAS=["¿Qué haríais esta semana con 2.000 € en Meta Ads?","Quiero más foco en el mercado alemán","¿Qué pieza de Diseño publicaríais primero?","No me convence la serie de mitos, ¿alternativas?"];
@@ -1135,6 +1321,7 @@ function contextoControl(){
     radar:top.map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),buzz:i.buzz,metricas:i.metricas||null})),
     competencia:st.cambios.slice(0,8).map(c=>({player:c.player,tipo:c.tipo,titulo:c.titulo,impacto:c.impacto})),
     diseno:st.dis.piezas.filter(x=>x.estado!=="archivada").slice(0,25).map(x=>({tipo:x.tipo,tema:x.tema,estado:x.estado})),
+    comunidad:st.com.analisis?{resumen:st.com.analisis.resumen,formatos:(st.com.analisis.porFormato||[]).slice(0,6),preguntas:(st.com.analisis.preguntas||[]).slice(0,8).map(p=>p.tema+": "+p.que),sugerencias:(st.com.analisis.sugerencias||[]).slice(0,6).map(x=>x.titulo)}:null,
     youtubeES:(mc.datos["es:ytVideos"]?.rows||[]).slice(0,5).map(r=>({titulo:r[2],vistas:+r[3],likes:+r[4],comentarios:+r[5]}))
   });
 }
@@ -1402,11 +1589,11 @@ async function exportar(){
 }
 
 /* ---------- Arranque ---------- */
-construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();iniciarMundos();
+construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();iniciarMundos();
 (async()=>{sampleFn=await window.claude?.use?.("sample")})();
 (async()=>{const m=await window.claude?.use?.("mcp");mc.mcp=m;mc.disponible=!!m;suscribirMetricool();suscribirMetricoolComp()})();
 const inicioRadar=location.hash==="#radar";
-requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
+requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#comunidad")entrar("comunidad");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
 setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
 
 (async()=>{
@@ -1421,6 +1608,10 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
   db.collection("control_chat").orderBy("t","asc").limit(300).onSnapshot(s=>{st.chat=s.docs.map(d=>({id:d.id,...d.data()}));pintarChat()});
   db.collection("diseno_piezas").limit(200).onSnapshot(s=>{st.dis.piezas=s.docs.map(d=>({id:d.id,...d.data()}));pintarDiseno()});
   db.doc("diseno_tendencias/actual").onSnapshot(s=>{st.dis.tend=s.exists?s.data():null;pintarDiseno()});
+  db.doc("comunidad_analisis/actual").onSnapshot(s=>{st.com.analisis=s.exists?s.data():null;pintarComunidad()});
+  db.doc("estado/comunidad").onSnapshot(s=>{st.com.estado=s.exists?s.data():null;pintarComunidad()});
+  db.collection("comunidad_lotes").orderBy("t","desc").limit(30).onSnapshot(s=>{st.com.lotes=s.docs.map(d=>({id:d.id,...d.data()}));pintarComunidad()});
+  db.collection("comunidad_snap").limit(10).onSnapshot(s=>{s.docs.forEach(d=>st.com.snapT[d.id]=d.data().t||"");});
   db.doc("estado/diseno").onSnapshot(s=>{st.dis.estado=s.exists?s.data():null;pintarDiseno()});
   db.doc("control_briefing/actual").onSnapshot(s=>{st.ctrl.briefing=s.exists?s.data():null;pintarControl()});
   db.collection("control_decisiones").orderBy("creado","desc").limit(200).onSnapshot(s=>{st.ctrl.decisiones=s.docs.map(d=>({id:d.id,...d.data()}));pintarControl()});
