@@ -1,6 +1,6 @@
 <title>Salas del Camino</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap">
 <style>
 /* Layout: lienzo infinito sobre el vacío. Las salas son marcos flotantes (estilo editor de diseño) que se recorren arrastrando y con zoom.
    Capas fijas encima: barra superior, panel de capas, inspector, barra de herramientas y minimapa. Diseño deliberadamente oscuro en ambos temas. */
@@ -46,14 +46,14 @@ a{color:inherit}
 .grupo-titulo small{display:block;font:500 18px/1.4 var(--f-mono);letter-spacing:.04em;color:var(--tenue);margin-top:12px;text-transform:uppercase}
 .grupo-titulo .ok{color:var(--vivo)}
 .marco.dato{display:none}
-body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"]{display:block;animation:entra .45s ease-out both}
+body[data-dentro="radar"] .marco.dato[data-sala="radar"],body[data-dentro="competencia"] .marco.dato[data-sala="competencia"],body[data-dentro="control"] .marco.dato[data-sala="control"],body[data-dentro="diseno"] .marco.dato[data-sala="diseno"]{display:block;animation:entra .45s ease-out both}
 @keyframes entra{from{opacity:0}}
-#m-radar,#m-competencia,#m-control{cursor:pointer}
-body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control{cursor:inherit}
+#m-radar,#m-competencia,#m-control,#m-diseno{cursor:pointer}
+body[data-dentro="radar"] #m-radar,body[data-dentro="competencia"] #m-competencia,body[data-dentro="control"] #m-control,body[data-dentro="diseno"] #m-diseno{cursor:inherit}
 .entrar-pista{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--sel);padding:6px 9px;border-radius:4px;box-shadow:0 0 18px rgba(61,123,255,.5)}
-body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista{display:none}
+body[data-dentro="radar"] #m-radar .entrar-pista,body[data-dentro="competencia"] #m-competencia .entrar-pista,body[data-dentro="control"] #m-control .entrar-pista,body[data-dentro="diseno"] #m-diseno .entrar-pista{display:none}
 .salir{display:none}
-body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir{display:inline-flex}
+body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-competencia .salir,body[data-dentro="control"] #m-control .salir,body[data-dentro="diseno"] #m-diseno .salir{display:inline-flex}
 #m-control{border-color:#4a4128}
 #m-control:hover{box-shadow:0 0 0 1px rgba(245,215,110,.5),0 0 70px rgba(245,215,110,.18),0 30px 80px rgba(0,0,0,.6)}
 #m-competencia:hover{box-shadow:0 0 0 1px rgba(255,107,61,.45),0 0 60px rgba(255,107,61,.16),0 30px 80px rgba(0,0,0,.6)}
@@ -239,6 +239,63 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
 .directriz{background:var(--marco-2);border:1px solid var(--borde);border-left:2px solid #f5d76e;border-radius:6px;padding:12px 14px;font-size:13.5px;color:#c3cad4}
 .directriz b{display:block;color:var(--texto);margin-bottom:4px}
 
+/* Sala de Diseño: maquetas con el brandbook 2027 */
+#m-diseno:hover{box-shadow:0 0 0 1px rgba(122,166,6,.55),0 0 70px rgba(122,166,6,.2),0 30px 80px rgba(0,0,0,.6)}
+.piezas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:18px 20px 22px;align-items:start}
+.pieza{background:var(--marco-2);border:1px solid var(--borde);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.pieza.aprobada{border-color:var(--vivo)}.pieza.descartada{opacity:.45}
+.mock{position:relative;overflow:hidden;font-family:"Montserrat",var(--f-ui);color:#2E2E2D;background:#fff}
+.mock.r45{aspect-ratio:4/5}.mock.r916{aspect-ratio:9/16}.mock.r169{aspect-ratio:16/9}
+.mock.blanco{background:#fff}
+.mock.verde{background:linear-gradient(135deg,#7AA606,#628A04);color:#fff}
+.mock.foto{color:#fff;background:linear-gradient(180deg,rgba(20,30,10,.15),rgba(20,30,10,.65)),radial-gradient(120% 80% at 70% 20%,#9fb7a0 0,#5f7d55 35%,#3c5435 70%,#25331f 100%)}
+.mock .in{position:absolute;inset:0;padding:9% 8%;display:flex;flex-direction:column;gap:6%}
+.mock .ante{font:700 9px/1 "Montserrat",sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#506718}
+.mock.verde .ante,.mock.foto .ante{color:#fff;opacity:.9}
+.mock h5{margin:0;font:800 22px/1.1 "Montserrat",sans-serif;letter-spacing:-.01em;text-wrap:balance}
+.mock.r169 h5{font-size:30px}.mock.r916 h5{font-size:19px}
+.sw{display:inline-block;background:#7AA606;color:#fff;padding:0 .18em;transform:rotate(-1.5deg);margin:.04em 0}
+.mock.verde .sw{background:#506718}
+.mock .lista{display:grid;gap:5px;margin-top:2%}
+.mock .lista span{background:#E8E8E6;border-radius:4px;padding:5px 7px;font:600 9.5px/1.2 "Montserrat",sans-serif;color:#2E2E2D;display:flex;gap:6px;align-items:center}
+.mock .lista span::before{content:"✓";display:grid;place-items:center;width:12px;height:12px;border-radius:50%;background:#7AA606;color:#fff;font-size:8px;flex:none}
+.mock .txt{font:400 10.5px/1.45 "Montserrat",sans-serif;opacity:.95}
+.mock .etq{align-self:flex-start;background:#fff;color:#506718;font:700 9.5px/1 "Montserrat",sans-serif;padding:6px 10px;border-radius:999px}
+.mock .concha{position:absolute;top:6%;right:6%;width:22px;height:22px}
+.mock .fotolbl{position:absolute;left:6%;bottom:4%;right:30%;font:500 8px/1.3 var(--f-mono);color:rgba(255,255,255,.75)}
+.mock.blanco .fotolbl{color:#6F6F6E}
+.mock .marca-agua{position:absolute;right:-12%;bottom:-10%;width:65%;opacity:.06}
+.mock .yt-dur{position:absolute;right:3%;bottom:4%;background:rgba(0,0,0,.8);color:#fff;font:600 10px/1 var(--f-ui);padding:3px 5px;border-radius:3px}
+.mock .vert-ui{position:absolute;right:4%;bottom:12%;display:grid;gap:10px;opacity:.85}
+.mock .vert-ui i{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.85);display:block}
+.mock.blanco .vert-ui i{background:#cfd3cc}
+.li-mock{background:#fff;color:#1d2226;padding:14px;font:400 12.5px/1.45 var(--f-ui);display:grid;gap:10px}
+.li-cab{display:flex;gap:9px;align-items:center}
+.li-av{width:34px;height:34px;border-radius:50%;background:#7AA606;display:grid;place-items:center;flex:none}
+.li-cab b{display:block;font-size:13px}.li-cab small{color:#666;font-size:11px}
+.li-txt{white-space:pre-wrap;max-height:260px;overflow:hidden;position:relative}
+.li-txt::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50px;background:linear-gradient(transparent,#fff)}
+.li-img{aspect-ratio:1.91/1;border-radius:4px;background:linear-gradient(135deg,#7AA606,#628A04);display:flex;align-items:flex-end;padding:12px;font:800 15px/1.15 "Montserrat",sans-serif;color:#fff}
+.li-img .sw{background:#506718}
+.pz-info{padding:12px 13px 14px;display:grid;gap:8px;font-size:12.5px}
+.pz-info h4{margin:0;font:600 14px/1.3 var(--f-ui)}
+.pz-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:11px/1.2 var(--f-mono);color:var(--tenue)}
+.pz-por{color:#c3cad4;line-height:1.4}
+.pz-ref{font:11.5px/1.4 var(--f-mono);color:var(--tenue);border-left:2px solid #7AA606;padding-left:8px;display:grid;gap:5px}
+.pz-ref a{color:#cfe7a0;text-decoration:none}.pz-ref a:hover{text-decoration:underline}
+.pieza details{border-top:1px solid var(--borde);padding-top:6px}
+.pieza summary{cursor:pointer;font:600 11px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--tenue);list-style:none}
+.pieza summary::-webkit-details-marker{display:none}
+.pieza summary::before{content:"+ "}.pieza details[open] summary::before{content:"− "}
+.pieza details p,.pieza details li{color:#c3cad4;font-size:12.5px;line-height:1.45;white-space:pre-wrap;margin:6px 0 0}
+.pieza details ol,.pieza details ul{margin:6px 0 0;padding-left:16px}
+.guion li b{color:var(--texto);font-weight:600}
+.tend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px 20px}
+.tend-c{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:14px;display:grid;gap:6px}
+.tend-c h4{margin:0;font:600 15px/1.3 var(--f-ui)}
+.tend-c p{margin:0;font-size:13px;color:#c3cad4;line-height:1.45}
+.tend-c .ev{font:11.5px/1.4 var(--f-mono);color:var(--tenue);border-left:2px solid #7AA606;padding-left:8px}
+
 /* Capas fijas */
 .capa{position:fixed;z-index:10;background:rgba(10,12,16,.92);border:1px solid var(--borde);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #barra{top:0;left:0;right:0;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 12px 0;border-width:0 0 1px;display:flex;align-items:center;gap:12px}
@@ -361,6 +418,13 @@ const MARCOS=[
   {id:"briefing",grupo:"control",dato:true,nombre:"Sala de Control / Briefing estratégico",x:-1700,y:1300,w:1580},
   {id:"decisiones",grupo:"control",dato:true,nombre:"Sala de Control / Decisiones y directrices",x:1320,y:1300,w:1400},
   {id:"brujula",grupo:"control",dato:true,nombre:"Sala de Control / Brújula 2026",x:2820,y:1300,w:900},
+  {id:"diseno",grupo:"diseno",nombre:"Diseño / Sala",x:-3200,y:1500,w:1200},
+  {id:"d_ig",grupo:"diseno",dato:true,nombre:"Diseño / Instagram · estáticos",x:-5400,y:0,w:1950},
+  {id:"d_reel",grupo:"diseno",dato:true,nombre:"Diseño / Reels",x:-5400,y:1500,w:1950},
+  {id:"d_yt",grupo:"diseno",dato:true,nombre:"Diseño / YouTube · miniaturas, guion y SEO",x:-5400,y:3000,w:1950},
+  {id:"d_li",grupo:"diseno",dato:true,nombre:"Diseño / LinkedIn",x:-5400,y:4500,w:1950},
+  {id:"d_tk",grupo:"diseno",dato:true,nombre:"Diseño / TikTok",x:-5400,y:6000,w:1950},
+  {id:"d_tend",grupo:"diseno",dato:true,nombre:"Diseño / Tendencias y pautas para RRSS",x:-7500,y:0,w:1950},
   {id:"competencia",grupo:"competencia",nombre:"Competencia / Sala",x:0,y:3400,w:1200},
   {id:"cambios",grupo:"competencia",dato:true,nombre:"Competencia / Alertas y cambios",x:0,y:4560,w:1240},
   {id:"players",grupo:"competencia",dato:true,nombre:"Competencia / Players vigilados",x:-1560,y:4560,w:1460},
@@ -370,7 +434,7 @@ const MARCOS=[
   {id:"analisis",grupo:"obras",nombre:"Análisis",x:1900,y:3400,w:1200,obra:"Medirá el rendimiento de tus propias redes y lo comparará con lo viral."},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
@@ -379,11 +443,14 @@ const PASILLOS_DEF=[
   {id:"pa7",d:"M400 2156 V3400",c:"#f5d76e",txt:"Directrices → Competencia",sub:"control.directrices.competencia",lx:340,ly:2800,fin:true},
   {id:"pa1",d:"M150 2156 V2380 H-1300 V3400",c:"#f5c518",txt:"Briefings y prioridades → Redacción",sub:"control.briefing · en obras",lx:-1250,ly:2330},
   {id:"pa2",d:"M2500 3400 V2380 H1050 V2156",c:"#22d3ee",txt:"Rendimiento de tus redes → Control",sub:"analisis.rendimiento · en obras",lx:1100,ly:2330},
+  {id:"pa8",d:"M0 1700 H-2000",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-1960,ly:1660},
+  {id:"pa9",d:"M-2000 1960 H0",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-1960,ly:2030},
+  {id:"pa10",d:"M-2600 2156 V2900 H-1700 V3400",c:"#7AA606",txt:"Piezas aprobadas → Redacción",sub:"diseno.aprobadas · en obras",lx:-2560,ly:2860},
   {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Piezas publicadas → Análisis",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,dis:{piezas:[],tend:null,estado:null},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -443,7 +510,7 @@ function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;
   st.marcoSel=id;marcarSel();volarA(caja(m))}
 function verTodo(){if(st.dentro)salir(false);st.marcoSel=null;marcarSel();volarA(cajaTotal())}
 function entrar(sala="radar",foco){
-  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();
+  st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();
   requestAnimationFrame(()=>volarA(foco&&foco!==sala?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(SALAS_ACT[sala]),50));
 }
 function salir(volar=true){
@@ -497,6 +564,7 @@ addEventListener("keydown",e=>{
   else if(e.key.toLowerCase()==="r")entrar("radar");
   else if(e.key.toLowerCase()==="c")entrar("competencia");
   else if(e.key.toLowerCase()==="d")entrar("control");
+  else if(e.key.toLowerCase()==="s")entrar("diseno");
   else if(e.key==="Escape"){if(st.sel)cerrarInsp();else if(st.dentro)salir()}
   else if(e.key.startsWith("Arrow")){const s=60;cam.x+=e.key==="ArrowLeft"?s:e.key==="ArrowRight"?-s:0;cam.y+=e.key==="ArrowUp"?s:e.key==="ArrowDown"?-s:0;aplicar()}
   else return;e.preventDefault();
@@ -522,6 +590,7 @@ function pintarMapa(){
 const ICO_MARCO=`<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 0v12M9 0v12M0 3h12M0 9h12"/></svg>`;
 function construir(){
   let h=svgPasillos()+`<div class="grupo-titulo" style="left:0;top:-230px">Radar Viral<small><span class="ok">● Sala activa</span> · Redes sociales · 11 especialistas · vídeo primero · ES EN DE IT PT</small></div>
+         <div class="grupo-titulo" style="left:-3200px;top:1270px;font-size:56px;color:#a3cf2e">Diseño<small><span class="ok">● Activa</span> · 6 creativos · piezas con el brandbook 2027</small></div>
          <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores de marketing · revisa y reorienta todo el flujo</small></div>
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
          <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
@@ -532,20 +601,21 @@ function construir(){
   mundo.innerHTML=h;
   $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral · RRSS</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
   $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
+  $("#c-diseno").innerHTML=`<div class="mcab"><div><h2>Diseño · Estudio creativo</h2></div><div class="meta"><span class="vivo off" id="vivoDis">Conectando</span><span id="disN">0 piezas</span><span class="entrar-pista" style="background:#7AA606">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-diseno">${svgDiseno()}</div>`;
   $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
   pintarCapas();
-  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO,...EQUIPO_C].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
+  $("#avatares").innerHTML=[...EQUIPO_D,...EQUIPO_S,...EQUIPO,...EQUIPO_C].map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
 }
 function pintarCapas(){
   $("#listaCapas").innerHTML=`
     <button class="capa-it" data-todo>${ICO_MARCO}Edificio completo</button>
-    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
+    ${[["control","Sala de Control"],["radar","Radar Viral"],["competencia","Competencia"],["diseno","Diseño"]].map(([id,n])=>`<button class="capa-it" data-entrar="${id}">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button>
     ${st.dentro===id?MARCOS.filter(m=>m.grupo===id).map(m=>`<button class="capa-it hijo" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1])}</button>`).join(""):""}`).join("")}
     ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
 function svgPasillos(){
-  const X=-2400,Y=500,W=5900,H=4100;
+  const X=-2800,Y=500,W=6300,H=4100;
   let d=`<svg class="pasillos" style="left:${X}px;top:${Y}px" width="${W}" height="${H}" viewBox="${X} ${Y} ${W} ${H}" aria-hidden="true"><defs>
     <filter id="brilloP" x="-100%" y="-300%" width="300%" height="700%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
   for(const p of PASILLOS_DEF){
@@ -554,7 +624,7 @@ function svgPasillos(){
       <path d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".08" stroke-width="40"/>
       <path class="flujo" d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".45" stroke-width="2" stroke-dasharray="8 32"/>
       <text x="${p.lx}" y="${p.ly}" class="p-txt"${p.fin?' text-anchor="end"':""}><tspan fill="${p.c}">■ </tspan>${esc(p.txt)}</text><text x="${p.fin?p.lx:p.lx+30}" y="${p.ly+28}" class="p-sub"${p.fin?' text-anchor="end"':""}>${esc(p.sub)}</text>`;
-    if(!quieto){const N=p.id==="pa5"||p.id==="pa6"||p.id==="pa4"||p.id==="pa7"?5:7,dur={pa3:16,pa4:7,pa5:6,pa6:7,pa7:7}[p.id]||14;for(let k=0;k<N;k++){const col=p.id==="pa5"?Object.values(PLAT)[k%Object.values(PLAT).length].c:p.c;
+    if(!quieto){const N=["pa4","pa5","pa6","pa7","pa8","pa9"].includes(p.id)?5:7,dur={pa3:16,pa4:7,pa5:6,pa6:7,pa7:7,pa8:7,pa9:7,pa10:9}[p.id]||14;for(let k=0;k<N;k++){const col=p.id==="pa5"?Object.values(PLAT)[k%Object.values(PLAT).length].c:p.c;
       d+=`<g><rect x="-11" y="-4" width="22" height="8" rx="2" fill="${col}" filter="url(#brilloP)"/><animateMotion dur="${dur}s" begin="-${(k*dur/N).toFixed(2)}s" repeatCount="indefinite" rotate="auto"${p.inv?' keyPoints="1;0" keyTimes="0;1" calcMode="linear"':""}><mpath href="#${p.id}"/></animateMotion></g>`}}
   }
   // nodos en los giros
@@ -570,6 +640,7 @@ document.addEventListener("click",e=>{
   if(st.dentro!=="radar"&&e.target.closest("#m-radar")){entrar("radar");return}
   if(st.dentro!=="competencia"&&e.target.closest("#m-competencia")){entrar("competencia");return}
   if(st.dentro!=="control"&&e.target.closest("#m-control")){entrar("control");return}
+  if(st.dentro!=="diseno"&&e.target.closest("#m-diseno")){entrar("diseno");return}
 });
 
 /* ---------- Plano del Radar ---------- */
@@ -683,6 +754,9 @@ function iniciarMundos(){
   mundos.push(crearMundo({cont:$("#plano-control"),equipo:EQUIPO_D,puestos:PUESTOS_D,sillaDy:0,pref:"d-",pasillos:[110,490],cafe:{x:530,y:262},
     corr:pt=>pt.y<=150?62:262,fraseReal:fraseRealD,fraseMesa:fraseMesaD,
     visita:(p,q)=>q.a.id==="cmo"?`Victoria, propongo cambiar el foco: ${azar(["más vídeo en EN","Camino Portugués para DE","más USA"])}`:p.a.id==="cmo"?`${q.a.n}, ¿cómo afecta esto al ticket medio?`:`${q.a.n}, ¿lo cruzamos con el research?`}));
+  mundos.push(crearMundo({cont:$("#plano-diseno"),equipo:EQUIPO_S,puestos:PUESTOS_S,sillaDy:34,pref:"s-",pasillos:[30,210,390,570],cafe:{x:70,y:262},
+    corr:pt=>pt.y<=70?62:pt.y<=170?160:268,fraseReal:fraseRealS,fraseMesa:fraseMesaS,
+    visita:(p,q)=>q.a.id==="arte"?`Paula, ¿esto cumple el brandbook?`:p.a.id==="arte"?`${q.a.n}, un solo subrayado por pieza`:`${q.a.n}, ¿probamos este gancho?`}));
   ultM=performance.now();cancelAnimationFrame(rafM);
   const loop=ts=>{const dt=Math.min(.05,(ts-ultM)/1000);ultM=ts;mundos.forEach(w=>w.tick(ts,dt));rafM=requestAnimationFrame(loop)};
   rafM=requestAnimationFrame(loop);
@@ -898,6 +972,118 @@ document.addEventListener("click",async e=>{
   const a=e.target.closest("[data-dacc]");if(!a)return;
   const id=a.closest("[data-dec]")?.dataset.dec;if(!id||!st.db){toast("Sin conexión con la sala");return}
   try{await st.db.doc("control_decisiones/"+id).update({estado:a.dataset.dacc,revisado:new Date().toISOString()});toast({aprobada:"Decisión aprobada",descartada:"Decisión descartada",hecha:"Marcada como hecha",propuesta:"Devuelta a propuesta"}[a.dataset.dacc])}
+  catch(_){toast("Solo el propietario puede decidir")}
+});
+
+/* ---------- Sala de Diseño ---------- */
+const EQUIPO_S=[
+  {id:"arte",n:"Paula",rol:"Dirección de arte: guardiana del brandbook 2027",c:"#7AA606"},
+  {id:"ig",n:"Nico",rol:"Instagram: estáticos y carruseles",c:"#e1306c"},
+  {id:"video",n:"Sara",rol:"Edición de vídeo: reels",c:"#f472b6"},
+  {id:"yt",n:"Leo",rol:"YouTube: miniaturas, guion y SEO",c:"#ff3b30"},
+  {id:"copy",n:"Irene",rol:"Copy y LinkedIn: valores de marca",c:"#3b82f6"},
+  {id:"tk",n:"Bruno",rol:"TikTok y nuevas tendencias",c:"#25f4ee"},
+];
+const PUESTOS_S={arte:[120,95],ig:[300,95],video:[480,95],yt:[120,200],copy:[300,200],tk:[480,200]};
+const FRASES_S={arte:["Un solo subrayado por pieza","Titulares en minúscula de frase","La concha, arriba a la derecha"],
+  ig:["Convirtiendo el mito ganador en serie","Carrusel de Xacobeo en marcha","Checklist de otoño lista"],
+  video:["Gancho en los dos primeros segundos","Subtítulos con la palabra en verde","Montando el POV de la maleta"],
+  yt:["Una miniatura, una idea","Capítulos y palabras clave listos","Título para la búsqueda de USA"],
+  copy:["Cada post, un valor del brandbook","Dato fresco y pregunta final","Personas antes que opinión"],
+  tk:["TikTok EN necesita voz nativa","Vídeo buscador de 3 minutos","Revisando sonidos en tendencia"]};
+const DIS_TIPOS=[["ig","d_ig","Instagram · estáticos"],["reel","d_reel","Reels"],["yt","d_yt","YouTube · miniaturas, guion y SEO"],["linkedin","d_li","LinkedIn"],["tiktok","d_tk","TikTok"]];
+function fraseRealS(p){
+  const mapa={ig:"ig",video:"reel",yt:"yt",copy:"linkedin",tk:"tiktok"};const t=mapa[p.a.id];
+  const ps=st.dis.piezas.filter(x=>t?x.tipo===t:true);
+  if(ps.length){const x=azar(ps);const r=(x.referencias||[])[0];return`«${corta(x.titular||x.tema,60)}»${r?`: se apoya en ${corta(r.texto,90)}`:""}`}
+  return azar(FRASES_S[p.a.id]);
+}
+function fraseMesaS(p){const b=(st.dis.estado?.bitacora||[]).filter(x=>x.quien===p.a.n);return b.length&&Math.random()<.5?corta(b[0].texto,120):azar(FRASES_S[p.a.id])}
+function conchaSVG(color){return`<svg class="concha" viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"><path d="M20 33 L6 16"/><path d="M20 33 L11 11"/><path d="M20 33 L20 8"/><path d="M20 33 L29 11"/><path d="M20 33 L34 16"/><path d="M5 17 Q20 0 35 17" stroke-width="2.2"/></g></svg>`}
+function conTitular(t,sub){t=esc(t||"");if(!sub)return t;const s=esc(sub);const i=t.toLowerCase().indexOf(s.toLowerCase());if(i<0)return t;let j=i+s.length;while(j<t.length&&/[,.:;!?»)]/.test(t[j]))j++;return t.slice(0,i)+`<span style="white-space:nowrap"><span class="sw">${t.slice(i,i+s.length)}</span>${t.slice(i+s.length,j)}</span>`+t.slice(j)}
+function svgDiseno(){
+  let d=`<svg viewBox="0 0 600 300" aria-hidden="true"><defs>
+    <pattern id="rejS" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#121710" stroke-width=".6"/></pattern>
+    <filter id="brilloS" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="haloS"><stop offset="0" stop-color="#7AA606" stop-opacity=".14"/><stop offset="1" stop-color="#7AA606" stop-opacity="0"/></radialGradient></defs>
+  <rect width="600" height="300" fill="#080a07"/><rect width="600" height="300" fill="url(#rejS)"/><ellipse cx="300" cy="150" rx="300" ry="150" fill="url(#haloS)"/>
+  <rect x="6" y="6" width="588" height="288" rx="3" fill="none" stroke="#2c3a1a" stroke-width="1.5"/>
+  <path d="M6 20V6H20M580 6H594V20M594 280V294H580M20 294H6V280" fill="none" stroke="#7AA606" stroke-width="1.5"/>
+  <rect x="170" y="14" width="260" height="38" rx="3" fill="#ffffff"/>
+  <rect x="180" y="22" width="22" height="22" fill="#7AA606"/><rect x="206" y="22" width="14" height="22" fill="#506718"/><rect x="224" y="22" width="9" height="22" fill="#2E2E2D"/><rect x="237" y="22" width="6" height="22" fill="#E8E8E6"/>
+  <text x="252" y="31" font-family="Montserrat" font-weight="800" font-size="10" fill="#2E2E2D">Brandbook 2027</text>
+  <rect x="251" y="35" width="66" height="10" fill="#7AA606" transform="rotate(-1.5 284 40)"/><text x="254" y="43" font-family="Montserrat" font-weight="800" font-size="8" fill="#fff" id="pantS">25 piezas</text>
+  <rect x="16" y="236" width="38" height="22" rx="2" fill="none" stroke="#2c3a1a"/><circle cx="26" cy="247" r="2.5" fill="#f5c518" filter="url(#brilloS)"/><text x="16" y="270" font-family="Geist Mono" font-size="7" fill="#556048">CAFÉ</text>
+  ${[0,1,2,3].map(k=>`<rect x="${560}" y="${80+k*36}" width="22" height="28" rx="2" fill="#ffffff" opacity=".9"/><rect x="563" y="${84+k*36}" width="16" height="8" fill="#7AA606"/>`).join("")}`;
+  EQUIPO_S.forEach((a,i)=>{const[x,y]=PUESTOS_S[a.id];d+=`<rect x="${x-46}" y="${y-17}" width="92" height="34" rx="2" fill="#0d110b" stroke="#2c3a1a"/>
+    <rect x="${x-26}" y="${y-14}" width="24" height="16" rx="1" fill="#ffffff" opacity=".92"/><rect x="${x-24}" y="${y-6}" width="14" height="4" fill="#7AA606" class="glow" style="animation-delay:-${(i*.4).toFixed(2)}s"/>
+    <rect x="${x+2}" y="${y-14}" width="12" height="20" rx="1" fill="#ffffff" opacity=".85"/><rect x="${x+4}" y="${y-2}" width="8" height="3" fill="${a.c}"/>
+    <circle cx="${x+30}" cy="${y-4}" r="4" fill="none" stroke="#2c3a1a"/>
+    <circle cx="${x}" cy="${y+34}" r="11" fill="none" stroke="#1c2414" stroke-dasharray="2 2"/>
+    <text x="${x+46}" y="${y-21}" text-anchor="end" font-family="Geist Mono" font-size="7" fill="#556048">${a.id.toUpperCase()}</text>`});
+  EQUIPO_S.forEach(a=>{const ancho=a.n.length*6.4+12;const oscuro=["tk"].includes(a.id);d+=`<g id="s-${a.id}"><g class="cuerpo"><circle r="13" fill="${a.c}" opacity=".13"/><circle r="7" fill="${a.c}" filter="url(#brilloS)"/><circle r="2.6" fill="#fff"/></g>
+    <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
+  return d+`</svg>`;
+}
+function mockPieza(x){
+  const fondo=x.fondo||"blanco",sw=conTitular(x.titular,x.subrayado);
+  const conchaCol=fondo==="blanco"?"#7AA606":"#fff";
+  const ante=x.antetitulo?`<div class="ante">${esc(x.antetitulo)}</div>`:"";
+  if(x.tipo==="linkedin"){
+    return`<div class="li-mock"><div class="li-cab"><span class="li-av">${conchaSVG("#fff").replace('class="concha"','style="width:20px;height:20px"')}</span><div><b>Santiago Ways</b><small>Empresa · ${esc(x.formato||"")}</small></div></div>
+      <div class="li-txt">${esc(x.texto||"")}</div><div class="li-img"><span>${sw}</span></div></div>`;
+  }
+  const r=x.tipo==="ig"?"r45":x.tipo==="yt"?"r169":"r916";
+  const lista=x.id==="ig-3-otono-mochila"?`<div class="lista">${(x.cuerpo||[]).map(c=>`<span>${esc(c)}</span>`).join("")}</div>`:"";
+  const sub=x.tipo==="ig"&&!lista?`<div class="txt">${esc((x.cuerpo||[])[0]?.replace(/^\d+:\s*|^Diapositiva \d+:\s*/,"")||"")}</div>`:"";
+  const etq=x.id==="ig-4-maleta-llega"?`<span class="etq">Sarria · 5-7 días</span>`:"";
+  const vert=(x.tipo==="reel"||x.tipo==="tiktok")?`<div class="vert-ui"><i></i><i></i><i></i></div>`:"";
+  const dur=x.tipo==="yt"?`<span class="yt-dur">${esc((x.formato||"").match(/\d+/)?.[0]||"10")}:00</span>`:"";
+  const just=x.tipo==="yt"?"justify-content:flex-end;":x.tipo==="ig"&&fondo!=="blanco"?"justify-content:center;":"";
+  return`<div class="mock ${r} ${fondo}">${fondo==="blanco"?conchaSVG("#7AA606").replace('class="concha"','class="marca-agua"'):""}${conchaSVG(conchaCol)}
+    <div class="in" style="${just}">${x.tipo==="yt"?"":ante}<h5>${sw}</h5>${sub}${lista}${etq}</div>${vert}${dur}
+    ${x.foto&&fondo==="foto"?`<div class="fotolbl">Foto: ${esc(corta(x.foto,90))}</div>`:""}</div>`;
+}
+function tarjetaPieza(x){
+  const g=(x.guion||[]).length?`<details><summary>Guion</summary><ol class="guion">${x.guion.map(l=>`<li><b>${esc(l.t)}</b> · ${esc(l.plano)}: ${esc(l.texto)}</li>`).join("")}</ol></details>`:"";
+  const c=(x.cuerpo||[]).length&&x.tipo==="ig"?`<details><summary>Diapositivas y textos</summary><ul>${x.cuerpo.map(l=>`<li>${esc(l)}</li>`).join("")}</ul></details>`:"";
+  const seo=x.seo?`<details open><summary>SEO</summary><p><b>Título:</b> ${esc(x.seo.titulo)}</p><p><b>Palabras clave:</b> ${esc((x.seo.keywords||[]).join(", "))}</p><p><b>Descripción:</b> ${esc(x.seo.descripcion)}</p><p><b>Capítulos:</b>\n${esc((x.seo.capitulos||[]).join("\n"))}</p></details>`:"";
+  const mini=x.miniatura?`<details><summary>Miniatura</summary><p>${esc(x.miniatura)}</p></details>`:"";
+  const cap=x.caption?`<details><summary>Copy para publicar</summary><p>${esc(x.caption)}${(x.hashtags||[]).length&&!/#/.test(x.caption)?"\n\n"+x.hashtags.map(h=>"#"+h).join(" "):""}</p></details>`:"";
+  const acc=x.estado==="propuesta"?`<button class="btn prim" data-pacc="aprobada">Aprobar</button><button class="btn" data-pacc="descartada">Descartar</button>`:`<button class="btn" data-pacc="propuesta">Reabrir</button>`;
+  return`<div class="pieza ${esc(x.estado)}" data-pieza="${esc(x.id)}">${mockPieza(x)}
+    <div class="pz-info"><div class="pz-meta"><span class="estado-dec ${esc(x.estado==="aprobada"?"aprobada":x.estado==="descartada"?"descartada":"propuesta")}">${esc(x.estado)}</span><span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>
+      <h4>${esc(x.tema)}</h4><div class="pz-meta">${esc(x.formato||"")}</div>
+      <div class="pz-por">${esc(x.porque||"")}</div>
+      <div class="pz-ref">${(x.referencias||[]).map(r=>r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.texto)} ↗</a>`:`<span>${esc(r.texto)}</span>`).join("")}</div>
+      ${mini}${seo}${c}${g}${cap}
+      <div class="acciones">${acc}${x.caption||x.texto?`<button class="btn" data-pcopiar>Copiar copy</button>`:""}</div></div></div>`;
+}
+function pintarDiseno(){
+  const D=st.dis,set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  const ap=D.piezas.filter(x=>x.estado==="aprobada").length;
+  set("disN",`${D.piezas.length} piezas · ${ap} aprobadas`);set("pantS",`${D.piezas.length} piezas`);
+  const v=document.getElementById("vivoDis");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
+  if(st.dentro!=="diseno")return;
+  for(const[t,id,nom]of DIS_TIPOS){
+    const ps=D.piezas.filter(x=>x.tipo===t&&x.estado!=="archivada").sort((a,b)=>(a.orden||0)-(b.orden||0));
+    $("#c-"+id).innerHTML=`<div class="mcab"><div><h2>${esc(nom)}</h2><div class="fuente-mc" style="margin-top:6px">${t==="linkedin"?"Basados en los valores del brandbook y la actualidad del sector":"Basadas en lo que funciona en tu cuenta, la competencia y el mercado"} · cada pieza cita sus referencias con métricas</div></div><div class="meta">${ps.filter(x=>x.estado==="aprobada").length} de ${ps.length} aprobadas</div></div>
+      <div class="piezas">${ps.length?ps.map(tarjetaPieza).join(""):`<div class="vacio">El equipo está preparando estas piezas.</div>`}</div>`;
+  }
+  const T=D.tend;
+  $("#c-d_tend").innerHTML=`<div class="mcab"><div><h2>Tendencias del sector y pautas para RRSS</h2><div class="fuente-mc" style="margin-top:6px">Para la responsable de redes: qué está pasando, cómo aprovecharlo y reglas de trabajo</div></div><div class="meta">${T?.fecha?`actualizado ${esc(hace(T.fecha))}`:""}</div></div>
+    ${T?`<div class="seccion-t">Tendencias y cómo aprovecharlas</div><div class="tend">${(T.tendencias||[]).map(x=>`<div class="tend-c"><h4>${esc(x.titulo)}</h4><p>${esc(x.que)}</p><p><b style="color:var(--texto)">Cómo aprovecharlo:</b> ${esc(x.aprovechar)}</p><div class="ev">${esc(x.evidencia)}</div></div>`).join("")}</div>
+    <div class="seccion-t">Pautas generales</div><ol class="prios">${(T.pautas||[]).map(x=>`<li class="prio" style="grid-template-columns:34px minmax(0,1fr)"><div><p style="color:#dfe4ea;font-size:14px">${esc(x)}</p></div></li>`).join("")}</ol>
+    <div class="seccion-t">Frecuencia recomendada</div><div class="mc-sec"><table class="tabla"><thead><tr><th>Canal</th><th style="text-align:left">Frecuencia</th></tr></thead><tbody>${(T.calendario||[]).map(c=>`<tr><td>${esc(c.canal)}</td><td style="text-align:left">${esc(c.frecuencia)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="vacio">Cargando tendencias…</div>`}
+    <div class="seccion-t">Bitácora del estudio</div><ol class="bit">${(D.estado?.bitacora||[]).slice(0,20).map(b=>{const a=EQUIPO_S.find(y=>y.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")}</ol>`;
+}
+document.addEventListener("click",async e=>{
+  const cp=e.target.closest("[data-pcopiar]");
+  if(cp){const x=st.dis.piezas.find(y=>y.id===cp.closest("[data-pieza]").dataset.pieza);const t=x.texto||((x.caption||"")+((x.hashtags||[]).length&&!/#/.test(x.caption||"")?"\n\n"+x.hashtags.map(h=>"#"+h).join(" "):""));
+    try{await navigator.clipboard.writeText(t);toast("Copy copiado")}catch(_){toast("No se pudo copiar en este visor")}return}
+  const a=e.target.closest("[data-pacc]");if(!a)return;
+  const id=a.closest("[data-pieza]")?.dataset.pieza;if(!id||!st.db){toast("Sin conexión con la sala");return}
+  try{await st.db.doc("diseno_piezas/"+id).update({estado:a.dataset.pacc,revisado:new Date().toISOString()});toast({aprobada:"Pieza aprobada",descartada:"Pieza descartada",propuesta:"Pieza reabierta"}[a.dataset.pacc])}
   catch(_){toast("Solo el propietario puede decidir")}
 });
 
@@ -1130,10 +1316,10 @@ async function exportar(){
 }
 
 /* ---------- Arranque ---------- */
-construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();iniciarMundos();
+construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();iniciarMundos();
 (async()=>{const m=await window.claude?.use?.("mcp");mc.mcp=m;mc.disponible=!!m;suscribirMetricool();suscribirMetricoolComp()})();
 const inicioRadar=location.hash==="#radar";
-requestAnimationFrame(()=>{if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
+requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
 setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
 
 (async()=>{
@@ -1145,6 +1331,9 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
     st.conectado=true;st.items=s.docs.map(d=>({id:d.id,...d.data()}));
     if(document.activeElement?.id!=="q")pintarDatos();
   },()=>{st.conectado=false;pintarDatos()});
+  db.collection("diseno_piezas").limit(200).onSnapshot(s=>{st.dis.piezas=s.docs.map(d=>({id:d.id,...d.data()}));pintarDiseno()});
+  db.doc("diseno_tendencias/actual").onSnapshot(s=>{st.dis.tend=s.exists?s.data():null;pintarDiseno()});
+  db.doc("estado/diseno").onSnapshot(s=>{st.dis.estado=s.exists?s.data():null;pintarDiseno()});
   db.doc("control_briefing/actual").onSnapshot(s=>{st.ctrl.briefing=s.exists?s.data():null;pintarControl()});
   db.collection("control_decisiones").orderBy("creado","desc").limit(200).onSnapshot(s=>{st.ctrl.decisiones=s.docs.map(d=>({id:d.id,...d.data()}));pintarControl()});
   db.collection("control_directrices").limit(20).onSnapshot(s=>{const o={};s.docs.forEach(d=>o[d.id]=d.data());st.ctrl.directrices=o;pintarControl()});
