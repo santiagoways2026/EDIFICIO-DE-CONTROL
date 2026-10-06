@@ -152,6 +152,38 @@ body.dentro .salir{display:inline-flex}
 .bit li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c,var(--tenue));margin-top:6px}
 .bit time{display:block;font:11.5px/1.3 var(--f-mono);color:var(--tenue);margin-bottom:2px}
 
+/* Metricool en vivo */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--borde-2);background:transparent;border-radius:6px;padding:7px 12px;cursor:pointer;font:600 13px/1 var(--f-mono);display:inline-flex;gap:8px;align-items:center}
+.tab[aria-pressed="true"]{background:var(--sel);border-color:var(--sel);color:#fff}
+.tab small{font:500 10px/1 var(--f-mono);opacity:.7;letter-spacing:.06em;text-transform:uppercase}
+.tab.off{opacity:.55}
+.mc-sec{padding:18px 20px;border-bottom:1px solid var(--borde)}
+.mc-sec:last-child{border-bottom:0}
+.mc-sec h3{margin:0 0 12px;font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tenue);display:flex;justify-content:space-between;gap:10px}
+.mc-sec h3 span{text-transform:none;letter-spacing:0;font-weight:500}
+.mc-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 2fr;gap:12px;align-items:stretch}
+.mc-kpi{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:12px 14px}
+.mc-kpi b{display:block;font:700 26px/1 var(--f-ui);font-variant-numeric:tabular-nums}
+.mc-kpi span{display:block;margin-top:6px;font:500 10.5px/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--tenue)}
+.spark{background:var(--marco-2);border:1px solid var(--borde);border-radius:6px;padding:10px 12px;min-width:0}
+.spark svg{width:100%;height:70px;display:block}
+.tabla{width:100%;border-collapse:collapse;font-size:13px}
+.tabla th{font:500 10.5px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--tenue);text-align:right;padding:6px 8px;border-bottom:1px solid var(--borde)}
+.tabla th:first-child,.tabla td:first-child{text-align:left}
+.tabla td{padding:9px 8px;border-bottom:1px solid #141922;text-align:right;font-variant-numeric:tabular-nums;vertical-align:top}
+.tabla td:first-child{max-width:520px}
+.tabla a{text-decoration:none;font-weight:500}
+.tabla a:hover{text-decoration:underline;text-decoration-color:var(--sel)}
+.tabla .sub{display:block;font:11.5px/1.3 var(--f-mono);color:var(--tenue);margin-top:2px;font-weight:400}
+.tabla tr.top td{background:#0f1726}
+.aviso{border:1px dashed var(--borde-2);border-radius:6px;padding:14px 16px;color:#c3cad4;font-size:13.5px;line-height:1.5}
+.aviso b{color:var(--texto)}
+.aviso.err{border-color:color-mix(in srgb,var(--caliente) 50%,var(--borde));border-style:solid}
+.aviso ul{margin:8px 0 0;padding-left:18px}
+.fuente-mc{font:11.5px/1.3 var(--f-mono);color:var(--tenue)}
+.mk{font:600 10px/1 var(--f-mono);letter-spacing:.06em;padding:3px 5px;border-radius:3px;border:1px solid var(--borde-2);color:#c3cad4}
+
 /* Capas fijas */
 .capa{position:fixed;z-index:10;background:rgba(10,12,16,.92);border:1px solid var(--borde);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #barra{top:0;left:0;right:0;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 12px 0;border-width:0 0 1px;display:flex;align-items:center;gap:12px}
@@ -240,15 +272,33 @@ body.dentro .salir{display:inline-flex}
 const PLAT={instagram:{n:"Instagram",c:"#e1306c"},tiktok:{n:"TikTok",c:"#25f4ee"},youtube:{n:"YouTube",c:"#ff3b30"},facebook:{n:"Facebook",c:"#3b82f6"},
   x:{n:"X",c:"#a0a8b4"},reddit:{n:"Reddit",c:"#ff6a2b"},blog:{n:"Blog",c:"#3ddc97"},prensa:{n:"Prensa",c:"#a78bfa"},foro:{n:"Foro",c:"#f5c518"}};
 const EQUIPO=[
-  {id:"insta",n:"Lucía",rol:"Instagram y TikTok",c:"#e1306c"},
-  {id:"yt",n:"Mateo",rol:"YouTube",c:"#ff3b30"},
-  {id:"fb",n:"Carmen",rol:"Facebook y grupos",c:"#3b82f6"},
-  {id:"prensa",n:"Andrés",rol:"Prensa",c:"#a78bfa"},
-  {id:"blogs",n:"Inés",rol:"Blogs, Reddit y foros",c:"#3ddc97"},
-  {id:"jefa",n:"Marta",rol:"Jefa de sala: buzz y duplicados",c:"#f5c518"},
+  {id:"ytes",n:"Mateo",mk:"ES",rol:"YouTube en español: vídeos largos con tracción",c:"#ff3b30"},
+  {id:"yten",n:"Emma",mk:"EN",rol:"YouTube en inglés: vlogs, guías y reviews",c:"#ff7a59"},
+  {id:"shorts",n:"Lucía",mk:"ES·EN",rol:"Shorts, Reels y TikTok: vídeo corto viral",c:"#e1306c"},
+  {id:"comp",n:"Carmen",mk:"MC",rol:"Competencia en Metricool: Instagram y YouTube",c:"#3b82f6"},
+  {id:"metricool",n:"Pablo",mk:"MC",rol:"Tus canales en Metricool: ES, EN y DE",c:"#22d3ee"},
+  {id:"jefa",n:"Marta",mk:"",rol:"Jefa de sala: buzz, mercados y duplicados",c:"#f5c518"},
+  {id:"de",n:"Lena",mk:"DE",rol:"Mercado alemán: Instagram, YouTube y foros",c:"#a78bfa"},
+  {id:"it",n:"Giulia",mk:"IT",rol:"Mercado italiano: Instagram, YouTube y foros",c:"#3ddc97"},
+  {id:"pt",n:"Rita",mk:"PT",rol:"Mercado portugués y brasileño",c:"#f472b6"},
+  {id:"prensa",n:"Andrés",mk:"",rol:"Prensa: noticias que generan conversación",c:"#c4b5fd"},
+  {id:"blogs",n:"Inés",mk:"",rol:"Blogs, Reddit y foros",c:"#86efac"},
 ];
+const MERCADOS=[
+  {id:"es",n:"ES",nombre:"Español",brand:"3306533",cuenta:"santiago_ways",yt:true,principal:true},
+  {id:"en",n:"EN",nombre:"Inglés",brand:"3306535",cuenta:"santiagoways_en",yt:true,principal:true},
+  {id:"de",n:"DE",nombre:"Alemán",brand:"3306537",cuenta:"santiago_ways_de",yt:false},
+  {id:"it",n:"IT",nombre:"Italiano"},
+  {id:"pt",n:"PT",nombre:"Portugués"},
+];
+const SUGERIDOS={es:["pilgrim.es","Tu Buen Camino","Efrén (vlogs y drones, 28,5 mil suscriptores)","Canales de las asociaciones de Amigos del Camino"],
+  en:["CaminoWays","Follow the Camino","robscamino (14 mil suscriptores)","Efrén (28,5 mil suscriptores)","Camino Hacks and Tips (8,5 mil suscriptores)"],
+  de:["Busca canales alemanes con «Jakobsweg» en YouTube"],it:[],pt:[]};
+const mercadoDe=i=>i.mercado||{es:"es",en:"en",de:"de",it:"it",pt:"pt"}[i.idioma]||"otros";
+const esVideo=i=>["video","short","reel"].includes(i.formato)||["youtube","tiktok"].includes(i.plataforma);
 const MARCOS=[
   {id:"radar",grupo:"radar",nombre:"Radar Viral / Sala",x:0,y:0,w:1200},
+  {id:"metricool",grupo:"radar",dato:true,nombre:"Radar Viral / Metricool en vivo",x:-1660,y:0,w:1540},
   {id:"metricas",grupo:"radar",dato:true,nombre:"Radar Viral / Métricas",x:1320,y:0,w:1520},
   {id:"listado",grupo:"radar",dato:true,nombre:"Radar Viral / Listado en vivo",x:1320,y:560,w:900},
   {id:"bitacora",grupo:"radar",dato:true,nombre:"Radar Viral / Equipo y bitácora",x:2280,y:560,w:560},
@@ -263,7 +313,7 @@ const PASILLOS_DEF=[
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro);
 
-const st={items:[],estado:null,plat:"todas",periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:false,conectado:false,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:false,conectado:false,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -321,7 +371,7 @@ function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;if(m.dato&&
 function verTodo(){if(st.dentro)salir(false);st.marcoSel=null;marcarSel();volarA(cajaTotal())}
 function entrar(foco){
   st.dentro=true;document.body.classList.add("dentro");st.marcoSel=foco||"radar";pintarCapas();marcarSel();pintarDatos();
-  requestAnimationFrame(()=>volarA(foco&&foco!=="radar"?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(["radar","metricas","listado","bitacora"]),50));
+  requestAnimationFrame(()=>volarA(foco&&foco!=="radar"?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(["radar","metricool","metricas","listado","bitacora"]),50));
 }
 function salir(volar=true){
   st.dentro=false;document.body.classList.remove("dentro");cerrarInsp();st.marcoSel=null;pintarCapas();marcarSel();
@@ -396,14 +446,14 @@ function pintarMapa(){
 /* ---------- Construcción del mundo ---------- */
 const ICO_MARCO=`<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 0v12M9 0v12M0 3h12M0 9h12"/></svg>`;
 function construir(){
-  let h=`<div class="grupo-titulo" style="left:0;top:-230px">Radar Viral<small><span class="ok">● Sala activa</span> · 6 especialistas trabajando</small></div>
+  let h=`<div class="grupo-titulo" style="left:0;top:-230px">Radar Viral<small><span class="ok">● Sala activa</span> · Redes sociales · 11 especialistas · vídeo primero · ES EN DE IT PT</small></div>
          <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
          <div class="grupo-titulo" style="left:1900px;top:3170px;color:#5d6774;font-size:56px">Análisis</div>`+svgPasillos();
   for(const m of MARCOS){
     h+=`<section class="marco${m.dato?" dato":""}" id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
   mundo.innerHTML=h;
-  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" id="salir">← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
+  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral · RRSS</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" id="salir">← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
   pintarCapas();
   $("#avatares").innerHTML=EQUIPO.map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
@@ -442,14 +492,19 @@ document.addEventListener("click",e=>{
 });
 
 /* ---------- Plano del Radar ---------- */
-const PUESTOS={insta:[120,95],yt:[300,95],fb:[480,95],prensa:[120,200],blogs:[300,200],jefa:[480,200]};
-const PASILLOS=[30,210,390,570];
-const FRASES={insta:["Revisando #buencamino","Este reel está subiendo rápido","Mirando qué creadores crecen hoy"],
-  yt:["Comparando vistas de esta semana","Este vídeo tiene muchísimos comentarios","Buscando vídeos nuevos del Camino"],
-  fb:["Mirando grupos de peregrinos","Ojo a cuántas veces se comparte esto","Contando reacciones en Facebook"],
+const PUESTOS={ytes:[90,88],yten:[230,88],shorts:[370,88],comp:[510,88],metricool:[90,162],jefa:[230,162],prensa:[370,162],blogs:[510,162],de:[90,236],it:[230,236],pt:[370,236]};
+const PASILLOS=[22,160,300,440,578];
+const FRASES={ytes:["Buscando vídeos del Camino con muchas vistas esta semana","Este vlog del Francés está creciendo rápido","Revisando miniaturas que funcionan"],
+  yten:["Checking Camino vlogs trending this week","Esta review en inglés tiene muchísimos comentarios","Buscando guías de etapas en inglés"],
+  shorts:["Revisando #buencamino en Reels","Este short está subiendo rápido","Mirando qué audios usan los TikToks del Camino"],
+  comp:["Comparando a la competencia en Metricool","pilgrim.es ha sacado un post con mucho engagement","Contando interacciones de la competencia"],
+  metricool:["Leyendo tus canales en Metricool","Revisando las visualizaciones de YouTube ES","Mirando qué vídeo tuyo rinde mejor"],
+  jefa:["Ordenando por buzz","Quitando duplicados","¿Esto está verificado?"],
+  de:["Suche nach Jakobsweg-Videos","Revisando #jakobsweg en Instagram","Mirando foros alemanes de peregrinos"],
+  it:["Cercando video sul Cammino di Santiago","Revisando #camminodisantiago","Mirando qué funciona en Italia"],
+  pt:["Procurando vídeos do Caminho de Santiago","Revisando #caminhodesantiago","Mirando creadores brasileños"],
   prensa:["Leyendo la prensa gallega","Esta noticia la están replicando fuera","Revisando titulares de hoy"],
-  blogs:["Hay un hilo nuevo en el foro","En Reddit se habla de esto","Leyendo blogs de peregrinos"],
-  jefa:["Ordenando por buzz","Quitando duplicados","¿Esto está verificado?"]};
+  blogs:["Hay un hilo nuevo en el foro","En Reddit se habla de esto","Leyendo blogs de peregrinos"]};
 function svgRadar(){
   let d=`<svg viewBox="0 0 600 300" aria-hidden="true"><defs>
     <pattern id="rej" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#131922" stroke-width=".6"/></pattern>
@@ -462,14 +517,15 @@ function svgRadar(){
   <circle cx="226" cy="33" r="13" fill="none" stroke="#3ddc97" stroke-opacity=".5"/><circle cx="226" cy="33" r="6" fill="none" stroke="#3ddc97" stroke-opacity=".3"/>
   <g transform="translate(226 33)"><path class="barrido" d="M0 0 L13 0 A13 13 0 0 0 9.2 -9.2 Z" fill="#3ddc97" fill-opacity=".55"/></g>
   <text x="248" y="29" class="pant-t">RADAR VIRAL</text><text x="248" y="45" class="pant-n" id="pantN">conectando…</text>
-  <rect x="16" y="236" width="38" height="22" rx="2" fill="none" stroke="#263142"/><circle cx="26" cy="247" r="2.5" fill="#ff3b30" filter="url(#brillo)"/><text x="16" y="270" font-family="Geist Mono" font-size="7" fill="#4b5563">CAFÉ</text>`;
-  EQUIPO.forEach((a,i)=>{const[x,y]=PUESTOS[a.id];d+=`<rect x="${x-46}" y="${y-17}" width="92" height="34" rx="2" fill="#0c1119" stroke="#24324a"/>
-    <rect class="glow" style="animation-delay:-${(i*.37).toFixed(2)}s" x="${x-20}" y="${y-13}" width="40" height="4" rx="1" fill="${a.c}" filter="url(#brillo)"/>
-    <rect x="${x-14}" y="${y+1}" width="28" height="7" rx="1" fill="none" stroke="#24324a"/>
-    <circle cx="${x}" cy="${y+34}" r="11" fill="none" stroke="#1c2635" stroke-dasharray="2 2"/>
-    <text x="${x+46}" y="${y-21}" text-anchor="end" font-family="Geist Mono" font-size="7" fill="#4b5563">${a.id.toUpperCase()}</text>`});
-  EQUIPO.forEach(a=>{const ancho=a.n.length*6.4+12;d+=`<g id="p-${a.id}"><g class="cuerpo"><circle r="13" fill="${a.c}" opacity=".12"/><circle r="7" fill="${a.c}" filter="url(#brillo)"/><circle r="2.6" fill="#fff"/></g>
-    <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${a.id==="jefa"||a.id==="blogs"?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
+  <rect x="490" y="226" width="40" height="24" rx="2" fill="none" stroke="#263142"/><circle cx="500" cy="238" r="2.5" fill="#ff3b30" filter="url(#brillo)"/><text x="490" y="221" font-family="Geist Mono" font-size="7" fill="#4b5563">CAFÉ</text>`;
+  EQUIPO.forEach((a,i)=>{const[x,y]=PUESTOS[a.id];d+=`<rect x="${x-46}" y="${y-13}" width="92" height="26" rx="2" fill="#0c1119" stroke="#24324a"/>
+    <rect class="glow" style="animation-delay:-${(i*.37).toFixed(2)}s" x="${x-22}" y="${y-10}" width="20" height="4" rx="1" fill="${a.c}" filter="url(#brillo)"/>
+    <rect class="glow" style="animation-delay:-${(i*.53).toFixed(2)}s" x="${x+2}" y="${y-10}" width="20" height="4" rx="1" fill="${a.c}" filter="url(#brillo)"/>
+    <rect x="${x-14}" y="${y}" width="28" height="6" rx="1" fill="none" stroke="#24324a"/>
+    <circle cx="${x}" cy="${y+24}" r="9" fill="none" stroke="#1c2635" stroke-dasharray="2 2"/>
+    <text x="${x+46}" y="${y-16}" text-anchor="end" font-family="Geist Mono" font-size="6.5" fill="#4b5563">${a.id.toUpperCase()}${a.mk?" · "+a.mk:""}</text>`});
+  EQUIPO.forEach(a=>{const et=a.n+(a.mk?" · "+a.mk:"");const ancho=et.length*6.1+12;const oscuro=["jefa","it","metricool","prensa","blogs"].includes(a.id);d+=`<g id="p-${a.id}"><g class="cuerpo"><circle r="12" fill="${a.c}" opacity=".12"/><circle r="6.5" fill="${a.c}" filter="url(#brillo)"/><circle r="2.4" fill="#fff"/></g>
+    <g transform="translate(8 8)"><rect width="${ancho}" height="15" rx="3" fill="${a.c}"/><text x="6" y="11" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(et)}</text></g></g>`});
   return d+`</svg>`;
 }
 function svgObra(m){
@@ -488,11 +544,13 @@ function svgObra(m){
 }
 
 const mundoA={gente:[],raf:0,ult:0,prox:0,cont:null,bocas:[]};
-const corr=pt=>pt.y<=70?62:pt.y<=170?160:268;
+const corr=pt=>pt.y<=70?62:pt.y<=134?134:pt.y<=208?208:282;
 function ruta(f,t){const c0=corr(f),c1=corr(t),r=[{x:f.x,y:c0}];
   if(c0!==c1){const mid=(f.x+t.x)/2;const ax=PASILLOS.reduce((b,v)=>Math.abs(v-mid)<Math.abs(b-mid)?v:b);r.push({x:ax,y:c0},{x:ax,y:c1})}
   r.push({x:t.x,y:c1},{x:t.x,y:t.y});return r}
 function fraseReal(p){
+  if(p.a.id==="metricool"){const v=(mc.datos["es:ytVideos"]?.rows||[]).slice().sort((a,b)=>+b[3]-+a[3])[0];if(v)return`Tu vídeo «${corta(v[2],55)}» lleva ${fmt(+v[3])} visualizaciones este mes`}
+  if(p.a.id==="comp"){const c=(mc.datos["es:igComp"]?.rows||[]).slice().sort((a,b)=>+b[6]-+a[6])[0];if(c)return`${c[0]} ha sumado ${fmt(+c[6])} interacciones con un post: «${corta(c[3],50)}»`}
   if(p.a.id==="jefa"){const top=activos().sort((a,b)=>(b.buzz||0)-(a.buzz||0))[0];return top?`Lo más fuerte ahora: «${corta(top.titulo,70)}»`:azar(FRASES.jefa)}
   const mio=activos().filter(i=>i.agente===p.a.n).sort((a,b)=>Date.parse(b.detectado)-Date.parse(a.detectado));
   if(mio.length){const i=azar(mio.slice(0,4));const t=interacciones(i);return`Mirad esto${t?` (${fmt(t)} interacciones)`:""}: «${corta(i.titulo,64)}»`}
@@ -509,7 +567,7 @@ function bocadillo(p,texto,ms){
 }
 function iniciarMundo(){
   mundoA.cont=$("#plano-radar");
-  mundoA.gente=EQUIPO.map((a,i)=>{const[x,y]=PUESTOS[a.id];const seat={x,y:y+34};const el=document.getElementById("p-"+a.id);
+  mundoA.gente=EQUIPO.map((a,i)=>{const[x,y]=PUESTOS[a.id];const seat={x,y:y+24};const el=document.getElementById("p-"+a.id);
     return{a,i,seat,x:seat.x,y:seat.y,r:[],estado:"sentado",hasta:0,el}});
   mundoA.prox=performance.now()+1000;mundoA.ult=performance.now();
   const tick=ts=>{const dt=Math.min(.05,(ts-mundoA.ult)/1000);mundoA.ult=ts;
@@ -533,8 +591,93 @@ function planificar(){
   else if(r<.62){const q=azar(mundoA.gente.filter(x=>x!==p));p.estado="ida";const lado=q.seat.x>500?-27:27;
     p.frase=q.a.id==="jefa"?`Marta, ¿cuánto buzz le damos a esto?`:p.a.id==="jefa"?`${q.a.n}, ¿esto está verificado?`:`${q.a.n}, ¿has visto lo que está pasando con esto?`;
     p.r=ruta(p,{x:q.seat.x+lado,y:q.seat.y})}
-  else if(r<.74){p.estado="ida";p.frase=azar(["Pausa de café","Cinco minutos y sigo","¿Alguien quiere café?"]);p.r=ruta(p,{x:70,y:262})}
+  else if(r<.74){p.estado="ida";p.frase=azar(["Pausa de café","Cinco minutos y sigo","¿Alguien quiere café?"]);p.r=ruta(p,{x:510,y:262})}
   else bocadillo(p,fraseMesa(p),4600);
+}
+
+/* ---------- Metricool en vivo ---------- */
+const MC="Metricool Social Media Management",MCT="getAnalyticsDataByMetrics";
+const mc={mcp:null,disponible:null,mercado:"es",datos:{},err:{},subs:[]};
+const CONSULTAS={
+  ytCanal:["YTEV01","YTEV02","YTEV05","YTEV04"],
+  ytVideos:["YTVP02","YTVP05","YTVP17","YTVP06","YTVP09","YTVP11","YTVP12","YTVP08"],
+  ytComp:["YTCV01","YTCV03","YTCV04","YTCV06","YTCV07","YTCV08","YTCV09"],
+  igComp:["IGCP01","IGCP06","IGCP11","IGCP04","IGCP07","IGCP08","IGCP09","IGCP10"],
+};
+const DENEGADOS=["needs_reauth","server_not_connected","blocked_by_policy","approval_required","not_in_manifest","selection_required","server_not_found"];
+function rango(dias){const h=new Date(),f=new Date(h-dias*864e5),d=x=>x.toISOString().slice(0,10);return{from:d(f)+"T00:00:00+00:00",to:d(h)+"T23:59:59+00:00"}}
+function suscribirMetricool(){
+  mc.subs.forEach(u=>{try{u()}catch(_){}});mc.subs=[];
+  const m=MERCADOS.find(x=>x.id===mc.mercado);
+  if(mc.mcp&&m.brand){const r=rango(30);
+    for(const[k,metrics]of Object.entries(CONSULTAS)){
+      if(!m.yt&&k.startsWith("yt"))continue;
+      const clave=m.id+":"+k;
+      mc.subs.push(mc.mcp.watchTool(MC,MCT,{brandId:m.brand,from:r.from,to:r.to,metrics},ev=>{
+        if(ev.type==="data"){const pl=ev.result.payload;mc.datos[clave]={rows:Array.isArray(pl?.rows)?pl.rows:[],at:ev.result.cache?.storedAt||Date.now()};delete mc.err[clave]}
+        else{mc.err[clave]=ev.error;if(DENEGADOS.includes(ev.error.code))delete mc.datos[clave]}
+        pintarMetricool();
+      },{refetchInterval:30*60000}));
+    }}
+  pintarMetricool();
+}
+function textoError(e){
+  const c=e?.code;
+  if(c==="needs_reauth")return"La conexión con Metricool ha caducado. Vuelve a conectarla en claude.ai → Ajustes → Conectores.";
+  if(c==="server_not_connected"||c==="server_not_found")return"No tienes el conector de Metricool en esta cuenta. Añádelo en claude.ai → Ajustes → Conectores.";
+  if(c==="selection_required")return"Tienes más de una conexión de Metricool. Elige cuál usar en el aviso de claude.ai.";
+  if(c==="not_in_manifest")return"Metricool está desactivado para esta página. Actívalo desde el menú de permisos del artifact.";
+  if(c==="blocked_by_policy"||c==="approval_required")return"Tu organización no permite esta consulta a Metricool desde aquí.";
+  if(c==="tool_error")return"Metricool ha devuelto un error: "+(e.message||"sin detalle");
+  if(c==="server_unavailable"||c==="rate_limited")return"Metricool no responde ahora mismo. Se reintentará en la próxima actualización.";
+  return"No se pudo leer Metricool ("+(c||"error")+"). Se reintentará en la próxima actualización.";
+}
+const dur=s=>{s=Math.round(+s||0);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+const fechaCorta=t=>{t=String(t||"");return t.length>=8?`${t.slice(6,8)}/${t.slice(4,6)}`:""};
+function seccion(clave,titulo,cuerpo,extra=""){
+  const d=mc.datos[clave],e=mc.err[clave];
+  let h=`<div class="mc-sec"><h3>${titulo}<span>${d?`actualizado ${esc(hace(new Date(d.at).toISOString()))}`:""}${extra}</span></h3>`;
+  if(e&&!d)return h+`<div class="aviso err">${esc(textoError(e))}</div></div>`;
+  if(!d)return h+`<div class="aviso">Pablo está leyendo Metricool…</div></div>`;
+  return h+(e?`<div class="aviso err" style="margin-bottom:10px">${esc(textoError(e))} Mostrando los últimos datos.</div>`:"")+cuerpo(d.rows)+`</div>`;
+}
+function sparkline(pts){
+  if(pts.length<2)return"";const W=400,H=70,max=Math.max(...pts.map(p=>p[1]),1);
+  const xy=pts.map((p,i)=>[i/(pts.length-1)*W,H-6-(p[1]/max)*(H-14)]);
+  const lin=xy.map((q,i)=>(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" ");
+  const u=xy[xy.length-1];
+  return`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="M0 ${H-6}H${W}" stroke="#1d232d"/><path d="${lin} L${W} ${H} L0 ${H} Z" fill="#3d7bff" fill-opacity=".14"/><path d="${lin}" fill="none" stroke="#3d7bff" stroke-width="1.6" vector-effect="non-scaling-stroke"/><circle cx="${u[0]}" cy="${u[1]}" r="3" fill="#3d7bff"/></svg>`;
+}
+function pintarMetricool(){
+  const el=$("#c-metricool");if(!el)return;
+  const m=MERCADOS.find(x=>x.id===mc.mercado);
+  let h=`<div class="mcab"><div><h2>Metricool en vivo</h2><div class="fuente-mc" style="margin-top:6px">Datos exactos de tus cuentas y de la competencia que sigues en Metricool · últimos 30 días</div></div>
+    <div class="tabs">${MERCADOS.map(x=>`<button class="tab${x.brand?"":" off"}" data-mcmk="${x.id}" aria-pressed="${mc.mercado===x.id}">${x.n}<small>${x.brand?esc(x.cuenta):"sin marca"}</small></button>`).join("")}</div></div>`;
+  if(mc.disponible===false){el.innerHTML=h+`<div class="mc-sec"><div class="aviso">Esta vista no puede consultar Metricool. Abre la página desde claude.ai con tu cuenta para ver tus datos en directo.</div></div>`;return}
+  if(!m.brand){el.innerHTML=h+`<div class="mc-sec"><div class="aviso"><b>El mercado ${esc(m.nombre.toLowerCase())} no tiene marca en Metricool.</b> Mientras tanto, ${m.id==="it"?"Giulia":"Rita"} rastrea en abierto lo que funciona en ${m.id==="it"?"Italia":"Portugal y Brasil"} y lo deja en el listado con el mercado ${m.n}.<br>Para tener cifras exactas, crea la marca en Metricool y conecta sus cuentas de Instagram, YouTube y TikTok.</div></div>`;return}
+  if(m.yt){
+    h+=seccion(m.id+":ytCanal","Canal de YouTube",rows=>{
+      const r=rows.slice().sort((a,b)=>String(a[4]).localeCompare(String(b[4])));
+      const subs=[...r].reverse().find(x=>x[0]!=null);const vistasT=r.reduce((t,x)=>t+(+x[1]||0),0),gan=r.reduce((t,x)=>t+(+x[2]||0),0),vid=r.reduce((t,x)=>t+(+x[3]||0),0);
+      return`<div class="mc-kpis"><div class="mc-kpi"><b>${subs?fmt(+subs[0]):"–"}</b><span>Suscriptores</span></div><div class="mc-kpi"><b>${fmt(vistasT)||"0"}</b><span>Visualizaciones 30 d</span></div>
+        <div class="mc-kpi"><b>+${fmt(gan)||"0"}</b><span>Suscriptores ganados</span></div><div class="mc-kpi"><b>${fmt(vid)||"0"}</b><span>Vídeos publicados</span></div>
+        <div class="spark"><div class="fuente-mc">Visualizaciones diarias del canal</div>${sparkline(r.map(x=>[x[4],+x[1]||0]))}</div></div>`});
+    h+=seccion(m.id+":ytVideos","Tus vídeos de YouTube publicados este mes",rows=>{
+      if(!rows.length)return`<div class="aviso">No has publicado vídeos en YouTube ${esc(m.n)} en los últimos 30 días.</div>`;
+      const r=rows.slice().sort((a,b)=>+b[3]-+a[3]);
+      return`<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Vídeo</th><th>Vistas</th><th>Me gusta</th><th>Coment.</th><th>Compart.</th><th>Vis. media</th><th>Engagement</th></tr></thead><tbody>
+      ${r.map((x,k)=>{const v=+x[3]||0,int=(+x[4]||0)+(+x[5]||0)+(+x[6]||0);return`<tr class="${k===0?"top":""}"><td><a href="${esc(safeUrl(x[1]))}" target="_blank" rel="noopener">${esc(x[2])}</a><span class="sub">${esc(fechaCorta(x[0]))}</span></td><td>${fmt(v)}</td><td>${fmt(+x[4])}</td><td>${fmt(+x[5])}</td><td>${fmt(+x[6])}</td><td>${dur(x[7])}</td><td>${v?(int/v*100).toLocaleString("es-ES",{maximumFractionDigits:1})+" %":"–"}</td></tr>`}).join("")}</tbody></table></div>`});
+    h+=seccion(m.id+":ytComp","Competencia en YouTube",rows=>{
+      if(!rows.length)return`<div class="aviso"><b>No sigues a ningún canal competidor de YouTube en la marca ${esc(m.cuenta)}.</b> Es lo que más falta para que Carmen compare vídeos con cifras exactas. Añádelos en Metricool → Competidores → YouTube. Candidatos para ${esc(m.n)}:<ul>${(SUGERIDOS[m.id]||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+      const r=rows.slice().sort((a,b)=>+b[4]-+a[4]).slice(0,10);
+      return`<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Vídeo</th><th>Vistas</th><th>Me gusta</th><th>Coment.</th></tr></thead><tbody>${r.map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(x[3])}</a><span class="sub">${esc(x[1])} · ${esc(fechaCorta(x[0]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[6])}</td><td>${fmt(+x[5])}</td></tr>`).join("")}</tbody></table></div>`});
+  }
+  h+=seccion(m.id+":igComp","Competencia en Instagram",rows=>{
+    if(!rows.length)return`<div class="aviso"><b>No sigues a competidores de Instagram en la marca ${esc(m.cuenta)}.</b> Añádelos en Metricool → Competidores → Instagram.${m.id==="en"?" Por ejemplo caminoways o followthecamino.":""}</div>`;
+    const r=rows.slice().sort((a,b)=>+b[6]-+a[6]).slice(0,8);
+    return`<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Post</th><th>Me gusta</th><th>Coment.</th><th>Interacciones</th><th>Engagement</th></tr></thead><tbody>${r.map((x,k)=>`<tr class="${k===0?"top":""}"><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(corta(x[3],110))}</a><span class="sub">@${esc(x[0])} · ${esc(fechaCorta(x[1]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[5])}</td><td>${fmt(+x[6])}</td><td>${(+x[7]||0).toLocaleString("es-ES",{maximumFractionDigits:2})}</td></tr>`).join("")}</tbody></table></div>`;
+  },!m.yt?" · este mercado solo tiene Instagram y Facebook en Metricool":"");
+  el.innerHTML=h;
 }
 
 /* ---------- Contenido de datos ---------- */
@@ -544,6 +687,8 @@ function filtrados(){
     if(st.vista==="guardados"&&!i.guardado)return false;
     if(st.vista==="descartados"?!i.descartado:i.descartado)return false;
     if(st.plat!=="todas"&&i.plataforma!==st.plat)return false;
+    if(st.mk!=="todos"&&mercadoDe(i)!==st.mk)return false;
+    if(st.soloVideo&&!esVideo(i))return false;
     const f=Date.parse(i.publicado||i.detectado);if(!isNaN(f)&&Date.now()-f>lim)return false;
     if(q&&!`${i.titulo} ${i.resumen} ${i.fuente} ${(i.etiquetas||[]).join(" ")}`.toLowerCase().includes(q))return false;
     return true});
@@ -593,6 +738,11 @@ function pintarListado(){
     ${Object.keys(PLAT).filter(p=>porPlat[p]).map(p=>`<button class="chip" data-plat="${p}" aria-pressed="${st.plat===p}">${PLAT[p].n} <i>${porPlat[p]}</i></button>`).join("")}
   </div>
   <div class="filtros">
+    <button class="chip" data-mk="todos" aria-pressed="${st.mk==="todos"}">Todos los mercados</button>
+    ${MERCADOS.map(m=>{const n=items.filter(i=>mercadoDe(i)===m.id).length;return`<button class="chip" data-mk="${m.id}" aria-pressed="${st.mk===m.id}">${m.n} <i>${n}</i></button>`}).join("")}
+    <button class="chip" id="soloVideo" aria-pressed="${st.soloVideo}">▶ Solo vídeo <i>${items.filter(esVideo).length}</i></button>
+  </div>
+  <div class="filtros">
     <input class="campo buscar" id="q" type="search" placeholder="Buscar: Muxía, albergue, Primitivo…" value="${esc(st.q)}" aria-label="Buscar">
     <select class="campo" id="periodo" aria-label="Periodo"><option value="1">24 horas</option><option value="7">7 días</option><option value="30">30 días</option><option value="todo">Todo</option></select>
     <select class="campo" id="orden" aria-label="Orden"><option value="buzz">Más buzz</option><option value="interacciones">Más interacciones</option><option value="recientes">Más recientes</option></select>
@@ -608,7 +758,7 @@ function fila(i){
   const p=PLAT[i.plataforma]||{n:i.plataforma||"Web",c:"#7f8a99"};const nuevo=Date.now()-Date.parse(i.detectado)<6*36e5;const t=interacciones(i);
   return`<li class="item${st.sel===i.id?" sel":""}" data-id="${esc(i.id)}">
     <div class="buzz"><b>${i.buzz??"–"}</b><span><i style="width:${Math.max(4,Math.min(100,i.buzz||0))}%;background:${colorBuzz(i.buzz||0)}"></i></span><small>buzz</small></div>
-    <div style="min-width:0"><div class="imeta"><span class="plat" style="--c:${p.c}">${esc(p.n)}</span>${nuevo?'<span class="nuevo">Nuevo</span>':""}${i.guardado?'<span class="nuevo" style="background:var(--sel);color:#fff">Guardado</span>':""}<span>${esc(corta(i.fuente,40))}</span><span>${esc(hace(i.publicado)||"")}</span></div>
+    <div style="min-width:0"><div class="imeta"><span class="plat" style="--c:${p.c}">${esc(p.n)}</span><span class="mk">${esc(mercadoDe(i).toUpperCase())}</span>${nuevo?'<span class="nuevo">Nuevo</span>':""}${i.guardado?'<span class="nuevo" style="background:var(--sel);color:#fff">Guardado</span>':""}<span>${esc(corta(i.fuente,40))}</span><span>${esc(hace(i.publicado)||"")}</span></div>
       <h3>${esc(i.titulo)}</h3><p>${esc(corta(i.resumen,170))}</p>
       ${t||vistas(i)?`<div class="mini-met">${vistas(i)?`<span><b>${fmt(vistas(i))}</b> vistas</span>`:""}${t?`<span><b>${fmt(t)}</b> interacciones</span>`:""}${engagement(i)!=null?`<span><b>${engagement(i).toLocaleString("es-ES",{maximumFractionDigits:1})} %</b> engagement</span>`:""}</div>`:""}
     </div></li>`;
@@ -644,6 +794,9 @@ function cerrarInsp(){st.sel=null;$("#insp").hidden=true;document.querySelectorA
 document.addEventListener("click",async e=>{
   if(e.target.closest("#cerrarInsp")){cerrarInsp();return}
   const c=e.target.closest("[data-plat]");if(c){st.plat=c.dataset.plat;st.limite=12;pintarListado();return}
+  const mkb=e.target.closest(".chip[data-mk]");if(mkb){st.mk=mkb.dataset.mk;st.limite=12;pintarListado();return}
+  if(e.target.closest("#soloVideo")){st.soloVideo=!st.soloVideo;st.limite=12;pintarListado();return}
+  const tb=e.target.closest(".tab[data-mcmk]");if(tb){mc.mercado=tb.dataset.mcmk;suscribirMetricool();return}
   if(e.target.id==="verMas"){st.limite+=25;pintarListado();return}
   if(e.target.id==="exportar"){exportar();return}
   const it=e.target.closest(".item[data-id],.ganador[data-id]");
@@ -663,15 +816,16 @@ document.addEventListener("input",e=>{if(e.target.id==="q"){st.q=e.target.value;
 document.addEventListener("change",e=>{if(["periodo","orden","vista"].includes(e.target.id)){st[e.target.id]=e.target.value;st.limite=12;pintarListado()}});
 
 async function exportar(){
-  const rows=filtrados();const cols=["buzz","plataforma","titulo","url","fuente","publicado","detectado","vistas","likes","reacciones","comentarios","compartidos","guardados","seguidores","interacciones","resumen","porque","senales","etiquetas","agente"];
+  const rows=filtrados();const cols=["buzz","mercado","formato","plataforma","titulo","url","fuente","publicado","detectado","vistas","likes","reacciones","comentarios","compartidos","guardados","seguidores","interacciones","resumen","porque","senales","etiquetas","agente"];
   const q=v=>`"${String(Array.isArray(v)?v.join(" "):v??"").replace(/"/g,'""')}"`;
-  const csv="﻿"+[cols.join(";"),...rows.map(r=>cols.map(c=>q(c==="interacciones"?(interacciones(r)||""):MET.some(([k])=>k===c)?(r.metricas||{})[c]:r[c])).join(";"))].join("\n");
+  const csv="﻿"+[cols.join(";"),...rows.map(r=>cols.map(c=>q(c==="mercado"?mercadoDe(r):c==="interacciones"?(interacciones(r)||""):MET.some(([k])=>k===c)?(r.metricas||{})[c]:r[c])).join(";"))].join("\n");
   if(!st.dl){toast("La descarga no está disponible en este visor");return}
   try{await st.dl.save({filename:`radar-viral-camino-${new Date().toISOString().slice(0,10)}.csv`,data:csv})}catch(err){if(err?.code!=="declined")toast("No se pudo exportar")}
 }
 
 /* ---------- Arranque ---------- */
-construir();pintarDatos();iniciarMundo();
+construir();pintarDatos();pintarMetricool();iniciarMundo();
+(async()=>{const m=await window.claude?.use?.("mcp");mc.mcp=m;mc.disponible=!!m;suscribirMetricool()})();
 const inicioRadar=location.hash==="#radar";
 requestAnimationFrame(()=>{if(inicioRadar)entrar();else volarA(cajaTotal(),70,true)});
 setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
