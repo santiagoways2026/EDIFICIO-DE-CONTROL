@@ -14,5 +14,5 @@ Sistema de salas con especialistas de IA trabajando sobre el Camino de Santiago.
 | Diseño | Activa, propuesta semanal (lunes) | `salas/diseno/AGENTE.md` |
 | Competencia | Activa, ronda de investigación cada 4 h | `salas/competencia/AGENTE.md` |
 | Comunidad (comentarios, preguntas e interacción) | Activa, análisis diario (8:37 Madrid) | `salas/comunidad/AGENTE.md` |
-| SEO (a la derecha de la Sala de Control) | En obras | |
+| SEO (a la derecha de la Sala de Control) | Activa, auditoría semanal (lunes 7:17 Madrid) | `salas/seo/AGENTE.md` |
 | Paid Media (a la derecha de la Sala de Control) | En obras | |
