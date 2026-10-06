@@ -296,6 +296,22 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
 .tend-c p{margin:0;font-size:13px;color:#c3cad4;line-height:1.45}
 .tend-c .ev{font:11.5px/1.4 var(--f-mono);color:var(--tenue);border-left:2px solid #7AA606;padding-left:8px}
 
+/* Chat con la Sala de Control */
+#chat{top:calc(60px + env(safe-area-inset-top,0px));right:12px;bottom:calc(72px + env(safe-area-inset-bottom,0px));width:440px;border-radius:10px;display:flex;flex-direction:column;z-index:15}
+.chat-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--borde)}
+.chat-cab b{font:600 14px/1.2 var(--f-ui)}.chat-cab small{display:block;font:11.5px/1.3 var(--f-mono);color:var(--tenue);margin-top:3px}
+.chat-msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:10px 12px;border-radius:10px;font-size:13.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.usuario{align-self:flex-end;background:#1b2a4a;border:1px solid #2b4170}
+.msg.direccion{align-self:flex-start;background:#17150d;border:1px solid #4a4128}
+.msg time{display:block;font:10.5px/1.2 var(--f-mono);color:var(--tenue);margin-top:6px}
+.msg .pend{font:10.5px/1.2 var(--f-mono);color:#f5d76e}
+.chat-sug{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}
+.chat-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--borde)}
+.chat-form textarea{flex:1;min-height:44px;max-height:140px;resize:vertical;background:var(--marco-2);border:1px solid var(--borde-2);border-radius:8px;padding:9px 11px;font:13.5px/1.4 var(--f-ui);color:var(--texto)}
+.chat-nota{padding:0 14px 10px;font:11px/1.4 var(--f-mono);color:var(--tenue)}
+@media (max-width:640px){#chat{left:12px;width:auto}}
+
 /* Capas fijas */
 .capa{position:fixed;z-index:10;background:rgba(10,12,16,.92);border:1px solid var(--borde);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #barra{top:0;left:0;right:0;height:calc(48px + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) 12px 0;border-width:0 0 1px;display:flex;align-items:center;gap:12px}
@@ -372,10 +388,18 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
   <button class="h" id="hMenos" title="Alejar (−)" aria-label="Alejar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
   <button class="h" id="hMas" title="Acercar (+)" aria-label="Acercar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
   <button class="h" id="hAjustar" title="Ver todo (1)" aria-label="Ver todo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg></button>
+  <button class="h" id="hChat" title="Chat con la Sala de Control" aria-label="Chat con la Sala de Control"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
   <button class="h" id="hRadar" title="Ir al Radar (R)" aria-label="Ir al Radar Viral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 12l6-6"/></svg></button>
 </div>
 <div id="mapa" class="capa" aria-label="Minimapa"></div>
 <aside id="insp" class="capa" hidden aria-label="Inspector"></aside>
+<aside id="chat" class="capa" hidden aria-label="Chat con la Sala de Control">
+  <div class="chat-cab"><div><b>Chat con la Sala de Control</b><small>Victoria, Hugo, Clara, Iván, Lola y Tomás</small></div><button class="h" id="cerrarChat" aria-label="Cerrar chat" style="width:28px;height:28px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-sug" id="chatSug"></div>
+  <div class="chat-nota" id="chatNota">Tus comentarios se guardan y la dirección los aplica en su siguiente revisión (8:50, 14:50 y 20:50).</div>
+  <form class="chat-form" id="chatForm"><textarea id="chatTxt" placeholder="Da feedback o pregunta a la dirección…" aria-label="Mensaje para la Sala de Control"></textarea><button class="btn prim" id="chatEnviar" type="submit">Enviar</button></form>
+</aside>
 <div class="ayuda">Arrastra para moverte · Rueda o pellizco para zoom · Pulsa una sala para entrar · Esc para salir</div>
 <div class="toast" id="toast" hidden></div>
 
@@ -450,7 +474,7 @@ const PASILLOS_DEF=[
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
-const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,dis:{piezas:[],tend:null,estado:null},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",mk:"todos",soloVideo:false,periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:null,conectado:false,chat:[],chatOcupado:false,dis:{piezas:[],tend:null,estado:null},ctrl:{briefing:null,decisiones:[],estado:null,research:null,directrices:{}},dFiltro:"abiertas",players:[],cambios:[],estadoC:null,cTipo:"todos",cPlayer:"todos",cImpacto:"todos",cLimite:20,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -600,7 +624,7 @@ function construir(){
   }
   mundo.innerHTML=h;
   $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral · RRSS</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
-  $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
+  $("#c-control").innerHTML=`<div class="mcab"><div><h2>Sala de Control · Dirección de marketing</h2></div><div class="meta"><span class="vivo off" id="vivoCtrl">Conectando</span><span id="ctrlN">0 decisiones</span><span id="ctrlUlt"></span><span class="entrar-pista" style="background:#c9a227;color:#000">Pulsa para entrar</span><button class="btn" data-abrirchat>Hablar con la dirección</button><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-control">${svgControl()}</div>`;
   $("#c-diseno").innerHTML=`<div class="mcab"><div><h2>Diseño · Estudio creativo</h2></div><div class="meta"><span class="vivo off" id="vivoDis">Conectando</span><span id="disN">0 piezas</span><span class="entrar-pista" style="background:#7AA606">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-diseno">${svgDiseno()}</div>`;
   $("#c-competencia").innerHTML=`<div class="mcab"><div><h2>Competencia · Agencia de investigación</h2></div><div class="meta"><span class="vivo off" id="vivoComp">Conectando</span><span id="compN">0 cambios</span><span id="compUlt"></span><span class="entrar-pista" style="background:#ff6b3d">Pulsa para entrar</span><button class="btn salir" data-salir>← Salir de la sala</button></div></div><div class="plano" id="plano-competencia">${svgCompetencia()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
@@ -1087,6 +1111,68 @@ document.addEventListener("click",async e=>{
   catch(_){toast("Solo el propietario puede decidir")}
 });
 
+/* ---------- Chat con la Sala de Control ---------- */
+let sampleFn=null,chatCtl=null,chatVivo="";
+const SUGERENCIAS=["¿Qué haríais esta semana con 2.000 € en Meta Ads?","Quiero más foco en el mercado alemán","¿Qué pieza de Diseño publicaríais primero?","No me convence la serie de mitos, ¿alternativas?"];
+function abrirChat(){$("#chat").hidden=false;pintarChat();setTimeout(()=>$("#chatTxt")?.focus(),50)}
+function pintarChat(){
+  const el=$("#chatMsgs");if(!el||$("#chat").hidden)return;
+  const ms=st.chat.slice(-60);
+  el.innerHTML=(ms.length?"":`<div class="msg direccion">Hola, Álvaro. Somos la dirección de marketing. Pregúntanos por cualquier estrategia o danos feedback: lo tendremos en cuenta en el briefing, las decisiones y las directrices de cada sala.</div>`)+
+    ms.map(m=>`<div class="msg ${m.rol==="usuario"?"usuario":"direccion"}">${esc(m.texto)}<time>${esc(hace(m.t))}${m.rol==="usuario"&&!m.procesado?' · <span class="pend">pendiente de aplicar</span>':""}</time></div>`).join("")+
+    (st.chatOcupado?`<div class="msg direccion" id="chatVivo">${esc(chatVivo||"La dirección está pensando…")}</div>`:"");
+  el.scrollTop=el.scrollHeight;
+  $("#chatSug").innerHTML=ms.length?"":SUGERENCIAS.map(x=>`<button class="chip" data-sug="${esc(x)}">${esc(x)}</button>`).join("");
+  $("#chatEnviar").textContent=st.chatOcupado?"Parar":"Enviar";
+}
+function contextoControl(){
+  const C=st.ctrl,top=activos().slice().sort((a,b)=>(b.buzz||0)-(a.buzz||0)).slice(0,10);
+  return JSON.stringify({
+    briefing:C.briefing?{titular:C.briefing.titular,resumen:C.briefing.resumen,prioridades:(C.briefing.prioridades||[]).map(p=>p.titulo+": "+(p.porque||""))}:null,
+    directrices:Object.fromEntries(Object.entries(C.directrices||{}).map(([k,v])=>[k,{resumen:v.resumen,foco:v.foco}])),
+    decisiones:C.decisiones.slice(0,14).map(d=>({titulo:d.titulo,estado:d.estado,prioridad:d.prioridad,director:d.director})),
+    research:C.research?{objetivo:C.research.objetivo,datos:C.research.datos,personas:(C.research.personas||[]).map(p=>p.nombre+": "+p.resumen),palancas:C.research.palancas}:null,
+    radar:top.map(i=>({titulo:i.titulo,plataforma:i.plataforma,mercado:mercadoDe(i),buzz:i.buzz,metricas:i.metricas||null})),
+    competencia:st.cambios.slice(0,8).map(c=>({player:c.player,tipo:c.tipo,titulo:c.titulo,impacto:c.impacto})),
+    diseno:st.dis.piezas.filter(x=>x.estado!=="archivada").slice(0,25).map(x=>({tipo:x.tipo,tema:x.tema,estado:x.estado})),
+    youtubeES:(mc.datos["es:ytVideos"]?.rows||[]).slice(0,5).map(r=>({titulo:r[2],vistas:+r[3],likes:+r[4],comentarios:+r[5]}))
+  });
+}
+const REGLAS_CHAT=`Eres la Sala de Control de Santiago Ways (agencia premium del Camino de Santiago, mercados ES y EN principales, también DE, IT y PT): seis directores de marketing de primer nivel. Victoria (CMO), Hugo (growth y performance), Clara (marca, vídeo y comunidad), Iván (mercados internacionales), Lola (CRM y lifecycle) y Tomás (inteligencia competitiva y SEO). Hablas con Álvaro, responsable del proyecto.
+Responde en español, con criterio y concreción, en un máximo de 180 palabras. Que hable el director o los dos directores más pertinentes, empezando cada intervención con su nombre y rol (por ejemplo «Victoria (CMO):»).
+Si Álvaro da feedback que cambia la estrategia, di qué ajustaréis (briefing, decisiones o directrices de qué sala) y que se aplicará en la próxima revisión.
+Siempre que menciones un post o vídeo de redes, cita sus métricas tal como constan en los datos. No inventes cifras: si un dato no está, dilo.
+Nunca uses guiones largos; usa punto, dos puntos o punto y coma. Tildes correctas.
+DATOS ACTUALES DEL SISTEMA (JSON):
+`;
+function textoErrorSample(c){return{not_granted:"No has permitido que la página consulte a Claude. Puedes activarlo en los permisos del artifact. Tu mensaje queda guardado y la dirección lo verá en su próxima revisión.",rate_limited:"Hay demasiadas consultas a la vez. Espera un momento y vuelve a enviar.",cancelled:""}[c]??"La dirección no ha podido responder ahora. Tu mensaje queda guardado y lo verá en su próxima revisión."}
+async function enviarChat(texto){
+  texto=texto.trim();if(!texto)return;
+  if(!st.db){toast("Abre la página desde claude.ai para usar el chat");return}
+  const t=new Date().toISOString();
+  try{await st.db.collection("control_chat").add({rol:"usuario",texto,t,procesado:false})}catch(_){toast("No se pudo guardar el mensaje");return}
+  $("#chatTxt").value="";
+  if(!sampleFn){toast("Mensaje guardado: la dirección lo responderá en su próxima revisión");return}
+  const hist=st.chat.slice(-12).map(m=>({role:m.rol==="usuario"?"user":"assistant",content:m.texto}));
+  if(!hist.length||hist[hist.length-1].content!==texto)hist.push({role:"user",content:texto});
+  const turns=[{role:"user",content:REGLAS_CHAT+contextoControl()},...hist];
+  st.chatOcupado=true;chatVivo="";chatCtl=new AbortController();pintarChat();
+  try{
+    const{text}=await sampleFn(turns,{cache:false,signal:chatCtl.signal,onText:({text})=>{chatVivo=text;const v=document.getElementById("chatVivo");if(v)v.textContent=text;const el=$("#chatMsgs");if(el)el.scrollTop=el.scrollHeight}});
+    await st.db.collection("control_chat").add({rol:"direccion",texto:text,t:new Date().toISOString(),origen:"chat"});
+  }catch(e){
+    const keep=e?.text;if(keep)await st.db.collection("control_chat").add({rol:"direccion",texto:keep,t:new Date().toISOString(),origen:"chat"}).catch(()=>{});
+    const msg=textoErrorSample(e?.code);if(msg)toast(msg);
+  }finally{st.chatOcupado=false;chatVivo="";pintarChat()}
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("#hChat,[data-abrirchat]")){e.stopPropagation();abrirChat();return}
+  if(e.target.closest("#cerrarChat")){$("#chat").hidden=true;return}
+  const sg=e.target.closest("[data-sug]");if(sg){$("#chatTxt").value=sg.dataset.sug;$("#chatTxt").focus();return}
+});
+document.addEventListener("submit",e=>{if(e.target.id!=="chatForm")return;e.preventDefault();if(st.chatOcupado){chatCtl?.abort();return}enviarChat($("#chatTxt").value)});
+document.addEventListener("keydown",e=>{if(e.target.id==="chatTxt"&&e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#chatForm").requestSubmit()}});
+
 /* ---------- Metricool en vivo ---------- */
 const MC="Metricool Social Media Management",MCT="getAnalyticsDataByMetrics";
 const mc={mcp:null,disponible:null,mercado:"es",datos:{},err:{},subs:[]};
@@ -1317,6 +1403,7 @@ async function exportar(){
 
 /* ---------- Arranque ---------- */
 construir();pintarDatos();pintarMetricool();pintarCompetencia();pintarControl();pintarDiseno();iniciarMundos();
+(async()=>{sampleFn=await window.claude?.use?.("sample")})();
 (async()=>{const m=await window.claude?.use?.("mcp");mc.mcp=m;mc.disponible=!!m;suscribirMetricool();suscribirMetricoolComp()})();
 const inicioRadar=location.hash==="#radar";
 requestAnimationFrame(()=>{if(location.hash==="#diseno")entrar("diseno");else if(location.hash==="#control")entrar("control");else if(inicioRadar)entrar("radar");else if(location.hash==="#competencia")entrar("competencia");else volarA(cajaTotal(),70,true)});
@@ -1331,6 +1418,7 @@ setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
     st.conectado=true;st.items=s.docs.map(d=>({id:d.id,...d.data()}));
     if(document.activeElement?.id!=="q")pintarDatos();
   },()=>{st.conectado=false;pintarDatos()});
+  db.collection("control_chat").orderBy("t","asc").limit(300).onSnapshot(s=>{st.chat=s.docs.map(d=>({id:d.id,...d.data()}));pintarChat()});
   db.collection("diseno_piezas").limit(200).onSnapshot(s=>{st.dis.piezas=s.docs.map(d=>({id:d.id,...d.data()}));pintarDiseno()});
   db.doc("diseno_tendencias/actual").onSnapshot(s=>{st.dis.tend=s.exists?s.data():null;pintarDiseno()});
   db.doc("estado/diseno").onSnapshot(s=>{st.dis.estado=s.exists?s.data():null;pintarDiseno()});

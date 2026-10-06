@@ -8,3 +8,9 @@ Rutina: 8:50, 14:50 y 20:50 (hora de Madrid). Seis directores (Victoria CMO, Hug
 - `estado/control`: bitácora.
 
 Regla de métricas: cualquier mención a un post o vídeo de redes incluye sus métricas.
+
+## Chat directo con el usuario (`control_chat`)
+
+- Desde la página, el botón "Hablar con la dirección" abre un chat en vivo: los directores responden al momento con todo el contexto de las salas (briefing, decisiones, directrices, research, radar con métricas, competencia y diseño).
+- Cada mensaje del usuario se guarda como `{rol: "usuario", texto, t, procesado: false}`; las respuestas en vivo como `{rol: "direccion", texto, t, origen: "chat"}`.
+- En cada revisión programada, el feedback pendiente (`procesado: false`) tiene máxima prioridad: se aplica en briefing, decisiones y directrices, se responde con un documento `{rol: "direccion", origen: "revision"}` que explica los cambios firmados por director, y se marcan los mensajes como `procesado: true`.
