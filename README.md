@@ -2,7 +2,7 @@
 
 Sistema de salas con especialistas de IA trabajando sobre el Camino de Santiago.
 
-- Interfaz en vivo: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (fuente: `salas/index.html`)
+- Interfaz en vivo (lienzo infinito con zoom): https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (fuente: `salas/index.html`)
 - Datos: base de datos compartida del artifact (colecciones `radar` y `estado`)
 
 ## Salas
