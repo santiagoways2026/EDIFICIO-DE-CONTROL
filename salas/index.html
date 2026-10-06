@@ -308,6 +308,12 @@ body[data-dentro="radar"] #m-radar .salir,body[data-dentro="competencia"] #m-com
 .mock .concha{position:absolute;top:6%;right:6%;width:22px;height:22px}
 .mock .fotolbl{position:absolute;left:6%;bottom:4%;right:30%;font:500 8px/1.3 var(--f-mono);color:rgba(255,255,255,.75)}
 .mock.blanco .fotolbl{color:#6F6F6E}
+.mock.conimg .fotolbl{display:none}
+.mock.conimg{background-size:cover!important;background-position:center!important;color:#fff}
+.mock .iso{position:absolute;top:5%;right:5%;width:24px;height:auto}
+.mock.vid-mock{background:#000}.mock.vid-mock video{width:100%;height:100%;object-fit:cover;display:block}
+.li-img.conimg{background-size:cover!important;background-position:center!important}
+.pz-falta{font-size:12px;line-height:1.45;color:#ffb38a;border-left:2px solid #ff6b3d;padding-left:8px}
 .mock .marca-agua{position:absolute;right:-12%;bottom:-10%;width:65%;opacity:.06}
 .mock .yt-dur{position:absolute;right:3%;bottom:4%;background:rgba(0,0,0,.8);color:#fff;font:600 10px/1 var(--f-ui);padding:3px 5px;border-radius:3px}
 .mock .vert-ui{position:absolute;right:4%;bottom:12%;display:grid;gap:10px;opacity:.85}
@@ -494,39 +500,35 @@ const MARCOS=[
   {id:"d_li",grupo:"diseno",dato:true,nombre:"Diseño / LinkedIn",x:-5400,y:4500,w:1950},
   {id:"d_tk",grupo:"diseno",dato:true,nombre:"Diseño / TikTok",x:-5400,y:6000,w:1950},
   {id:"d_tend",grupo:"diseno",dato:true,nombre:"Diseño / Tendencias y pautas para RRSS",x:-7500,y:0,w:1950},
-  {id:"d_vid",grupo:"diseno",dato:true,nombre:"Diseño / Ediciones de vídeo",x:-9600,y:0,w:1950},
-  {id:"d_bib",grupo:"diseno",dato:true,nombre:"Diseño / Biblioteca Drive",x:-11700,y:0,w:1950},
   {id:"competencia",grupo:"competencia",nombre:"Competencia / Sala",x:0,y:3400,w:1200},
   {id:"cambios",grupo:"competencia",dato:true,nombre:"Competencia / Alertas y cambios",x:0,y:4560,w:1240},
   {id:"players",grupo:"competencia",dato:true,nombre:"Competencia / Players vigilados",x:-1560,y:4560,w:1460},
   {id:"comprrss",grupo:"competencia",dato:true,nombre:"Competencia / Sus redes en Metricool",x:1340,y:4560,w:1100},
   {id:"compbit",grupo:"competencia",dato:true,nombre:"Competencia / Equipo y bitácora",x:2540,y:4560,w:560},
-  {id:"redaccion",grupo:"obras",nombre:"Redacción",x:-1900,y:3400,w:1200,obra:"Convertirá las tendencias del Radar en publicaciones listas para tus redes."},
   {id:"comunidad",grupo:"comunidad",nombre:"Comunidad / Sala",x:1900,y:0,w:1200},
-  {id:"k_formatos",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué genera comentarios",x:3260,y:0,w:1400},
-  {id:"k_preguntas",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué pregunta y comenta la gente",x:4900,y:0,w:1250},
-  {id:"k_ideas",grupo:"comunidad",dato:true,nombre:"Comunidad / Ideas para más interacción",x:6400,y:0,w:1250},
-  {id:"k_vivo",grupo:"comunidad",dato:true,nombre:"Comunidad / Tus comentarios en vivo y bitácora",x:7900,y:0,w:1100},
-  {id:"seo",grupo:"obras",nombre:"SEO",x:1900,y:3400,w:1200,obra:"Posicionamiento orgánico: palabras clave, contenidos y la web frente a la competencia."},
-  {id:"paid",grupo:"obras",nombre:"Paid Media",x:3800,y:3400,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
+  {id:"k_formatos",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué genera comentarios",x:3260,y:-340,w:1400,arriba:true},
+  {id:"k_preguntas",grupo:"comunidad",dato:true,nombre:"Comunidad / Qué pregunta y comenta la gente",x:4900,y:-340,w:1250,arriba:true},
+  {id:"k_ideas",grupo:"comunidad",dato:true,nombre:"Comunidad / Ideas para más interacción",x:6400,y:-340,w:1250,arriba:true},
+  {id:"k_vivo",grupo:"comunidad",dato:true,nombre:"Comunidad / Tus comentarios en vivo y bitácora",x:7900,y:-340,w:1100,arriba:true},
+  {id:"seo",grupo:"obras",nombre:"SEO",x:3900,y:1300,w:1200,obra:"Posicionamiento orgánico: palabras clave, contenidos y la web frente a la competencia."},
+  {id:"paid",grupo:"obras",nombre:"Paid Media",x:3900,y:2250,w:1200,obra:"Campañas de pago: Meta Ads, Google Ads y el resto, con gasto, CPL y ROAS."},
 ];
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
-const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend","d_vid","d_bib"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
+const SALAS_ACT={diseno:["diseno","d_ig","d_reel","d_yt","d_li","d_tk","d_tend"],control:["control","briefing","decisiones","brujula"],radar:["radar","metricool","metricas","listado","bitacora"],competencia:["competencia","players","cambios","comprrss","compbit"],comunidad:["comunidad","k_formatos","k_preguntas","k_ideas","k_vivo"]};
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
 const PASILLOS_DEF=[
   {id:"pa5",d:"M800 656 V1500",c:"#3d7bff",txt:"Tendencias virales y métricas → Control",sub:"radar.hallazgos · cada 2 h",lx:860,ly:1070},
   {id:"pa6",d:"M400 1500 V656",c:"#f5d76e",txt:"Directrices → Radar",sub:"control.directrices.radar",lx:340,ly:1070,fin:true},
   {id:"pa4",d:"M800 3400 V2156",c:"#ff6b3d",txt:"Alertas de competencia → Control",sub:"competencia.cambios · cada 4 h",lx:860,ly:2800},
   {id:"pa7",d:"M400 2156 V3400",c:"#f5d76e",txt:"Directrices → Competencia",sub:"control.directrices.competencia",lx:340,ly:2800,fin:true},
-  {id:"pa1",d:"M150 2156 V2380 H-1300 V3400",c:"#f5c518",txt:"Briefings y prioridades → Redacción",sub:"control.briefing · en obras",lx:-1250,ly:2330},
-  {id:"pa2",d:"M2300 656 V1700 H1200",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada día",lx:2240,ly:1180,fin:true},
-  {id:"pa13",d:"M1200 1950 H2700 V656",c:"#f5d76e",txt:"Directrices → Comunidad",sub:"control.directrices.comunidad",lx:2800,ly:1320},
+  {id:"pa2",d:"M2300 656 V1100 H1000 V1500",c:"#c084fc",txt:"Insights de comunidad → Control",sub:"comunidad.insights · cada 4 h",lx:2240,ly:880,fin:true},
+  {id:"pa14",d:"M1200 1650 H3900",c:"#22d3ee",txt:"Control → SEO",sub:"en obras",lx:3000,ly:1610},
+  {id:"pa15",d:"M1200 2000 H3500 V2550 H3900",c:"#f472b6",txt:"Control → Paid Media",sub:"en obras",lx:3000,ly:1960},
+  {id:"pa13",d:"M1150 1500 V1300 H2700 V656",c:"#f5d76e",txt:"Directrices → Comunidad",sub:"control.directrices.comunidad",lx:2760,ly:880},
   {id:"pa11",d:"M1200 270 H1900",c:"#3d7bff",txt:"Lo viral → Comunidad",sub:"radar.hallazgos",lx:1250,ly:215},
   {id:"pa12",d:"M1900 450 H1200",c:"#c084fc",txt:"Lo que pregunta tu audiencia → Radar",sub:"comunidad.preguntas",lx:1250,ly:540},
   {id:"pa8",d:"M0 1700 H-2000",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-1960,ly:1660},
   {id:"pa9",d:"M-2000 1960 H0",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-1960,ly:2030},
-  {id:"pa10",d:"M-2600 2156 V2900 H-1700 V3400",c:"#7AA606",txt:"Piezas aprobadas → Redacción",sub:"diseno.aprobadas · en obras",lx:-2560,ly:2860},
-  {id:"pa3",d:"M-1300 4056 V4300 H2500 V4056",c:"#3ddc97",txt:"Contenidos publicados → SEO",sub:"redaccion.publicaciones · en obras",lx:-1250,ly:4380},
 ];
 const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro===m.sala);
 
@@ -674,10 +676,9 @@ function construir(){
          <div class="grupo-titulo" style="left:-3200px;top:1270px;font-size:56px;color:#a3cf2e">Diseño<small><span class="ok">● Activa</span> · 6 creativos · piezas con el brandbook 2027</small></div>
          <div class="grupo-titulo" style="left:0;top:1270px;font-size:56px;color:#f5d76e">Sala de Control<small><span class="ok">● Activa</span> · 6 directores de marketing · revisa y reorienta todo el flujo</small></div>
          <div class="grupo-titulo" style="left:0;top:3170px;font-size:56px">Competencia<small><span class="ok">● Sala activa</span> · 6 investigadores · webs, precios, noticias, redes y alianzas</small></div>
-         <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
          <div class="grupo-titulo" style="left:1900px;top:-230px;font-size:56px;color:#d8b4fe">Comunidad<small><span class="ok">● Activa</span> · 6 especialistas · comentarios, preguntas e interacción</small></div>
-         <div class="grupo-titulo" style="left:1900px;top:3170px;color:#5d6774;font-size:56px">SEO</div>
-         <div class="grupo-titulo" style="left:3800px;top:3170px;color:#5d6774;font-size:56px">Paid Media</div>`;
+         <div class="grupo-titulo" style="left:3900px;top:1070px;color:#5d6774;font-size:56px">SEO</div>
+         <div class="grupo-titulo" style="left:3900px;top:2020px;color:#5d6774;font-size:56px">Paid Media</div>`;
   for(const m of MARCOS){
     h+=`<section class="marco${m.dato?" dato":""}" ${m.dato?`data-sala="${m.sala}"`:""} id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px${m.arriba?";transform:translateY(-100%)":""}"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
@@ -699,7 +700,7 @@ function pintarCapas(){
     ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
 function svgPasillos(){
-  const X=-2800,Y=0,W=6300,H=4600;
+  const X=-2800,Y=0,W=7000,H=4600;
   let d=`<svg class="pasillos" style="left:${X}px;top:${Y}px" width="${W}" height="${H}" viewBox="${X} ${Y} ${W} ${H}" aria-hidden="true"><defs>
     <filter id="brilloP" x="-100%" y="-300%" width="300%" height="700%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
   for(const p of PASILLOS_DEF){
@@ -712,7 +713,7 @@ function svgPasillos(){
       d+=`<g><rect x="-11" y="-4" width="22" height="8" rx="2" fill="${col}" filter="url(#brilloP)"/><animateMotion dur="${dur}s" begin="-${(k*dur/N).toFixed(2)}s" repeatCount="indefinite" rotate="auto"${p.inv?' keyPoints="1;0" keyTimes="0;1" calcMode="linear"':""}><mpath href="#${p.id}"/></animateMotion></g>`}}
   }
   // nodos en los giros
-  const nodos=[[150,2380],[-1300,2380],[2300,1700],[2700,1950]];
+  const nodos=[[2300,1100],[1000,1100],[2700,1300],[1150,1300],[3500,2000],[3500,2550]];
   for(const[x,y]of nodos)d+=`<rect x="${x-14}" y="${y-14}" width="28" height="28" fill="#05070a" stroke="#3d7bff" stroke-width="2"/><rect x="${x-4}" y="${y-4}" width="8" height="8" fill="#3d7bff" filter="url(#brilloP)"/>`;
   return d+`</svg>`;
 }
@@ -1113,13 +1114,14 @@ function svgDiseno(){
     <g transform="translate(9 9)"><rect width="${ancho}" height="16" rx="3" fill="${a.c}"/><text x="6" y="11.5" class="nombre" ${oscuro?'style="fill:#000"':""}>${esc(a.n)}</text></g></g>`});
   return d+`</svg>`;
 }
+function isoMock(c){return`<img class="iso" src="img/isotipo_${c}.png" alt="">`}
 function mockPieza(x){
   const fondo=x.fondo||"blanco",sw=conTitular(x.titular,x.subrayado);
   const conchaCol=fondo==="blanco"?"#7AA606":"#fff";
   const ante=x.antetitulo?`<div class="ante">${esc(x.antetitulo)}</div>`:"";
   if(x.tipo==="linkedin"){
-    return`<div class="li-mock"><div class="li-cab"><span class="li-av">${conchaSVG("#fff").replace('class="concha"','style="width:20px;height:20px"')}</span><div><b>Santiago Ways</b><small>Empresa · ${esc(x.formato||"")}</small></div></div>
-      <div class="li-txt">${esc(x.texto||"")}</div><div class="li-img"><span>${sw}</span></div></div>`;
+    return`<div class="li-mock"><div class="li-cab"><span class="li-av"><img src="img/isotipo_blanco.png" alt="" style="width:19px;height:auto"></span><div><b>Santiago Ways</b><small>Empresa · ${esc(x.formato||"")}</small></div></div>
+      <div class="li-txt">${esc(x.texto||"")}</div><div class="li-img${x.imagen?" conimg":""}"${x.imagen?` style="background-image:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.6)),url('${esc(x.imagen)}')"`:""}><span>${sw}</span></div></div>`;
   }
   const r=x.tipo==="ig"?"r45":x.tipo==="yt"?"r169":"r916";
   const lista=x.id==="ig-3-otono-mochila"?`<div class="lista">${(x.cuerpo||[]).map(c=>`<span>${esc(c)}</span>`).join("")}</div>`:"";
@@ -1128,7 +1130,9 @@ function mockPieza(x){
   const vert=(x.tipo==="reel"||x.tipo==="tiktok")?`<div class="vert-ui"><i></i><i></i><i></i></div>`:"";
   const dur=x.tipo==="yt"?`<span class="yt-dur">${esc((x.formato||"").match(/\d+/)?.[0]||"10")}:00</span>`:"";
   const just=x.tipo==="yt"?"justify-content:flex-end;":x.tipo==="ig"&&fondo!=="blanco"?"justify-content:center;":"";
-  return`<div class="mock ${r} ${fondo}">${fondo==="blanco"?conchaSVG("#7AA606").replace('class="concha"','class="marca-agua"'):""}${conchaSVG(conchaCol)}
+  if((x.tipo==="reel"||x.tipo==="tiktok")&&x.video)return`<div class="mock r916 vid-mock"><video controls playsinline preload="none" poster="${esc(x.poster||"")}" src="${esc(x.video)}"></video></div>`;
+  const bg=x.imagen?` style="background-image:linear-gradient(180deg,rgba(0,0,0,.05) 35%,rgba(0,0,0,.62)),url('${esc(x.imagen)}')"`:"";
+  return`<div class="mock ${r} ${fondo}${x.imagen?" conimg":""}"${bg}>${isoMock(fondo==="blanco"?"verde":"blanco")}
     <div class="in" style="${just}">${x.tipo==="yt"?"":ante}<h5>${sw}</h5>${sub}${lista}${etq}</div>${vert}${dur}
     ${x.foto&&fondo==="foto"?`<div class="fotolbl">Foto: ${esc(corta(x.foto,90))}</div>`:""}</div>`;
 }
@@ -1146,7 +1150,7 @@ function tarjetaPieza(x){
   return`<div class="pieza ${esc(x.estado)}" data-pieza="${esc(x.id)}">${mockPieza(x)}
     <div class="pz-info">${selloControl(x.control)}<div class="pz-meta"><span class="estado-dec ${esc(x.estado==="aprobada"?"aprobada":x.estado==="descartada"?"descartada":"propuesta")}">${esc(x.estado)}</span><span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>
       <h4>${esc(x.tema)}</h4><div class="pz-meta">${esc(x.formato||"")}</div>
-      <div class="pz-por">${esc(x.porque||"")}</div>
+      <div class="pz-por">${esc(x.porque||"")}</div>${x.material?`<div class="pz-falta">${esc(x.material)}</div>`:""}${x.video?`<a class="btn" href="${esc(x.video)}" download style="justify-self:start">Descargar vídeo</a>`:""}
       <div class="pz-ref">${(x.referencias||[]).map(r=>r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.texto)} ↗</a>`:`<span>${esc(r.texto)}</span>`).join("")}</div>
       ${mini}${seo}${c}${g}${cap}
       <div class="acciones">${acc}${x.caption||x.texto?`<button class="btn" data-pcopiar>Copiar copy</button>`:""}</div></div></div>`;
@@ -1162,7 +1166,6 @@ function pintarDiseno(){
     $("#c-"+id).innerHTML=`<div class="mcab"><div><h2>${esc(nom)}</h2><div class="fuente-mc" style="margin-top:6px">${t==="linkedin"?"Basados en los valores del brandbook y la actualidad del sector":"Basadas en lo que funciona en tu cuenta, la competencia y el mercado"} · cada pieza cita sus referencias con métricas</div></div><div class="meta">${ps.filter(x=>x.estado==="aprobada").length} de ${ps.length} aprobadas</div></div>
       <div class="piezas">${ps.length?ps.map(tarjetaPieza).join(""):`<div class="vacio">El equipo está preparando estas piezas.</div>`}</div>`;
   }
-  pintarVideos();pintarBiblio();
   const T=D.tend;
   $("#c-d_tend").innerHTML=`<div class="mcab"><div><h2>Tendencias del sector y pautas para RRSS</h2><div class="fuente-mc" style="margin-top:6px">Para la responsable de redes: qué está pasando, cómo aprovecharlo y reglas de trabajo</div></div><div class="meta">${T?.fecha?`actualizado ${esc(hace(T.fecha))}`:""}</div></div>
     ${T?`<div class="seccion-t">Tendencias y cómo aprovecharlas</div><div class="tend">${(T.tendencias||[]).map(x=>`<div class="tend-c"><h4>${esc(x.titulo)}</h4><p>${esc(x.que)}</p><p><b style="color:var(--texto)">Cómo aprovecharlo:</b> ${esc(x.aprovechar)}</p><div class="ev">${esc(x.evidencia)}</div></div>`).join("")}</div>

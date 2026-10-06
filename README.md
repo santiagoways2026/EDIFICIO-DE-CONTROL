@@ -13,7 +13,6 @@ Sistema de salas con especialistas de IA trabajando sobre el Camino de Santiago.
 | Radar Viral (con métricas de interacción) | Activa, barrida automática cada 2 h (minuto 18, hora UTC) | `salas/radar-viral/AGENTE.md` |
 | Diseño | Activa, propuesta semanal (lunes) | `salas/diseno/AGENTE.md` |
 | Competencia | Activa, ronda de investigación cada 4 h | `salas/competencia/AGENTE.md` |
-| Redacción | En obras | |
 | Comunidad (comentarios, preguntas e interacción) | Activa, análisis diario (8:37 Madrid) | `salas/comunidad/AGENTE.md` |
-| SEO | En obras | |
-| Paid Media | En obras | |
+| SEO (a la derecha de la Sala de Control) | En obras | |
+| Paid Media (a la derecha de la Sala de Control) | En obras | |

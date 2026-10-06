@@ -9,5 +9,6 @@ Regla: cada pieza cita sus posts de referencia con métricas.
 ## Biblioteca de Drive y ediciones de vídeo
 
 - `diseno_biblio`: índice etiquetado de la carpeta CLAUDE de Drive (IMÁGENES y VIDEO): descripción, escena, etiquetas, orientación, duración y enlace. Cada pieza cita en `foto` y en el guion el archivo concreto que hay que usar.
-- `diseno_videos`: ediciones montadas por el estudio (reels 9:16 con Montserrat, subrayado SW, concha y cierre verde Ways). Los MP4 y las miniaturas se publican junto a la página y no se suben a este repositorio, porque contienen fotos de clientes.
+- Los reels y TikToks se montan dentro de su propia pieza (`video` y `poster` en diseno_piezas): vertical 9:16 real (los planos horizontales se recortan con zoom y se centran), texto que aparece escribiéndose, antetítulo en caja verde, subrayado SW, sin marca de agua y cierre oficial (verde Ways, logo vertical blanco, titular con subrayado sendero y santiagoways.com). Cada plano debe casar con el texto que lleva encima. Si falta material, la pieza lo indica en `material`.
+- Las imágenes de miniaturas de YouTube, LinkedIn e Instagram van en `imagen`. Los archivos se publican junto a la página y no se suben a este repositorio, porque contienen fotos de clientes.
 - Todo pasa por la Sala de Control: escribe en cada pieza y vídeo `control = {estado: validada|ajustar, nota, director, t}`. El estudio corrige lo marcado como "ajustar" antes de proponer nada nuevo.
