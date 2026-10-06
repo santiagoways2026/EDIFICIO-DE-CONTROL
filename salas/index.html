@@ -45,6 +45,23 @@ a{color:inherit}
 .grupo-titulo{position:absolute;font:800 72px/1 var(--f-ui);letter-spacing:-.03em;color:var(--texto);white-space:nowrap;pointer-events:none}
 .grupo-titulo small{display:block;font:500 18px/1.4 var(--f-mono);letter-spacing:.04em;color:var(--tenue);margin-top:12px;text-transform:uppercase}
 .grupo-titulo .ok{color:var(--vivo)}
+.marco.dato{display:none}
+body.dentro .marco.dato{display:block;animation:entra .45s ease-out both}
+body.dentro .marco.dato:nth-of-type(odd){animation-delay:.08s}
+@keyframes entra{from{opacity:0}}
+#m-radar{cursor:pointer}
+body.dentro #m-radar{cursor:inherit}
+.entrar-pista{font:600 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--sel);padding:6px 9px;border-radius:4px;box-shadow:0 0 18px rgba(61,123,255,.5)}
+body.dentro .entrar-pista{display:none}
+.salir{display:none}
+body.dentro .salir{display:inline-flex}
+#m-radar:hover{box-shadow:0 0 0 1px rgba(61,123,255,.45),0 0 60px rgba(61,123,255,.18),0 30px 80px rgba(0,0,0,.6)}
+.pasillos{position:absolute;pointer-events:none;overflow:visible}
+.flujo{animation:flujo 1.1s linear infinite}
+@keyframes flujo{to{stroke-dashoffset:-40}}
+.p-txt{font:500 26px var(--f-mono);fill:#8792a2;letter-spacing:.04em}
+.p-sub{font:500 18px var(--f-mono);fill:#4f5967;letter-spacing:.04em}
+@media (prefers-reduced-motion: reduce){.flujo{animation:none}}
 
 /* Cabecera interna de marco */
 .mcab{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;border-bottom:1px solid var(--borde)}
@@ -215,7 +232,7 @@ a{color:inherit}
 </div>
 <div id="mapa" class="capa" aria-label="Minimapa"></div>
 <aside id="insp" class="capa" hidden aria-label="Inspector"></aside>
-<div class="ayuda">Arrastra para moverte · Rueda o pellizco para zoom · Doble clic para acercar</div>
+<div class="ayuda">Arrastra para moverte · Rueda o pellizco para zoom · Pulsa una sala para entrar · Esc para salir</div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
@@ -232,14 +249,21 @@ const EQUIPO=[
 ];
 const MARCOS=[
   {id:"radar",grupo:"radar",nombre:"Radar Viral / Sala",x:0,y:0,w:1200},
-  {id:"metricas",grupo:"radar",nombre:"Radar Viral / Métricas",x:0,y:760,w:1200},
-  {id:"listado",grupo:"radar",nombre:"Radar Viral / Listado en vivo",x:1300,y:0,w:860},
-  {id:"bitacora",grupo:"radar",nombre:"Radar Viral / Equipo y bitácora",x:2260,y:0,w:560},
-  {id:"redaccion",grupo:"obras",nombre:"Redacción",x:-1500,y:0,w:1200,obra:"Convertirá las tendencias del Radar en publicaciones listas para tus redes."},
-  {id:"analisis",grupo:"obras",nombre:"Análisis",x:-1500,y:800,w:1200,obra:"Medirá el rendimiento de tus propias redes y lo comparará con lo viral."},
+  {id:"metricas",grupo:"radar",dato:true,nombre:"Radar Viral / Métricas",x:1320,y:0,w:1520},
+  {id:"listado",grupo:"radar",dato:true,nombre:"Radar Viral / Listado en vivo",x:1320,y:560,w:900},
+  {id:"bitacora",grupo:"radar",dato:true,nombre:"Radar Viral / Equipo y bitácora",x:2280,y:560,w:560},
+  {id:"redaccion",grupo:"obras",nombre:"Redacción",x:-1900,y:3400,w:1200,obra:"Convertirá las tendencias del Radar en publicaciones listas para tus redes."},
+  {id:"analisis",grupo:"obras",nombre:"Análisis",x:1900,y:3400,w:1200,obra:"Medirá el rendimiento de tus propias redes y lo comparará con lo viral."},
 ];
+/* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
+const PASILLOS_DEF=[
+  {id:"pa1",d:"M300 656 V2500 H-1300 V3400",c:"#f5c518",txt:"Tendencias virales → Redacción",sub:"radar.posts_ganadores · cada 2 h",lx:-1250,ly:2440},
+  {id:"pa2",d:"M900 656 V2500 H2500 V3400",c:"#3d7bff",txt:"Métricas de tus redes → Radar",sub:"analisis.rendimiento · en obras",lx:1000,ly:2440,inv:true},
+  {id:"pa3",d:"M-700 3728 H1900",c:"#3ddc97",txt:"Piezas publicadas → Análisis",sub:"redaccion.publicaciones · en obras",lx:-640,ly:3670},
+];
+const visibles=()=>MARCOS.filter(m=>!m.dato||st.dentro);
 
-const st={items:[],estado:null,plat:"todas",periodo:"30",orden:"buzz",q:"",vista:"todo",limite:25,sel:null,marcoSel:null,conectado:false,db:null,dl:null};
+const st={items:[],estado:null,plat:"todas",periodo:"30",orden:"buzz",q:"",vista:"todo",limite:12,sel:null,marcoSel:null,dentro:false,conectado:false,db:null,dl:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
@@ -278,8 +302,8 @@ function aplicar(){
 }
 const limZ=z=>Math.min(4,Math.max(.06,z));
 function zoomEn(sx,sy,f){cancelAnimationFrame(vuelo);const wx=(sx-cam.x)/cam.z,wy=(sy-cam.y)/cam.z;cam.z=limZ(cam.z*f);cam.x=sx-wx*cam.z;cam.y=sy-wy*cam.z;aplicar()}
-function caja(m){const el=document.getElementById("m-"+m.id);return{x:m.x,y:m.y,w:m.w,h:el?el.offsetHeight:600}}
-function cajaTotal(ids){const bs=(ids?MARCOS.filter(m=>ids.includes(m.id)):MARCOS).map(caja);
+function caja(m){const el=document.getElementById("m-"+m.id);return{x:m.x,y:m.y,w:m.w,h:el&&el.offsetHeight?el.offsetHeight:656}}
+function cajaTotal(ids){const bs=(ids?MARCOS.filter(m=>ids.includes(m.id)):visibles()).map(caja);
   const x0=Math.min(...bs.map(b=>b.x)),y0=Math.min(...bs.map(b=>b.y))-(ids?0:200),x1=Math.max(...bs.map(b=>b.x+b.w)),y1=Math.max(...bs.map(b=>b.y+b.h));return{x:x0,y:y0,w:x1-x0,h:y1-y0}}
 function volarA(b,pad=70,inst=false){
   const W=innerWidth,H=innerHeight,top=56,bot=70,left=innerWidth>900?260:12,right=$("#insp").hidden||innerWidth<640?12:380;
@@ -293,8 +317,16 @@ function volarA(b,pad=70,inst=false){
     if(k<1)vuelo=requestAnimationFrame(paso);else mundo.classList.remove("moviendo")};
   vuelo=requestAnimationFrame(paso);
 }
-function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;st.marcoSel=id;marcarSel();volarA(caja(m))}
-function verTodo(){st.marcoSel=null;marcarSel();volarA(cajaTotal())}
+function irAMarco(id){const m=MARCOS.find(x=>x.id===id);if(!m)return;if(m.dato&&!st.dentro){entrar(id);return}if(!m.dato&&id!=="radar"&&st.dentro)salir(false);st.marcoSel=id;marcarSel();volarA(caja(m))}
+function verTodo(){if(st.dentro)salir(false);st.marcoSel=null;marcarSel();volarA(cajaTotal())}
+function entrar(foco){
+  st.dentro=true;document.body.classList.add("dentro");st.marcoSel=foco||"radar";pintarCapas();marcarSel();pintarDatos();
+  requestAnimationFrame(()=>volarA(foco&&foco!=="radar"?caja(MARCOS.find(m=>m.id===foco)):cajaTotal(["radar","metricas","listado","bitacora"]),50));
+}
+function salir(volar=true){
+  st.dentro=false;document.body.classList.remove("dentro");cerrarInsp();st.marcoSel=null;pintarCapas();marcarSel();
+  if(volar)volarA(cajaTotal());
+}
 function marcarSel(){
   document.querySelectorAll(".marco").forEach(el=>el.classList.toggle("sel",el.id==="m-"+st.marcoSel));
   document.querySelectorAll(".capa-it").forEach(el=>el.classList.toggle("sel",el.dataset.ir===st.marcoSel));
@@ -339,15 +371,15 @@ addEventListener("keydown",e=>{
   const c=[innerWidth/2,innerHeight/2];
   if(e.key==="+"||e.key==="=")zoomEn(...c,1.25);else if(e.key==="-")zoomEn(...c,.8);
   else if(e.key==="1")verTodo();else if(e.key==="0")zoomEn(...c,1/cam.z);
-  else if(e.key.toLowerCase()==="r")irAMarco("radar");
-  else if(e.key==="Escape"){cerrarInsp()}
+  else if(e.key.toLowerCase()==="r")entrar();
+  else if(e.key==="Escape"){if(st.sel)cerrarInsp();else if(st.dentro)salir()}
   else if(e.key.startsWith("Arrow")){const s=60;cam.x+=e.key==="ArrowLeft"?s:e.key==="ArrowRight"?-s:0;cam.y+=e.key==="ArrowUp"?s:e.key==="ArrowDown"?-s:0;aplicar()}
   else return;e.preventDefault();
 });
 $("#hMas").onclick=()=>zoomEn(innerWidth/2,innerHeight/2,1.25);
 $("#hMenos").onclick=()=>zoomEn(innerWidth/2,innerHeight/2,.8);
 $("#hAjustar").onclick=verTodo;
-$("#hRadar").onclick=()=>irAMarco("radar");
+$("#hRadar").onclick=()=>entrar();
 addEventListener("resize",aplicar);
 
 /* Minimapa */
@@ -355,7 +387,7 @@ function pintarMapa(){
   const el=$("#mapa");if(!el||!document.getElementById("m-radar"))return;
   const b=cajaTotal(),pad=200,X=b.x-pad,Y=b.y-pad,W=b.w+pad*2,H=b.h+pad*2;
   const vx=-cam.x/cam.z,vy=-cam.y/cam.z,vw=innerWidth/cam.z,vh=innerHeight/cam.z;
-  el.innerHTML=`<svg viewBox="${X} ${Y} ${W} ${H}" preserveAspectRatio="xMidYMid meet">${MARCOS.map(m=>{const c=caja(m);return`<rect x="${c.x}" y="${c.y}" width="${c.w}" height="${c.h}" fill="${m.obra?"#2a2410":"#1a2333"}" stroke="${m.id===st.marcoSel?"#3d7bff":"#2a3240"}" stroke-width="${W/200}"/>`}).join("")}
+  el.innerHTML=`<svg viewBox="${X} ${Y} ${W} ${H}" preserveAspectRatio="xMidYMid meet">${PASILLOS_DEF.map(p=>`<path d="${p.d}" fill="none" stroke="#1f2733" stroke-width="${W/90}"/>`).join("")}${visibles().map(m=>{const c=caja(m);return`<rect x="${c.x}" y="${c.y}" width="${c.w}" height="${c.h}" fill="${m.obra?"#2a2410":"#1a2333"}" stroke="${m.id===st.marcoSel?"#3d7bff":"#2a3240"}" stroke-width="${W/200}"/>`}).join("")}
   <rect x="${vx}" y="${vy}" width="${vw}" height="${vh}" fill="rgba(61,123,255,.08)" stroke="#3d7bff" stroke-width="${W/130}"/></svg>`;
   el.onclick=ev=>{const r=el.getBoundingClientRect();const s=Math.max(W/r.width,H/r.height);const ox=(r.width*s-W)/2,oy=(r.height*s-H)/2;
     const wx=X+(ev.clientX-r.left)*s-ox,wy=Y+(ev.clientY-r.top)*s-oy;cancelAnimationFrame(vuelo);cam.x=innerWidth/2-wx*cam.z;cam.y=innerHeight/2-wy*cam.z;aplicar()};
@@ -365,23 +397,48 @@ function pintarMapa(){
 const ICO_MARCO=`<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 0v12M9 0v12M0 3h12M0 9h12"/></svg>`;
 function construir(){
   let h=`<div class="grupo-titulo" style="left:0;top:-230px">Radar Viral<small><span class="ok">● Sala activa</span> · 6 especialistas trabajando</small></div>
-         <div class="grupo-titulo" style="left:-1500px;top:-230px;color:#5d6774">En construcción<small>2 salas en obras</small></div>`;
+         <div class="grupo-titulo" style="left:-1900px;top:3170px;color:#5d6774;font-size:56px">Redacción</div>
+         <div class="grupo-titulo" style="left:1900px;top:3170px;color:#5d6774;font-size:56px">Análisis</div>`+svgPasillos();
   for(const m of MARCOS){
-    h+=`<section class="marco" id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
+    h+=`<section class="marco${m.dato?" dato":""}" id="m-${m.id}" style="left:${m.x}px;top:${m.y}px;width:${m.w}px"><div class="etiqueta" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}</div><div class="cont" id="c-${m.id}"></div></section>`;
   }
   mundo.innerHTML=h;
-  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
+  $("#c-radar").innerHTML=`<div class="mcab"><div><h2>Radar Viral</h2></div><div class="meta"><span class="vivo off" id="vivoSala">Conectando</span><span id="salaN">0 en el radar</span><span id="salaUlt"></span><span class="entrar-pista">Pulsa para entrar</span><button class="btn salir" id="salir">← Salir de la sala</button></div></div><div class="plano" id="plano-radar">${svgRadar()}</div>`;
   for(const m of MARCOS.filter(x=>x.obra))$("#c-"+m.id).innerHTML=`<div class="mcab"><h2>${esc(m.nombre)}</h2><span class="obra-tag">En construcción</span></div><div class="plano">${svgObra(m)}</div>`;
-  $("#listaCapas").innerHTML=`
-    <button class="capa-it" data-todo>${ICO_MARCO}Edificio completo</button>
-    <button class="capa-it" data-ir="radar">${ICO_MARCO}Radar Viral<span class="t" style="color:var(--vivo)">Activa</span></button>
-    ${MARCOS.filter(m=>m.grupo==="radar").map(m=>`<button class="capa-it hijo" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1])}</button>`).join("")}
-    ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
+  pintarCapas();
   $("#avatares").innerHTML=EQUIPO.map(a=>`<span class="av" style="--c:${a.c}" title="${esc(a.n)}: ${esc(a.rol)}">${esc(a.n.slice(0,2).toUpperCase())}</span>`).join("");
 }
+function pintarCapas(){
+  $("#listaCapas").innerHTML=`
+    <button class="capa-it" data-todo>${ICO_MARCO}Edificio completo</button>
+    <button class="capa-it" data-entrar>${ICO_MARCO}Radar Viral<span class="t" style="color:var(--vivo)">${st.dentro?"Dentro":"Activa"}</span></button>
+    ${st.dentro?MARCOS.filter(m=>m.grupo==="radar").map(m=>`<button class="capa-it hijo" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1])}</button>`).join(""):""}
+    ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
+}
+function svgPasillos(){
+  const X=-2400,Y=500,W=5900,H=3900;
+  let d=`<svg class="pasillos" style="left:${X}px;top:${Y}px" width="${W}" height="${H}" viewBox="${X} ${Y} ${W} ${H}" aria-hidden="true"><defs>
+    <filter id="brilloP" x="-100%" y="-300%" width="300%" height="700%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+  for(const p of PASILLOS_DEF){
+    d+=`<path d="${p.d}" fill="none" stroke="#1b222c" stroke-width="96" stroke-linejoin="miter"/>
+      <path id="${p.id}" d="${p.d}" fill="none" stroke="#05070a" stroke-width="90" stroke-linejoin="miter"/>
+      <path d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".08" stroke-width="40"/>
+      <path class="flujo" d="${p.d}" fill="none" stroke="${p.c}" stroke-opacity=".45" stroke-width="2" stroke-dasharray="8 32"/>
+      <text x="${p.lx}" y="${p.ly}" class="p-txt"><tspan fill="${p.c}">■ </tspan>${esc(p.txt)}</text><text x="${p.lx+30}" y="${p.ly+28}" class="p-sub">${esc(p.sub)}</text>`;
+    if(!quieto){const N=7,dur=p.id==="pa3"?9:14;for(let k=0;k<N;k++){const col=p.id==="pa1"?Object.values(PLAT)[k%Object.values(PLAT).length].c:p.c;
+      d+=`<g><rect x="-11" y="-4" width="22" height="8" rx="2" fill="${col}" filter="url(#brilloP)"/><animateMotion dur="${dur}s" begin="-${(k*dur/N).toFixed(2)}s" repeatCount="indefinite" rotate="auto"${p.inv?' keyPoints="1;0" keyTimes="0;1" calcMode="linear"':""}><mpath href="#${p.id}"/></animateMotion></g>`}}
+  }
+  // nodos en los giros
+  const nodos=[[300,2500],[-1300,2500],[900,2500],[2500,2500]];
+  for(const[x,y]of nodos)d+=`<rect x="${x-14}" y="${y-14}" width="28" height="28" fill="#05070a" stroke="#3d7bff" stroke-width="2"/><rect x="${x-4}" y="${y-4}" width="8" height="8" fill="#3d7bff" filter="url(#brilloP)"/>`;
+  return d+`</svg>`;
+}
 document.addEventListener("click",e=>{
+  if(e.target.closest("#salir")){salir();return}
   const ir=e.target.closest("[data-ir]");if(ir){irAMarco(ir.dataset.ir);return}
   if(e.target.closest("[data-todo]")){verTodo();return}
+  if(e.target.closest("[data-entrar]")){entrar();return}
+  if(!st.dentro&&e.target.closest("#m-radar")){entrar();return}
 });
 
 /* ---------- Plano del Radar ---------- */
@@ -586,7 +643,7 @@ function cerrarInsp(){st.sel=null;$("#insp").hidden=true;document.querySelectorA
 
 document.addEventListener("click",async e=>{
   if(e.target.closest("#cerrarInsp")){cerrarInsp();return}
-  const c=e.target.closest("[data-plat]");if(c){st.plat=c.dataset.plat;st.limite=25;pintarListado();return}
+  const c=e.target.closest("[data-plat]");if(c){st.plat=c.dataset.plat;st.limite=12;pintarListado();return}
   if(e.target.id==="verMas"){st.limite+=25;pintarListado();return}
   if(e.target.id==="exportar"){exportar();return}
   const it=e.target.closest(".item[data-id],.ganador[data-id]");
@@ -602,8 +659,8 @@ document.addEventListener("click",async e=>{
   try{await st.db.doc("radar/"+i.id).update({[campo]:!i[campo]});toast(campo==="guardado"?(i[campo]?"Quitado de guardados":"Guardado"):(i[campo]?"Recuperado":"Descartado"))}
   catch(_){toast("Solo el propietario puede marcar contenidos")}
 });
-document.addEventListener("input",e=>{if(e.target.id==="q"){st.q=e.target.value;st.limite=25;clearTimeout(pintarListado.t);pintarListado.t=setTimeout(pintarListado,180)}});
-document.addEventListener("change",e=>{if(["periodo","orden","vista"].includes(e.target.id)){st[e.target.id]=e.target.value;st.limite=25;pintarListado()}});
+document.addEventListener("input",e=>{if(e.target.id==="q"){st.q=e.target.value;st.limite=12;clearTimeout(pintarListado.t);pintarListado.t=setTimeout(pintarListado,180)}});
+document.addEventListener("change",e=>{if(["periodo","orden","vista"].includes(e.target.id)){st[e.target.id]=e.target.value;st.limite=12;pintarListado()}});
 
 async function exportar(){
   const rows=filtrados();const cols=["buzz","plataforma","titulo","url","fuente","publicado","detectado","vistas","likes","reacciones","comentarios","compartidos","guardados","seguidores","interacciones","resumen","porque","senales","etiquetas","agente"];
@@ -616,7 +673,7 @@ async function exportar(){
 /* ---------- Arranque ---------- */
 construir();pintarDatos();iniciarMundo();
 const inicioRadar=location.hash==="#radar";
-requestAnimationFrame(()=>{if(inicioRadar)irAMarco("radar");else volarA(cajaTotal(),70,true)});
+requestAnimationFrame(()=>{if(inicioRadar)entrar();else volarA(cajaTotal(),70,true)});
 setInterval(()=>{if(document.activeElement?.id!=="q")pintarDatos()},60000);
 
 (async()=>{
