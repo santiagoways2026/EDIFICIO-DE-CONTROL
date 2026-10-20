@@ -35,7 +35,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
   2. Cambiar «Zoho» por el nombre nuevo en `salas/index.html`.
   3. Volver a declarar `capabilities`. Una declaración nueva sustituye a todas las anteriores, así que hay que repetir también las demás (db, user y Metricool).
 - `ZohoCRM_runReport`: usar siempre el tipo matrix con una agrupación de columna por fecha y `date_filter`; si no, da INTERNAL_SERVER_ERROR. Un grupo de filtros con un solo criterio da AMBIGUOUS_GROUP_IN_CRITERIA. En la respuesta, `aggregates[0]` es el número de filas; con `sum`, la suma está en `aggregates[1]`. El formato completo está en el prompt de la rutina «Seguimiento RRSS».
-- Correo: hasta ahora todas las herramientas de correo daban OAUTH_SCOPE_MISMATCH (la autorización no incluía el permiso de correo). Los informes sí funcionaban.
+- Correo: con el conector «zoho crm» (20 de octubre de 2026) ya no sale OAUTH_SCOPE_MISMATCH, pero Zoho responde NO_PERMISSION: «Administrator only has permission» y «You don't have permission to access other users Storage». La cuenta con la que se autorizó el conector no tiene el perfil Administrator en Zoho CRM. Los informes (runReport) y Zoho Analytics sí funcionan.
 
 ## Reglas
 
