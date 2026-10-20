@@ -48,6 +48,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 - Español con tildes y sin guiones largos; en su lugar, punto, dos puntos o punto y coma.
 - Zoho, Meta, Google Ads, Windsor y Metricool son solo lectura. Nunca programar ni crear publicaciones. En Zoho nunca usar herramientas destructivas; la única excepción es el informe 2161768000878444244, que se puede reconfigurar.
 - WordPress: no cambiar nada sin avisar antes.
+- Conectores: si se pierde o falla una conexión (Zoho, Metricool, Windsor, Gmail, Semrush, Google), avisar a Álvaro antes de seguir y revisarlo juntos; no rodearlo en silencio.
 - Correo de los asesores: lo acordado era ver solo métricas. Si se pasa a leer el contenido, avisar antes al equipo.
 
 ## Pendiente
