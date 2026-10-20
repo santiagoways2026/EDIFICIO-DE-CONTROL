@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 152 a 20 de octubre de 2026).
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 153 a 21 de octubre de 2026).
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
@@ -14,7 +14,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 1. En un chat nuevo, leer primero la página con Artifact (`action: read`) y comprobar que coincide con `salas/index.html`.
 2. Editar `salas/index.html` en este repo.
 3. Copiarlo a `brandbook2027/salas/index.html`.
-4. Publicar con Artifact: ese archivo y la url de la página, sin pasar `capabilities` (así se conservan las que ya tiene).
+4. Publicar con Artifact: ese archivo y la url de la página, sin pasar `capabilities` (así se conservan las que ya tiene: db, downloads, sample y mcp con Metricool, «zoho crm» y Claude Code Remote/fire_trigger).
 5. Commit y push de los dos repos en la rama `claude/magical-tesla-rc62sa`.
 
 ## Documentos de la base de datos
@@ -27,15 +27,21 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 | `inversion_plataformas/actual` | Captación, Inversión: barras apiladas por plataforma. |
 | `seo_blog` | SEO, zoom del Blog con deals y won por URL. |
 | `captacion_canales_pais/actual` | Ya no se usa (se sustituyó por el filtro por mercado). |
+| `youtube_dash/actual` | YouTube, Dashboard de canales: copia de las filas diarias de Metricool (ES, EN y ES del año anterior). La página la renueva una vez al día con los datos en vivo. |
+| `refresco/diario` | Control del refresco diario al abrir la página: qué tablas de Zoho y qué rutinas se han lanzado hoy. |
 
 ## Zoho
 
-- El conector de claude.ai se llama ahora «zoho crm». La página todavía llama a un servidor llamado «Zoho»: 8 llamadas `callTool("Zoho", ...)` y su declaración `mcp`. Cuando el conector nuevo funcione hay que:
-  1. Comprobar que tiene las herramientas que usa la página con el mismo nombre: `ZohoCRM_runSpecificReport`, `ZohoCRM_updateReports`, `ZohoAnalytics_createExportJobSQLQuery`, `ZohoAnalytics_getExportJobDetails` y `ZohoAnalytics_downloadExportedData`.
-  2. Cambiar «Zoho» por el nombre nuevo en `salas/index.html`.
-  3. Volver a declarar `capabilities`. Una declaración nueva sustituye a todas las anteriores, así que hay que repetir también las demás (db, user y Metricool).
+- La página ya llama al conector «zoho crm» (constante `ZO` en `salas/index.html`) y lo tiene declarado en `capabilities`.
 - `ZohoCRM_runReport`: usar siempre el tipo matrix con una agrupación de columna por fecha y `date_filter`; si no, da INTERNAL_SERVER_ERROR. Un grupo de filtros con un solo criterio da AMBIGUOUS_GROUP_IN_CRITERIA. En la respuesta, `aggregates[0]` es el número de filas; con `sum`, la suma está en `aggregates[1]`. El formato completo está en el prompt de la rutina «Seguimiento RRSS».
 - Correo: con el conector «zoho crm» (20 de octubre de 2026) ya no sale OAUTH_SCOPE_MISMATCH, pero Zoho responde NO_PERMISSION: «Administrator only has permission» y «You don't have permission to access other users Storage». La cuenta con la que se autorizó el conector no tiene el perfil Administrator en Zoho CRM. Los informes (runReport) y Zoho Analytics sí funcionan.
+
+## Refresco diario y pestañas ocultas
+
+- Al abrir la página (solo quien puede escribir en la base de datos), `refrescoDiario()` revisa qué no es de hoy (hora de Madrid): actualiza las tablas de Zoho con el conector de quien abre (`REF_ZOHO`) y lanza con fire_trigger las rutinas de Cerebro, Control, Community, Lifecycle, YouTube y SEO cuyo análisis no sea de hoy (`REF_RUT`). Lo apunta en `refresco/diario` para no repetirlo el mismo día.
+- Rutinas en horario de mañana (Madrid): SEO 6:17 (ahora diaria), YouTube 6:47 y 17:47, Community 7:07, Lifecycle 7:22, Cerebro 7:28, 14:28 y 20:28, Control 7:50, 14:50 y 20:50.
+- La rutina «Análisis comercial» (Zoho) está pausada: usaba el conector antiguo y escribía filas sin el mes de cierre; ahora lo actualiza la página al abrirse.
+- Ocultas sin borrar (`MODS_OCULTOS`): «Desde SEO» en todas las salas, «SEO para cada sala», el brief de Control en Diseño y, en YouTube, la auditoría y la estrategia Hub & Spoke. Los datos siguen circulando por la base de datos.
 
 ## Reglas
 
