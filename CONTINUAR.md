@@ -37,6 +37,8 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 - La página ya llama al conector «zoho crm» (constante `ZO` en `salas/index.html`) y lo tiene declarado en `capabilities`.
 - `ZohoCRM_runReport`: usar siempre el tipo matrix con una agrupación de columna por fecha y `date_filter`; si no, da INTERNAL_SERVER_ERROR. Un grupo de filtros con un solo criterio da AMBIGUOUS_GROUP_IN_CRITERIA. En la respuesta, `aggregates[0]` es el número de filas; con `sum`, la suma está en `aggregates[1]`. El formato completo está en el prompt de la rutina «Seguimiento RRSS».
+- Último refresco completo hecho desde un chat: 21 de octubre de 2026 (las 8 tablas, el filtro por mercado, los deals de redes de Seguimiento RRSS y el Blog). El informe 2161768000878444244 quedó con la última configuración de CR por canal.
+- Alerta del 21 de octubre de 2026: los deals con `Utm_Source = blog_org` de octubre llevan parados en 52 al menos desde el 16 de octubre (igual el 16, el 19, el 20 y el 21), mientras el resto de canales sigue creciendo. Parece que el blog dejó de enviar la etiqueta a Zoho hacia el 7 u 8 de octubre. Está en el análisis de `seo_blog`. No se ha tocado WordPress: revisarlo con Álvaro.
 - Correo: con el conector «zoho crm» (20 de octubre de 2026) ya no sale OAUTH_SCOPE_MISMATCH, pero Zoho responde NO_PERMISSION: «Administrator only has permission» y «You don't have permission to access other users Storage». La cuenta con la que se autorizó el conector no tiene el perfil Administrator en Zoho CRM. Los informes (runReport) y Zoho Analytics sí funcionan.
 
 ## Refresco diario y pestañas ocultas
