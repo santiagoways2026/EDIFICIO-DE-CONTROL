@@ -43,6 +43,11 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 - La rutina «Análisis comercial» (Zoho) está pausada: usaba el conector antiguo y escribía filas sin el mes de cierre; ahora lo actualiza la página al abrirse.
 - Ocultas sin borrar (`MODS_OCULTOS`): «Desde SEO» en todas las salas, «SEO para cada sala», el brief de Control en Diseño y, en YouTube, la auditoría y la estrategia Hub & Spoke. Los datos siguen circulando por la base de datos.
 
+## Semrush
+
+- El conector de Semrush de claude.ai entra con la subcuenta de Álvaro, que no tiene unidades de API (no_api_units).
+- La API key con unidades está guardada en la configuración del entorno como `SEMRUSH_API_KEY` (añadida el 21 de octubre de 2026). Se lee solo en sesiones nuevas. Úsala desde Bash con la API REST de Semrush (https://api.semrush.com/), sin imprimirla ni guardarla en archivos del repo ni de la página.
+
 ## Reglas
 
 - Español con tildes y sin guiones largos; en su lugar, punto, dos puntos o punto y coma.
