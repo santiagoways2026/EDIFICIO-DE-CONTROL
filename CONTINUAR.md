@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 156 a 21 de octubre de 2026).
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 157 a 21 de octubre de 2026).
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
@@ -31,6 +31,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 | `refresco/diario` | Control del refresco diario al abrir la página: qué tablas de Zoho y qué rutinas se han lanzado hoy. |
 | `seo_semrush/actual` | SEO, Brecha de palabras clave y parte de SEO técnico: búsquedas más grandes de cada mercado con nuestra mejor posición (`grandes`, mensual, con `hist` por mes; julio de 2026 cargado con el histórico de Semrush a 50 unidades por palabra clave), visibilidad semanal por país, historia de 12 meses por dominio, conjunto fijo de palabras clave por mercado (ES, US, UK, DE) con la posición de cada competidor, palabras que nos faltan, resumen de Site Audit, pautas de Jaime y gasto de unidades. Lo escribe la rutina «Sala SEO: Semrush con tope». |
 | `seo_tecnico/actual` | SEO técnico: velocidad de 10 páginas clave con Lighthouse (gratis), historia diaria y pautas técnicas de Pedro. Lo escribe la rutina «Sala SEO: SEO técnico y velocidad». |
+| `plan_itpt/actual` | Sala de Control, pestaña «Plan de contingencia IT y PT» (primera de la sala): diagnóstico de los mercados italiano y portugués frente a ES, EN y DE, qué funciona en el resto y no se hace en IT y PT, los tres mercados (Italia, Brasil y Portugal), plan en 3 fases con sala y responsable por acción, objetivos, umbrales de decisión (20 nov, 20 dic y 28 feb), decisiones previas e insights de 21 salas. Escrito a mano desde un chat el 21 de octubre de 2026 (análisis en el scratchpad de esa sesión); no lo actualiza ninguna rutina. |
 | `seo_gsc/actual` | Reservado para Search Console (todavía sin conectar). Esquema que lee la página: `mercados.{es,en,de,it,pt}` con `mensual` [[AAAAMM, clics, impresiones, posición]] y `kws` [{kw, clics, impr, pos, pos_prev, pos_ini, url}]. |
 
 ## Zoho
@@ -38,6 +39,8 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 - La página ya llama al conector «zoho crm» (constante `ZO` en `salas/index.html`) y lo tiene declarado en `capabilities`.
 - `ZohoCRM_runReport`: usar siempre el tipo matrix con una agrupación de columna por fecha y `date_filter`; si no, da INTERNAL_SERVER_ERROR. Un grupo de filtros con un solo criterio da AMBIGUOUS_GROUP_IN_CRITERIA. En la respuesta, `aggregates[0]` es el número de filas; con `sum`, la suma está en `aggregates[1]`. El formato completo está en el prompt de la rutina «Seguimiento RRSS».
 - Último refresco completo hecho desde un chat: 21 de octubre de 2026 (las 8 tablas, el filtro por mercado, los deals de redes de Seguimiento RRSS y el Blog). El informe 2161768000878444244 quedó con la última configuración de CR por canal.
+- Alerta web del 21 de octubre de 2026 (comprobada con navegador): en las homes /it/ y /pt/ el botón principal («Richiedi un preventivo!» / «Solicite um orçamento!») y las tarjetas de Sarria y Saint-Jean llevan a un 404 en español; las fichas buenas están en URL «-old» y los nuevos hubs del Francés en noindex. Además, las 128 etapas IT y las 127 PT usan el formulario español (Language = Spanish). No se ha tocado WordPress: está en el plan de contingencia para validarlo con Álvaro.
+- GA4 en Windsor: el 21 de octubre de 2026 el conector de Google Analytics no estaba configurado para el usuario; los datos de GA4 son la copia de `ga4/actual` del 6 de octubre.
 - Alerta del 21 de octubre de 2026: los deals con `Utm_Source = blog_org` de octubre llevan parados en 52 al menos desde el 16 de octubre (igual el 16, el 19, el 20 y el 21), mientras el resto de canales sigue creciendo. Parece que el blog dejó de enviar la etiqueta a Zoho hacia el 7 u 8 de octubre. Está en el análisis de `seo_blog`. No se ha tocado WordPress: revisarlo con Álvaro.
 - Correo: con el conector «zoho crm» (20 de octubre de 2026) ya no sale OAUTH_SCOPE_MISMATCH, pero Zoho responde NO_PERMISSION: «Administrator only has permission» y «You don't have permission to access other users Storage». La cuenta con la que se autorizó el conector no tiene el perfil Administrator en Zoho CRM. Los informes (runReport) y Zoho Analytics sí funcionan.
 
