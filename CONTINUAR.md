@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 155 a 21 de octubre de 2026).
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 156 a 21 de octubre de 2026).
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
@@ -29,7 +29,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 | `captacion_canales_pais/actual` | Ya no se usa (se sustituyó por el filtro por mercado). |
 | `youtube_dash/actual` | YouTube, Dashboard de canales: copia de las filas diarias de Metricool (ES, EN y ES del año anterior). La página la renueva una vez al día con los datos en vivo. |
 | `refresco/diario` | Control del refresco diario al abrir la página: qué tablas de Zoho y qué rutinas se han lanzado hoy. |
-| `seo_semrush/actual` | SEO, Brecha de palabras clave y parte de SEO técnico: búsquedas más grandes de cada mercado con nuestra mejor posición (`grandes`, mensual), visibilidad semanal por país, historia de 12 meses por dominio, conjunto fijo de palabras clave por mercado (ES, US, UK, DE) con la posición de cada competidor, palabras que nos faltan, resumen de Site Audit, pautas de Jaime y gasto de unidades. Lo escribe la rutina «Sala SEO: Semrush con tope». |
+| `seo_semrush/actual` | SEO, Brecha de palabras clave y parte de SEO técnico: búsquedas más grandes de cada mercado con nuestra mejor posición (`grandes`, mensual, con `hist` por mes; julio de 2026 cargado con el histórico de Semrush a 50 unidades por palabra clave), visibilidad semanal por país, historia de 12 meses por dominio, conjunto fijo de palabras clave por mercado (ES, US, UK, DE) con la posición de cada competidor, palabras que nos faltan, resumen de Site Audit, pautas de Jaime y gasto de unidades. Lo escribe la rutina «Sala SEO: Semrush con tope». |
 | `seo_tecnico/actual` | SEO técnico: velocidad de 10 páginas clave con Lighthouse (gratis), historia diaria y pautas técnicas de Pedro. Lo escribe la rutina «Sala SEO: SEO técnico y velocidad». |
 | `seo_gsc/actual` | Reservado para Search Console (todavía sin conectar). Esquema que lee la página: `mercados.{es,en,de,it,pt}` con `mensual` [[AAAAMM, clics, impresiones, posición]] y `kws` [{kw, clics, impr, pos, pos_prev, pos_ini, url}]. |
 
@@ -69,7 +69,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 - Rutina «Sala SEO: Semrush con tope (brecha y competencia)» (trig_019QiQanw1bPkBpDmb9m6HpV), los lunes a las 5:47 de Madrid. Lleva el script con tope: 3.500 unidades al mes (7.000 en octubre de 2026, el primer mes), y no gasta nada si el saldo baja de 40.000. Cada semana, visibilidad por país (60 unidades); cada mes, historia, posiciones del conjunto frente a la competencia (domain_organic con filtro por palabra clave, unas 10 unidades por dominio y palabra) y Site Audit; cada trimestre, palabras que nos faltan. No la pongas en el refresco diario de la página: es semanal a propósito. No le pases texto extra al lanzarla con fire_trigger, porque repite la ejecución.
 - `domain_domains` devuelve solo palabras en las que posicionan todos los dominios (intersección); sirve para «nos faltan», no para la brecha.
-- Primera carga del 21 de octubre de 2026: 6.040 unidades; con las búsquedas más grandes, 6.680 en octubre y saldo 71.430. Coste mensual previsto: unas 2.200 unidades (3.330 en enero, abril, julio y octubre por «nos faltan»).
+- Primera carga del 21 de octubre de 2026: 6.040 unidades; con las búsquedas más grandes y su posición de julio, 8.180 en octubre (por encima del tope de 7.000 del primer mes, a petición de Álvaro) y saldo 69.930. La rutina no gastará más en octubre. Coste mensual previsto: unas 2.200 unidades (3.330 en enero, abril, julio y octubre por «nos faltan»).
 - Proyectos de Semrush: 1001436 (Position Tracking con 10 palabras clave, Site Audit de 1.000 páginas y más herramientas), 28068064 (Site Audit de 100 páginas) y 28088077 (Position Tracking; la API responde «campaign not found»).
 
 ## Reglas
