@@ -47,6 +47,23 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 - El conector de Semrush de claude.ai entra con la subcuenta de Álvaro, que no tiene unidades de API (no_api_units).
 - La API key con unidades está guardada en la configuración del entorno como `SEMRUSH_API_KEY` (añadida el 21 de octubre de 2026). Se lee solo en sesiones nuevas. Úsala desde Bash con la API REST de Semrush (https://api.semrush.com/), sin imprimirla ni guardarla en archivos del repo ni de la página.
+- Las unidades son de toda la empresa y no se recargan solas. El 21 de octubre de 2026 una prueba gastó 129.000 unidades (de 207.100 a 78.100) por dos llamadas al historial de Site Audit. Antes de usar un informe nuevo, prueba con una sola fila y mira el coste.
+- Coste medido por llamada o por fila (21 de octubre de 2026):
+
+| Informe | Coste |
+|---|---|
+| `siteaudit/history` | 60.000 por llamada. **No usar nunca.** |
+| `tracking_competitors_organic` | 1.000 por fila. No usar. |
+| `tracking_position_organic` (proyecto 1001436) | 100 por palabra clave, con todos los días del rango |
+| `tracking_overview_organic` | 100 por llamada |
+| `siteaudit/info`, `siteaudit/meta/issues`, `management/v1/projects/{id}` | 100 por llamada |
+| `domain_domains` (brecha) | 80 por fila |
+| `domain_organic` y `phrase_organic` históricos (`display_date`) | 50 por fila |
+| `domain_organic_organic` (competidores) | 40 por fila |
+| `domain_organic`, `domain_ranks`, `domain_rank_history`, `phrase_organic`, `phrase_these` | 10 por fila |
+| `management/v1/projects` (lista) y `countapiunits` | gratis |
+
+- Proyectos de Semrush: 1001436 (Position Tracking con 10 palabras clave, Site Audit de 1.000 páginas y más herramientas), 28068064 (Site Audit de 100 páginas) y 28088077 (Position Tracking; la API responde «campaign not found»).
 
 ## Reglas
 
