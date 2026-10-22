@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 171 a 22 de octubre de 2026).
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 172 a 22 de octubre de 2026). Desde el 22 de octubre por la tarde el chat principal es «Salas del Camino (actual)» (session_0188V3bzjZ4HKuLiCJXwVY79); el anterior se llama «Salas del Camino (antiguo, no usar)» y ya no publica.
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
@@ -47,6 +47,8 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 | `seo_gsc/actual` | Reservado para Search Console (todavía sin conectar). Esquema que lee la página: `mercados.{es,en,de,it,pt}` con `mensual` [[AAAAMM, clics, impresiones, posición]] y `kws` [{kw, clics, impr, pos, pos_prev, pos_ini, url}]. |
 
 ## Zoho
+
+- Refresco diario de las 7 tablas de Zoho (22 de octubre de 2026, tarde): desde la página falla en la primera tabla en unos 12 segundos, aunque las mismas llamadas (ZohoCRM_updateReports y runSpecificReport sobre el informe 2161768000878444244) funcionan desde el chat y PageSense sí se lee desde la página. Desde la versión 172 la página guarda en `refresco/diario.error` la tabla que falla y el último error del conector (servidor, herramienta, code y mensaje); leerlo para seguir el diagnóstico. El informe 2161768000878444244 quedó en tipo summary tras una prueba; la página lo deja en matrix al terminar CR por canal.
 
 - La página llama al conector «Zoho Suite» (constante `ZO` en `salas/index.html`; hasta la versión 167 era «zoho crm», que ya no existe en la cuenta) y lo tiene declarado en `capabilities`.
 - `ZohoCRM_runReport`: usar siempre el tipo matrix con una agrupación de columna por fecha y `date_filter`; si no, da INTERNAL_SERVER_ERROR. Un grupo de filtros con un solo criterio da AMBIGUOUS_GROUP_IN_CRITERIA. En la respuesta, `aggregates[0]` es el número de filas; con `sum`, la suma está en `aggregates[1]`. El formato completo está en el prompt de la rutina «Seguimiento RRSS».
