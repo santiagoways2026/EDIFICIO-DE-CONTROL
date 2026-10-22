@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 164 a 22 de octubre de 2026).
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 165 a 22 de octubre de 2026).
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
@@ -16,6 +16,11 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 3. Copiarlo a `brandbook2027/salas/index.html`.
 4. Publicar con Artifact: ese archivo y la url de la página, sin pasar `capabilities` (así se conservan las que ya tiene: db, downloads, sample y mcp con Metricool, «zoho crm» y Claude Code Remote/fire_trigger).
 5. Commit y push de los dos repos en la rama `claude/magical-tesla-rc62sa`.
+
+## Salas en obras y títulos
+
+- Salas en construcción (sin contenido, solo el cartel): Fidelización & Journey, Brand / Awareness, CRO (a la derecha de SEO, posición [7000,400]) y Santiago Ways App (a la derecha de CRO, [8600,400]). Se definen en MARCOS con `obra:"..."` y una posición en POS. Álvaro pidió el 22 de octubre de 2026 no pintar nada dentro de CRO ni de la App todavía.
+- Títulos de las salas en el lienzo (`.grupo-titulo`): 96 px (Radar Viral 112 y Sala de Control 140), subtítulo de 30 px con un máximo de 1.500 px de ancho, y la planta de cada sala empieza 360 px por encima para que el título no pise la etiqueta. Las salas en obras también llevan título grande con «En construcción».
 
 ## Documentos de la base de datos
 
