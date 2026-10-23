@@ -4,7 +4,7 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Dónde está todo
 
-- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 175 a 23 de octubre de 2026; en «Evolución del CR» ya no hay botones Paid y Organic y hay filtro de meses, `st.crEv.d` y `st.crEv.h`). Desde el 22 de octubre por la tarde el chat principal es «Salas del Camino (actual)» (session_0188V3bzjZ4HKuLiCJXwVY79); el anterior se llama «Salas del Camino (antiguo, no usar)» y ya no publica.
+- Página: https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (versión 177 a 23 de octubre de 2026; en «Evolución del CR» ya no hay botones Paid y Organic, hay filtro de meses, `st.crEv.d` y `st.crEv.h`, y dos círculos huecos con el CR del mes en curso a día de hoy en los dos años, de `captacion_deals/actual.hoyCR`, que escribe la cuarta consulta de `actualizarCaptacion`; en «Inversión, CPL y CPA» hay un gráfico «Captación frente a inversión», función `iaRel`). Desde el 22 de octubre por la tarde el chat principal es «Salas del Camino (actual)» (session_0188V3bzjZ4HKuLiCJXwVY79); el anterior se llama «Salas del Camino (antiguo, no usar)» y ya no publica.
 - Código: `salas/index.html` en este repo (`santiagoways2026/edificio-de-control`), rama `claude/magical-tesla-rc62sa`. Copia idéntica en `santiagoways2026/brandbook2027` (`salas/index.html`, misma rama).
 - Datos: base de datos de la página; se lee y escribe con ArtifactData y la url de la página.
 - Protocolos de cada sala: `salas/<sala>/AGENTE.md`.
