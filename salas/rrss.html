@@ -1581,9 +1581,9 @@ const POS={captacion:[3400,1600],instagram:[-3600,-2600],youtube:[-2000,-2600],t
 const EDIFICIO=document.querySelector('meta[name="edificio"]')?.content||"camino";
 const EDIFICIOS={
   camino:{titulo:"Salas del Camino",ocultas:["diseno"],pasillosNo:["pa8","pa9","pr1","pr2","pr3"]},
-  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia","diseno"],pos:{diseno:[-2350,450]},tam:{diseno:2400},
+  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia","diseno"],pos:{diseno:[-2050,900]},tam:{diseno:1800},
     pasillos:["pa11","pa22","pa32","pa28","pa20","pa33","pa29","pr1","pr2","pr3"],modsNo:["cambios","comp_nuevos","comp_bp"],
-    fachada:{x:-5550,y:-3350,w:8500,h:5500,ex:-1150,ey:2080}}};
+    fachada:{x:-5550,y:-3350,w:8500,h:5600,ex:-1150,ey:2180}}};
 const ED=EDIFICIOS[EDIFICIO]||EDIFICIOS.camino;
 Object.assign(POS,ED.pos||{});Object.assign(TAM,ED.tam||{});
 MARCOS.forEach(m=>{if(POS[m.id])[m.x,m.y]=POS[m.id];if(TAM[m.id])m.w=TAM[m.id]});
@@ -1646,7 +1646,7 @@ const PASILLOS_DEF=[
   {id:"pa56",d:"M2650 6333 H3100",c:"#a3e635",txt:"",sub:"",lx:0,ly:0},
   {id:"pa8",d:"M-600 1500 C-1700 1200 -2800 1200 -4000 1500",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-2900,ly:1170},
   {id:"pa9",d:"M-4000 1760 C-2800 2060 -1700 2060 -600 1760",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-2900,ly:2090},
-  {id:"pr1",d:"M-1150 -78 V450",c:"#7AA606",txt:"Diseño ↔ Community",sub:"piezas · seguimiento RRSS · peticiones",lx:-1100,ly:120},
+  {id:"pr1",d:"M-1150 -78 V900",c:"#7AA606",txt:"Diseño ↔ Community",sub:"piezas · seguimiento RRSS · peticiones",lx:-1100,ly:330},
   {id:"pr2",d:"M-4000 -2300 H-3600",c:"#ff6b3d",txt:"Competencia ↔ Instagram",sub:"",lx:-3990,ly:-2363},
   {id:"pr3",d:"M-1400 -2600 V-3000",c:"#2dd4bf",txt:"SEO, briefing y directrices desde Salas del Camino",sub:"espejo cada 3 h · seo_red · control.brief · insights",lx:-1340,ly:-2950},
 ];
