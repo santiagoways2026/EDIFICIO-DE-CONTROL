@@ -524,6 +524,7 @@ body.oculto *{animation-play-state:paused!important}
 .pz-info{padding:12px 13px 14px;display:grid;gap:8px;font-size:12.5px}
 .pz-info h4{margin:0;font:600 14px/1.3 var(--f-ui)}
 .pz-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:11px/1.2 var(--f-mono);color:var(--tenue)}
+.pz-num{font:800 13px/1 var(--f-mono);background:#7AA606;color:#05070a;padding:4px 8px;border-radius:4px;letter-spacing:.02em}.pz-numt{color:#a3cf2e;font-weight:800}
 .pz-por{color:#c3cad4;line-height:1.4}
 .pz-ref{font:11.5px/1.4 var(--f-mono);color:var(--tenue);border-left:2px solid #7AA606;padding-left:8px;display:grid;gap:5px}
 .pz-ref a{color:#cfe7a0;text-decoration:none}.pz-ref a:hover{text-decoration:underline}
@@ -2717,8 +2718,8 @@ function tarjetaPieza(x){
   const cap=x.caption?`<details><summary>Copy para publicar</summary><p>${esc(x.caption)}${(x.hashtags||[]).length&&!/#/.test(x.caption)?"\n\n"+x.hashtags.map(h=>"#"+h).join(" "):""}</p></details>`:"";
   const acc=accionesPieza(x,"pacc");
   return`<div class="pieza ${esc(x.estado)}" data-pieza="${esc(x.id)}">${mockPieza(x)}
-    <div class="pz-info"><div class="pz-meta">${chipEstado(x)}<span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>${x.brief?`<div class="porque pz-brief"><b>${x.tipo==="meta"?"Brief de Meta Ads":"Brief de Control"}:</b> ${esc(x.brief)}</div>`:""}
-      <h4>${esc(x.tema)}</h4><div class="pz-meta pz-formato">${esc(x.formato||"")}</div>
+    <div class="pz-info"><div class="pz-meta">${x.num?`<span class="pz-num" title="Número de la pieza: cítalo para dar feedback">#${x.num}</span>`:""}${chipEstado(x)}<span class="mk">${esc((x.mercado||"").toUpperCase())}</span>${x.valor?`<span class="sala-tag">${esc(x.valor)}</span>`:""}<span>${esc(x.disenador||"")}</span></div>${x.brief?`<div class="porque pz-brief"><b>${x.tipo==="meta"?"Brief de Meta Ads":"Brief de Control"}:</b> ${esc(x.brief)}</div>`:""}
+      <h4>${x.num?`<span class="pz-numt">${x.num}.</span> `:""}${esc(x.tema)}</h4><div class="pz-meta pz-formato">${esc(x.formato||"")}</div>
       ${(x.ab||[]).length?`<div class="ab"><div class="ab-t">Test A/B de miniatura</div><div class="ab-g">${x.ab.map(v=>`<a href="${esc(v.img)}" download title="Descargar variante ${esc(v.v)}"><img loading="lazy" src="${esc(v.img)}" alt=""><span>${esc(v.v)}</span></a>`).join("")}</div></div>`:""}${x.material?`<div class="pz-falta">${esc(x.material)}</div>`:""}${x.video?`<a class="btn" href="${esc(x.video)}" download style="justify-self:start">Descargar vídeo</a>`:""}
       ${refMin(x)}
       ${x.tipo==="ig"?"":mini+seo+g+cap}
