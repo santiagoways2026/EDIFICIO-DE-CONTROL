@@ -4,6 +4,7 @@ Sistema de salas con especialistas de IA trabajando sobre el Camino de Santiago.
 
 - Interfaz en vivo (lienzo infinito con zoom): https://claude.ai/artifact/EQuo4jWzUPiuceTb8VzxwC (fuente: `salas/index.html`)
 - Datos: base de datos compartida del artifact (colecciones `radar` y `estado`)
+- Edificio hermano «RRSS · Santiago Ways» (dashboard de redes sociales, rama `claude/rrss-paula`): https://claude.ai/artifact/9JzricUTN6AKMkmdaHcUbM, documentado en `salas/rrss/README.md`
 
 ## Salas
 
