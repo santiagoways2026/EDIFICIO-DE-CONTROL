@@ -16,6 +16,7 @@ Salidas en --out:
   estado_nuevo.json     documento espejo/estado para guardar al terminar (huellas incluidas)
   resumen.txt           resumen legible
 
+Los documentos listados en excluir_docs de la configuración nunca se copian.
 Criterio: se comparan contenidos (hash de `data`), no versiones, porque los contadores de versión
 no son comparables entre artifacts. Colecciones de un solo sentido: gana el origen siempre que difiera.
 Colecciones de dos sentidos (peticiones): a tres bandas con las huellas de la pasada anterior; si
@@ -68,6 +69,7 @@ def main():
             e['if_version'] = ver_dst
         lista.append(e); copiados[col] = copiados.get(col, 0) + 1
 
+    excluir = set(cfg.get('excluir_docs', []))  # 'coleccion/doc' que nunca se copian (salas ajenas al edificio RRSS)
     ambos = set(cfg.get('principal_a_rrss', [])) & set(cfg.get('rrss_a_principal', []))
     solo_pr = [c for c in cfg.get('principal_a_rrss', []) if c not in ambos]
     solo_rp = [c for c in cfg.get('rrss_a_principal', []) if c not in ambos]
@@ -76,6 +78,8 @@ def main():
         P = cargar(a.principal, col); R = cargar(a.rrss, col)
         for doc in sorted(set(P) | set(R)):
             key = f'{col}/{doc}'
+            if key in excluir:
+                continue
             dp = P.get(doc); dr = R.get(doc)
             hP = huella(dp[0]) if dp else None; hR = huella(dr[0]) if dr else None
             if hP == hR:

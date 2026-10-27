@@ -15,7 +15,9 @@ instagram, youtube, tiktok, community, radar, competencia y diseno (Diseño solo
 
 ## Base de datos
 
-Independiente de la del artifact principal: no hay lectura cruzada. Semilla del 27 de octubre de 2026: 1.008 documentos en 29 colecciones (comp_cambios 57, comp_exploracion 1, comunidad_analisis 1, comunidad_snap 1, control_brief 1, control_briefing 1, control_directrices 11, diseno_biblio 146, diseno_piezas 47, diseno_tendencias 1, estado 9, ig_capt 1, ig_dash 1, ig_en 1, ig_err 1, ig_ranking 1, insights 2, peticiones 17, players 11, radar 677, radar_prev 7, radar_sintesis 1, roadmap 5, rrss_seguimiento 1, seo_red 1, tk_ranking 1, youtube_analisis 2, youtube_dash 1, youtube_ranking 1). Los contadores de versión empiezan en 1 y no son comparables con los del principal.
+Independiente de la del artifact principal: no hay lectura cruzada. Semilla del 27 de octubre de 2026: 1.008 documentos en 29 colecciones (comp_cambios 57, comp_exploracion 1, comunidad_analisis 1, comunidad_snap 1, control_brief 1, control_briefing 1, control_directrices 11, diseno_biblio 146, diseno_piezas 47, diseno_tendencias 1, estado 9, ig_capt 1, ig_dash 1, ig_en 1, ig_err 1, ig_ranking 1, insights 2, peticiones 17, players 11, radar 677, radar_prev 7, radar_sintesis 1, roadmap 5, rrss_seguimiento 1, seo_red 1, tk_ranking 1, youtube_analisis 2, youtube_dash 1, youtube_ranking 1). Los contadores de versión empiezan en 1 y no son comparables con los del principal. El mismo día se borraron 12 documentos de salas ajenas al edificio (estado de control, mdirecto, paid y seo; directrices de comercial, mdirecto, paid, producto y seo; roadmap de lifecycle y seo; insights de lifecycle): el RRSS solo guarda datos de sus 7 salas y del briefing, brief, directrices e insights que necesita Diseño.
+
+Edificio cerrado: `entrar()` rechaza cualquier sala que no esté en `EDIFICIOS.rrss.salas` (también por `#hash` en la URL) y el panel de capas no lista las salas en obras de las Salas del Camino.
 
 Documentos propios de este edificio:
 

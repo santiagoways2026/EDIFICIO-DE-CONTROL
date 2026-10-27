@@ -1581,11 +1581,11 @@ const POS={captacion:[3400,1600],instagram:[-3600,-2600],youtube:[-2000,-2600],t
 const EDIFICIO=document.querySelector('meta[name="edificio"]')?.content||"camino";
 const EDIFICIOS={
   camino:{titulo:"Salas del Camino",ocultas:["diseno"],pasillosNo:["pa8","pa9","pr1","pr2","pr3"]},
-  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia","diseno"],pos:{diseno:[-5200,-900]},
+  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia","diseno"],pos:{diseno:[-2350,450]},tam:{diseno:2400},
     pasillos:["pa11","pa22","pa32","pa28","pa20","pa33","pa29","pr1","pr2","pr3"],modsNo:["cambios","comp_nuevos","comp_bp"],
-    fachada:{x:-5550,y:-3350,w:8500,h:3750,ex:-1900,ey:280}}};
+    fachada:{x:-5550,y:-3350,w:8500,h:5500,ex:-1150,ey:2080}}};
 const ED=EDIFICIOS[EDIFICIO]||EDIFICIOS.camino;
-Object.assign(POS,ED.pos||{});
+Object.assign(POS,ED.pos||{});Object.assign(TAM,ED.tam||{});
 MARCOS.forEach(m=>{if(POS[m.id])[m.x,m.y]=POS[m.id];if(TAM[m.id])m.w=TAM[m.id]});
 const altoSala=m=>Math.round(m.w/1200*666);
 {const st0=document.createElement("style");st0.textContent=Object.entries(TAM).map(([k,w])=>`#m-${k}>.cont{zoom:${w/1200}}`).join("");document.head.appendChild(st0)}
@@ -1646,8 +1646,8 @@ const PASILLOS_DEF=[
   {id:"pa56",d:"M2650 6333 H3100",c:"#a3e635",txt:"",sub:"",lx:0,ly:0},
   {id:"pa8",d:"M-600 1500 C-1700 1200 -2800 1200 -4000 1500",c:"#f5d76e",txt:"Prioridades y learnings → Diseño",sub:"control.briefing · 3 veces al día",lx:-2900,ly:1170},
   {id:"pa9",d:"M-4000 1760 C-2800 2060 -1700 2060 -600 1760",c:"#7AA606",txt:"Piezas propuestas → Control",sub:"diseno.piezas",lx:-2900,ly:2090},
-  {id:"pr1",d:"M-4000 -600 H-1900",c:"#7AA606",txt:"Diseño ↔ Community",sub:"piezas · seguimiento RRSS · peticiones",lx:-3700,ly:-660},
-  {id:"pr2",d:"M-4000 -2300 H-3600",c:"#ff6b3d",txt:"Competencia ↔ Instagram",sub:"",lx:0,ly:0},
+  {id:"pr1",d:"M-1150 -78 V450",c:"#7AA606",txt:"Diseño ↔ Community",sub:"piezas · seguimiento RRSS · peticiones",lx:-1100,ly:120},
+  {id:"pr2",d:"M-4000 -2300 H-3600",c:"#ff6b3d",txt:"Competencia ↔ Instagram",sub:"",lx:-3990,ly:-2363},
   {id:"pr3",d:"M-1400 -2600 V-3000",c:"#2dd4bf",txt:"SEO, briefing y directrices desde Salas del Camino",sub:"espejo cada 3 h · seo_red · control.brief · insights",lx:-1340,ly:-2950},
 ];
 for(let i=PASILLOS_DEF.length-1;i>=0;i--){const id=PASILLOS_DEF[i].id;if((ED.pasillos&&!ED.pasillos.includes(id))||(ED.pasillosNo||[]).includes(id))PASILLOS_DEF.splice(i,1)}
@@ -1816,6 +1816,7 @@ function cerrarPanel(){
 }
 const chatVisible=()=>!$("#chat").hidden||!$("#panel").hidden;
 function entrar(sala="radar",foco){
+  if(ED.salas&&!ED.salas.includes(sala))return; /* edificio cerrado: solo sus salas, también por #hash */
   if(st.dentro&&st.dentro!==sala)vaciarSala(st.dentro);
   st.dentro=sala;document.body.dataset.dentro=sala;st.marcoSel=foco||sala;pintarCapas();marcarSel();pintarDatos();pintarCompetencia();pintarControl();pintarDiseno();pintarComunidad();pintarSeo();pintarPaid();pintarSalasN();pintarPeticionesDiseno();pintarGA4();if(sala==="comunidad")suscribirComunidad();
   suscribirSala(sala);abrirPanel(sala,foco);
@@ -1931,7 +1932,7 @@ function pintarCapas(){
       const ord=SALAS_ACT[id]||[],hijos=MARCOS.filter(m=>m.grupo===id).sort((a,b)=>(ord.indexOf(a.id)+1||99)-(ord.indexOf(b.id)+1||99)),ab=st.capasAb[id]??(st.dentro===id);
       return `<div class="capa-fila">${hijos.length?`<button class="capa-fl" data-capafl="${id}" aria-expanded="${ab}" aria-label="${ab?"Plegar":"Desplegar"} ${esc(n)}">${CHEV_CAPA}</button>`:`<span class="capa-fl" aria-hidden="true"></span>`}<button class="capa-it" data-entrar="${id}" style="padding-left:4px">${ICO_MARCO}${n}<span class="t" style="color:var(--vivo)">${st.dentro===id?"Dentro":"Activa"}</span></button></div>
       ${ab?hijos.map(m=>`<button class="capa-it hijo${st.marcoSel===m.id?" sel":""}" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre.split(" / ")[1]||m.nombre)}</button>`).join(""):""}`}).join("")}
-    ${MARCOS.filter(m=>m.obra).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
+    ${MARCOS.filter(m=>m.obra&&!OCULTAS.includes(m.id)).map(m=>`<button class="capa-it" data-ir="${m.id}">${ICO_MARCO}${esc(m.nombre)}<span class="t">Obras</span></button>`).join("")}`;
 }
 function plegarCapas(pl){$("#capas").classList.toggle("plegado",pl);$("#capasTog").setAttribute("aria-expanded",String(!pl));try{localStorage.setItem("capasPlegado",pl?"1":"0")}catch(e){}}
 try{if(localStorage.getItem("capasPlegado")==="1")plegarCapas(true)}catch(e){}
