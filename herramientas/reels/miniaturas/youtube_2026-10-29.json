@@ -1,0 +1,96 @@
+[
+ {
+  "out": "yt-1-A",
+  "foto": "1FAzzg38oUo0Yf3-yyRUlBAglldS4jkJy",
+  "cx": 0.5,
+  "cy": 0.42,
+  "lado": "izq",
+  "ante": "AÑO SANTO 2027",
+  "titulo": "Lo que cambia\nen [2027]"
+ },
+ {
+  "out": "yt-1-B",
+  "foto": "1-LS_8H2_mH5_X14teC-o4y0Mu2emC0LP",
+  "cx": 0.5,
+  "cy": 0.3,
+  "lado": "izq",
+  "ante": "XACOBEO 2027",
+  "titulo": "Lo que nadie te cuenta\ndel [Año Santo]",
+  "fs": 56
+ },
+ {
+  "out": "yt-2-A",
+  "foto": "1F9wBs8ASVYdDGmo5vO9pOe9gSUVdocRj",
+  "cx": 0.5,
+  "cy": 0.4,
+  "lado": "der",
+  "ante": "BEGINNER'S GUIDE",
+  "titulo": "Your [first Camino],\nstep by step",
+  "fs": 56
+ },
+ {
+  "out": "yt-2-B",
+  "foto": "1mov_z-7xnJxietb-v4kr_siwAwaBdf7S",
+  "cx": 0.5,
+  "cy": 0.3,
+  "lado": "izq",
+  "ante": "SARRIA TO SANTIAGO",
+  "titulo": "Your first Camino\nin [5 days]"
+ },
+ {
+  "out": "yt-3-A",
+  "foto": "1wlfmzE-gEBKLSi-BMETahwzaS9Ti4cH3",
+  "cx": 0.5,
+  "cy": 0.5,
+  "lado": "der",
+  "ante": "OVER 60",
+  "titulo": "The Camino\nat [60+]"
+ },
+ {
+  "out": "yt-3-B",
+  "foto": "1NcI1wXzotnDvogL234f9a1w3hAd0e6OC",
+  "cx": 0.45,
+  "cy": 0.4,
+  "lado": "izq",
+  "ante": "OVER 60",
+  "titulo": "Can you walk it\n[at any age]?",
+  "fs": 56
+ },
+ {
+  "out": "yt-5-A",
+  "foto": "1xJha9fMYhvjaVZ3IbXcnVBVayLGoW3It",
+  "cx": 0.5,
+  "cy": 0.4,
+  "lado": "izq",
+  "ante": "COMPARATIVA",
+  "titulo": "¿Francés\no [Portugués]?"
+ },
+ {
+  "out": "yt-5-B",
+  "foto": "1G97oG-U39Eaa6GQZ5DmbA243bhJwIPK4",
+  "cx": 0.5,
+  "cy": 0.45,
+  "lado": "der",
+  "ante": "COMPARATIVA",
+  "titulo": "Francés o Portugués:\nel [veredicto]",
+  "fs": 54
+ },
+ {
+  "out": "yt-6-A",
+  "foto": "1eXsJqoJ6wtfczCsMdjfjIWU4NW3BQbne",
+  "cx": 0.5,
+  "cy": 0.62,
+  "lado": "der",
+  "ante": "PILGRIM FAQ",
+  "titulo": "[Who can] walk\nthe Camino?"
+ },
+ {
+  "out": "yt-6-B",
+  "foto": "1QBcCX7s6bKgkcQvm3NsTluN-hMJDmAFi",
+  "cx": 0.45,
+  "cy": 0.4,
+  "lado": "der",
+  "ante": "PILGRIM FAQ",
+  "titulo": "Yes,\n[at any age]"
+ }
+]

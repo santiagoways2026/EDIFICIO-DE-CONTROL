@@ -69,14 +69,19 @@ def frame_texto(lineas, ante, n, fs=78):
         for txt, hi in ln:
             w = d.textlength(txt, font=f)
             if hi:
-                d.rounded_rectangle([x - 8, y + 6, x + w + 8, y + lh - 4], radius=6, fill=VERDE + (255,))
-            d.text((x, y), txt, font=f, fill=(255, 255, 255, 255))
-            x += w + (16 if hi else 0)
+                # subrayado SW del brandbook: bloque verde Ways recto, girado -1,5 grados
+                bl = Image.new('RGBA', (int(w) + 24, lh + 8), (0, 0, 0, 0)); db = ImageDraw.Draw(bl)
+                db.rectangle([0, 10, int(w) + 23, lh], fill=VERDE + (255,))
+                db.text((12, 4), txt, font=f, fill=(255, 255, 255, 255))
+                bl = bl.rotate(1.5, resample=Image.BICUBIC, expand=True)
+                img.alpha_composite(bl, (int(x) - 12, y - 4)); d = ImageDraw.Draw(img); x += w + 24
+            else:
+                d.text((x, y), txt, font=f, fill=(255, 255, 255, 255)); x += w
     if ante:
         fa = font('700', 30)
         wa = d.textlength(ante, font=fa) + 2 * (len(ante) - 1)
         ya = ytop - 72; ha = 52
-        d.rounded_rectangle([x0, ya, x0 + wa + 36, ya + ha], radius=4, fill=VERDE + (255,))
+        d.rectangle([x0, ya, x0 + wa + 36, ya + ha], fill=VERDE + (255,))
         # tracking manual
         x = x0 + 18
         for ch in ante:
@@ -103,8 +108,12 @@ def frame_cierre(t, titulo):
         x = 90
         for txt, hi in ln:
             w = d.textlength(txt, font=f)
-            if hi: d.rounded_rectangle([x - 10, y + 8, x + w + 10, y + lh - 2], radius=6, fill=OSCURO + (200,))
-            d.text((x, y), txt, font=f, fill=(255, 255, 255, 255)); x += w
+            if hi:
+                bl = Image.new('RGBA', (int(w) + 28, lh + 8), (0, 0, 0, 0)); db = ImageDraw.Draw(bl)
+                db.rectangle([0, 12, int(w) + 27, lh + 2], fill=VERDE2 + (255,)); db.text((14, 4), txt, font=f, fill=(255, 255, 255, 255))
+                bl = bl.rotate(1.5, resample=Image.BICUBIC, expand=True); capa.alpha_composite(bl, (int(x) - 14, y - 4)); d = ImageDraw.Draw(capa); x += w + 28
+            else:
+                d.text((x, y), txt, font=f, fill=(255, 255, 255, 255)); x += w
         y += lh
     d.text((90, 1740), 'santiagoways.com', font=font('700', 40), fill=(255, 255, 255, 255))
     a = min(1.0, t / 0.6)

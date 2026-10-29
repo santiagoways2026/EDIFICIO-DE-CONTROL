@@ -25,3 +25,14 @@ horizontales. Ejecución: `python3 -I reel.py guiones/reel-14-dia-1-sarria.json`
 Piezas montadas con los brutos del 26 de octubre: reel-14 (día 1 desde Sarria), reel-15 (la maleta viaja
 sola), reel-16 (arriving in Santiago, EN) y reel-17 (cosas de peregrino). Fichas en `diseno_piezas`
 con números 48 a 51.
+
+## Miniaturas de YouTube (`thumbs.py`)
+
+Miniaturas 1280x720 según el Brandbook 2027: foto a sangre de peregrinos reales o la Catedral, caja blanca con
+sombra, antetítulo en mayúsculas verde sendero (#506718), titular en grafito (#2E2E2D) y minúscula de frase con
+Montserrat ExtraBold, subrayado SW en verde Ways (#7AA606) girado -1,5° con letra blanca e isotipo blanco en la
+esquina superior, sin tapar caras. Especificación en `miniaturas/*.json` (`foto` es el id de Drive; `cx`, `cy`
+desplazan el recorte; `lado` coloca la caja a la izquierda o a la derecha). Ejecución:
+`python3 -I thumbs.py miniaturas/youtube_2026-10-29.json`. Los archivos se publican como `img/yt/yt-N-A.jpg` y `-B.jpg`.
+
+Desde el 29 de octubre el montador de reels usa el mismo subrayado recto girado -1,5° (antes, caja redondeada).
