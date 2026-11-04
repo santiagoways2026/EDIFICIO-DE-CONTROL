@@ -1332,6 +1332,7 @@ html[data-tema=sw] #c-community_rrss .as-t tbody tr:nth-child(even) td.as-n{back
 .mr-f td:first-child{padding-left:22px}.mr-pf td:first-child{color:#c3cad3}.mr-sin td{color:#c3cad3;font-style:italic}
 .mr-al td{background:#221d0b;color:#f3e7b3;border-left:3px solid #f5d76e;text-align:left;white-space:normal;font-size:12.5px;line-height:1.5;padding-left:22px}
 .mr-alx{max-width:min(1000px,64vw)}.mr-tot td{background:#1a1f27;font-weight:700}.mr-gen td{background:#1d2a44;color:#e6eefc}
+.mr-cal{display:inline-block;min-width:30px;padding:1px 6px;border-radius:5px;font:700 12px var(--f-mono);text-align:center}.mr-cal.a{background:#1e3a12;color:#b5dd4a}.mr-cal.b{background:#3a2e0e;color:#f5d76e}.mr-cal.c{background:#2a1a1a;color:#ff9f9f}
 .mr-est{font:600 11px var(--f-mono);color:#b5dd4a}.mr-est.off{color:#ffb38a}
 .mr-ckb{background:none;border:0;cursor:pointer;padding:0}.mr-ck{display:inline-block;width:20px;height:20px;border-radius:5px;font:700 12px/20px var(--f-ui);text-align:center}.mr-ck.si{background:#1e3a12;color:#b5dd4a}.mr-ck.no{background:#3a1616;color:#ff8a8a}
 .tz-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 20px 0;font-size:12.5px;color:var(--tenue)}.tz-bar .btn{font-size:12px;padding:3px 9px}.tz-bar b{min-width:44px;text-align:center;color:#d6dbe1;font:600 12px var(--f-mono)}
@@ -1343,6 +1344,11 @@ html #panel.full .pn-mods{grid-column:1;grid-row:3}
 html #panel.full .pn-chat{grid-column:2;grid-row:2/4}
 .tz-fix .tz-c{position:sticky;left:0;z-index:3;box-shadow:6px 0 8px -6px rgba(0,0,0,.7)}
 .tz-fix thead .tz-c{z-index:4}
+.sl-wrap{overflow:auto;max-height:70vh;padding:0!important;overscroll-behavior:contain;scrollbar-width:auto;scrollbar-color:#5b6b83 #11151c;outline:none}
+.sl-wrap::-webkit-scrollbar{width:13px;height:13px;display:block}.sl-wrap::-webkit-scrollbar-track{background:#11151c;border-radius:8px}.sl-wrap::-webkit-scrollbar-thumb{background:#5b6b83;border-radius:8px;border:3px solid #11151c}.sl-wrap::-webkit-scrollbar-thumb:hover{background:#7f90aa}.sl-wrap::-webkit-scrollbar-corner{background:#11151c}
+.sl-wrap thead th{position:sticky;top:0;z-index:5;background:var(--marco-2)}.sl-wrap thead th.tz-c{z-index:6}
+.sl-btns{display:flex;align-items:center;gap:4px;margin-left:auto}.sl-btns .btn{min-width:34px;padding:4px 9px;font-size:14px;line-height:1}.sl-btns small{color:var(--tenue);margin-right:4px}
+html[data-tema=sw] .sl-wrap{scrollbar-color:#9DB36A #E9F0D8}html[data-tema=sw] .sl-wrap::-webkit-scrollbar-track,html[data-tema=sw] .sl-wrap::-webkit-scrollbar-corner{background:#E9F0D8}html[data-tema=sw] .sl-wrap::-webkit-scrollbar-thumb{background:#9DB36A;border-color:#E9F0D8}
 .tz-stk{position:sticky;left:10px;display:inline-block;max-width:min(1000px,70vw)}
 .ma-alc{padding:12px 20px 0;margin:0;color:#d6dbe1;font-size:14px;line-height:1.55}
 .ma-hall{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;padding:10px 20px 0}.ma-h{background:var(--marco-2);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}.ma-h h4{margin:0 0 6px;font-size:15px;color:#f1f3f5}.ma-h p{margin:0 0 8px;font-size:13.5px;line-height:1.5;color:#c9d0da}
@@ -4997,43 +5003,45 @@ function pintarGadsUtm(){const el=document.getElementById("c-gads_utm");if(!el||
 const MR_EST=[{g:"ES",c:[["latam","LATAM"],["arg","Argentina"],["mex","México"],["esp","España"]]},{g:"EN",c:[["uk","UK, IR, AUS, NZ"],["usa","EEUU + Canadá"]]},{g:"DE",c:[["de","Alemania y Austria"]]},{g:"IT",c:[["it","Italia"]]},{g:"PT",c:[["br","PT · Brasil"]]}];
 const MR_META={latam:"LATAM Remarketing CRM y Pixel Web (ES)",arg:"Argentina y Uruguay Remarketing CRM y Pixel Web (ES)",mex:"Mexico - Zoho CRM (ES)",esp:"España Remarketing CRM y Pixel Web (ES)",uk:"UK, Irlanda, Nueva Zelanda y Australia Remarketing CRM y Pixel Web (EN)",usa:"EEUU y Canadá Remarketing CRM y Pixel Web (EN)",de:"Alemania y Austria Remarketing CRM y Pixel Web (DE)",it:"Italia Remarketing CRM y Pixel Web (IT)",br:"Brasil Remarketing CRM y Pixel Web (PT)"};
 const MR_AUD=[["crm","Remarketing contactos del CRM (listas)"],["pixel","Remarketing visitantes de la web (180 días)"],["sin","Deals con UTM antigua (sin audiencia)"]];
-function mrSuma(D,keys,de,ha){const t={i:0,c:0,s:0,l:0,d:0,w:0};for(const k of keys){const x=D[k];if(!x)continue;
+function mrSuma(D,keys,de,ha){const t={i:0,c:0,s:0,l:0,d:0,w:0,v:0};for(const k of keys){const x=D[k];if(!x)continue;
   for(const[ym,v]of Object.entries(x.m||{})){const n=+ym;if(n<de||n>ha)continue;t.i+=v[0];t.c+=v[1];t.s+=v[2];t.l+=v[3]}
   for(const[ym,v]of Object.entries(x.d||{})){const n=+ym;if(n>=de&&n<=ha)t.d+=v}
+  for(const[ym,v]of Object.entries(x.v||{})){const n=+ym;if(n>=de&&n<=ha)t.v+=v}
   for(const[ym,cs]of Object.entries(x.w||{})){const n=+ym;if(n<de||n>ha)continue;for(const[cy,v]of Object.entries(cs))if(+cy<=ha)t.w+=v}}return t}
 function pintarMetaRep(){const el=document.getElementById("c-meta_rep");if(!el||st.dentro!=="metaads")return;const R=st.metaRep;
   if(!R){el.innerHTML=`<div class="mcab"><div><h2>Campañas activas</h2></div></div><div class="vacio">Martina está cruzando Meta Ads con el CRM.</div>`;return}
   const V=st.mrV||(st.mrV={desde:R.desde_defecto||R.meses[0],hasta:R.meses[R.meses.length-1],pausa:false}),D=R.datos||{},CH=(st.metaChk&&st.metaChk.filas)||{},AL=R.alertas||{};
   const gr=x=>x.replace(/\B(?=(\d{3})+(?!\d))/g,"."),num=n=>gr(String(Math.round(n))),dec=n=>{const[e,d]=n.toFixed(2).split(".");return gr(e)+","+d},eur=n=>dec(n)+" €",pc=x=>dec(x*100)+" %",dv=(a,b,f)=>b?f(a/b):"—";
-  const celdas=t=>`<td>${num(t.i)}</td><td>${num(t.c)}</td><td>${dv(t.c,t.i,pc)}</td><td>${num(t.l)}</td><td>${dv(t.d,t.l,pc)}</td><td>${num(t.d)}</td><td>${eur(t.s)}</td><td>${dv(t.s,t.l,eur)}</td><td>${dv(t.s,t.d,eur)}</td><td>${num(t.w)}</td><td>${dv(t.s,t.w,eur)}</td>`;
+  const calN=t=>t.d?Math.max(1,Math.min(100,Math.round(100*(t.w+.5*t.v)/t.d))):null,cal=t=>{const q=calN(t);return q===null?"—":`<span class="mr-cal ${q>=40?"a":q>=20?"b":"c"}" title="(deals won + 0,5 × deals vivos) / deals CRM">${q}</span>`};
+  const celdas=t=>`<td>${num(t.i)}</td><td>${num(t.c)}</td><td>${dv(t.c,t.i,pc)}</td><td>${num(t.l)}</td><td>${dv(t.d,t.l,pc)}</td><td>${num(t.d)}</td><td>${num(t.v)}</td><td>${eur(t.s)}</td><td>${dv(t.s,t.l,eur)}</td><td>${dv(t.s,t.d,eur)}</td><td>${num(t.w)}</td><td>${dv(t.s,t.w,eur)}</td><td>${cal(t)}</td>`;
   const de=V.desde,ha=V.hasta,ok=v=>`<span class="mr-ck ${v?"si":"no"}">${v?"✓":"✕"}</span>`;
   const chk=(c,a,i)=>{const v=CH[c]?.[a]?.[i];return`<td class="mr-c"><button class="mr-ckb" data-mrck="${c}|${a}|${i}" title="Pulsa para cambiar">${ok(v!==false)}</button></td>`};
-  let filas="",tg={i:0,c:0,s:0,l:0,d:0,w:0};const sumT=(a,b)=>{for(const k in a)a[k]+=b[k]};
-  for(const G of MR_EST){const tm={i:0,c:0,s:0,l:0,d:0,w:0};filas+=`<tr class="mr-g"><td colspan="16"><span class="tz-stk">${G.g}</span></td></tr>`;
-    for(const[c,n]of G.c){filas+=`<tr class="mr-camp"><td colspan="16"><span class="tz-stk"><b>${esc(n)}</b> <small>${esc(MR_META[c])}</small></span></td></tr>`;
+  let filas="",tg={i:0,c:0,s:0,l:0,d:0,w:0,v:0};const sumT=(a,b)=>{for(const k in a)a[k]+=b[k]};
+  for(const G of MR_EST){const tm={i:0,c:0,s:0,l:0,d:0,w:0,v:0};filas+=`<tr class="mr-g"><td colspan="18"><span class="tz-stk">${G.g}</span></td></tr>`;
+    for(const[c,n]of G.c){filas+=`<tr class="mr-camp"><td colspan="18"><span class="tz-stk"><b>${esc(n)}</b> <small>${esc(MR_META[c])}</small></span></td></tr>`;
       for(const[a,lab]of MR_AUD){const t=mrSuma(D,[c+"|"+a],de,ha);if(a==="sin"&&!t.d)continue;
         if(a!=="sin"&&!t.i&&!t.d&&!(c==="mex"&&a==="pixel")&&!(D[c+"|"+a]))continue;
         const est=a==="sin"?"":c==="mex"&&a==="pixel"?`<span class="mr-est off">NO EXISTE</span>`:`<span class="mr-est">ACTIVA</span>`;
         filas+=`<tr class="mr-f${a==="sin"?" mr-sin":""}"><td>${esc(lab)}</td><td>${est}</td>${a==="sin"||(c==="mex"&&a==="pixel")?"<td></td><td></td><td></td>":chk(c,a,0)+chk(c,a,1)+chk(c,a,2)}${celdas(t)}</tr>`;sumT(tm,t)}
-      if((AL[c]||[]).length)filas+=`<tr class="mr-al"><td colspan="16"><div class="mr-alx tz-stk">⚠ ${AL[c].map(esc).join(" · ")}</div></td></tr>`}
+      if((AL[c]||[]).length)filas+=`<tr class="mr-al"><td colspan="18"><div class="mr-alx tz-stk">⚠ ${AL[c].map(esc).join(" · ")}</div></td></tr>`}
     const ps=Object.entries(R.pausadas||{}).filter(([,m])=>m===G.g).map(([n])=>[n,mrSuma(D,["p:"+n],de,ha)]).filter(([,t])=>t.i||t.d||t.s);
-    if(ps.length){const tp={i:0,c:0,s:0,l:0,d:0,w:0};ps.forEach(([,t])=>sumT(tp,t));sumT(tm,tp);
+    if(ps.length){const tp={i:0,c:0,s:0,l:0,d:0,w:0,v:0};ps.forEach(([,t])=>sumT(tp,t));sumT(tm,tp);
       filas+=`<tr class="mr-camp mr-pz" data-mrpausa><td><b>${V.pausa?"▾":"▸"} Campañas en pausa (${ps.length})</b> <small>con gasto o deals en el periodo</small></td><td></td><td></td><td></td><td></td>${celdas(tp)}</tr>`;
       if(V.pausa)ps.sort((a,b)=>b[1].s-a[1].s).forEach(([n,t])=>filas+=`<tr class="mr-f mr-pf"><td>${esc(n)}</td><td><span class="mr-est off">EN PAUSA</span></td><td></td><td></td><td></td>${celdas(t)}</tr>`)}
     filas+=`<tr class="mr-tot"><td>TOTAL ${G.g}</td><td></td><td></td><td></td><td></td>${celdas(tm)}</tr>`;sumT(tg,tm)}
   const ts=mrSuma(D,["sin"],de,ha);sumT(tg,ts);
   filas+=`<tr class="mr-f mr-sin"><td>Deals de Meta sin campaña identificable</td><td></td><td></td><td></td><td></td>${celdas(ts)}</tr>`;
   const desg=Object.entries(R.sin_desglose||{}).slice(0,4).map(([k,n])=>`${k} (${num(n)})`).join(", ");
-  filas+=`<tr class="mr-al"><td colspan="16"><div class="mr-alx tz-stk">⚠ utm_campaign sin campaña desde septiembre: ${esc(desg)}…</div></td></tr>`;
+  filas+=`<tr class="mr-al"><td colspan="18"><div class="mr-alx tz-stk">⚠ utm_campaign sin campaña desde septiembre: ${esc(desg)}…</div></td></tr>`;
   filas+=`<tr class="mr-tot mr-gen"><td>TOTAL GENERAL</td><td></td><td></td><td></td><td></td>${celdas(tg)}</tr>`;
   const M=R.meses,optM=s=>M.map(m=>`<option value="${m}"${m===s?" selected":""}>${ymTxt(m)}</option>`).join(""),ult=M[M.length-1];
   const pres=[["Este mes",ult,ult],["Desde septiembre",202609,ult],["Últimos 3 meses",M[Math.max(0,M.length-3)],ult],["Este año",M[0],ult]];
   el.innerHTML=`<div class="mcab"><div><h2>Campañas activas</h2><div class="fuente-mc" style="margin-top:6px">${esc(R.autor||"")}</div></div><div class="meta">${R.fecha?esc(hace(R.fecha)):""}</div></div>
    <div class="cn-fechas"><label>Desde <select data-mrf="desde">${optM(de)}</select></label><label>Hasta <select data-mrf="hasta">${optM(ha)}</select></label><div class="cn-pres">${pres.map(([n,a,b])=>`<button class="btn${de===a&&ha===b?" prim":""}" data-mrpre="${a}-${b}">${n}</button>`).join("")}</div></div>
-   <div class="as-res"><div><b>${eur(tg.s)}</b><span>coste · ${esc(de===ha?ymTxt(de):ymTxt(de)+" a "+ymTxt(ha))}</span></div><div><b>${num(tg.l)}</b><span>conversiones Meta</span></div><div><b>${num(tg.d)}</b><span>deals CRM</span></div><div><b>${num(tg.w)}</b><span>deals won</span></div><div><b>${dv(tg.s,tg.w,eur)}</b><span>CPA</span></div></div>
+   <div class="as-res"><div><b>${eur(tg.s)}</b><span>coste · ${esc(de===ha?ymTxt(de):ymTxt(de)+" a "+ymTxt(ha))}</span></div><div><b>${num(tg.l)}</b><span>conversiones Meta</span></div><div><b>${num(tg.d)}</b><span>deals CRM</span></div><div><b>${num(tg.v)}</b><span>deals vivos (Sent, Stand by y Cold)</span></div><div><b>${num(tg.w)}</b><span>deals won</span></div><div><b>${dv(tg.s,tg.w,eur)}</b><span>CPA</span></div><div><b>${calN(tg)===null?"—":calN(tg)}</b><span>calidad (1 a 100)</span></div></div>
    ${R.general?`<div class="cn-revw"><b>⚠ Antes de leer</b> · ${esc(R.general)}</div>`:""}
-   <div class="mc-sec mr-wrap"><table class="tabla mr-t"><thead><tr><th style="text-align:left">Campaña / audiencia</th><th>Estado</th><th>UTM conv.</th><th>Creas</th><th>Audiencias</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Conversiones</th><th>CR a deal</th><th>Deals CRM</th><th>Coste</th><th>CPL</th><th>CPL CRM</th><th>Deals won</th><th>CPA</th></tr></thead><tbody>${filas}</tbody></table></div>
-   <p class="as-nota">Meta Ads (Windsor.ai): impresiones, clics, conversiones (leads que atribuye Meta) y coste. Zoho CRM: deals con utm_source meta, asignados a cada campaña por utm_campaign (con los nombres antiguos y los ID ya unidos) y a cada audiencia por el utm_medium (_crm_remarketing = listas de contactos del CRM; _pixel_remarketing = visitantes de la web de los últimos 180 días; hay conjuntos con la UTM cambiada, ver avisos). CTR = clics / impresiones. CR a deal = deals CRM / conversiones de Meta. CPL = coste / conversiones; CPL CRM = coste / deals CRM; CPA = coste / deals won. Deals won = deals creados en el periodo que están won con Closing Date hasta el último mes del filtro (incluido), igual que en el resto de informes. UTM conv., Creas y Audiencias son tu revisión: pulsa ✓ / ✕ para cambiarlos. Las filas amarillas son avisos del equipo.</p>`}
+   <div class="mc-sec mr-wrap"><table class="tabla mr-t"><thead><tr><th style="text-align:left">Campaña / audiencia</th><th>Estado</th><th>UTM conv.</th><th>Creas</th><th>Audiencias</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Conversiones</th><th>CR a deal</th><th>Deals CRM</th><th title="Deals del CRM creados en el periodo que hoy siguen en Sent, Stand by o Cold">Deals vivos</th><th>Coste</th><th>CPL</th><th>CPL CRM</th><th>Deals won</th><th title="Calidad de los deals, de 1 a 100: (deals won + 0,5 × deals vivos) / deals CRM">Calidad</th></tr></thead><tbody>${filas}</tbody></table></div>
+   <p class="as-nota">Meta Ads (Windsor.ai): impresiones, clics, conversiones (leads que atribuye Meta) y coste. Zoho CRM: deals con utm_source meta, asignados a cada campaña por utm_campaign (con los nombres antiguos y los ID ya unidos) y a cada audiencia por el utm_medium (_crm_remarketing = listas de contactos del CRM; _pixel_remarketing = visitantes de la web de los últimos 180 días; hay conjuntos con la UTM cambiada, ver avisos). CTR = clics / impresiones. CR a deal = deals CRM / conversiones de Meta. CPL = coste / conversiones; CPL CRM = coste / deals CRM; CPA = coste / deals won. Deals won = deals creados en el periodo que están won con Closing Date hasta el último mes del filtro (incluido), igual que en el resto de informes. UTM conv., Creas y Audiencias son tu revisión: pulsa ✓ / ✕ para cambiarlos. Las filas amarillas son avisos del equipo. Deals vivos = deals creados en el periodo que hoy siguen abiertos en Sent, Stand by (hold) o Cold (quedan fuera Pending y Hot, que son muy pocos). Calidad = (deals won + 0,5 × deals vivos) / deals CRM × 100: un deal ganado cuenta entero y uno vivo la mitad; verde a partir de 40, ámbar a partir de 20.${R.vivos?.fecha?` Deals vivos leídos del CRM el ${new Date(R.vivos.fecha).toLocaleDateString("es-ES",{day:"numeric",month:"long"})}.`:""}</p>`}
 document.addEventListener("change",e=>{const s=e.target.closest("[data-mrf]");if(!s||!st.mrV)return;st.mrV[s.dataset.mrf]=Number(s.value);if(st.mrV.desde>st.mrV.hasta)[st.mrV.desde,st.mrV.hasta]=[st.mrV.hasta,st.mrV.desde];pintarMetaRep()});
 document.addEventListener("click",async e=>{const b=e.target.closest("[data-mrpre]");if(b&&st.mrV){const[a,c]=b.dataset.mrpre.split("-").map(Number);st.mrV.desde=a;st.mrV.hasta=c;pintarMetaRep();return}
   if(e.target.closest("[data-mrpausa]")&&st.mrV){st.mrV.pausa=!st.mrV.pausa;pintarMetaRep();return}
@@ -5096,24 +5104,29 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-gamas]");i
 function pintarGads(){pintarGadsUtm();pintarGadsGen("gads_pmax");pintarGadsCamp();pintarGadsGen("gads_kw");pintarGadsGen("gads_anu");pintarGadsGen("gads_med")}
 /* ---------- Tablas de informes: ajustar a pantalla, zoom y ocultar menú ---------- */
 const TZ_MODS=["c-captacion_inv","c-meta_rep","c-gads_camp","c-comercial_asesores","c-captacion_canales","c-captacion_evolucion","c-captacion_cpa"];
+const SL_MODS=["c-meta_rep"];
 const tzLee=id=>{try{return localStorage.getItem("tz_"+id)||"fit"}catch(e){return"fit"}},tzGuarda=(id,v)=>{try{localStorage.setItem("tz_"+id,v)}catch(e){}};
 function tzAplica(el){const modo=tzLee(el.id);let zs=[];
   el.querySelectorAll("table.tabla,table.as-t").forEach(t=>{const w=t.parentElement;if(!w||!t.offsetParent)return;const tk=w.clientWidth+"|"+modo;if(t.dataset.tzk===tk&&t.style.zoom){zs.push(Number(t.style.zoom)||1);return}t.dataset.tzk=tk;t.style.zoom=1;const pw=t.style.width;t.style.width="max-content";const cs=getComputedStyle(w),real=t.getBoundingClientRect().width;t.style.width=pw;const disp=(w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight))*.98;
     const z=modo==="fit"?Math.max(.82,Math.min(1,disp/real)):Number(modo)||1;t.style.zoom=z;zs.push(z);
     if(getComputedStyle(w).overflowX==="visible")w.style.overflowX="auto";t.classList.add("tz-fix");
+    if(SL_MODS.includes(el.id)){w.classList.add("sl-wrap");if(!w.hasAttribute("tabindex"))w.setAttribute("tabindex","0");const zr=w.offsetWidth?w.getBoundingClientRect().width/w.offsetWidth:1;w.style.maxHeight=Math.round(Math.max(380,innerHeight*.72)/zr)+"px";
+      t.querySelectorAll("thead th").forEach(h=>{if(h.style.background)return;let col="",e=t;while(e&&e!==w.parentElement){const b=getComputedStyle(e).backgroundColor;if(b&&b!=="transparent"&&b!=="rgba(0, 0, 0, 0)"){col=b;break}e=e.parentElement}if(col)h.style.background=col});
+      requestAnimationFrame(()=>{const sb=el.querySelector(".sl-btns");if(sb)sb.style.display=w.scrollWidth>w.clientWidth+2?"":"none"})}
     t.querySelectorAll("tr").forEach(r=>{const c=r.firstElementChild;if(!c||c.classList.contains("tz-c"))return;if((c.colSpan||1)>3)return;c.classList.add("tz-c");
       let col="",e=c;while(e&&e!==w){const b=getComputedStyle(e).backgroundColor;if(b&&b!=="transparent"&&b!=="rgba(0, 0, 0, 0)"){col=b;break}e=e.parentElement}
       c.style.background=col?`linear-gradient(${col},${col}),#0f1318`:"#0f1318"})});
   const lab=el.querySelector(".tz-pct");if(lab)lab.textContent=zs.length?Math.round(Math.min(...zs)*100)+" %":"";
   el.querySelectorAll("[data-tz]").forEach(b=>b.classList.toggle("prim",b.dataset.tz==="fit"&&modo==="fit"))}
 function tzBarra(el){if(!el.querySelector("table.tabla,table.as-t"))return;if(!el.querySelector(".tz-bar")){const d=document.createElement("div");d.className="tz-bar";
-  d.innerHTML=`<span>Tabla</span><button class="btn" data-tz="fit" title="Que la tabla entera quepa en la pantalla">Ajustar a pantalla</button><button class="btn" data-tz="-" title="Más pequeña">−</button><b class="tz-pct"></b><button class="btn" data-tz="+" title="Más grande">+</button>`;
+  d.innerHTML=`<span>Tabla</span><button class="btn" data-tz="fit" title="Que la tabla entera quepa en la pantalla">Ajustar a pantalla</button><button class="btn" data-tz="-" title="Más pequeña">−</button><b class="tz-pct"></b><button class="btn" data-tz="+" title="Más grande">+</button>${SL_MODS.includes(el.id)?`<span class="sl-btns"><small>Desplazar</small><button class="btn" data-tzs="-1" title="Ver las columnas de la izquierda (también Mayús + rueda del ratón)">◀</button><button class="btn" data-tzs="1" title="Ver las columnas de la derecha (también Mayús + rueda del ratón)">▶</button></span>`:""}`;
   el.prepend(d)}tzAplica(el)}
 let tzT=0;const tzTodo=()=>{clearTimeout(tzT);tzT=setTimeout(()=>TZ_MODS.forEach(id=>{const el=document.getElementById(id);if(el)tzBarra(el)}),60)};
 new MutationObserver(m=>{if(m.some(r=>[...r.addedNodes].some(n=>n.nodeType===1&&!n.classList?.contains("tz-bar"))))tzTodo()}).observe(document.body,{childList:true,subtree:true});
 window.addEventListener("resize",tzTodo);
 document.addEventListener("click",e=>{if(e.target.closest("[data-pnir],#pnFull,#pnRes,summary"))setTimeout(tzTodo,80);const n=e.target.closest("[data-tznav]");if(n){const p=$("#panel");p.classList.toggle("sin-nav");try{localStorage.setItem("tzNav",p.classList.contains("sin-nav")?"1":"0")}catch(_){}
     document.querySelectorAll("[data-tznav]").forEach(b=>b.textContent=p.classList.contains("sin-nav")?"Mostrar menú":"Ocultar menú");tzTodo();return}
+  const sb=e.target.closest("[data-tzs]");if(sb){const w=sb.closest("[id^='c-']")?.querySelector(".sl-wrap");if(w)w.scrollBy({left:Number(sb.dataset.tzs)*Math.max(200,w.clientWidth*.6),behavior:"smooth"});return}
   const b=e.target.closest("[data-tz]");if(!b)return;const el=b.closest("[id^='c-']");if(!el)return;const t=el.querySelector("table.tabla,table.as-t");
   const act=t?Number(t.style.zoom)||1:1,v=b.dataset.tz==="fit"?"fit":String(Math.max(.4,Math.min(1.3,Math.round((act+(b.dataset.tz==="+"?.1:-.1))*10)/10)));tzGuarda(el.id,v);tzAplica(el)});
 /* ---------- Meta Ads: qué anuncios funcionan ---------- */
