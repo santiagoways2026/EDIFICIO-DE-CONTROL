@@ -144,3 +144,4 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 - Duda: «el informe de Paula de RRSS» se ha tomado como la pestaña Seguimiento RRSS. ¿Es este informe u otro (por ejemplo el Excel REPORT_Y_SEGUIMIENTO_RRSS_2026)?
 - Duda: ¿hay que mandarle a Paula algo cada día (correo o aviso) además de actualizar la pestaña?
 - Duda: ¿marcar en la pestaña cuándo un dato tiene más de 2 días sin actualizar?
+- Ahorro de CPU (9 de noviembre de 2026, página versión 208): las animaciones decorativas (CSS infinitas, SMIL de los iconos de sala y la gente de los planos) se pausan al perder el foco, con la pestaña oculta, tras 60 s sin actividad o con el botón «Modo ligero» de la barra (localStorage `modoLigero`). Medido en Chromium: 99 % de un núcleo en reposo antes, 0,1 % en pausa. Bloque «Ahorro» junto a `arrancarMundos`. Por error se publicó una copia aparte en https://claude.ai/artifact/LdDE4t9F6LXCGmqt5j7ybe (pendiente de que Álvaro diga si se borra).
