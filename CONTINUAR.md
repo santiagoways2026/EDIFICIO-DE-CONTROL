@@ -133,6 +133,8 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 12. Meta Ads en Windsor: el conector `facebook` se quedó sin cuenta del 30 de octubre al 4 de noviembre de 2026; Álvaro la reconectó ese día (cuenta 402629925894411) y `captacion_inversion` (versión 6), `inversion_plataformas` (versión 5) y `openai_ads` (versión 5, fila de Meta en la comparativa) llevan el gasto de Meta de enero al 4 de noviembre (octubre 11.008 €). Si vuelve a faltar la cuenta, el gasto de Meta se queda congelado en el último refresco.
 
 
+- Recuento mensual de inversión para Jane Carson (pedido por Álvaro el 9 de noviembre de 2026): tarea «Inversión publicitaria del mes: correo a Jane» (trig_012KyEYa4hUAuhHdn4mSd6JP, día 1 a las 10:12 de Madrid, despierta este chat). Suma el gasto del mes anterior de Google Ads, Meta, OpenAI Ads y Bing por Windsor (Bing a mano si no está conectado). Si falta alguna plataforma, avisa a Álvaro y no envía nada; si están las cuatro, manda el correo a Jane. Comprobado el 9 de noviembre: octubre de 2026 en Windsor, Google Ads 127.611,16 €, Meta 11.007,79 € y OpenAI Ads 2.797,06 €; Bing pendiente.
+
 ## Dudas pendientes de Seguimiento RRSS
 
 Álvaro pidió (5 de noviembre de 2026) guardar las dudas y enseñárselas cuando entre en la sala. Se ven en la pestaña Seguimiento RRSS (aviso de la rutina nocturna). Borrar cada una cuando la conteste.
