@@ -150,3 +150,6 @@ Nota de traspaso para seguir con las Salas del Camino desde otra sesión; por ej
 
 ## Regla fija de Álvaro (10/11/2026): vigilancia de Google Ads
 Avisarle SIEMPRE, sin esperar a que pregunte, de cualquier alarma, caída de rendimiento, incidencia o cambio relevante en Google Ads: gasto que se dispara o se para, CPL o CPA que sube, conversiones o deals que caen, campañas pausadas o limitadas por presupuesto, rechazos de anuncios, cambios de estrategia de puja, cuota de impresiones que baja, desconexión de la fuente de datos. Solo lectura: nunca tocar campañas. Revisión diaria programada «Vigilancia Google Ads» en esta sesión.
+
+## Regla de Álvaro (10/11/2026): automatizaciones como máximo una vez al día
+Ninguna tarea programada corre más de una vez al día salvo que Álvaro lo pida. Cambiadas a diario (hora de Madrid): Radar barrida 6:18, Radar capturas 10:48, Competencia ronda 8:27, Competencia exploración 8:13, YouTube vigías 6:47, Cerebro 7:28, Sala de Control 7:50, Diseño 9:47, Sales Dream Team 7:06. Para ahorrar tokens: subagentes pesados con modelo económico y resumen común (scratchpad cierre26/20_resumen.md).
