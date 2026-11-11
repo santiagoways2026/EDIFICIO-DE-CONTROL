@@ -157,3 +157,4 @@ Ninguna tarea programada corre más de una vez al día salvo que Álvaro lo pida
 
 ## Regla de Álvaro (11/11/2026): Seguimiento RRSS solo bajo petición
 Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkEx8zPfDFUQHspni8eYb) y «Seguimiento RRSS: lectura del día 1» (trig_01SUxoTJZFju2zQsvur62PtE). No lanzar ni actualizar el seguimiento de RRSS salvo que Álvaro lo pida. Prioridad: conservar tokens.
+- Limpieza de la sala SEO (11/11/2026, versión 213): ocultas las pestañas Rastreo propio (o_audit), Conexiones (o_plan) y GA4 (g_seo) en MODS_OCULTOS; en Brecha, «Las búsquedas más grandes» plegada por defecto; SEO técnico con titulares de progreso de la curación y «Qué toca ahora» (3 pautas) y el resto plegado; Blog con KPI y evolución y el detalle plegado; Roadmap (todas las salas) solo con título, quién y estado (el dato va en el tooltip). Estado de los plegables en DET (data-mem). Copia previa en el scratchpad index_pre_limpieza.html.
