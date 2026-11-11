@@ -1390,7 +1390,7 @@ a.zlink{display:inline-block;margin-left:auto;text-decoration:none;font-size:12.
   </div>
   <div class="ruta" id="ruta">/ <b>Edificio</b></div>
   <div class="centro"><span class="vivo off" id="vivo">Conectando</span><span class="txt" id="barrida"></span></div>
-  <button id="ligeroSW" class="tema-sw" aria-pressed="false" title="Apaga las animaciones decorativas para gastar menos (útil en reuniones). Los datos siguen en vivo."><i></i><span>Modo ligero</span></button>
+  
   <div class="avatares" id="avatares" title="Especialistas conectados"></div>
   <span id="zoomtxt">100%</span>
 </header>
@@ -2193,7 +2193,7 @@ function arrancarMundos(){if(rafM||document.hidden||ahorro?.pausa)return;mundos.
    Se paran al pasar a otra ventana (por ejemplo, una reunión de Meet), con la pestaña oculta, tras 60 s sin tocar nada o con el modo ligero.
    Los datos y las suscripciones siguen igual; vuelven a moverse al mover el ratón o pulsar una tecla. ===== */
 var ahorro={pausa:null,ult:performance.now(),foco:true};
-const modoLigero=()=>{try{return localStorage.getItem("modoLigero")==="1"}catch(_){return false}};
+const modoLigero=()=>true;
 const enPausa=()=>document.hidden||modoLigero()||!ahorro.foco||performance.now()-ahorro.ult>60000;
 function aplicarAhorro(){const p=enPausa();
   if(p)document.querySelectorAll("svg").forEach(v=>{try{if(!v.animationsPaused())v.pauseAnimations()}catch(_){}});
