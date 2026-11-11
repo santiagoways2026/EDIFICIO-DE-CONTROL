@@ -166,3 +166,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v220: evolución mensual IG en una gráfica de líneas (una por métrica, colores, escala log, todo el periodo); igLinea admite 4º parámetro log.
 - 11/11 v221: evolución IG: en Todos, gráfica original por cuenta con botones de métrica; con ES/EN/DE, líneas por métrica de ese mercado.
 - 11/11 v222: ranking por formato/tipo con 6 métricas (mediana y media de vistas, likes, seguidores por post, guardados, interacción; verde = mejor) e iconos SVG RS_FIC para Reel, Carrusel e Imagen.
+- 11/11 v223: ranking, por tipo de contenido vuelve a tabla de medias (vistas mediana/media, likes, comentarios, compartidos, guardados, seguidores/post, interacción; verde = mejor).
