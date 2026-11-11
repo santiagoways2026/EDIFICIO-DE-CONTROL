@@ -1621,7 +1621,7 @@ MARCOS.push({id:"control_instagram",grupo:"control",dato:true,directo:true,nombr
 SALAS_ACT.openaiads=["openaiads","oai_dash","oai_camp","oai_anu","oai_crm","oai_plan"];SALAS_ACT.bingads=["bingads","bing_dash","bing_camp","bing_crm","bing_plan"];SALAS_ACT.cro=["cro","cro_dash","cro_backlog","cro_tests","cro_analytics","cro_result"];
 /* Las directrices entre salas (Desde SEO, SEO para cada sala, brief de Control a Diseño) siguen circulando por la base de datos y las rutinas, pero sin pestaña.
    En YouTube, la auditoría y la estrategia Hub & Spoke quedan retiradas de momento */
-const MODS_OCULTOS=new Set(["listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
+const MODS_OCULTOS=new Set(["instagram_cuentas","listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
 for(let i=MARCOS.length-1;i>=0;i--)if(MODS_OCULTOS.has(MARCOS[i].id))MARCOS.splice(i,1);
 Object.values(SALAS_ACT).forEach(a=>{for(let i=a.length-1;i>=0;i--)if(MODS_OCULTOS.has(a[i]))a.splice(i,1)});
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */

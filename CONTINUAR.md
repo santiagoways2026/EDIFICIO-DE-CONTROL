@@ -170,3 +170,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v224: ranking por tipo con puesto (🥇🥈🥉 1º, 2º...); tarjetas del ranking y promocionadas más pequeñas (.yr-grid.rs-pq, 150px).
 - 11/11 v225: errores IG solo desde el 11/11 (ig_err.items nuevos con img/err/*.jpg; histórico en ig_err.historico, no se muestra). Revisión diaria 10:23 Madrid trig_01MA7yehTZZnK6Af2VqKoEUz (Metricool getScheduledPosts, solo lectura). Lo que hemos visto compacto. Quitados de Capitalización IG: épocas, por idioma y por enlace.
 - 11/11 v226: Capitalización IG: gráfica a la izquierda y tabla mensual a la derecha (.igcap-2), posts más pequeños, método en tooltip.
+- 11/11 v227: oculto el módulo instagram_cuentas («Tus cuentas de Instagram», Metricool en vivo) en la sala Instagram. Negritas ** en errores: tipo «Negrita que no se verá» con propuesta en negrita Unicode.
