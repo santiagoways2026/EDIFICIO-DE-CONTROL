@@ -992,7 +992,7 @@ html[data-tema=sw] .bq-s3,html[data-tema=sw] .bq-s4{color:#1b2a3d!important}
 .tec-k b::before{font-size:13px}.tec-c::before,.tec-ley::before{font-size:10px;margin-right:5px}
 .tec-umbral{stroke:currentColor;stroke-opacity:.35;stroke-dasharray:3 4}
 .tec-inc{display:grid;gap:6px;margin-top:8px;font-size:13px}.tec-inc>div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--borde);padding-bottom:5px}.tec-inc b{font-variant-numeric:tabular-nums}
-.tec-tit{margin:8px 20px 4px;padding-left:18px;display:grid;gap:6px;font-size:14px;line-height:1.45}.tec-tit li::marker{color:var(--bq-1,#7AA606)}details.bq-otras>summary.seccion-t{cursor:pointer;list-style:revert}details.bq-otras[data-mem]{padding:4px 0 0}.tec-gr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px 20px 0}.tec-gr>div{background:var(--marco-2);border:1px solid var(--borde);border-radius:8px;padding:10px 12px}.tec-gr h4{margin:0 0 6px;font-size:13px}.tec-gr ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55}.tec-gr li span{color:var(--tenue);font-variant-numeric:tabular-nums}
+.sint-g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding:12px 20px 4px}.sint-c2{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--borde);border-radius:12px;background:var(--marco-2)}.sint-ic{font-size:30px;line-height:1;flex:0 0 36px;text-align:center}.sint-c2 h4{font-size:15px;line-height:1.3;margin:0 0 6px}.sint-met{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(122,166,6,.18);color:#9fd12a}.sint-haz{margin:8px 0 0;font-size:13px;line-height:1.4;color:var(--tenue)}.sint-ls{list-style:none;margin:6px 20px 0;padding:0;display:grid;gap:6px}.sint-ls li{display:flex;gap:10px;align-items:center;font-size:13.5px}.sint-ls li>span{font-size:18px;flex:0 0 22px;text-align:center}.tec-tit{margin:8px 20px 4px;padding-left:18px;display:grid;gap:6px;font-size:14px;line-height:1.45}.tec-tit li::marker{color:var(--bq-1,#7AA606)}details.bq-otras>summary.seccion-t{cursor:pointer;list-style:revert}details.bq-otras[data-mem]{padding:4px 0 0}.tec-gr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px 20px 0}.tec-gr>div{background:var(--marco-2);border:1px solid var(--borde);border-radius:8px;padding:10px 12px}.tec-gr h4{margin:0 0 6px;font-size:13px}.tec-gr ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.55}.tec-gr li span{color:var(--tenue);font-variant-numeric:tabular-nums}
 html[data-tema=sw] .bq-ver,html[data-tema=sw] .tec-gr>div{background:#fff;border-color:#E3EBD0}
 @media (max-width:760px){.tec-gr{grid-template-columns:1fr}.bq-bf,.bq-df{grid-template-columns:minmax(90px,130px) 1fr 44px}.bq-df{grid-template-columns:minmax(90px,130px) 1fr}}
 #c-control_prioridades{--pr-1:#3987e5;--pr-2:#9085e9;--pr-g:#7c8591;--pr-mal:#e5603a;--pr-ok:#3ddc97;--pr-amb:#f5c518;--pr-s0:#262c36}
@@ -1620,7 +1620,7 @@ MARCOS.push({id:"control_instagram",grupo:"control",dato:true,directo:true,nombr
 SALAS_ACT.openaiads=["openaiads","oai_dash","oai_camp","oai_anu","oai_crm","oai_plan"];SALAS_ACT.bingads=["bingads","bing_dash","bing_camp","bing_crm","bing_plan"];SALAS_ACT.cro=["cro","cro_dash","cro_backlog","cro_tests","cro_analytics","cro_result"];
 /* Las directrices entre salas (Desde SEO, SEO para cada sala, brief de Control a Diseño) siguen circulando por la base de datos y las rutinas, pero sin pestaña.
    En YouTube, la auditoría y la estrategia Hub & Spoke quedan retiradas de momento */
-const MODS_OCULTOS=new Set(["seo_red","o_audit","o_plan","g_seo","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
+const MODS_OCULTOS=new Set(["seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
 for(let i=MARCOS.length-1;i>=0;i--)if(MODS_OCULTOS.has(MARCOS[i].id))MARCOS.splice(i,1);
 Object.values(SALAS_ACT).forEach(a=>{for(let i=a.length-1;i>=0;i--)if(MODS_OCULTOS.has(a[i]))a.splice(i,1)});
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
@@ -6660,13 +6660,19 @@ function filtrados(){
 function ytId(u){const m=String(u||"").match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);return m?m[1]:null}
 function previewPost(i,p,peq){const img=st.prev?.[i.id]||i.imagen||(ytId(i.url)?`https://i.ytimg.com/vi/${ytId(i.url)}/hqdefault.jpg`:"");
   return`<a class="vir-pv${peq?" peq":""}" href="${esc(safeUrl(i.url))}" target="_blank" rel="noopener" style="--c:${p.c}" aria-label="Abrir el post">${img?`<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:""}<span class="pv-red">${esc(p.n)}</span><span class="pv-play">▶</span></a>`}
+const SINT_IC=[[/a[ñn]o santo|xacobeo|jubileo|2027|puerta santa/i,"🗓️"],[/humor|gracios|divertid|meme|ironi/i,"😂"],[/consejo|checklist|mochila|equipaje|qu[eé] llevar|tips?\b|ampolla|preparar|gu[ií]a pr[aá]ctica/i,"🎒"],[/comida|pulpo|gastronom|vino|men[uú]/i,"🍲"],[/emoci|testimonio|historia|personal|transform|llor|fe\b|espiritual/i,"❤️"],[/prensa|noticia|medio|r[eé]cord|cifra|estad[ií]stic/i,"📰"],[/ruta|etapa|sarria|portugu[eé]s|franc[eé]s|norte|primitivo|mapa|km/i,"🗺️"],[/paisaje|naturaleza|amanecer|bosque|oto[ñn]o|lluvia/i,"🌄"],[/vlog|v[ií]deo|youtube|documental/i,"🎥"],[/reel|tiktok|short/i,"📱"]];
+const sintIc=x=>(SINT_IC.find(([r])=>r.test(x))||[0,"✨"])[1];
+const SINT_PL=[[/youtube|shorts?/i,"▶️"],[/instagram|reels?|carrusel/i,"📸"],[/tiktok/i,"🎵"],[/facebook/i,"👍"],[/reddit|foro/i,"💬"],[/prensa|blog/i,"📰"]];
+const sintPl=x=>(SINT_PL.find(([r])=>r.test(x))||[0,"•"])[1];
+const sintMet=x=>{const m=String(x||"").match(/(?:\+?\d[\d.,]*\s*(?:M|k|K|mil|millones?)?)\s*(?:de\s+)?(?:visualizaciones|vistas|views|reproducciones|me gusta|likes|comentarios|compartid\w*|guardad\w*|seguidores|suscriptores)/i);return m?m[0].replace(/\s+/g," "):""};
+const sintCorta=(x,n)=>{x=String(x||"").replace(/\s*\([^)]*\)/g,"").trim();const f=x.split(/(?<=[.;])\s/)[0].replace(/[\s;,.]+$/,"");return corta(f,n)};
 function pintarSintesis(){const el=document.getElementById("c-radar_sintesis");if(!el)return;const S=st.rsint;
-  const items=activos(),porPlat={};items.forEach(i=>{porPlat[i.plataforma]=(porPlat[i.plataforma]||0)+1});
-  el.innerHTML=`<div class="mcab"><div><h2>Qué está funcionando</h2><div class="fuente-mc" style="margin-top:6px">Síntesis del radar · ${items.length} piezas analizadas</div></div><div class="meta">${S?.fecha?`actualizado ${esc(hace(S.fecha))}`:""}</div></div>
-   ${S?`<p class="sint-res">${esc(S.resumen||"")}</p>
-   <div class="sint-grid">${(S.tematicas||[]).map((t,k)=>`<div class="sint-c"><span class="sint-n">${k+1}</span><h4>${esc(t.tema)}</h4><p>${esc(t.dato||"")}</p>${t.replicar?`<p class="sint-rep">→ ${esc(t.replicar)}</p>`:""}</div>`).join("")}</div>
-   ${(S.formatos||[]).length?`<div class="seccion-t">Formatos que funcionan</div><div class="sint-chips">${S.formatos.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}
-   ${(S.plataformas||[]).length?`<div class="seccion-t">Por plataforma</div><div class="sint-chips">${S.plataformas.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""}`:`<div class="vacio">Marta está preparando la síntesis.</div>`}`}
+  const items=activos();
+  el.innerHTML=`<div class="mcab"><div><h2>Qué está funcionando</h2><div class="fuente-mc" style="margin-top:6px">${items.length} piezas del radar</div></div><div class="meta">${S?.fecha?`actualizado ${esc(hace(S.fecha))}`:""}</div></div>
+   ${S?`${S.resumen?`<p class="sint-res">💡 ${esc(sintCorta(S.resumen,140))}</p>`:""}
+   <div class="sint-g2">${(S.tematicas||[]).map(t=>{const m=sintMet(t.dato);return`<div class="sint-c2" title="${esc(t.dato||"")}"><span class="sint-ic">${sintIc(t.tema+" "+(t.dato||""))}</span><div><h4>${esc(t.tema)}</h4>${m?`<span class="sint-met">${esc(m)}</span>`:""}${t.replicar?`<p class="sint-haz">👉 ${esc(sintCorta(t.replicar,90))}</p>`:""}</div></div>`}).join("")}</div>
+   ${(S.formatos||[]).length?`<div class="seccion-t">Formatos</div><ul class="sint-ls">${S.formatos.map(x=>`<li title="${esc(x)}"><span>${sintIc(x)==="✨"?"🎬":sintIc(x)}</span>${esc(sintCorta(x,80))}</li>`).join("")}</ul>`:""}
+   ${(S.plataformas||[]).length?`<div class="seccion-t">Plataformas</div><ul class="sint-ls">${S.plataformas.map(x=>`<li title="${esc(x)}"><span>${sintPl(x)}</span>${esc(sintCorta(x,80))}</li>`).join("")}</ul>`:""}`:`<div class="vacio">Marta está preparando la síntesis.</div>`}`}
 const REG_ACT=[["todos","Todos"],["us","US + Canadá"],["latam","LATAM"],["es","ES"],["it","IT"],["pt","PT"],["de","DE"],["uk","UK + IE + AUS"],["otros","Otros"]];
 const REG_HOST={"catholicreview.org":"us","catholicstarherald.org":"us","detroitcatholic.com":"us","ncregister.com":"us","forbes.com":"us","thecatholicherald.com":"uk","noticel.com":"latam","elnuevodia.com":"latam","infobae.com":"latam","aciprensa.com":"latam","cordobainteriorinforma.com":"latam","idealista.com":"es","santiago.es":"es","xataka.com":"es","vaticannews.va":"otros","starnewskorea.com":"otros","tribune.net.ph":"otros","iol.co.za":"otros"};
 function regionMedio(i){if(i.region&&REG_ACT.some(r=>r[0]===i.region))return i.region;
@@ -6718,7 +6724,7 @@ function pintarDatos(){
   pintarListado();
   // equipo y bitácora
   const ag=e.agentes||{};
-  $("#c-bitacora").innerHTML=`<div class="mcab"><h2>Equipo y bitácora</h2><div class="meta">${EQUIPO.length} especialistas</div></div>
+  if($("#c-bitacora"))$("#c-bitacora").innerHTML=`<div class="mcab"><h2>Equipo y bitácora</h2><div class="meta">${EQUIPO.length} especialistas</div></div>
     <div class="equipo">${EQUIPO.map(a=>{const x=ag[a.id]||{};return`<div class="agente"><span class="av" style="--c:${a.c}">${esc(a.n.slice(0,2).toUpperCase())}</span><div><div class="n">${esc(a.n)}</div><div class="r">${esc(a.rol)}</div></div><div class="a">${x.ultima?`${esc(hace(x.ultima))}<br>${x.hallazgos??0} nuevos`:"sin datos"}</div></div>`}).join("")}</div>
     <ol class="bit">${(e.bitacora||[]).slice(0,24).map(b=>{const a=EQUIPO.find(x=>x.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")||'<li><div>Aquí verás qué hace cada especialista en cada barrida.</div></li>'}</ol>`;
   if(st.sel)pintarInsp();
