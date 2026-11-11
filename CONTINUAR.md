@@ -173,3 +173,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v227: oculto el módulo instagram_cuentas («Tus cuentas de Instagram», Metricool en vivo) en la sala Instagram. Negritas ** en errores: tipo «Negrita que no se verá» con propuesta en negrita Unicode.
 - 11/11 v228: oculto instagram_comp (competencia IG).
 - 11/11 v229: oculto i_instagram (Análisis por cuenta).
+- 11/11 v230: oculto instagram_mision (Misión, equipo y valores).
