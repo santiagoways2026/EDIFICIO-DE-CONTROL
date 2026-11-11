@@ -192,3 +192,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11: Radar viral semanal: barrida trig_013z6FCA1GfCMRCBtRpZPAa2 lunes 6:18 y capturas trig_017dRGjrR82zXjgyJqXNpDKe lunes 10:48.
 - 11/11: rutina de exploración de Competencia sin búsqueda de nuevos players; solo best practices (Marcos), semanal lunes 8:13. La pestaña comp_nuevos sigue oculta. La sala Diseño sigue visible y su rutina diaria activa (solo se quitó el botón «Diseño SW» el 9/11).
 - 11/11 (v248): sala Diseño eliminada a petición de Álvaro (las piezas las hace Paula en su sala propia de RRSS). Oculta en los dos edificios (OCULTAS y lista de salas de rrss); los datos diseno_* quedan en la base sin usar. Rutina trig_01RYonFUs4zM5NXtQ7diypuS pausada (no borrada).
+- 11/11: Diseño quitado definitivamente: rutina trig_01RYonFUs4zM5NXtQ7diypuS borrada; Cerebro y Sala de Control ya no leen ni revisan diseno_* (prompts actualizados). Los datos diseno_* siguen en la base sin usar.
