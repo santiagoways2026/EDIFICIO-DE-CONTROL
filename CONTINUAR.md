@@ -182,3 +182,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v236: sala community renombrada «Seguimiento RRSS»; roadmap fuera; insights de community en tarjetas visuales (icono, cifra, acción; texto en tooltip). Ocultos tiktok_mision y tiktok_datos.
 - 11/11 v237: previews de lo más viral más pequeños (16:10, máx. 140 px). En marcha: revisión de errores de todo el histórico de YouTube (subagente; resultado en scratchpad/yterr_hist.json e img/err/yt_*.jpg).
 - 11/11: rutina de capturas del Radar (Tania, trig_017dRGjrR82zXjgyJqXNpDKe) ampliada: además de los 5 de lo más viral, previews de los 120 más recientes de 90 días (máx. 80 por ronda, 360 px). Lanzada a mano el 11/11.
+- 11/11 v238: yt_err/actual con 63 errores del histórico de YouTube (24 alta, 27 media, 12 baja; 56 ES, 7 EN), miniaturas en img/err/yt_*.jpg.
