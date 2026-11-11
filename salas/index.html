@@ -4411,12 +4411,12 @@ function pintarRrssEn(el,vista){if(st.dentro!=="community")return;const D=st.rrs
       ${kpi(igGr(T.p),"publicaciones en 2026",`${igGr(T.s)} son stories`)}
       ${kpi(igGr(T.d),"deals de RRSS en el CRM",`${cHoy?igGr(cHoy[0]):"0"} en ${rrMes(hoyYm)} · Zoho`)}
       ${kpi(igGr(T.w),"deals won",T.a?`${igEur(T.a)} de importe`:"importe pendiente")}
-      ${kpi(igGr(g.t),"visitas a la web desde RRSS",`${gms.length?rrMes(+gms[0])+" a "+rrMes(+gms[gms.length-1]):""} · GA4 del Excel · ${igGr(g.d)} deals`)}</div>`;
+      ${kpi(igGr(g.t),"visitas a la web desde RRSS",`${gms.length?rrMes(+gms[0])+" a "+rrMes(+gms[gms.length-1]):""} · GA4 · ${igGr(g.d)} deals`)}</div>`;
     const filas=MS.map(ym=>{const x=tot(ym),c=crm(ym),ga=G[ym],cr=X.cr_ga4?.[ym],cur=ym===hoyYm;
       return`<tr${cur?' class="ia-fut"':""}><td class="as-n">${rrMes(ym)}${cur?" <small>(en curso)</small>":""}</td><td>${ga?igGr(ga[0]):"–"}</td><td>${ga?igGr(ga[1]):"–"}</td><td>${cr!=null?igPc(cr):"–"}</td>
         <td>${c?igGr(c[0]):"–"}</td><td>${c?c[1]||"–":"–"}</td><td>${c&&c[0]?igPc(c[1]/c[0]):"–"}</td><td>${c&&c[2]?igEur(c[2]):"–"}</td><td>${x?igGr(x[0]):"–"}</td><td>${x?igGr(x[1]):"–"}</td><td>${x&&x[0]?igGr(Math.round(x[1]/x[0])):"–"}</td></tr>`}).join("");
     const pie=`<tr><td class="as-n">Total</td><td>${igGr(g.t)}</td><td>${igGr(g.d)}</td><td>${(()=>{const v=Object.values(X.cr_ga4||{});return v.length?igPc(v.reduce((a,b)=>a+b,0)/v.length)+" <small>prom.</small>":"–"})()}</td><td>${igGr(T.d)}</td><td>${T.w}</td><td>${T.d?igPc(T.w/T.d):"–"}</td><td>${T.a?igEur(T.a):"–"}</td><td>${igGr(T.p)}</td><td>${igGr(T.i)}</td><td>${T.p?igGr(Math.round(T.i/T.p)):"–"}</td></tr>`;
-    const tabla=`<div class="as-tw"><table class="as-t ia-t"><thead><tr><th class="as-n" rowspan="2">Mes</th><th colspan="3">Google Analytics (Excel)</th><th colspan="4">CRM · Zoho</th><th colspan="3">Metricool</th></tr>
+    const tabla=`<div class="as-tw"><table class="as-t ia-t"><thead><tr><th class="as-n" rowspan="2">Mes</th><th colspan="3">Google Analytics</th><th colspan="4">CRM · Zoho</th><th colspan="3">Metricool</th></tr>
       <tr><th>Tráfico</th><th>Deals</th><th>CR deal</th><th>Deals</th><th>Ventas</th><th>CR venta</th><th>Importe</th><th>Publicaciones</th><th>Interacciones</th><th>Int. por publ.</th></tr></thead><tbody>${filas}</tbody><tfoot>${pie}</tfoot></table></div>`;
     const EV=MS.map(ym=>{const c=crm(ym),x=tot(ym),cur=ym===hoyYm;return{n:rrMes(ym),cur,c,x}});
     const graf=`<div class="ia-graf"><div class="ia-g"><h4>Deals de RRSS en el CRM por mes</h4><div class="ia-sub">Deals creados con utm de redes orgánicas (el mes en curso va incompleto)</div>${igLinea(MS,[{n:"Deals",c:"#e879f9",v:MS.map(ym=>crm(ym)?.[0]??null)}])}</div>
@@ -4440,7 +4440,7 @@ function pintarRrssEn(el,vista){if(st.dentro!=="community")return;const D=st.rrs
     cuerpo=`${kpis}${blq}<div class="seccion-t">Evolución mensual</div>${graf}${tabla}<div class="seccion-t">Por red social</div>${tRed}`;
   }else if(V.v==="mensual"){
     const filas=MS.map(ym=>{const ga=G[ym],c=crm(ym),cr=X.cr_ga4?.[ym],cur=ym===hoyYm;return`<tr${cur?' class="ia-fut"':""}><td class="as-n">${rrMes(ym)}${cur?" <small>(en curso)</small>":""}</td><td>${ga?igGr(ga[0]):"–"}</td><td>${ga?igGr(ga[1]):"–"}</td><td>${cr!=null?igPc(cr):"–"}</td><td>${c?igGr(c[0]):"–"}</td><td>${c&&ga?.[0]?igPc(c[0]/ga[0]):"–"}</td><td>${c?c[1]||"–":"–"}</td><td>${c&&c[0]?igPc(c[1]/c[0]):"–"}</td></tr>`}).join("");
-    const t1=`<div class="as-tw"><table class="as-t ia-t"><thead><tr><th class="as-n" rowspan="2">Mes</th><th colspan="3">Google Analytics (Excel)</th><th colspan="4">CRM · Zoho</th></tr><tr><th>Tráfico</th><th>Deals</th><th>CR</th><th>Deals</th><th>Deals / tráfico</th><th>Ventas</th><th>CR venta</th></tr></thead><tbody>${filas}</tbody></table></div>`;
+    const t1=`<div class="as-tw"><table class="as-t ia-t"><thead><tr><th class="as-n" rowspan="2">Mes</th><th colspan="3">Google Analytics</th><th colspan="4">CRM · Zoho</th></tr><tr><th>Tráfico</th><th>Deals</th><th>CR</th><th>Deals</th><th>Deals / tráfico</th><th>Ventas</th><th>CR venta</th></tr></thead><tbody>${filas}</tbody></table></div>`;
     const varF=MS.slice(1).map(ym=>{const a=rrAnt(ym),ga=G[ym],gaA=G[a],c=crm(ym),cA=crm(a),x=tot(ym),xA=tot(a),cur=ym===hoyYm;
       const fin=cur?null:rrFin(ym),sF=cur?hoyTot().t:segTot(fin),sA=segTot(rrFin(a)),dS=sF!=null&&sA!=null?sF-sA:null;
       const dC=rrPv(c?.[0],cA?.[0]),dI=rrPv(x?.[1],xA?.[1]),tx=X.tendencias?.[ym];let ten;
@@ -4513,7 +4513,7 @@ function pintarRrssEn(el,vista){if(st.dentro!=="community")return;const D=st.rrs
       <div class="ia-per">Lecturas de seguidores del 28 abr al 1 oct según el Excel (el 1 oct es el cierre de septiembre) y del 21 oct con el dato de ese día; desde noviembre se registran solas el día 1 de cada mes, como cierre del mes anterior. En «Hoy», atenuado, la última lectura de quien no tiene dato diario. Cuentas propias con el valor exacto de Metricool de ese día (el del Excel, al pasar el ratón).</div>
       ${C1?`<div class="rr-cons"><div class="rr-cc ${C1.cls}"><h4><span class="rr-dot ${C1.cls}"></span>${RR_RED[red]} · ${rrF(C1.fecha)}</h4>${C1.t.map(x=>`<p>${esc(x)}</p>`).join("")}</div></div>`:""}
       ${tabla}
-      ${notas.length?`<div class="seccion-t">Notas del equipo (Excel)</div><div class="rr-notas"><ul>${notas.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`:""}
+      ${notas.length?`<div class="seccion-t">Notas del equipo</div><div class="rr-notas"><ul>${notas.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`:""}
       ${desc.length?`<p class="as-nota">${desc.map(esc).join(" ")}</p>`:""}</details>
       <p class="as-nota">▲▼ frente a la lectura anterior. Pasa el ratón por una barra para ver las cifras.</p>`;
   }else if(V.v==="consolidado"){
@@ -4535,7 +4535,7 @@ function pintarRrssEn(el,vista){if(st.dentro!=="community")return;const D=st.rrs
       <div class="as-tw"><table class="as-t rr-plan"><thead><tr><th class="as-n">Acción</th><th>KPI</th><th>Plataforma</th><th>Fase</th><th>Prioridad</th></tr></thead><tbody>${(p.acciones||[]).map(a=>`<tr><td class="as-n">${esc(a.accion)}</td><td>${esc(a.kpi)}</td><td>${esc(a.plataforma)}</td><td>${esc(a.fase)}</td><td><span class="rr-dot ${rrDot(a.prioridad)}"></span>${esc(rrSinIco(a.prioridad))}</td></tr>`).join("")}</tbody></table></div>`).join("")}`;
   }
   const LM=D.lectura_mensual||{};
-  el.innerHTML=`<div class="mcab"><div><h2>${vista==="comp"?"Competencia en redes":"Resumen ejecutivo"}</h2><div class="fuente-mc" style="margin-top:6px">${esc(X.archivo||"Excel de seguimiento")} en vivo: Metricool (11 cuentas propias y competidores), Zoho CRM y lecturas de fin de mes</div></div><div class="meta">${estado}</div></div>
+  el.innerHTML=`<div class="mcab"><div><h2>${vista==="comp"?"Competencia en redes":"Resumen ejecutivo"}</h2><div class="fuente-mc" style="margin-top:6px">Metricool (11 cuentas propias y competidores), Zoho CRM y GA4 · se actualiza lunes y jueves</div></div><div class="meta">${estado}</div></div>
     <div class="ia-per">${MS.length?`De enero a ${rrMesL(hoyYm)} de ${Math.floor(hoyYm/100)} (${rrMesL(hoyYm)} en curso).`:""} CRM de Zoho del ${esc(rrF(String(CRM.fecha).slice(0,10)))}. Próxima lectura de competidores: ${esc(rrF(LM.proxima||""))}.</div>
     ${false&&(D.avisos||[]).length?`<div class="rr-aviso">⚠ Rutina nocturna: ${D.avisos.map(esc).join("; ")}.${D.avisos.some(x=>/conector/i.test(x))?" Hay que añadir los conectores de Metricool y Zoho CRM a la rutina «Seguimiento RRSS» en claude.ai; mientras, Metricool se lee en vivo al abrir la página y el CRM se queda en la última carga.":""}</div>`:""}
     ${cuerpo}
