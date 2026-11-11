@@ -1584,7 +1584,7 @@ const MARCOS=[
   {id:"cr_tiempo",grupo:"cr",dato:true,nombre:"CR / Tiempo hasta el presupuesto",x:0,y:-9000,w:1300},
   {id:"cr_plan",grupo:"cr",dato:true,nombre:"CR / Plan de mejora",x:0,y:-9000,w:1300},
 ];
-/* Análisis de producto: eliminada de momento (petición de Álvaro) */
+/* Análisis de producto y Diseño: eliminadas (petición de Álvaro; Diseño lo lleva Paula en su sala de RRSS) */
 for(let i=MARCOS.length-1;i>=0;i--)if(["producto","mdirecto"].includes(MARCOS[i].grupo))MARCOS.splice(i,1);
 MARCOS.forEach(m=>{if(m.dato)m.sala=m.grupo});
 /* Planta del edificio: salas más separadas */
@@ -1595,7 +1595,7 @@ const POS={captacion:[3400,1600],instagram:[-3600,-2600],youtube:[-2000,-2600],t
 const EDIFICIO=document.querySelector('meta[name="edificio"]')?.content||"camino";
 const EDIFICIOS={
   camino:{titulo:"Salas del Camino",ocultas:["diseno","brand","fidelizacion"],pasillosNo:["pa8","pa9","pa50","pa52","pr1","pr2","pr3"]},
-  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia","diseno"],pos:{diseno:[-5200,-900]},
+  rrss:{titulo:"RRSS · Santiago Ways",salas:["instagram","youtube","tiktok","community","radar","competencia"],
     pasillos:["pa11","pa22","pa32","pa28","pa20","pa33","pa29","pr1","pr2","pr3"],modsNo:["cambios","comp_nuevos","comp_bp"],
     fachada:{x:-5550,y:-3350,w:8500,h:3750,ex:-1900,ey:280}}};
 const ED=EDIFICIOS[EDIFICIO]||EDIFICIOS.camino;
@@ -1694,7 +1694,7 @@ const PERSONALIDAD={
   ventas:{c:"#fb7185",caracter:"La caja",lema:"Cada viaje vendido, cada euro cuenta",ambiente:"Una caja registradora antigua, un calendario de pared con los doce meses y dos líneas que suben mes a mes: 2025 y 2026",tono:"Eres claro y numérico: hablas de viajes vendidos, importe de viajes vendidos, ticket medio y variación frente al año pasado, siempre con el dato de Zoho Analytics delante.",suelo:"velas",obj:"grafico"},
   comercial:{c:"#818cf8",caracter:"La lonja",lema:"Del presupuesto a la reserva",ambiente:"Campana de ventas, embudo en la pared y un teléfono que no para",tono:"Eres comercial y orientado al cierre: embudo, tiempos de respuesta, objeciones y reservas.",suelo:"embudo",obj:"campana"},
 };
-const OCULTAS=[...new Set(["comunidad","producto","mdirecto",...(ED.ocultas||[]),...(ED.salas?MARCOS.filter(m=>!m.dato&&!ED.salas.includes(m.id)).map(m=>m.id):[])])];
+const OCULTAS=[...new Set(["comunidad","producto","mdirecto","diseno",...(ED.ocultas||[]),...(ED.salas?MARCOS.filter(m=>!m.dato&&!ED.salas.includes(m.id)).map(m=>m.id):[])])];
 {const s=document.createElement("style");s.textContent=OCULTAS.map(id=>`#m-${id}{display:none!important}`).join("");document.head.appendChild(s)}
 document.title=ED.titulo;{const h=document.getElementById("edTitulo");if(h)h.textContent=ED.titulo}
 const visibles=()=>MARCOS.filter(m=>!OCULTAS.includes(m.grupo)&&(!m.dato||st.dentro===m.sala));
