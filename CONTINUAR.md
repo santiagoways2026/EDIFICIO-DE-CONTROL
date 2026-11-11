@@ -176,3 +176,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v230: oculto instagram_mision (Misión, equipo y valores).
 - 11/11 v231: dash IG: cajas de captación (2×2) a la izquierda y gráfica de deals/ventas a la derecha (.igc-lado).
 - 11/11 v232: ventas IG a igualdad de días (ig_dash.capt_corte: won del mes anterior con cierre hasta el mismo día; Zoho CRM runReport Stage×Language×mes con date_filter Closing_Date; hay que refrescarlo a mano cada mes). Capitalización renombrada a Ventas. Errores: fuera resumen, chips y patrones.
+- 11/11 v233: YouTube: dash nuevo con filtro Ambos/ES/EN (suscriptores, visualizaciones, deals youtube_org de youtube_deals/actual, clics no disponibles), ranking al estilo IG (YT_FIC, por formato, tabla por tema con puestos, tarjetas pequeñas, mismo filtro). Ocultos youtube_mision y youtube_datos.
