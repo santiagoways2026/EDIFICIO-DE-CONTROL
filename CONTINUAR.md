@@ -164,3 +164,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v218: IG captación filtra por idioma (ig_dash.capt_idioma desde Zoho CRM runReport matrix Utm_Source=instagram_org × Language × Stage × mes; refrescar a mano); evolución mensual IG en una sola gráfica de barras por colores (escala log, 13 meses).
 - 11/11 v219: ranking de posts (IG y TikTok, pintarRsRanking): hallazgos solo con titular + icono + previews grandes; sugerencias en lista con iconos; tablas por formato/tipo sustituidas por filas con los 6 mejores previews; tarjetas con 4 KPIs en iconos.
 - 11/11 v220: evolución mensual IG en una gráfica de líneas (una por métrica, colores, escala log, todo el periodo); igLinea admite 4º parámetro log.
+- 11/11 v221: evolución IG: en Todos, gráfica original por cuenta con botones de métrica; con ES/EN/DE, líneas por métrica de ese mercado.

@@ -5249,8 +5249,9 @@ function pintarIgDash(){const el=document.getElementById("c-instagram_dash");if(
    ${igCapt()}<div class="ig-cuentas" style="display:none">${(D.cuentas||[]).filter(c=>ok(c.n)).map(c=>`<div class="ig-cta" style="--c:${IG_COL[c.n]||"#e1306c"}"><div class="ig-ch"><b>${esc(c.n)}</b><span>${esc(c.cuenta)}</span></div>
      <div class="ig-big">${igGr(c.seg)}<small>seguidores</small></div>
      <div class="ig-kv">${(c.kpis||[]).map(k=>`<span>${esc(k[0])}<b>${esc(k[1])}</b></span>`).join("")}</div></div>`).join("")}</div>
-   <div class="seccion-t">Evolución mensual</div>
-   <div class="ig-graf">${igBarMet(M,mets,ok)}</div>
+   <div class="seccion-t">Evolución mensual${V.idi==="todos"?" por cuenta":" · "+esc(V.idi)}</div>
+   ${V.idi==="todos"?`<div class="as-modo" style="padding:0 20px">${mets.map(([k,n])=>`<button class="btn${V.met===k?" prim":""}" data-igdm="${k}">${n}</button>`).join("")}</div>
+   <div class="ig-graf">${igLinea(M.meses||[],ser)}</div>`:`<div class="ig-graf">${igBarMet(M,mets,ok)}</div>`}
    ${M.nota?`<p class="as-nota">${esc(M.nota)}</p>`:""}
    ${MC?`<div class="seccion-t">Actividad real de la cuenta cada mes (${metC==="inter"?"interacciones":"visualizaciones"})</div><div class="ig-graf">${igLinea(MC.meses,serC)}</div><p class="as-nota">${esc(MC.nota||"")}</p>`:""}
    <div class="seccion-t">Lo más importante</div><ul class="sint-ls igc-cl">${(D.claves||[]).map(s=>`<li title="${esc(s)}"><span>${/cae|baja|menos|peor|pierde|ca[ií]da|no despega|solo hubo/i.test(s)?"📉":/audiencia|edad|mujeres/i.test(s)?"👥":/formato|carrusel|reel|imagen/i.test(s)?"🎞️":/sube|crece|gan[aó]|mejor|pico|r[eé]cord|motor/i.test(s)?"📈":sintIc(s)}</span>${esc(sintCorta(s,120))}</li>`).join("")}</ul>
