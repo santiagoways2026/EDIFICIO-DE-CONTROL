@@ -190,3 +190,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v246: Seguimiento RRSS con pestañas generales: Resumen ejecutivo (community_rrss), Competencia (community_rrcomp) e Insights; pintarRrssEn(el,vista).
 - 11/11 v247: el Excel de RRSS ya no se usa; el dash es la herramienta. Rutina trig_018mkEx8zPfDFUQHspni8eYb reactivada lunes y jueves 9:37 en esta sesión: Metricool, Zoho CRM y Windsor GA4 (si está), y refresca crm_corte, ig capt_corte.mes, youtube/tiktok_deals.corte y filas. Quitadas las menciones al Excel en la cabecera.
 - 11/11: Radar viral semanal: barrida trig_013z6FCA1GfCMRCBtRpZPAa2 lunes 6:18 y capturas trig_017dRGjrR82zXjgyJqXNpDKe lunes 10:48.
+- 11/11: rutina de exploración de Competencia sin búsqueda de nuevos players; solo best practices (Marcos), semanal lunes 8:13. La pestaña comp_nuevos sigue oculta. La sala Diseño sigue visible y su rutina diaria activa (solo se quitó el botón «Diseño SW» el 9/11).
