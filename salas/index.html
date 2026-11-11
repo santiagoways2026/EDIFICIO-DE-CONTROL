@@ -1243,7 +1243,7 @@ html[data-tema=sw] .oai-anu{background:#fff;border-color:#E3EBD0}
 @media (max-width:760px){.oai-anus{grid-template-columns:1fr}}
 @media (max-width:520px){#panel .k-grid.ytd-k,#panel.full .k-grid.ytd-k{grid-template-columns:minmax(0,1fr)!important}}
 .ytd-l{fill:none;stroke-width:2.5;stroke-linejoin:round}
-.ytd-l.ytd-es{stroke:var(--ytd-es)}.ytd-l.ytd-en{stroke:var(--ytd-en)}.ytd-l.ytd-prev{stroke:currentColor;stroke-opacity:.4;stroke-dasharray:5 4;stroke-width:2}
+.ytd-l.ytd-es{stroke:var(--ytd-es)}.ytd-l.ytd-en{stroke:var(--ytd-en)}.ytd-l.tkd{stroke:#25f4ee}.ytd-p.tkd{fill:#25f4ee}.ytd-lt.tkd{fill:#25f4ee}.ytd-l.ytd-prev{stroke:currentColor;stroke-opacity:.4;stroke-dasharray:5 4;stroke-width:2}
 .ytd-p.ytd-es{fill:var(--ytd-es)}.ytd-p.ytd-en{fill:var(--ytd-en)}.ytd-p.ytd-prev{fill:currentColor;fill-opacity:.45}
 .ytd-lt{font-size:13px;font-weight:700}.ytd-lt.ytd-es{fill:var(--ytd-es)}.ytd-lt.ytd-en{fill:var(--ytd-en)}.ytd-lt.ytd-prev{fill:currentColor;fill-opacity:.6}
 #c-community_rrss{--rr-b:#3987e5;--rr-own:#3ddc97;--rr0:#3987e5;--rr1:#d95926;--rr2:#a78bfa;--rr3:#e8b93a;--rr4:#e879f9;--rr5:#22d3ee;--rr6:#9aa3ad}
@@ -1509,6 +1509,8 @@ const MARCOS=[
   {id:"instagram_dash",grupo:"instagram",dato:true,nombre:"Instagram / Dash general",x:0,y:-9000,w:1300},
   {id:"instagram_capt",grupo:"instagram",dato:true,nombre:"Instagram / Ventas",x:0,y:-9000,w:1300},
   {id:"instagram_errores",grupo:"instagram",dato:true,nombre:"Instagram / Errores",x:0,y:-9000,w:1300},
+  {id:"youtube_errores",grupo:"youtube",dato:true,nombre:"YouTube / Errores",x:0,y:-9000,w:1300},
+  {id:"tiktok_errores",grupo:"tiktok",dato:true,nombre:"TikTok / Errores",x:0,y:-9000,w:1300},
   {id:"control_negocio",grupo:"control",dato:true,nombre:"Sala de Control / Cuadro de mando de negocio",x:0,y:-9000,w:1300},
   {id:"d_insp",grupo:"diseno",dato:true,nombre:"Diseño / Inspiración: piezas aprobadas",x:0,y:-9000,w:1300},
   {id:"seo_roadmap",grupo:"seo",dato:true,nombre:"SEO / Roadmap",x:0,y:-9000,w:1300},
@@ -1613,6 +1615,8 @@ MARCOS.push({id:"seo_red",grupo:"seo",dato:true,nombre:"SEO / SEO para cada sala
 MARCOS.push({id:"seo_blog",grupo:"seo",dato:true,nombre:"SEO / Blog: captación por URL",x:0,y:-9000,w:1300});SALAS_ACT.seo.splice(1,0,"seo_blog");
 MARCOS.push({id:"community_rrss",grupo:"community",dato:true,nombre:"Community / Seguimiento RRSS",x:0,y:-9000,w:1300});SALAS_ACT.community.splice(1,0,"community_rrss");
 MARCOS.push({id:"youtube_dash",grupo:"youtube",sala:"youtube",dato:true,nombre:"YouTube / Dashboard de canales",x:0,y:-9000,w:1300});SALAS_ACT.youtube.splice(1,0,"youtube_dash");
+MARCOS.push({id:"tiktok_dash",grupo:"tiktok",sala:"tiktok",dato:true,nombre:"TikTok / Dashboard de cuentas",x:0,y:-9000,w:1300});SALAS_ACT.tiktok.splice(1,0,"tiktok_dash");
+SALAS_ACT.youtube.splice(3,0,"youtube_errores");SALAS_ACT.tiktok.splice(3,0,"tiktok_errores");
 MARCOS.push({id:"seo_brecha",grupo:"seo",dato:true,nombre:"SEO / Brecha de palabras clave",x:0,y:-9000,w:1300},{id:"seo_tecnico",grupo:"seo",dato:true,nombre:"SEO / SEO técnico",x:0,y:-9000,w:1300});SALAS_ACT.seo.splice(1,0,"seo_brecha","seo_tecnico");
 MARCOS.push({id:"plan_itpt",grupo:"control",dato:true,nombre:"Sala de Control / Plan de contingencia IT y PT",x:0,y:-9000,w:1300});SALAS_ACT.control.splice(1,0,"plan_itpt");
 MARCOS.push({id:"comp_itpt",grupo:"competencia",dato:true,directo:true,nombre:"Competencia / Mercados IT y PT",x:0,y:-9000,w:1300});SALAS_ACT.competencia.splice(1,0,"comp_itpt");
@@ -1621,7 +1625,7 @@ MARCOS.push({id:"control_instagram",grupo:"control",dato:true,directo:true,nombr
 SALAS_ACT.openaiads=["openaiads","oai_dash","oai_camp","oai_anu","oai_crm","oai_plan"];SALAS_ACT.bingads=["bingads","bing_dash","bing_camp","bing_crm","bing_plan"];SALAS_ACT.cro=["cro","cro_dash","cro_backlog","cro_tests","cro_analytics","cro_result"];
 /* Las directrices entre salas (Desde SEO, SEO para cada sala, brief de Control a Diseño) siguen circulando por la base de datos y las rutinas, pero sin pestaña.
    En YouTube, la auditoría y la estrategia Hub & Spoke quedan retiradas de momento */
-const MODS_OCULTOS=new Set(["youtube_mision","youtube_datos","instagram_cuentas","instagram_comp","i_instagram","instagram_mision","listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
+const MODS_OCULTOS=new Set(["youtube_roadmap","youtube_mision","youtube_datos","instagram_cuentas","instagram_comp","i_instagram","instagram_mision","listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
 for(let i=MARCOS.length-1;i>=0;i--)if(MODS_OCULTOS.has(MARCOS[i].id))MARCOS.splice(i,1);
 Object.values(SALAS_ACT).forEach(a=>{for(let i=a.length-1;i>=0;i--)if(MODS_OCULTOS.has(a[i]))a.splice(i,1)});
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
@@ -5307,7 +5311,26 @@ function pintarIgErr(){const el=document.getElementById("c-instagram_errores");i
      <p class="ig-mal" style="white-space:pre-line"><span>Pone</span>${esc(x.mal)}</p><p class="ig-bien" style="white-space:pre-line"><span>Debería poner</span>${esc(x.bien)}</p>${x.nota?`<p class="ig-nota">${esc(x.nota)}</p>`:""}
      ${x.url?`<a class="btn" href="${esc(x.url)}" target="_blank" rel="noopener">Abrir en Instagram ↗</a>`:""}</div></div>`).join("")||`<div class="vacio">Sin errores con estos filtros.</div>`}</div>
    <p class="as-nota">${esc(D.nota||"")}</p>`}
-document.addEventListener("change",e=>{const s=e.target.closest("[data-igef]");if(s&&st.igEV){st.igEV[s.dataset.igef]=s.value;pintarIgErr()}});
+function pintarErrRed(R){const RN={youtube:"YouTube",tiktok:"TikTok"}[R],DK={youtube:"ytErr",tiktok:"tkErr"}[R],VK=DK+"V";const el=document.getElementById("c-"+R+"_errores");if(!el||st.dentro!==R)return;const D=st[DK];
+  if(!D){el.innerHTML=`<div class="mcab"><div><h2>Errores</h2></div></div><div class="vacio">Revisando los vídeos programados y publicados.</div>`;return}
+  const V=st[VK]||(st[VK]={cuenta:"todas",tipo:"todos",gravedad:"todas",donde:"todos"}),all=D.items||[];
+  const L=all.filter(x=>(V.cuenta==="todas"||x.cuenta===V.cuenta)&&(V.tipo==="todos"||x.tipo===V.tipo)&&(V.gravedad==="todas"||x.gravedad===V.gravedad)&&(V.donde==="todos"||x.donde===V.donde));
+  const sel=(k,n,vs,def)=>`<label>${n} <select data-igef="${R}|${k}"><option value="${def}">${def==="todas"?"Todas":"Todos"}</option>${vs.map(v=>`<option${V[k]===v?" selected":""}>${esc(v)}</option>`).join("")}</select></label>`;
+  el.innerHTML=`<div class="mcab"><div><h2>Errores en las publicaciones</h2><div class="fuente-mc" style="margin-top:6px">${esc(D.fuente||"")}</div></div><div class="meta">${D.fecha?`revisado ${esc(hace(D.fecha))}`:""}</div></div>
+   
+   <div class="ig-idi">${["todas",...new Set(all.map(x=>x.cuenta))].sort().map(c=>`<button class="btn${V.cuenta===c?" prim":""}" data-errc="${R}|${esc(c)}">${c==="todas"?"Ambos":esc(c.replace(RN+" ",""))}</button>`).join("")}</div>
+   ${V.cuenta==="todas"?`<div class="as-res">${(D.kpis||[]).map(k=>`<div><b>${esc(k[1])}</b><span>${esc(k[0])}</span></div>`).join("")}</div>`:(()=>{const S=all.filter(x=>x.cuenta===V.cuenta),g=k=>S.filter(x=>x.gravedad===k).length;return`<div class="as-res"><div><b>${S.length}</b><span>errores en ${esc(V.cuenta)}</span></div><div><b>${new Set(S.map(x=>x.url)).size}</b><span>publicaciones con errores</span></div><div><b>${g("alta")}</b><span>de gravedad alta</span></div><div><b>${g("media")}</b><span>de gravedad media</span></div><div><b>${g("baja")}</b><span>de gravedad baja</span></div></div>`})()}
+   ${false?`<div class="seccion-t">Lo que más se repite</div><ol class="ma-sug">${D.patrones.filter(x=>V.cuenta==="todas"||!/^(DE|EN|ES):/.test(x)||x.includes(V.cuenta.replace("Instagram ","")+":")).map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:""}
+   <div class="seccion-t">Errores uno a uno (${L.length})</div>
+   <div class="ma-ctl">${sel("tipo","Tipo",[...new Set(all.map(x=>x.tipo))].sort(),"todos")}${sel("gravedad","Gravedad",["alta","media","baja"],"todas")}${sel("donde","Dónde",["Creatividad","Texto del post"],"todos")}</div>
+   <div class="ig-errs">${L.map(x=>`<div class="ig-err" style="--g:${IG_GRAV[x.gravedad]||"#8fb3ff"}"><a class="yr-img rs-q3 rs-instagram"${x.url?` href="${esc(x.url)}" target="_blank" rel="noopener"`:""}>${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy">`:igSpr(D,x)}</a>
+     <div class="ig-ed"><div class="ig-et"><span class="ig-g">${esc(x.gravedad)}</span><b>${esc(x.tipo)}</b><small>${esc(x.cuenta)} · ${x.estado?esc(x.estado)+" ":""}${esc(fchE(x.fecha))}${x.hora?" a las "+esc(x.hora):""} · ${esc(x.donde)}</small></div>
+     <p class="ig-mal" style="white-space:pre-line"><span>Pone</span>${esc(x.mal)}</p><p class="ig-bien" style="white-space:pre-line"><span>Debería poner</span>${esc(x.bien)}</p>${x.nota?`<p class="ig-nota">${esc(x.nota)}</p>`:""}
+     ${x.url?`<a class="btn" href="${esc(x.url)}" target="_blank" rel="noopener">Abrir en ${RN} ↗</a>`:""}</div></div>`).join("")||`<div class="vacio">${all.length?"Sin errores con estos filtros.":"✅ Sin errores detectados en "+RN+"."}</div>`}</div>
+   <p class="as-nota">${esc(D.nota||"")}</p>`}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-errc]");if(!b)return;const[R,c]=b.dataset.errc.split("|"),VK={youtube:"ytErrV",tiktok:"tkErrV"}[R];if(st[VK]){st[VK].cuenta=c;pintarErrRed(R)}});
+document.addEventListener("change",e=>{const s=e.target.closest("[data-igef]");if(!s||!s.dataset.igef.includes("|"))return;const[R,k]=s.dataset.igef.split("|"),VK={youtube:"ytErrV",tiktok:"tkErrV"}[R];if(st[VK]){st[VK][k]=s.value;pintarErrRed(R)}});
+document.addEventListener("change",e=>{const s=e.target.closest("[data-igef]");if(s&&st.igEV&&!s.dataset.igef.includes("|")){st.igEV[s.dataset.igef]=s.value;pintarIgErr()}});
 /* ===== Instagram y TikTok: ranking de publicaciones por formato y tema (como el de YouTube) ===== */
 const RS_RANK={instagram:{mod:"instagram_ranking",doc:"igRank",red:"Instagram",dir:"img/ig/rank/"},tiktok:{mod:"tiktok_ranking",doc:"tkRank",red:"TikTok",dir:"img/tk/rank/"}};
 const RS_FIC={Reel:`<svg viewBox="0 0 48 48" width="40" height="40"><defs><linearGradient id="fgR" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".65" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect x="4" y="4" width="40" height="40" rx="11" fill="url(#fgR)"/><path d="M4 16h40" stroke="#fff" stroke-width="2.4"/><path d="M15 4l6 12M27 4l6 12" stroke="#fff" stroke-width="2.4"/><path d="M20 22.5v13l11-6.5z" fill="#fff"/></svg>`,
@@ -5461,6 +5484,37 @@ function pintarYtDash(){const el=document.getElementById("c-youtube_dash");if(!e
     <figure><figcaption>🔗 Clics en enlaces</figcaption><div class="vacio" style="margin:10px 0">Metricool y la API de YouTube no dan los clics en los enlaces de la descripción. Para medirlos hace falta conectar GA4 (visitas con utm_source youtube_org) o usar enlaces acortados con contador. Mientras tanto, los deals de la gráfica de al lado son el resultado final de esos clics.</div></figure>
    </div><p class="as-nota">Fuente: ${esc(D?.fuente||"Metricool · YouTube Evolution")} y Zoho CRM. YouTube redondea los suscriptores de los canales con más de 1.000.</p>`}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-ytdc]");if(b&&st.ytdV){st.ytdV.c=b.dataset.ytdc;pintarYtDash();try{pintarYtRanking()}catch(_){}}});
+/* ===== TikTok: dashboard de las cuentas ES y EN (Metricool en vivo) y deals de tiktok_org (Zoho) ===== */
+const TKD_C=[{id:"es",n:"ES",brand:"3306533"},{id:"en",n:"EN",brand:"3306535"}],TKD_M=["TKEV07","TKEV12","TKEV01","TKEV09"],tkd={subs:false,guardado:false,t:0};
+function tkdSuscribir(){if(tkd.subs||!mc.mcp)return;tkd.subs=true;const y=new Date().getFullYear(),to=new Date().toISOString().slice(0,10)+"T23:59:59+00:00";
+  const cb=k=>ev=>{if(ev.type==="data"){const pl=ev.result.payload;mc.datos[k]={rows:Array.isArray(pl?.rows)?pl.rows:[],at:ev.result.cache?.storedAt||Date.now()};delete mc.err[k]}else{mc.err[k]=ev.error;if(DENEGADOS.includes(ev.error.code))delete mc.datos[k]}if(!tkd.t)tkd.t=setTimeout(()=>{tkd.t=0;pintarTkDash()},300)};
+  TKD_C.forEach(c=>mc.mcp.watchTool(MC,MCT,{brandId:c.brand,from:y+"-01-01T00:00:00+00:00",to,metrics:TKD_M},cb("tkd:"+c.id),{refetchInterval:60*60000}))}
+function tkdGuardar(){if(tkd.guardado||!st.db)return;const L=TKD_C.map(c=>mc.datos["tkd:"+c.id]?.rows);if(L.some(r=>!r||!r.length))return;tkd.guardado=true;if(st.tkDash?.fecha&&diaMad(st.tkDash.fecha)===diaMad(Date.now()))return;
+  st.db.doc("tiktok_dash/actual").set({fecha:new Date().toISOString(),fuente:"Metricool · TikTok Evolution: seguidores, visualizaciones, vídeos y visitas al perfil por día",filas:{es:L[0],en:L[1]}}).catch(()=>{})}
+function tkdSerie(rows){const d=[];for(const r of rows||[]){const f=String(r[4]||"");if(f.length!==8)continue;d.push({f,v:r.slice(0,4).map(z=>z==null||z===""?null:+z)})}d.sort((a,b)=>a.f.localeCompare(b.f));const M={};
+  for(const{f,v}of d){const ym=+f.slice(0,6),o=M[ym]||(M[ym]={ym,fol:null,vis:0,vid:0,pv:0});if(v[0]>=100)o.fol=v[0];o.vis+=v[1]||0;o.vid+=v[2]||0;o.pv+=v[3]||0}
+  return{d,meses:Object.values(M).sort((a,b)=>a.ym-b.ym),fol:d.filter(x=>x.v[0]>=100).map(x=>[x.f,x.v[0]])}}
+function pintarTkDash(){const el=document.getElementById("c-tiktok_dash");if(!el||st.dentro!=="tiktok")return;tkdSuscribir();tkdGuardar();
+  const y=new Date().getFullYear(),hoyYm=+new Date().toISOString().slice(0,7).replace("-",""),D=st.tkDash,vivo=TKD_C.some(c=>mc.datos["tkd:"+c.id]),filas=k=>mc.datos["tkd:"+k]?.rows||D?.filas?.[k]||[];
+  const C=TKD_C.map(c=>({...c,...tkdSerie(filas(c.id))})).filter(c=>c.d.length);
+  const cab=`<div class="mcab"><div><h2>Dashboard de cuentas</h2><div class="fuente-mc" style="margin-top:6px">Metricool${vivo?" en vivo":""} · TikTok ES y EN · ${y}</div></div><div class="meta">${vivo?"datos de Metricool en vivo":D?.fecha?`copia del ${esc(hace(D.fecha))}`:""}</div></div>`;
+  if(!C.length){const e=TKD_C.map(c=>mc.err["tkd:"+c.id]).find(Boolean);el.innerHTML=cab+`<div class="vacio">${e?"No se pudo leer Metricool: "+esc(e.message||e.code||"error"):mc.mcp?"Leyendo las cuentas en Metricool…":"Abre la página desde claude.ai con Metricool conectado para ver las cuentas."}</div>`;return}
+  const V=st.tkdV||(st.tkdV={c:"ambos"}),sel=C.filter(c=>V.c==="ambos"||c.id===V.c),pc=x=>x==null||!isFinite(x)?"–":(x>0?"+":"")+(x*100).toFixed(1).replace(".",",")+" %",sg=n=>(n>0?"+":"")+igGr(n);
+  const btn=`<div class="ig-idi">${[["ambos","Ambos"],["es","ES"],["en","EN"]].map(([k,n])=>`<button class="btn${V.c===k?" prim":""}" data-tkdc="${k}">${n}</button>`).join("")}</div>`;
+  const fs=[...new Set(sel.flatMap(c=>c.fol.map(p=>p[0])))].sort(),ul={},pts=[];for(const f of fs){sel.forEach(c=>{const q=c.fol.find(z=>z[0]===f);if(q)ul[c.id]=q[1]});if(sel.every(c=>ul[c.id]!=null))pts.push([f,sel.reduce((t,c)=>t+ul[c.id],0)])}
+  const yms=[...new Set(sel.flatMap(c=>c.meses.map(m=>m.ym)))].sort(),sm=(ym,k)=>sel.reduce((t,c)=>t+(c.meses.find(m=>m.ym===ym)?.[k]||0),0);
+  const visM=yms.map(ym=>({n:MESN[ym%100-1],v:sm(ym,"vis"),cur:ym===hoyYm,s:sm(ym,"vid")?sm(ym,"vid")+" víd.":"",tt:`${RR_ML[ym%100-1]}: ${igGr(sm(ym,"vis"))} visualizaciones · ${sm(ym,"vid")} vídeos`})),pvM=yms.map(ym=>({n:MESN[ym%100-1],v:sm(ym,"pv"),cur:ym===hoyYm,tt:`${RR_ML[ym%100-1]}: ${igGr(sm(ym,"pv"))} visitas al perfil`}));
+  const DF=st.tkDeals?.filas||{},dl=ym=>["es","en"].filter(k=>V.c==="ambos"||k===V.c).reduce((t,k)=>{const x=DF[k]?.[String(ym)];return[t[0]+(x?.[0]||0),t[1]+(x?.[1]||0)]},[0,0]);
+  const ymsD=[];for(let m=1;m<=hoyYm%100;m++)ymsD.push(y*100+m);const dM=ymsD.map(ym=>{const x=dl(ym);return{n:MESN[ym%100-1],v:x[0],cur:ym===hoyYm,s:x[1]?x[1]+" won":"",tt:`${RR_ML[ym%100-1]}: ${x[0]} deals · ${x[1]} won`}}),dT=ymsD.reduce((t,ym)=>{const x=dl(ym);return[t[0]+x[0],t[1]+x[1]]},[0,0]);
+  const dd=sel.flatMap(c=>c.d),v30=sel.reduce((t,c)=>t+c.d.slice(-30).reduce((a,x)=>a+(x.v[1]||0),0),0),v30p=sel.reduce((t,c)=>t+c.d.slice(-60,-30).reduce((a,x)=>a+(x.v[1]||0),0),0),f0=pts[0]?.[1],f1=pts[pts.length-1]?.[1];
+  const kp=`<div class="as-res"><div><b>${f1!=null?igGr(f1):"–"}</b><span>seguidores</span></div><div><b>${f1!=null&&f0!=null?sg(f1-f0):"–"}</b><span>seguidores nuevos en ${y}</span></div><div><b>${rrCorto(v30)}</b><span>visualizaciones en 30 días${v30p?" · "+pc((v30-v30p)/v30p)+" frente a los 30 anteriores":""}</span></div><div><b>${igGr(dT[0])}</b><span>deals desde TikTok en ${y} · ${dT[1]} won</span></div><div><b>${igGr(dd.reduce((t,x)=>t+(x.v[2]||0),0))}</b><span>vídeos publicados en ${y}</span></div></div>`;
+  el.innerHTML=cab+btn+kp+`<div class="ytd-g ytd-4" style="--rr-b:#25f4ee">
+    <figure><figcaption>👥 Seguidores</figcaption>${pts.length?ytdLinea([{n:V.c==="ambos"?"ES + EN":V.c.toUpperCase(),cls:"tkd",pts}],pts[0][0],pts[pts.length-1][0],"Seguidores de TikTok"):""}</figure>
+    <figure><figcaption>▶️ Visualizaciones por mes${visM.some(m=>m.cur)?" (* mes en curso)":""}</figcaption>${rrBarras(visM,"Visualizaciones por mes")}</figure>
+    <figure><figcaption>🤝 Deals desde TikTok por mes</figcaption>${rrBarras(dM,"Deals desde TikTok por mes")}<p class="as-nota" style="margin:4px 0 0">Zoho CRM, utm_source tiktok_org.</p></figure>
+    <figure><figcaption>🔗 Visitas al perfil por mes</figcaption>${rrBarras(pvM,"Visitas al perfil por mes")}<p class="as-nota" style="margin:4px 0 0">TikTok no da los clics en el enlace de la bio; las visitas al perfil son el paso previo.</p></figure>
+   </div><p class="as-nota">Fuente: Metricool · TikTok Evolution y Zoho CRM.</p>`}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tkdc]");if(b&&st.tkdV){st.tkdV.c=b.dataset.tkdc;pintarTkDash()}});
 /* ===== Viajes vendidos: número e importe de viajes vendidos, 2025 frente a 2026 ===== */
 const VE_IDI={English:"Inglés (EN)",Spanish:"Español (ES)",German:"Alemán (DE)",Italian:"Italiano (IT)",Portuguese:"Portugués (PT)"},VE_COL={a:"#7c86e8",b:"#7AA606"};
 const veSQL=dia=>[`select year("Created Time")*100+month("Created Time") as ym, "Language" as idioma, count(*) as viajes, sum("Trip Amount") as importe, sum(case when dayofmonth("Created Time")<=${dia} then 1 else 0 end) as viajes_corte, sum(case when dayofmonth("Created Time")<=${dia} then "Trip Amount" else 0 end) as importe_corte, sum("People") as personas from "Viajes" where "Created Time" >= '2025-01-01' group by 1,2`];
@@ -7018,8 +7072,8 @@ document.addEventListener("click",e=>{let t=e.target.closest("[data-pcmord]");if
 const SUBS_SALA={
   googleads:[["gads_pmax","gadsPmax"],["gads_camp","gadsCamp"],["gads_kw","gadsKw"],["gads_anu","gadsAnu"],["gads_med","gadsMed"],["gads_utm","gadsUtm"]].map(([c,k])=>[c+"/actual",k,()=>pintarGads()]).concat([["paid_cm/actual","paidCm",()=>pintarPaidCM("google")]]),
   instagram:[["ig_ranking/actual","igRank",()=>pintarRsRanking("instagram")],["ig_dash/actual","igDash",()=>pintarIgDash()],["ig_capt/actual","igCapt",()=>pintarIgCapt()],["ig_err/actual","igErr",()=>pintarIgErr()]],
-  tiktok:[["tk_ranking/actual","tkRank",()=>pintarRsRanking("tiktok")]],
-  youtube:[["youtube_dash/actual","ytDash",()=>pintarYtDash()],["youtube_deals/actual","ytDeals",()=>pintarYtDash()]],
+  tiktok:[["tk_ranking/actual","tkRank",()=>pintarRsRanking("tiktok")],["tiktok_dash/actual","tkDash",()=>pintarTkDash()],["tiktok_deals/actual","tkDeals",()=>pintarTkDash()],["tk_err/actual","tkErr",()=>pintarErrRed("tiktok")]],
+  youtube:[["youtube_dash/actual","ytDash",()=>pintarYtDash()],["youtube_deals/actual","ytDeals",()=>pintarYtDash()],["yt_err/actual","ytErr",()=>pintarErrRed("youtube")]],
   captacion:[["inversion_plataformas/actual","invPl",()=>pintarInvAnual()],["captacion_canales_mercado/actual","canalesMk",()=>pintarCanales()]],
   seo:[["seo_blog/actual","seoBlog",()=>pintarSeoBlog()],["seo_semrush/actual","seoSem",()=>{pintarSeoBrecha();pintarSeoTec()}],["seo_gsc/actual","seoGsc",()=>pintarSeoBrecha()]],
   community:[["rrss_seguimiento/actual","rrss",()=>pintarRrss()]],
