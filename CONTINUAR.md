@@ -167,3 +167,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v221: evolución IG: en Todos, gráfica original por cuenta con botones de métrica; con ES/EN/DE, líneas por métrica de ese mercado.
 - 11/11 v222: ranking por formato/tipo con 6 métricas (mediana y media de vistas, likes, seguidores por post, guardados, interacción; verde = mejor) e iconos SVG RS_FIC para Reel, Carrusel e Imagen.
 - 11/11 v223: ranking, por tipo de contenido vuelve a tabla de medias (vistas mediana/media, likes, comentarios, compartidos, guardados, seguidores/post, interacción; verde = mejor).
+- 11/11 v224: ranking por tipo con puesto (🥇🥈🥉 1º, 2º...); tarjetas del ranking y promocionadas más pequeñas (.yr-grid.rs-pq, 150px).
