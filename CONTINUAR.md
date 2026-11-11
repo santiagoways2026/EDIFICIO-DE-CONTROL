@@ -196,3 +196,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11: borrados de la base todos los datos de Diseño (253 documentos: diseno_piezas, diseno_biblio, diseno_aprendizajes, diseno_tendencias, estado/diseno, control_brief/diseno, control_directrices/diseno). El código de la sala sigue oculto en index.html.
 - 11/11 (v249): Paid Media sin «Auditoría de UTMs» (p_utm en MODS_OCULTOS). Meta Ads rendimiento con menos texto: resumen de una frase, país, edad, ubicación y avisos plegados en «Más detalle», anuncios solo con nombre y métricas.
 - 11/11 (v250): Captación sin «CPA y retorno por canal», «Mix Paid / Organic» ni «Evolución del CR por canal» (MODS_OCULTOS). Quedan Inversión/CPL/CPA, Deals y CR por canal y Tiempo de conversión.
+- 11/11: Sala de Control solo los lunes 6:53 (Madrid) y Cerebro los lunes 6:33, justo antes. Fuera de eso solo se actualiza cuando Álvaro lo pida (fire_trigger).
