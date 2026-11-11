@@ -1613,7 +1613,7 @@ function logosEn(txt,h=18){const ids=logoIds(txt);return ids.length?`<div class=
 const SEO_DEST={instagram:"Instagram",youtube:"YouTube",tiktok:"TikTok",community:"Community",diseno:"Diseño",captacion:"Captación",paid:"Paid Media",lifecycle:"Conversión",cr:"CR",control:"Sala de Control"};
 MARCOS.push({id:"seo_red",grupo:"seo",dato:true,nombre:"SEO / SEO para cada sala",x:0,y:-9000,w:1300});SALAS_ACT.seo.splice(1,0,"seo_red");
 MARCOS.push({id:"seo_blog",grupo:"seo",dato:true,nombre:"SEO / Blog: captación por URL",x:0,y:-9000,w:1300});SALAS_ACT.seo.splice(1,0,"seo_blog");
-MARCOS.push({id:"community_rrss",grupo:"community",dato:true,nombre:"Seguimiento RRSS / Seguimiento",x:0,y:-9000,w:1300});SALAS_ACT.community.splice(1,0,"community_rrss");
+MARCOS.push({id:"community_rrss",grupo:"community",dato:true,nombre:"Seguimiento RRSS / Resumen ejecutivo",x:0,y:-9000,w:1300},{id:"community_rrcomp",grupo:"community",dato:true,nombre:"Seguimiento RRSS / Competencia",x:0,y:-9000,w:1300});SALAS_ACT.community.splice(1,0,"community_rrss","community_rrcomp");
 MARCOS.push({id:"youtube_dash",grupo:"youtube",sala:"youtube",dato:true,nombre:"YouTube / Dashboard de canales",x:0,y:-9000,w:1300});SALAS_ACT.youtube.splice(1,0,"youtube_dash");
 MARCOS.push({id:"tiktok_dash",grupo:"tiktok",sala:"tiktok",dato:true,nombre:"TikTok / Dashboard de cuentas",x:0,y:-9000,w:1300});SALAS_ACT.tiktok.splice(1,0,"tiktok_dash");
 SALAS_ACT.youtube.splice(3,0,"youtube_errores");SALAS_ACT.tiktok.splice(3,0,"tiktok_errores");
@@ -4387,10 +4387,11 @@ function rrConsol(D,red){const{fechas,by}=rrLect(D,red),ref=RR_REF[red];if(!fech
     if(yo)t.push(`Desde el ${rrF(fA)}: Santiago Ways ${rrSg(yo[1])}${top&&top[0]!==ref?`; quien más crece es ${nom(top[0])} (${rrSg(top[1])})`:top?"; es quien más crece":""}.`)}
   return{red,fecha:fU,cls,t,pos,n}}
 function rrCelda(o,f,cls){if(!o)return`<td class="vac">–</td>`;const tt=o.src==="Metricool"&&o.xl!=null?` title="Metricool, ${rrF(f)}. En el Excel: ${igGr(o.xl)}"`:o.src?` title="${esc(o.src)}, ${rrF(f)}"`:"";return`<td${cls?` class="${cls}"`:""}${tt}>${igGr(o.v)}</td>`}
-function pintarRrss(){const el=document.getElementById("c-community_rrss");if(!el||st.dentro!=="community")return;const D=st.rrss;
+function pintarRrss(){[["c-community_rrss","resumen"],["c-community_rrcomp","comp"]].forEach(([id,v])=>{const el=document.getElementById(id);if(el)pintarRrssEn(el,v)})}
+function pintarRrssEn(el,vista){if(st.dentro!=="community")return;const D=st.rrss;
   if(!D||!(D.cuentas||[]).length){el.innerHTML=`<div class="mcab"><div><h2>Seguimiento RRSS</h2></div></div><div class="vacio">Inés está cargando el seguimiento de redes.</div>`;return}
   rrSuscribir();
-  const V=st.rrV||(st.rrV={v:"resumen",red:"instagram",met:"i"});if(!RR_V[V.v])V.v="resumen";
+  const V0=st.rrV||(st.rrV={v:"resumen",red:"instagram",met:"i"}),V={...V0,v:vista};
   const hoy=new Date(),hoyYm=rrYm(hoy),MS=[];for(let ym=202601;ym<=hoyYm;ym=rrSig(ym))MS.push(ym);
   const MC_=MS.filter(ym=>ym<hoyYm),CRM=rrCrm(D),G=D.ga4?.meses||{},X=D.excel||{};
   const vivo=(D.cuentas||[]).map(c=>rrVivo(c[0],c[1])).filter(Boolean),vivoAt=vivo.length?Math.max(...vivo.map(v=>+v.at||0)):0;
@@ -4534,8 +4535,7 @@ function pintarRrss(){const el=document.getElementById("c-community_rrss");if(!e
       <div class="as-tw"><table class="as-t rr-plan"><thead><tr><th class="as-n">Acción</th><th>KPI</th><th>Plataforma</th><th>Fase</th><th>Prioridad</th></tr></thead><tbody>${(p.acciones||[]).map(a=>`<tr><td class="as-n">${esc(a.accion)}</td><td>${esc(a.kpi)}</td><td>${esc(a.plataforma)}</td><td>${esc(a.fase)}</td><td><span class="rr-dot ${rrDot(a.prioridad)}"></span>${esc(rrSinIco(a.prioridad))}</td></tr>`).join("")}</tbody></table></div>`).join("")}`;
   }
   const LM=D.lectura_mensual||{};
-  el.innerHTML=`<div class="mcab"><div><h2>Seguimiento RRSS</h2><div class="fuente-mc" style="margin-top:6px">${esc(X.archivo||"Excel de seguimiento")} en vivo: Metricool (11 cuentas propias y competidores), Zoho CRM y lecturas de fin de mes</div></div><div class="meta">${estado}</div></div>
-    <div class="as-ctl"><div class="as-modo rr-vistas">${Object.entries(RR_V).map(([k,n])=>chip("v",k,n,V.v===k)).join("")}</div></div>
+  el.innerHTML=`<div class="mcab"><div><h2>${vista==="comp"?"Competencia en redes":"Resumen ejecutivo"}</h2><div class="fuente-mc" style="margin-top:6px">${esc(X.archivo||"Excel de seguimiento")} en vivo: Metricool (11 cuentas propias y competidores), Zoho CRM y lecturas de fin de mes</div></div><div class="meta">${estado}</div></div>
     <div class="ia-per">${MS.length?`De enero a ${rrMesL(hoyYm)} de ${Math.floor(hoyYm/100)} (${rrMesL(hoyYm)} en curso).`:""} CRM de Zoho del ${esc(rrF(String(CRM.fecha).slice(0,10)))}. Próxima lectura de competidores: ${esc(rrF(LM.proxima||""))}.</div>
     ${false&&(D.avisos||[]).length?`<div class="rr-aviso">⚠ Rutina nocturna: ${D.avisos.map(esc).join("; ")}.${D.avisos.some(x=>/conector/i.test(x))?" Hay que añadir los conectores de Metricool y Zoho CRM a la rutina «Seguimiento RRSS» en claude.ai; mientras, Metricool se lee en vivo al abrir la página y el CRM se queda en la última carga.":""}</div>`:""}
     ${cuerpo}
