@@ -5207,9 +5207,9 @@ const IG_COL={ES:"#e1306c",EN:"#3d7bff",DE:"#7AA606"};
 const igGr=n=>String(Math.round(n||0)).replace(/\B(?=(\d{3})+(?!\d))/g,"."),igPc=(x,d=1)=>x==null||!isFinite(x)?"–":(x*100).toFixed(d).replace(".",",")+" %",igEur=n=>igGr(n)+" €";
 const igYm=ym=>`${MESN[ym%100-1]} ${String(Math.floor(ym/100)).slice(2)}`;
 const igSpr=(D,x)=>x&&x.sp&&D.sprites?`<span class="rs-sp" style="background-image:url(img/rs/${D.sprites[x.sp[0]]});background-position:${(x.sp[1]%10)/9*100}% ${Math.floor(x.sp[1]/10)/9*100}%"></span>`:`<span class="yr-sin">${esc(corta(x?.titulo||"",80))}</span>`;
-function igLinea(meses,series,fmt){if(!meses.length)return"";const W=900,H=230,pl=56,pr=14,pt=14,pb=28,vals=series.flatMap(s=>s.v.filter(v=>v!=null)),mx=Math.max(1,...vals)*1.08;
-  const x=i=>pl+i*(W-pl-pr)/Math.max(1,meses.length-1),y=v=>pt+(H-pt-pb)*(1-v/mx);
-  const ticks=[0,.25,.5,.75,1].map(t=>mx*t);
+function igLinea(meses,series,fmt,lg){if(!meses.length)return"";const W=900,H=lg?260:230,pl=56,pr=14,pt=14,pb=28,vals=series.flatMap(s=>s.v.filter(v=>v!=null)),mx=Math.max(1,...vals)*1.08,lmx=Math.log10(Math.max(10,mx));
+  const x=i=>pl+i*(W-pl-pr)/Math.max(1,meses.length-1),y=lg?v=>pt+(H-pt-pb)*(1-Math.log10(Math.max(v,1))/lmx):v=>pt+(H-pt-pb)*(1-v/mx);
+  const ticks=lg?[1,10,100,1e3,1e4,1e5,1e6,1e7].filter(g=>g<=mx):[0,.25,.5,.75,1].map(t=>mx*t);
   return`<svg class="ig-lin" viewBox="0 0 ${W} ${H}" role="img">${ticks.map(t=>`<line x1="${pl}" x2="${W-pr}" y1="${y(t)}" y2="${y(t)}" stroke="currentColor" stroke-opacity=".12"/><text x="${pl-6}" y="${y(t)+4}" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".6">${(fmt||igGr)(t)}</text>`).join("")}
    ${meses.map((m,i)=>(i%Math.ceil(meses.length/12)===0&&meses.length-1-i>=Math.ceil(meses.length/12)/2)||i===meses.length-1?`<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".6">${igYm(m)}</text>`:"").join("")}
    ${series.map(s=>{let d="",on=false;s.v.forEach((v,i)=>{if(v==null){on=false;return}d+=(on?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1);on=true});return`<path d="${d}" fill="none" stroke="${s.c}" stroke-width="2.4" stroke-linejoin="round"/>${s.v.map((v,i)=>v==null?"":`<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${s.c}"><title>${esc(s.n)} · ${igYm(meses[i])}: ${(fmt||igGr)(v)}</title></circle>`).join("")}`}).join("")}</svg>
@@ -5235,12 +5235,9 @@ function igCapt(){const F=(st.canales?.filas||[]).filter(r=>r[0]==="instagram_or
       <text x="${pl-6}" y="${pt+8}" text-anchor="end" font-size="11" fill="#e1306c">${igGr(md)}</text><text x="${W-pr+6}" y="${pt+8}" font-size="11" fill="#7AA606">${mw}</text></svg><div class="ig-ley"><span style="--c:#e1306c">Deals (barras, eje izquierdo)</span><span style="--c:#7AA606">Ventas (línea, eje derecho)</span></div>`})()}</div>
    <p class="as-nota">Deals de Zoho con utm_source instagram_org, por mes de creación${idi!=="todos"?` e idioma del deal (${esc(idi)}; datos del ${esc(st.igDash?.capt_idioma_fecha||"")})`:""}. Las ventas de los últimos meses todavía suben: muchos deals siguen abiertos.</p>`}
 const IG_MC={alcance:"#e1306c",vistas:"#f59e0b",inter:"#3b82f6",guard:"#7AA606",seg:"#a855f7"};
-function igBarMet(M,mets,ok){const ms=(M.meses||[]),n0=Math.max(0,ms.length-13),meses=ms.slice(n0);if(!meses.length)return"";
-  const val=(k,i)=>Object.entries(M.cuentas||{}).filter(([c])=>ok(c)).reduce((t,[,o])=>t+((o[k]||[])[n0+i]||0),0);
-  const W=900,H=260,pl=48,pr=10,pt=12,pb=28,n=meses.length,gw=(W-pl-pr)/n,bw=gw*.8/mets.length,mx=Math.max(10,...mets.flatMap(([k])=>meses.map((_,i)=>val(k,i)))),lmx=Math.log10(mx)*1.02,y=v=>pt+(H-pt-pb)*(1-(v>0?Math.log10(Math.max(v,1)):0)/lmx),nm=m=>`${MESN[m%100-1]} ${String(Math.floor(m/100)).slice(2)}`;
-  const grid=[1,10,100,1e3,1e4,1e5,1e6,1e7].filter(g=>g<=mx*1.05).map(g=>`<line x1="${pl}" x2="${W-pr}" y1="${y(g)}" y2="${y(g)}" stroke="currentColor" stroke-opacity=".1"/><text x="${pl-6}" y="${y(g)+4}" text-anchor="end" font-size="11" fill="currentColor" fill-opacity=".55">${igGr(g)}</text>`).join("");
-  const bars=meses.map((m,i)=>mets.map(([k,nmK],j)=>{const v=val(k,i),x=pl+gw*i+gw*.1+bw*j;return`<rect x="${x.toFixed(1)}" y="${y(v).toFixed(1)}" width="${(bw*.9).toFixed(1)}" height="${(H-pb-y(v)).toFixed(1)}" rx="1.5" fill="${IG_MC[k]}"><title>${nm(m)} · ${nmK}: ${igGr(v)}</title></rect>`}).join("")+`<text x="${pl+gw*(i+.5)}" y="${H-8}" text-anchor="middle" font-size="11" fill="currentColor" fill-opacity=".6">${nm(m)}</text>`).join("");
-  return`<svg class="ig-lin" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución mensual de Instagram">${grid}${bars}</svg><div class="ig-ley">${mets.map(([k,nmK])=>`<span style="--c:${IG_MC[k]}">${nmK}</span>`).join("")}</div><p class="as-nota">Escala logarítmica para que quepan todas las métricas; pasa el ratón por una barra para ver el dato.</p>`}
+function igBarMet(M,mets,ok){const ms=M.meses||[];if(!ms.length)return"";
+  const ser=mets.map(([k,n])=>({n,c:IG_MC[k],v:ms.map((_,i)=>Object.entries(M.cuentas||{}).filter(([c])=>ok(c)).reduce((t,[,o])=>t+((o[k]||[])[i]||0),0))}));
+  return igLinea(ms,ser,null,1)+`<p class="as-nota">Escala logarítmica para que quepan todas las métricas; pasa el ratón por un punto para ver el dato.</p>`}
 function pintarIgDash(){const el=document.getElementById("c-instagram_dash");if(!el||st.dentro!=="instagram")return;const D=st.igDash;
   if(!D){el.innerHTML=`<div class="mcab"><div><h2>Dash general</h2></div></div><div class="vacio">Valeria está preparando el resumen de las tres cuentas.</div>`;return}
   const V=st.igDV||(st.igDV={met:"alcance",idi:"todos"}),M=D.mensual||{meses:[],cuentas:{}},ok=n=>V.idi==="todos"||n===V.idi,MC=D.cuenta_mes;
@@ -5252,7 +5249,7 @@ function pintarIgDash(){const el=document.getElementById("c-instagram_dash");if(
    ${igCapt()}<div class="ig-cuentas" style="display:none">${(D.cuentas||[]).filter(c=>ok(c.n)).map(c=>`<div class="ig-cta" style="--c:${IG_COL[c.n]||"#e1306c"}"><div class="ig-ch"><b>${esc(c.n)}</b><span>${esc(c.cuenta)}</span></div>
      <div class="ig-big">${igGr(c.seg)}<small>seguidores</small></div>
      <div class="ig-kv">${(c.kpis||[]).map(k=>`<span>${esc(k[0])}<b>${esc(k[1])}</b></span>`).join("")}</div></div>`).join("")}</div>
-   <div class="seccion-t">Evolución mensual (últimos 13 meses)</div>
+   <div class="seccion-t">Evolución mensual</div>
    <div class="ig-graf">${igBarMet(M,mets,ok)}</div>
    ${M.nota?`<p class="as-nota">${esc(M.nota)}</p>`:""}
    ${MC?`<div class="seccion-t">Actividad real de la cuenta cada mes (${metC==="inter"?"interacciones":"visualizaciones"})</div><div class="ig-graf">${igLinea(MC.meses,serC)}</div><p class="as-nota">${esc(MC.nota||"")}</p>`:""}
