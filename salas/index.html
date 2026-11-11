@@ -2315,22 +2315,7 @@ function pintarCompetencia(){pintarCompExp();pintarCompItpt();
     <div class="equipo">${EQUIPO_C.map(a=>{const x=ag[a.id]||{};return`<div class="agente"><span class="av" style="--c:${a.c}">${esc(a.n.slice(0,2).toUpperCase())}</span><div><div class="n">${esc(a.n)}</div><div class="r">${esc(a.rol)}</div></div><div class="a">${x.ultima?`${esc(hace(x.ultima))}<br>${x.hallazgos??0} nuevos`:"sin datos"}</div></div>`}).join("")}</div>
     <ol class="bit">${(e.bitacora||[]).slice(0,24).map(b=>{const a=EQUIPO_C.find(x=>x.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")||'<li><div>Aquí verás qué investiga cada uno en cada ronda.</div></li>'}</ol>`;
 }
-function pintarCompRRSS(){
-  const el=$("#c-comprrss");if(!el)return;
-  const bloque=(clave,titulo,cols,fila)=>{const d=mc.datos[clave],e=mc.err[clave];
-    let h=`<div class="mc-sec"><h3>${titulo}<span>${d?`actualizado ${esc(hace(new Date(d.at).toISOString()))}`:""}</span></h3>`;
-    if(e&&!d)return h+`<div class="aviso err">${esc(textoError(e))}</div></div>`;
-    if(!d)return h+`<div class="aviso">${mc.disponible===false?"Abre la página desde claude.ai para ver estos datos.":"Álex está leyendo Metricool…"}</div></div>`;
-    if(!d.rows.length)return h+`<div class="aviso">No hay competidores configurados aquí en Metricool. Añádelos en Metricool → Competidores.</div></div>`;
-    return h+`<div style="overflow-x:auto"><table class="tabla"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${fila(d.rows)}</tbody></table></div></div>`};
-  el.innerHTML=`<div class="mcab"><div><h2>Sus redes en Metricool</h2><div class="fuente-mc" style="margin-top:6px">Cifras exactas de los competidores que sigues · últimos 30 días</div></div></div>
-  ${bloque("comp:es:igComp","Instagram · competidores de la marca ES",["Post","Me gusta","Coment.","Interacciones"],rows=>[...rows].sort((a,b)=>+b[6]-+a[6]).slice(0,10).map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(corta(x[3],90))}</a><span class="sub">${logoIg(x[0],14)}@${esc(x[0])} · ${esc(fechaCorta(x[1]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[5])}</td><td>${fmt(+x[6])}</td></tr>`).join(""))}
-  ${bloque("comp:en:igComp","Instagram · competidores de la marca EN",["Post","Me gusta","Coment.","Interacciones"],rows=>[...rows].sort((a,b)=>+b[6]-+a[6]).slice(0,10).map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(corta(x[3],90))}</a><span class="sub">${logoIg(x[0],14)}@${esc(x[0])} · ${esc(fechaCorta(x[1]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[5])}</td><td>${fmt(+x[6])}</td></tr>`).join(""))}
-  ${bloque("comp:de:igComp","Instagram · competidores de la marca DE",["Post","Me gusta","Coment.","Interacciones"],rows=>[...rows].sort((a,b)=>+b[6]-+a[6]).slice(0,10).map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(corta(x[3],90))}</a><span class="sub">${logoIg(x[0],14)}@${esc(x[0])} · ${esc(fechaCorta(x[1]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[5])}</td><td>${fmt(+x[6])}</td></tr>`).join(""))}
-  ${bloque("comp:es:ytComp","YouTube · competidores de la marca ES",["Vídeo","Vistas","Me gusta","Coment."],rows=>[...rows].sort((a,b)=>+b[4]-+a[4]).slice(0,8).map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(x[3])}</a><span class="sub">${logoIds(x[1]).slice(0,1).map(i=>logoP(i,14)).join("")}${esc(x[1])} · ${esc(fechaCorta(x[0]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[6])}</td><td>${fmt(+x[5])}</td></tr>`).join(""))}
-  ${bloque("comp:en:ytComp","YouTube · competidores de la marca EN",["Vídeo","Vistas","Me gusta","Coment."],rows=>[...rows].sort((a,b)=>+b[4]-+a[4]).slice(0,8).map(x=>`<tr><td><a href="${esc(safeUrl(x[2]))}" target="_blank" rel="noopener">${esc(x[3])}</a><span class="sub">${logoIds(x[1]).slice(0,1).map(i=>logoP(i,14)).join("")}${esc(x[1])} · ${esc(fechaCorta(x[0]))}</span></td><td>${fmt(+x[4])}</td><td>${fmt(+x[6])}</td><td>${fmt(+x[5])}</td></tr>`).join(""))}
-  ${(()=>{const L=(st.ytb?.canales||[]).filter(c=>c.grupo==="A");const vacios=["comp:es:ytComp","comp:en:ytComp"].every(c=>mc.datos[c]&&!mc.datos[c].rows.length);if(!vacios||!L.length)return"";return`<div class="mc-sec"><h3>YouTube de la competencia · fuera de Metricool<span>benchmark de Vera y Bruno</span></h3><div class="aviso">Metricool no devuelve competidores de YouTube en ninguna marca, así que estas cifras salen de la investigación web del benchmark, con su fuente.</div><div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Canal</th><th>Suscriptores</th><th>Vistas</th><th>Crecimiento</th></tr></thead><tbody>${L.map(c=>`<tr><td><a href="${esc(safeUrl(c.url))}" target="_blank" rel="noopener">${esc(c.nombre)}</a><span class="sub">${esc(c.handle||"")} · ${esc(c.idioma||"")}</span></td><td>${esc(c.suscriptores||"")}</td><td>${esc(c.vistas||"")}</td><td style="white-space:normal">${esc(c.crecimiento||"")}</td></tr>`).join("")}</tbody></table></div></div>`})()}`;
-}
+function pintarCompRRSS(){/* pestaña oculta: código eliminado */}
 let subsComp=[];
 function suscribirMetricoolComp(){
   subsComp.forEach(u=>{try{u()}catch(_){}});subsComp=[];if(!mc.mcp)return;const r=rango(30);
@@ -2840,31 +2825,8 @@ function briefHTML(B,corto){if(!B)return`<div class="vacio"><b>La dirección est
    <div class="seccion-t">Marca (Brandbook 2027)</div><ol class="bf-list">${L(B.marca,r=>`<li>${esc(r)}</li>`)}</ol>
    <div class="seccion-t">Tu feedback, aplicado</div><div class="mc-sec"><table class="tabla bf-t"><thead><tr><th>Pieza</th><th style="text-align:left">Pediste</th><th style="text-align:left">Qué se ha hecho</th></tr></thead><tbody>${L(B.feedback,f=>`<tr><td>${esc(f.pieza)}</td><td style="text-align:left">${esc(f.pedido)}</td><td style="text-align:left">${esc(f.hecho)}</td></tr>`)}</tbody></table></div>
    <div class="seccion-t">Replanteo pieza a pieza</div><div class="mc-sec"><table class="tabla bf-t"><thead><tr><th>Pieza</th><th style="text-align:left">Decisión</th><th style="text-align:left">Por qué</th></tr></thead><tbody>${L(B.piezas,f=>`<tr><td>${esc(f.id)}</td><td style="text-align:left"><span class="bf-dec ${esc(f.clase||"")}">${esc(f.decision)}</span></td><td style="text-align:left">${esc(f.porque)}</td></tr>`)}</tbody></table></div>`}
-function pintarBrief(){const el=document.getElementById("c-d_brief");if(el&&st.dentro==="diseno")el.innerHTML=briefHTML(st.brief,false)}
-function pintarDiseno(){
-  const D=st.dis,set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
-  const ap=D.piezas.filter(x=>x.estado==="aprobada").length;
-  set("disN",`${D.piezas.length} piezas · ${ap} aprobadas`);set("pantS",`${D.piezas.length} piezas`);
-  const v=document.getElementById("vivoDis");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
-  if(st.dentro!=="diseno")return;
-  for(const[t,id,nom]of DIS_TIPOS){
-    const ps=D.piezas.filter(x=>x.tipo===t&&VIVA(x)).sort((a,b)=>(a.orden||0)-(b.orden||0));
-    const el0=$("#c-"+id);if(!el0)continue;const FB=t==="meta"?st.metaAnu?.feedback_diseno:null;
-    const fbH=FB?`<div class="ma-fb" style="margin-top:12px"><div class="ma-fbc"><b>Lo que pide el equipo de Meta Ads</b><span>${esc(FB.de||"")} · ${FB.fecha?esc(hace(FB.fecha)):""}</span></div>${(FB.prioridades||[]).map(p=>`<p><b>${esc(p.p)}. ${esc(p.t)}.</b> ${esc(p.d)}</p>`).join("")}<p><b>Evitar:</b> ${esc((FB.evitar||[]).join(" · "))}</p></div>`:"";
-    el0.innerHTML=`<div class="mcab"><div><h2>${esc(nom)}</h2><div class="fuente-mc" style="margin-top:6px">${t==="meta"?"Piezas para las campañas de Meta Ads, hechas a partir de su análisis de anuncios":t==="linkedin"?"Basados en los valores del brandbook y la actualidad del sector":"Basadas en lo que funciona en tu cuenta, la competencia y el mercado"} · cada pieza cita sus referencias con métricas</div></div><div class="meta">${ps.length} versiones vivas</div></div>
-      ${fbH}<div class="piezas">${ps.length?ps.map(tarjetaPieza).join(""):`<div class="vacio">El equipo está preparando nuevas versiones.</div>`}</div>`;
-  }
-  pintarVideos();pintarBiblio();pintarBrief();
-  {const el=document.getElementById("c-d_insp");if(el){const ap=D.piezas.filter(x=>x.estado==="aprobada").sort((a,b)=>String(b.revisado||"").localeCompare(String(a.revisado||""))),av=(D.videos||[]).filter(v=>v.estado==="aprobada");
-    el.innerHTML=`<div class="mcab"><div><h2>Inspiración</h2><div class="fuente-mc" style="margin-top:6px">Lo que has aceptado: referencia para el equipo y listo para publicar</div></div><div class="meta">${ap.length+av.length} aprobadas</div></div>
-    ${ap.length||av.length?`${[["ig","Instagram · estáticos y carruseles"],["reel","Instagram · reels"],["tiktok","TikTok"],["yt","YouTube"],["linkedin","LinkedIn"],["meta","Meta Ads · Facebook e Instagram"]].map(([k,n])=>{const g=ap.filter(x=>x.tipo===k);return g.length?`<div class="seccion-t">${n} <span style="opacity:.6">· ${g.length}</span></div><div class="piezas">${g.map(tarjetaPieza).join("")}</div>`:""}).join("")}${ap.filter(x=>!["ig","reel","tiktok","yt","linkedin","meta"].includes(x.tipo)).length?`<div class="seccion-t">Otras</div><div class="piezas">${ap.filter(x=>!["ig","reel","tiktok","yt","linkedin","meta"].includes(x.tipo)).map(tarjetaPieza).join("")}</div>`:""}${av.length?`<div class="seccion-t">Vídeos aprobados</div><div class="vids">${av.map(v=>`<div class="vid" data-video="${esc(v.id)}"><video controls playsinline preload="none" poster="${esc(miniPoster(v.poster||""))}" src="${esc(v.archivo||"")}"></video><div class="pz-info"><h4>${esc(v.titulo||"")}</h4></div></div>`).join("")}</div>`:""}`:`<div class="vacio">Aún no has aceptado ninguna pieza. Las que aceptes aparecerán aquí.</div>`}`}}
-  const T=D.tend;
-  $("#c-d_tend").innerHTML=`<div class="mcab"><div><h2>Tendencias del sector y pautas para RRSS</h2><div class="fuente-mc" style="margin-top:6px">Para la responsable de redes: qué está pasando, cómo aprovecharlo y reglas de trabajo</div></div><div class="meta">${T?.fecha?`actualizado ${esc(hace(T.fecha))}`:""}</div></div>
-    ${T?`<div class="seccion-t">Tendencias y cómo aprovecharlas</div><div class="tend">${(T.tendencias||[]).map(x=>`<div class="tend-c"><h4>${esc(x.titulo)}</h4><p>${esc(x.que)}</p><p><b style="color:var(--texto)">Cómo aprovecharlo:</b> ${esc(x.aprovechar)}</p><div class="ev">${esc(x.evidencia)}</div></div>`).join("")}</div>
-    <div class="seccion-t">Pautas generales</div><ol class="prios">${(T.pautas||[]).map(x=>`<li class="prio" style="grid-template-columns:34px minmax(0,1fr)"><div><p style="color:#dfe4ea;font-size:14px">${esc(x)}</p></div></li>`).join("")}</ol>
-    <div class="seccion-t">Frecuencia recomendada</div><div class="mc-sec"><table class="tabla"><thead><tr><th>Canal</th><th style="text-align:left">Frecuencia</th></tr></thead><tbody>${(T.calendario||[]).map(c=>`<tr><td>${esc(c.canal)}</td><td style="text-align:left">${esc(c.frecuencia)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="vacio">Cargando tendencias…</div>`}
-    <div class="seccion-t">Bitácora del estudio</div><ol class="bit">${(D.estado?.bitacora||[]).slice(0,20).map(b=>{const a=EQUIPO_S.find(y=>y.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")}</ol>`;
-}
+function pintarBrief(){/* pestaña oculta: código eliminado */}
+function pintarDiseno(){/* pestaña oculta: código eliminado */}
 document.addEventListener("click",async e=>{
   const cp=e.target.closest("[data-pcopiar]");
   if(cp){const x=st.dis.piezas.find(y=>y.id===cp.closest("[data-pieza]").dataset.pieza);const t=x.texto||((x.caption||"")+((x.hashtags||[]).length&&!/#/.test(x.caption||"")?"\n\n"+x.hashtags.map(h=>"#"+h).join(" "):""));
@@ -2929,38 +2891,7 @@ const RED_K={instagram:"Instagram",facebook:"Facebook",tiktok:"TikTok",youtube:"
 const fechaK=t=>{t=String(t||"");if(/^\d{4}-\d{2}-\d{2}/.test(t))return t.slice(8,10)+"/"+t.slice(5,7)+"/"+t.slice(2,4);if(/^\d{8}/.test(t))return t.slice(6,8)+"/"+t.slice(4,6)+"/"+t.slice(2,4);return t.slice(0,10)};
 const refK=r=>r?`<div class="k-ref">${r.url?`<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(corta(r.texto||r.titulo||"Ver post",90))}</a>`:esc(corta(r.texto||"",90))}<br>${esc([r.red&&(RED_K[r.red]||r.red),r.mercado&&r.mercado.toUpperCase(),r.cuenta].filter(Boolean).join(" · "))}${r.metricas?" · "+esc(r.metricas):""}</div>`:"";
 function metK(x){return[x.comentarios!=null?`${fmtK(x.comentarios)} coment.`:"",x.likes!=null?`${fmtK(x.likes)} me gusta`:"",x.views?`${fmtK(x.views)} vistas`:x.alcance?`${fmtK(x.alcance)} alcance`:"",x.guardados?`${fmtK(x.guardados)} guardados`:"",x.compartidos?`${fmtK(x.compartidos)} compartidos`:""].filter(Boolean).join(" · ")}
-function pintarComunidad(){
-  const C=st.com,A=C.analisis,set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
-  const tot=(A?.totales||[]).reduce((s,x)=>s+(+x.comentarios||0),0);
-  set("comN",A?`${fmtK(tot)} comentarios analizados · ${(A.preguntas||[]).length} temas de conversación`:"Analizando comentarios");set("pantK",A?fmtK(tot):"…");
-  const v=document.getElementById("vivoCom");if(v){v.classList.toggle("off",!st.conectado);v.textContent=st.conectado?"En directo":"Conectando"}
-  if(st.dentro!=="comunidad")return;
-  const upd=A?.fecha?`actualizado ${esc(hace(A.fecha))}`:"";
-  // 1. Qué genera comentarios
-  const maxF=Math.max(1,...(A?.porFormato||[]).map(x=>+x.media||0));
-  $("#c-k_formatos").innerHTML=`<div class="mcab"><div><h2>Qué tipo de post genera más comentarios</h2><div class="fuente-mc" style="margin-top:6px">Tus cuentas en Metricool · ${esc(A?.periodo||"últimos 12 meses")} · todas las cifras son reales</div></div><div class="meta">${upd}</div></div>
-    ${A?`<p style="padding:14px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(A.resumen||"")}</p>
-    <div class="seccion-t">Comentarios por red y mercado</div><div class="mc-sec"><table class="tabla"><thead><tr><th>Red</th><th>Mercado</th><th>Posts</th><th>Comentarios</th><th>Media por post</th></tr></thead><tbody>${(A.totales||[]).map(x=>`<tr><td>${esc(RED_K[x.red]||x.red)}</td><td>${esc((x.mercado||"").toUpperCase())}</td><td>${fmtK(x.posts)}</td><td>${fmtK(x.comentarios)}</td><td>${esc(String(x.media??""))}</td></tr>`).join("")}</tbody></table></div>
-    <div class="seccion-t">Por tipo de post (media de comentarios)</div>
-    <div class="k-grid">${(A.porFormato||[]).map(x=>`<div class="k-c"><h4>${esc(x.tipo)}</h4><div class="k-num">${esc(String(x.media))}<small>coment./post · ${fmtK(x.posts)} posts</small></div><div class="k-bar" style="width:${Math.round((+x.media||0)/maxF*100)}%"></div><p>${esc(x.lectura||"")}</p>${refK(x.ejemplo)}</div>`).join("")}</div>
-    <div class="seccion-t">Los posts con más comentarios</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Coment.</th><th>Me gusta</th><th>Alcance / vistas</th></tr></thead><tbody>${(A.topPosts||[]).slice(0,15).map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto,90))}</a><span class="sub">${esc(RED_K[x.red]||x.red)} · ${esc((x.mercado||"").toUpperCase())} · ${esc(x.formato||"")} · ${esc(fechaK(x.fecha))}</span></td><td>${fmtK(x.comentarios)}</td><td>${x.likes!=null?fmtK(x.likes):""}</td><td>${fmtK(x.views||x.alcance||0)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="vacio">El equipo está contando los comentarios de tus cuentas.</div>`}`;
-  // 2. Qué pregunta la gente
-  $("#c-k_preguntas").innerHTML=`<div class="mcab"><div><h2>Qué pregunta y comenta la gente</h2><div class="fuente-mc" style="margin-top:6px">Tus comentarios analizados, foros, Reddit y grupos de peregrinos</div></div><div class="meta">${upd}</div></div>
-    ${A?.limitaciones?`<div class="k-aviso">${esc(A.limitaciones)}</div>`:""}
-    ${A?`<div class="seccion-t">Preguntas y temas que más se repiten</div><ol class="prios">${(A.preguntas||[]).map(x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.tema)}${x.mercado?` <span class="k-tag">${esc(x.mercado)}</span>`:""}</p><p style="color:#c9d1da;font-size:13.5px;margin-top:4px">${esc(x.que||"")}</p>${x.oportunidad?`<p style="color:#b5dd4a;font-size:13px;margin-top:6px">Oportunidad: ${esc(x.oportunidad)}</p>`:""}${x.fuente?`<div class="k-ref" style="margin-top:6px"><a href="${esc(safeUrl(x.fuente))}" target="_blank" rel="noopener">${esc(corta(x.fuenteNombre||x.fuente,70))}</a></div>`:""}</div></li>`).join("")}</ol>
-    ${(A.quejas||[]).length?`<div class="seccion-t">Miedos y quejas frecuentes</div><ol class="prios">${A.quejas.map(q=>`<li class="prio"><div><p style="color:#dfe4ea;font-size:13.5px">${esc(q)}</p></div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Cargando…</div>`}
-    <div class="seccion-t">Analiza tus comentarios</div>
-    <form class="k-pegar" id="kForm"><p style="margin:0;color:#a8b3c0;font-size:13px">Pega comentarios reales (bandeja de Metricool, Instagram, YouTube Studio, TikTok…). Bea los agrupa por temas y preguntas y lo guarda para la Sala de Control.</p>
-      <textarea id="kTxt" placeholder="Un comentario por línea"></textarea>
-      <div class="fila"><select id="kRed">${Object.entries(RED_K).map(([k,n])=>`<option value="${k}">${n}</option>`).join("")}</select><select id="kMk"><option value="es">ES</option><option value="en">EN</option><option value="de">DE</option><option value="it">IT</option><option value="pt">PT</option></select><button class="btn" id="kBtn" type="submit">${C.ocupado?"Analizando…":"Analizar comentarios"}</button></div></form>
-    ${C.lotes.length?`<div class="seccion-t">Lotes analizados</div><div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${C.lotes.slice(0,8).map(l=>{const r=l.resultado||{};return`<div class="k-c"><h4>${esc(RED_K[l.red]||l.red)} · ${esc((l.mercado||"").toUpperCase())} · ${fmtK(l.n)} comentarios <span style="color:var(--tenue);font-weight:400;font-size:12px">${esc(hace(l.t))}</span></h4><p>${esc(r.resumen||"")}</p>${(r.temas||[]).length?`<p><b style="color:#f1f3f5">Temas:</b> ${r.temas.map(t=>esc(t.tema)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${(r.preguntas||[]).length?`<p><b style="color:#f1f3f5">Preguntas:</b> ${r.preguntas.map(t=>esc(t.pregunta)+(t.n?` (${t.n})`:"")).join(" · ")}</p>`:""}${r.sentimiento?`<p style="font-family:var(--f-mono);font-size:12px">Positivo ${esc(String(r.sentimiento.positivo??"?"))} · neutro ${esc(String(r.sentimiento.neutro??"?"))} · negativo ${esc(String(r.sentimiento.negativo??"?"))}</p>`:""}${(r.oportunidades||[]).length?`<p style="color:#b5dd4a">${r.oportunidades.map(esc).join(" · ")}</p>`:""}</div>`}).join("")}</div>`:""}`;
-  // 3. Ideas
-  $("#c-k_ideas").innerHTML=`<div class="mcab"><div><h2>Ideas para captar y aumentar interacciones</h2><div class="fuente-mc" style="margin-top:6px">Basadas en tu cuenta, la competencia y el mercado · cada idea cita su referencia con métricas</div></div><div class="meta">${upd}</div></div><div style="padding:12px 20px 0">${selloControl(A?.control)}</div>
-    ${A?`<div class="k-grid" style="grid-template-columns:minmax(0,1fr)">${(A.sugerencias||[]).map(x=>`<div class="k-c"><div><span class="k-tag ${esc(x.tipo||"")}">${esc(x.tipo||"idea")}</span>${x.red?`<span class="k-tag">${esc(x.red)}</span>`:""}</div><h4>${esc(x.titulo)}</h4><p>${esc(x.detalle||"")}</p>${x.porque?`<p style="color:#a8b3c0"><b style="color:#dfe4ea">Por qué:</b> ${esc(x.porque)}</p>`:""}${(x.referencias||[]).map(refK).join("")}</div>`).join("")}</div>
-    ${(A.competencia||[]).length?`<div class="seccion-t">Lo que más comentarios genera en la competencia</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Tipo</th><th>Coment.</th><th>Me gusta</th></tr></thead><tbody>${A.competencia.slice(0,15).map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto,80))}</a><span class="sub">${esc(x.cuenta||"")} · ${esc(RED_K[x.red]||x.red||"")} · ${esc(fechaK(x.fecha))}</span></td><td>${esc(x.tipo||"")}</td><td>${fmtK(x.comentarios)}</td><td>${x.likes!=null?fmtK(x.likes):""}</td></tr>`).join("")}</tbody></table></div>`:""}
-    ${(A.benchmarks||[]).length?`<div class="seccion-t">Benchmarks del mercado</div><ol class="prios">${A.benchmarks.map(b=>`<li class="prio"><div><p style="color:#dfe4ea;font-size:13.5px">${esc(b.texto)}</p>${b.fuente?`<div class="k-ref" style="margin-top:6px"><a href="${esc(safeUrl(b.fuente))}" target="_blank" rel="noopener">${esc(corta(b.fuenteNombre||b.fuente,70))}</a></div>`:""}</div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Cargando…</div>`}`;
-  pintarKVivo();
-}
+function pintarComunidad(){/* pestaña oculta: código eliminado */}
 /* Comentarios en vivo desde Metricool */
 const K_MK=[{id:"es",n:"ES",brand:"3306533",redes:["igPosts","igReels","fb","tk"]},{id:"en",n:"EN",brand:"3306535",redes:["igPosts","igReels","fb","tk"]},{id:"de",n:"DE",brand:"3306537",redes:["igPosts","igReels","fb"]}];
 const CONSULTAS_K={igPosts:["IGPO02","IGPO03","IGPO06","IGPO07","IGPO08","IGPO13","IGPO14"],igReels:["IGRE02","IGRE03","IGRE06","IGRE07","IGRE10","IGRE11"],fb:["FBPO02","FBPO03","FBPO06","FBPO07","FBPO08","FBPO13","FBPO12"],tk:["TKPO02","TKPO05","TKPO03","TKPO09","TKPO08","TKPO07"]};
@@ -2990,22 +2921,7 @@ async function guardarSnapK(m){
   const posts=postsK(m.id).sort((a,b)=>b.comentarios-a.comentarios).slice(0,80).map(x=>({...x,texto:corta(x.texto||"",220)}));
   try{await st.db.doc("comunidad_snap/"+m.id).set({t,dias:90,posts})}catch(_){}
 }
-function pintarKVivo(){
-  const el=document.getElementById("c-k_vivo");if(!el||st.dentro!=="comunidad")return;
-  const m=K_MK.find(x=>x.id===kv.mk),ps=postsK(m.id),errs=m.redes.map(k=>kv.err[m.id+":"+k]).filter(Boolean);
-  const cargando=mc.mcp&&m.redes.some(k=>!kv.datos[m.id+":"+k]&&!kv.err[m.id+":"+k]);
-  const porRed={};ps.forEach(x=>{const o=porRed[x.red]||(porRed[x.red]={posts:0,com:0});o.posts++;o.com+=x.comentarios});
-  const top=[...ps].sort((a,b)=>b.comentarios-a.comentarios).slice(0,12);
-  const E=st.com.estado;
-  el.innerHTML=`<div class="mcab"><div><h2>Tus comentarios en vivo</h2><div class="fuente-mc" style="margin-top:6px">Metricool · últimos 90 días · se guarda una foto para el equipo cada 6 h</div></div></div>
-    <div class="tabs" style="padding:12px 20px 0">${K_MK.map(x=>`<button class="tab" data-kmk="${x.id}" aria-pressed="${kv.mk===x.id}">${x.n}</button>`).join("")}</div>
-    ${!mc.disponible&&mc.disponible!==null?`<div class="vacio">Metricool no está disponible en este visor.</div>`:""}
-    ${errs.length?`<div class="k-aviso">${esc(textoError(errs[0]))}</div>`:""}
-    ${cargando?`<div class="vacio">Leyendo Metricool…</div>`:""}
-    ${ps.length?`<div class="mc-sec"><table class="tabla"><thead><tr><th>Red</th><th>Posts</th><th>Comentarios</th><th>Media</th></tr></thead><tbody>${Object.entries(porRed).map(([r,o])=>`<tr><td>${esc(RED_K[r]||r)}</td><td>${fmtK(o.posts)}</td><td>${fmtK(o.com)}</td><td>${(o.com/Math.max(1,o.posts)).toFixed(1).replace(".",",")}</td></tr>`).join("")}</tbody></table></div>
-    <div class="seccion-t">Más comentados · ${esc(m.n)}</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Post</th><th>Coment.</th><th>Me gusta</th></tr></thead><tbody>${top.map(x=>`<tr><td style="text-align:left"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(corta(x.texto||"(sin texto)",70))}</a><span class="sub">${esc(RED_K[x.red])} · ${esc(x.formato)} · ${esc(fechaK(x.fecha))} · ${fmtK(x.views||x.alcance)} ${x.views?"vistas":"alcance"}</span></td><td>${fmtK(x.comentarios)}</td><td>${fmtK(x.likes)}</td></tr>`).join("")}</tbody></table></div>`:""}
-    <div class="seccion-t">Bitácora de la sala</div><ol class="bit">${(E?.bitacora||[]).slice(0,20).map(b=>{const a=EQUIPO_K.find(y=>y.n===b.quien);return`<li style="--c:${a?a.c:"#7f8a99"}"><div><time>${esc(hace(b.t))} · ${esc(b.quien||"")}</time>${esc(b.texto)}</div></li>`}).join("")}</ol>`;
-}
+function pintarKVivo(){/* pestaña oculta: código eliminado */}
 const PROMPT_K=`Eres Bea, jefa de comunidad de Santiago Ways (agencia premium del Camino de Santiago). Analiza estos comentarios reales de redes sociales. Agrúpalos en temas, detecta las preguntas que se repiten, el sentimiento y oportunidades de contenido o de venta. No inventes: cuenta solo lo que está en el texto.
 Responde SOLO con un objeto JSON válido, sin texto antes ni después, con esta forma:
 {"resumen":"2-3 frases","temas":[{"tema":"","n":0,"ejemplo":"cita breve"}],"preguntas":[{"pregunta":"","n":0}],"sentimiento":{"positivo":"%","neutro":"%","negativo":"%"},"oportunidades":["idea concreta"],"respuestas":["respuesta modelo para la pregunta más repetida"]}
@@ -3453,27 +3369,8 @@ function htmlPeticiones(lista,modo){
    <p style="margin-top:6px">${esc(x.detalle||"")}</p>${(x.requisitos||[]).length?`<ul style="margin:6px 0 0;padding-left:16px;display:grid;gap:3px">${x.requisitos.map(q=>`<li style="font-size:12.5px;color:#c9d1da">${esc(q)}</li>`).join("")}</ul>`:""}
    ${x.respuesta?`<div class="k-c" style="margin-top:10px;border-left:3px solid #7AA606"><h4>Respuesta de ${esc(SALA_TIT[x.para]||x.para)}${x.respuesta.quien?" · "+esc(x.respuesta.quien):""}</h4><p>${esc(x.respuesta.texto||"")}</p>${x.respuesta.imagen?`<img loading="lazy" src="${esc(x.respuesta.imagen)}" alt="${esc(x.respuesta.alt||"Propuesta de diseño")}" style="width:100%;border-radius:6px;margin-top:8px;background:#fff">`:""}</div>`:""}
    </div></li>`).join("")}</ol>`}
-function pintarWorkflows(){
-  const el=document.getElementById("c-mdirecto_wf");if(!el||st.dentro!=="mdirecto")return;const A=st.mkd;
-  const mias=(st.peticiones||[]).filter(x=>x.de==="mdirecto");
-  el.innerHTML=`<div class="mcab"><div><h2>Workflows del CRM y plantillas</h2><div class="fuente-mc" style="margin-top:6px">Análisis del archivo de workflows de Zoho · todo pasa por la revisión de la Sala de Control</div></div><div class="meta">${A?.fecha?`actualizado ${esc(hace(A.fecha))}`:""}</div></div>
-   ${A?`<div style="padding:12px 20px 0">${selloControl(A.control)}</div>${A.resumen?`<p style="padding:14px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(A.resumen)}</p>`:""}
-   ${(A.kpis||[]).length?`<div class="k-grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">${A.kpis.map(k=>`<div class="k-c"><div class="k-num" style="color:#38bdf8;font-size:16px;line-height:1.3">${esc(k.valor)}</div><p>${esc(k.nombre)}</p></div>`).join("")}</div>`:""}
-   ${A.revision?`<div class="seccion-t">${esc(A.revision.titulo||"Revisión frente a Zoho")}</div><div class="mc-sec" style="display:grid;gap:10px">${A.revision.resumen?`<p style="margin:0;font-size:14px;line-height:1.55;color:#e6eaee">${esc(A.revision.resumen)}</p>`:""}<div class="k-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:0">${[["corregido","Corregido en Zoho","#3ddc97"],["parcial","A medias","#f5d76e"],["pendiente","Sigue pendiente","#ff6b3d"]].map(([k,t,c])=>(A.revision[k]||[]).length?`<div class="k-c" style="border-top:3px solid ${c}"><h4 style="margin:0 0 6px;color:${c}">${t} · ${A.revision[k].length}</h4><ul style="margin:0;padding-left:16px;display:grid;gap:4px">${A.revision[k].map(x=>`<li style="font-size:12.5px;line-height:1.45;color:#d6dbe1">${esc(x)}</li>`).join("")}</ul></div>`:"").join("")}</div>${A.revision.nota?`<p style="margin:0;font:500 11.5px/1.4 var(--f-mono);color:var(--tenue)">${esc(A.revision.nota)}</p>`:""}</div>`:""}
-   ${(A.hallazgos||[]).length?`<div class="seccion-t">Hallazgos</div><ol class="prios">${A.hallazgos.map(x=>{const EC={corregido:["#3ddc97","corregido"],parcial:["#f5d76e","a medias"],pendiente:["#ff6b3d","pendiente"]}[x.estado];return `<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.titulo)} ${x.prioridad?`<span class="k-tag" style="background:${PRIO_C[x.prioridad]||"#555"}22;color:${PRIO_C[x.prioridad]||"#ccc"}">${esc(x.prioridad)}</span>`:""}${EC?`<span class="k-tag" style="background:${EC[0]}22;color:${EC[0]}">${EC[1]}</span>`:""}</p><p style="margin-top:4px">${esc(x.detalle||"")}</p>${x.revision?`<p style="margin-top:4px;font-size:12.5px;color:${EC?EC[0]:"#d6dbe1"}">Revisión: ${esc(x.revision)}</p>`:""}${x.quien?`<p style="margin-top:4px;font:500 11px/1.3 var(--f-mono);color:var(--tenue)">${esc(x.quien)}</p>`:""}</div></li>`}).join("")}</ol>`:""}
-   ${A.journey?`<div class="seccion-t">Journey del cliente</div><p style="padding:0 20px;margin:0;font-size:14px;line-height:1.55;color:#d6dbe1;white-space:pre-line">${esc(typeof A.journey==="string"?A.journey:JSON.stringify(A.journey))}</p>`:""}
-   ${(A.mapa||[]).length?`<div class="seccion-t">Mapa de workflows</div><div class="mc-sec"><table class="tabla"><thead><tr><th style="text-align:left">Módulo</th><th>Activos</th><th>Inactivos</th><th style="text-align:left">Notas</th></tr></thead><tbody>${A.mapa.map(m=>`<tr><td style="text-align:left">${esc(m.modulo)}</td><td>${esc(m.activos)}</td><td>${esc(m.inactivos)}</td><td style="text-align:left;white-space:normal">${esc(m.notas||"")}</td></tr>`).join("")}</tbody></table></div>`:""}
-   ${(A.plantillas||[]).length?`<div class="seccion-t">Plantillas: original y propuesta</div>${A.plantillas.map(t=>`<details class="k-c" style="margin:0 20px 10px"><summary style="cursor:pointer;font-weight:600;color:#f1f3f5">${esc(t.nombre)} <span style="font:500 11px/1 var(--f-mono);color:var(--tenue)">${esc(t.cuando||"")} · ${esc(t.idioma||"")}</span></summary>
-     ${(t.problemas||[]).length?`<p style="margin-top:8px;color:#ffb38a">Problemas: ${esc(t.problemas.join("; "))}</p>`:""}
-     ${t.extracto_original?`<p style="margin-top:8px;color:var(--tenue);font-size:12.5px">Original: «${esc(t.extracto_original)}»</p>`:""}
-     ${t.propuesta?`<div style="margin-top:10px;padding:12px;border-radius:6px;background:#0b1117;border:1px solid #18384a"><p style="font:600 12px/1.3 var(--f-mono);color:#38bdf8">Asunto: ${esc(t.propuesta.asunto||"")}</p>${t.propuesta.preheader?`<p style="font:500 11.5px/1.3 var(--f-mono);color:var(--tenue);margin-top:4px">Preheader: ${esc(t.propuesta.preheader)}</p>`:""}<p style="margin-top:8px;white-space:pre-line;font-size:13.5px;line-height:1.55;color:#e6eaee">${esc(t.propuesta.cuerpo||"")}</p>${t.propuesta.cta?`<p style="margin-top:8px"><span class="k-tag" style="background:#7AA60633;color:#b5dd4a">${esc(t.propuesta.cta)}</span></p>`:""}</div>`:""}
-     ${t.propuesta_en?`<div style="margin-top:8px;padding:12px;border-radius:6px;background:#0b1117;border:1px solid #18384a"><p style="font:600 12px/1.3 var(--f-mono);color:#38bdf8">EN · Subject: ${esc(t.propuesta_en.asunto||"")}</p><p style="margin-top:8px;white-space:pre-line;font-size:13.5px;line-height:1.55;color:#e6eaee">${esc(t.propuesta_en.cuerpo||"")}</p></div>`:""}
-     ${t.porque?`<p style="margin-top:8px;color:#b5dd4a;font-size:12.5px">${esc(t.porque)}</p>`:""}${zEditar(t.workflow||t.nombre)}</details>`).join("")}`:""}
-   ${(A.recomendaciones||[]).length?`<div class="seccion-t">Recomendaciones</div><ol class="prios">${A.recomendaciones.map(x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.titulo)} ${x.prioridad?`<span class="k-tag">${esc(x.prioridad)}</span>`:""}</p><p style="margin-top:4px">${esc(x.detalle||"")}</p>${x.quien?`<p style="margin-top:4px;font:500 11px/1.3 var(--f-mono);color:var(--tenue)">${esc(x.quien)}</p>`:""}</div></li>`).join("")}</ol>`:""}`:`<div class="vacio">Lorena y el equipo están analizando el archivo de workflows.</div>`}
-   <div class="seccion-t">Peticiones enviadas a otras salas</div>${htmlPeticiones(mias,"de")}`;
-}
-function pintarPeticionesDiseno(){const el=document.getElementById("c-d_pet");if(!el||st.dentro!=="diseno")return;
-  el.innerHTML=`<div class="mcab"><div><h2>Peticiones de otras salas</h2><div class="fuente-mc" style="margin-top:6px">Encargos que llegan al estudio · Paula los asigna</div></div></div>${htmlPeticiones((st.peticiones||[]).filter(x=>x.para==="diseno"),"para")}`}
+function pintarWorkflows(){/* pestaña oculta: código eliminado */}
+function pintarPeticionesDiseno(){/* pestaña oculta: código eliminado */}
 function ybNum(t){const m=String(t||"").replace(/\s/g,"").match(/^([+-]?[\d.,]+)(K|M|mil)?/i);if(!m)return null;let n=m[1];if(m[2]){n=+n.replace(",",".");return n*(/m$/i.test(m[2])&&m[2]!=="mil"?1e6:1e3)}return +n.replace(/\./g,"").replace(",",".")}
 function pintarBenchYT(){const el=document.getElementById("c-youtube_bench");if(!el)return;const B=st.ytb,G={A:["Competencia directa","#ff6b3d","🏢"],B:["Creadores del Camino","#c084fc","🎒"],C:["Marcas de viaje","#2dd4bf","✈️"]};
   if(!B){el.innerHTML=`<div class="mcab"><div><h2>Benchmark: el nicho en YouTube</h2></div></div><div class="vacio">Vera y Bruno están navegando canales con crecimiento orgánico.</div>`;return}
@@ -3496,27 +3393,7 @@ function pintarBenchYT(){const el=document.getElementById("c-youtube_bench");if(
    <div class="yb-cs">${L.slice(0,V.n).map(tarj).join("")}</div>${L.length>V.n?`<div style="padding:10px 20px"><button class="btn" data-ybmas>Ver ${Math.min(24,L.length-V.n)} más (${L.length-V.n} en total)</button></div>`:""}
    <p class="as-nota">Primero la competencia directa, luego creadores del Camino y marcas de viaje; dentro de cada grupo, por crecimiento de los últimos 28 días. 🔥 = impacto alto. Pasa el ratón por un canal para ver qué hace bien. Fuentes: vidIQ, Social Blade y los propios canales.</p>`}
 document.addEventListener("click",e=>{const g=e.target.closest("[data-ybg]");if(g&&st.ybV){st.ybV.g=g.dataset.ybg;st.ybV.n=12;pintarBenchYT();return}if(e.target.closest("[data-ybmas]")&&st.ybV){st.ybV.n+=24;pintarBenchYT()}});
-function pintarYouTube(){
-  if(st.dentro!=="youtube")return;pintarBenchYT();const A=st.yt,li=(arr,f)=>`<ol class="prios">${arr.map(f).join("")}</ol>`,GRV={alta:"#ff6b3d",media:"#f5d76e",baja:"#8fb3ff"};
-  const tab=(cols,filas)=>`<div class="mc-sec"><table class="tabla"><thead><tr>${cols.map((c,i)=>`<th${i?"":` style="text-align:left"`}>${esc(c)}</th>`).join("")}</tr></thead><tbody>${filas.map(f=>`<tr>${f.map((c,i)=>`<td${i?"":` style="text-align:left;white-space:normal"`}>${esc(c??"")}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
-  const a=document.getElementById("c-youtube_audit"),h=document.getElementById("c-youtube_hub");
-  if(a)a.innerHTML=`<div class="mcab"><div><h2>Auditoría de canales y errores</h2><div class="fuente-mc" style="margin-top:6px">Metricool, GA4, búsquedas y mercado · todo pasa por la Sala de Control</div></div><div class="meta">${A?.fecha?`actualizada ${esc(hace(A.fecha))}`:""}</div></div>
-   ${A?`<div style="padding:12px 20px 0">${selloControl(A.control)}</div>${A.resumen?`<p style="padding:12px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(A.resumen)}</p>`:""}
-   ${(A.kpis||[]).length?`<div class="k-grid" style="grid-template-columns:repeat(4,minmax(0,1fr))">${A.kpis.map(k=>`<div class="k-c"><div class="k-num" style="color:#ff4d4d;font-size:15px;line-height:1.35">${esc(k.valor)}</div><p>${esc(k.nombre)}</p></div>`).join("")}</div>`:""}
-   ${(A.errores||[]).length?`<div class="seccion-t">Errores</div>${li(A.errores,x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.titulo)} <span class="k-tag" style="background:${GRV[x.gravedad]||"#555"}22;color:${GRV[x.gravedad]||"#ccc"}">${esc(x.gravedad||"")}</span></p><p style="margin-top:4px">${esc(x.detalle||"")}</p>${x.quien?`<p style="margin-top:4px;font:500 11px/1.3 var(--f-mono);color:var(--tenue)">${esc(x.quien)}</p>`:""}</div></li>`)}`:""}
-   ${(A.canales||[]).map(c=>`<div class="seccion-t">${esc(c.canal)}${c.suscriptores!=null?` · ${esc(c.suscriptores)} suscriptores`:""}</div>${(c.mejores||[]).length?tab(["Vídeo","Fecha","Vistas","Likes","Comentarios"],c.mejores.map(v=>[v.titulo,v.fecha,v.vistas,v.likes,v.comentarios])):""}${c.notas?`<p style="padding:0 20px;margin:6px 0 0;font-size:13px;color:var(--tenue)">${esc(c.notas)}</p>`:""}`).join("")}
-   ${(A.mercado||[]).length?`<div class="seccion-t">Mercado: qué funciona en YouTube</div>${tab(["Canal","Idioma","Métrica","Formato que funciona"],A.mercado.map(m=>[m.canal,m.idioma,m.suscriptores_o_vistas,m.formato_que_funciona]))}`:""}
-   ${(A.busquedas||[]).length?`<div class="seccion-t">Búsquedas</div>${tab(["Consulta","Idioma","Intención","Fuente"],A.busquedas.map(b=>[b.consulta,b.idioma,b.intencion,b.fuente]))}`:""}
-   ${(A.limitaciones||[]).length||A.limitaciones?`<div class="k-aviso">${esc(Array.isArray(A.limitaciones)?A.limitaciones.join(" · "):A.limitaciones)}</div>`:""}`:`<div class="vacio">Iker y el equipo están auditando los dos canales.</div>`}`;
-  if(h){const H=A?.hub_spoke;h.innerHTML=`<div class="mcab"><div><h2>Estrategia Hub & Spoke</h2><div class="fuente-mc" style="margin-top:6px">Hubs por ruta y tema, vídeos satélite, listas y destino con UTM</div></div></div>
-   ${A?`${H?.explicacion?`<p style="padding:12px 20px 0;margin:0;font-size:15px;line-height:1.55;color:#e6eaee">${esc(H.explicacion)}</p>`:""}
-   ${(H?.hubs||[]).map(x=>`<div class="k-c" style="margin:12px 20px 0;border-left:3px solid #ff4d4d"><h4>${esc(x.titulo_propuesto)} <span class="k-tag">${esc(x.idioma||"")}</span></h4><p style="font:500 12px/1.4 var(--f-mono);color:#ffb3b3">${esc(x.keyword_principal||"")}${x.volumen_o_evidencia?" · "+esc(x.volumen_o_evidencia):""}</p><ul style="margin:6px 0 0;padding-left:16px;display:grid;gap:3px">${(x.spokes||[]).map(t=>`<li style="font-size:13px;color:#d6dbe1">${esc(t)}</li>`).join("")}</ul>${x.lista_reproduccion?`<p style="margin-top:6px;font-size:12.5px;color:var(--tenue)">Lista: ${esc(x.lista_reproduccion)}</p>`:""}${x.enlace_destino?`<p style="margin-top:4px;font:500 11.5px/1.4 var(--f-mono);color:#b5dd4a;word-break:break-all">${esc(x.enlace_destino)}</p>`:""}</div>`).join("")}
-   ${(A.algoritmo||[]).length?`<div class="seccion-t">Cómo trabajar el algoritmo</div>${li(A.algoritmo,x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.tactica)}</p><p style="margin-top:4px">${esc(x.como||"")}</p>${x.kpi?`<p style="margin-top:4px;font:500 11px/1.3 var(--f-mono);color:var(--tenue)">KPI: ${esc(x.kpi)}</p>`:""}</div></li>`)}`:""}
-   ${(A.suscriptores||[]).length?`<div class="seccion-t">Suscriptores por perfil</div>${li(A.suscriptores,x=>`<li class="prio"><div><p style="color:#f1f3f5;font-weight:600">${esc(x.canal)}${x.objetivo_12_meses?" · objetivo: "+esc(x.objetivo_12_meses):""}</p><p style="margin-top:4px">${esc(Array.isArray(x.palancas)?x.palancas.join("; "):x.palancas||"")}</p></div></li>`)}`:""}
-   ${(A.comentarios||[]).length?`<div class="seccion-t">Generar comentarios</div>${li(A.comentarios,x=>`<li class="prio"><div><p>${esc(typeof x==="string"?x:(x.mecanica||x.titulo||"")+(x.ejemplo?": "+x.ejemplo:"")+(x.como?": "+x.como:""))}</p></div></li>`)}`:""}
-   ${A.presupuestos?`<div class="seccion-t">De vistas a presupuestos</div>${li(Array.isArray(A.presupuestos)?A.presupuestos:Object.entries(A.presupuestos).map(([k,v])=>k+": "+(typeof v==="string"?v:JSON.stringify(v))),x=>`<li class="prio"><div><p>${esc(typeof x==="string"?x:(x.accion||x.titulo||x.paso||"")+(x.detalle?": "+x.detalle:"")+(x.como?": "+x.como:""))}</p></div></li>`)}`:""}
-   ${(A.plan_30_dias||[]).length?`<div class="seccion-t">Plan de 30 días</div>${tab(["Semana","Tarea","Quién"],A.plan_30_dias.map(x=>[x.semana,x.tarea,x.quien]))}`:""}`:`<div class="vacio">El equipo está definiendo los hubs.</div>`}`}
-}
+function pintarYouTube(){/* pestaña oculta: código eliminado */}
 /* ---------- Sala de Instagram: cuentas ES, EN y DE en vivo desde Metricool ---------- */
 const IG_CUENTAS=[{id:"es",n:"ES",cuenta:"@santiago_ways",brand:"3306533"},{id:"en",n:"EN",cuenta:"@santiagoways_en",brand:"3306535"},{id:"de",n:"DE",cuenta:"@santiago_ways_de",brand:"3306537"}];
 const IG_Q={ev:["IGEV01","IGEV43","IGEV44","IGEV37","IGEV38"],reels:["IGRE02","IGRE03","IGRE06","IGRE23","IGRE10","IGRE07","IGRE21","IGRE12","IGRE11","IGRE27"],posts:["IGPO02","IGPO03","IGPO06","IGPO07","IGPO13","IGPO08","IGPO27","IGPO15","IGPO14","IGPO28"],comp:["IGCO02","IGCO03","IGCO07","IGCO08","IGCO12","IGCO09","IGCO06","IGCO10"]};
@@ -3530,28 +3407,7 @@ function suscribirIG(){if(ig.subs||!mc.mcp)return;ig.subs=true;const r=rango(30)
 function piezasIG(cid){const R=(mc.datos[`ig:${cid}:reels`]?.rows||[]).map(x=>({tipo:"Reel",fecha:x[0],texto:x[1],url:x[2],vistas:+x[3]||0,likes:+x[4]||0,com:+x[5]||0,comp:+x[6]||0,guard:+x[7]||0,alcance:+x[8]||0,ret:x[9]!=null?+x[9]:null}));
   const P=(mc.datos[`ig:${cid}:posts`]?.rows||[]).map(x=>({tipo:x[3]==="FEED_CAROUSEL_ALBUM"?"Carrusel":x[3]==="FEED_VIDEO"?"Vídeo":"Imagen",fecha:x[0],texto:x[1],url:x[2],likes:+x[4]||0,com:+x[5]||0,comp:+x[6]||0,guard:+x[7]||0,alcance:+x[8]||0,vistas:+x[9]||0,ret:null}));
   return[...R,...P].map(p=>({...p,inter:p.likes+p.com+p.comp+p.guard})).sort((a,b)=>b.vistas-a.vistas||b.inter-a.inter)}
-function pintarIG(){
-  const el=document.getElementById("c-instagram_cuentas"),ec=document.getElementById("c-instagram_comp");if(!el||st.dentro!=="instagram")return;
-  const C=IG_CUENTAS.find(x=>x.id===ig.cuenta),cab=`<div class="mcab"><div><h2>Tus cuentas de Instagram</h2><div class="fuente-mc" style="margin-top:6px">Metricool en vivo · últimos 30 días · ordenado por visualizaciones</div></div>
-    <div class="tabs">${IG_CUENTAS.map(x=>`<button class="tab" data-igc="${x.id}" aria-pressed="${ig.cuenta===x.id}">${x.n}<small>${esc(x.cuenta)}</small></button>`).join("")}</div></div>`;
-  if(mc.disponible===false){el.innerHTML=cab+`<div class="mc-sec"><div class="aviso">Abre la página desde claude.ai con tu cuenta para ver Instagram en directo.</div></div>`}
-  else{
-    const ev=(mc.datos[`ig:${C.id}:ev`]?.rows||[]).slice().sort((a,b)=>String(a[a.length-1]).localeCompare(String(b[b.length-1])));
-    const ult=[...ev].reverse().find(x=>x[0]!=null),pri=ev.find(x=>x[0]!=null),sum=i=>ev.reduce((t,x)=>t+(+x[i]||0),0);
-    const L=piezasIG(C.id),cargando=!mc.datos[`ig:${C.id}:reels`]&&!mc.datos[`ig:${C.id}:posts`],err=mc.err[`ig:${C.id}:reels`]||mc.err[`ig:${C.id}:posts`];
-    const tarjeta=(p,k)=>`<details class="cola-it"${k===0?" open":""}><summary><span class="n">#${k+1}</span><span class="plat" style="--c:#e1306c">${esc(p.tipo)}</span><span class="t">${esc(corta((p.texto||"").split("\n")[0],110))}</span><b>${fmt(p.vistas)||"0"}<small>vistas</small></b></summary>
-      <div class="cola-det"><p style="white-space:pre-line">${esc(corta(p.texto,600))}</p>
-      <div class="desg">${[[p.likes,"me gusta"],[p.com,"comentarios"],[p.comp,"compartidos"],[p.guard,"guardados"],[p.alcance,"alcance"]].map(([v,l])=>`${fmt(v)||"0"} ${l}`).join(" · ")}${p.ret!=null?` · retención ${p.ret.toFixed(1).replace(".",",")} %`:""}</div>
-      <p class="meta-c">${esc(C.cuenta)} · publicado ${esc(fechaCorta(p.fecha))}${p.alcance?` · ${((p.guard+p.comp)/p.alcance*100).toFixed(1).replace(".",",")} % guardados y compartidos sobre alcance`:""}</p>
-      <div class="cola-acc">${p.url?`<a class="btn prim" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener">Abrir en Instagram ↗</a>`:""}</div></div></details>`;
-    el.innerHTML=cab+(err&&cargando?`<div class="mc-sec"><div class="aviso err">${esc(textoError(err))}</div></div>`:"")+
-     `<div class="mc-sec"><div class="mc-kpis"><div class="mc-kpi"><b>${ult?fmt(+ult[0]):"–"}</b><span>Seguidores</span></div><div class="mc-kpi"><b>${ult&&pri?((+ult[0]-+pri[0]>=0?"+":"")+fmt(+ult[0]-+pri[0])):"–"}</b><span>Variación 30 d</span></div><div class="mc-kpi"><b>${fmt(sum(1))||"–"}</b><span>Ganados</span></div><div class="mc-kpi"><b>${fmt(sum(2))||"–"}</b><span>Perdidos</span></div><div class="mc-kpi"><b>${L.length||"–"}</b><span>Publicaciones</span></div><div class="mc-kpi"><b>${fmt(L.reduce((t,p)=>t+p.inter,0))||"–"}</b><span>Interacciones</span></div></div></div>
-     <div class="seccion-t">Publicaciones de ${esc(C.cuenta)}</div>${cargando?`<div class="vacio">Eloy está leyendo Metricool…</div>`:L.length?`<div class="cola">${L.slice(0,ig.lim).map(tarjeta).join("")}</div>${L.length>ig.lim?`<button class="btn" type="button" id="igMas" style="margin:10px 20px 0">Ver más (${L.length-ig.lim})</button>`:""}`:`<div class="vacio">Sin publicaciones en los últimos 30 días.</div>`}`}
-  if(ec){ec.innerHTML=`<div class="mcab"><div><h2>Competencia en Instagram</h2><div class="fuente-mc" style="margin-top:6px">Competidores configurados en Metricool por cuenta · últimos 30 días</div></div></div>`+IG_CUENTAS.map(C=>{const d=mc.datos[`ig:${C.id}:comp`];
-    if(!d)return`<div class="mc-sec"><h3>${esc(C.n)} · ${esc(C.cuenta)}</h3><div class="aviso">${mc.disponible===false?"Abre la página desde claude.ai para ver estos datos.":"Eloy está leyendo Metricool…"}</div></div>`;
-    if(!d.rows.length)return`<div class="mc-sec"><h3>${esc(C.n)} · ${esc(C.cuenta)}</h3><div class="aviso">No hay competidores de Instagram configurados en esta marca de Metricool. Añádelos en Metricool → Competidores → Instagram.</div></div>`;
-    return`<div class="mc-sec"><h3>${esc(C.n)} · ${esc(C.cuenta)}<span>${d.rows.length} competidores</span></h3><div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Cuenta</th><th>Seguidores</th><th>Posts</th><th>Reels</th><th>Me gusta medios</th><th>Coment. medios</th><th>Engagement</th></tr></thead><tbody>${[...d.rows].sort((a,b)=>+b[2]-+a[2]).map(x=>`<tr><td><a href="https://instagram.com/${encodeURIComponent(x[0])}" target="_blank" rel="noopener">${logoIg(x[0],16)}@${esc(x[0])}</a><span class="sub">${esc(x[1]||"")}</span></td><td>${fmt(+x[2])||"–"}</td><td>${fmt(+x[3])||"0"}</td><td>${fmt(+x[4])||"0"}</td><td>${fmt(Math.round(+x[5]))||"0"}</td><td>${fmt(Math.round(+x[6]))||"0"}</td><td>${x[7]!=null?(+x[7]).toFixed(1).replace(".",","):"–"}</td></tr>`).join("")}</tbody></table></div></div>`}).join("")}
-}
+function pintarIG(){/* pestaña oculta: código eliminado */}
 
 /* Calendario de publicación del roadmap: semana tipo, franjas reales de Metricool, ciclo de hubs y reglas para combinar formatos */
 const CAL_C={"Reel UGC":"#e1306c","Reel de texto":"#f58529","Carrusel":"#7AA606","Estático":"#3d7bff","Stories":"#a78bfa","Vídeo largo":"#ff4d4d","Short":"#f5c518","Comunidad":"#2dd4bf"};
@@ -3912,104 +3768,18 @@ function cnSpark(vals,c){const v=vals.filter(x=>x!=null);if(v.length<2)return"";
 function cnRango(V,meses,ult){const y=Math.floor(ult/100),r=(V.rango||"12m");
   if(r==="12m"){let i=meses.indexOf(ult);return meses.slice(Math.max(0,i-11),i+1)}
   return meses.filter(m=>Math.floor(m/100)===Number(r))}
-function pintarEvolucion(){const el=document.getElementById("c-captacion_evolucion");if(!el||st.dentro!=="captacion")return;const C=st.canales;
-  if(!C||!(C.filas||[]).length||C.filas[0].length<5){el.innerHTML=`<div class="vacio">Álex está preparando los datos mensuales.</div>`;return}
-  const M=cnMensual(C),ult=M.meses[M.meses.length-1],V=st.cnEv||(st.cnEv={rango:"12m",min:30,ver:"cr"});
-  const conCierre=C.filas[0].length>=6,cdEv=conCierre&&V.cierre!==false,iw=cdEv?2:1;
-  const ms=cnRango(V,M.meses,ult),anios=[...new Set(M.meses.map(m=>Math.floor(m/100)))];
-  const hoy=new Date(),mesAct=hoy.getFullYear()*100+hoy.getMonth()+1,enCurso=new Set([mesAct]);
-  const cr=x=>x&&x[0]?x[iw]/x[0]:null,finR=ms[ms.length-1],PS={},PG={};
-  (C.filas||[]).forEach(f=>{const ym=f[2];if(ym<ms[0]||ym>finR)return;const k=cnClasif(f[0],f[1]).join("|"),w=cdEv?cnWonHasta(f,finR):f[4],x=PS[k]||(PS[k]=[0,0]),g=PG[k.split("|")[0]]||(PG[k.split("|")[0]]=[0,0]);x[0]+=f[3];x[1]+=w;g[0]+=f[3];g[1]+=w});
-  const filas=M.orden.filter(k=>ms.some(m=>M.por[k]?.[m]?.[0])).map(k=>{const vals=ms.map(m=>{const x=M.por[k]?.[m];return x&&x[0]>=V.min?x[iw]/x[0]:null});
-    const mm=ms.reduce((t,m)=>{const x=M.por[k]?.[m];return x?[t[0]+x[0],t[1]+x[iw]]:t},[0,0]);return{k,vals,sum:PS[k]||[0,0],base:mm[0]?mm[1]/mm[0]:0}});
-  const heat=(x,base)=>{if(x==null)return"";const r=base?x/base:1,a=Math.min(.55,Math.abs(r-1)*.9);return r>=1?`background:rgba(61,220,151,${a})`:`background:rgba(255,107,107,${a})`};
-  const grpMes=(G,m)=>Object.entries(M.por).reduce((t,[k,x])=>k.startsWith(G+"|")&&x[m]?[t[0]+x[m][0],t[1]+x[m][iw]]:t,[0,0]);
-  const celdaG=(x)=>V.ver==="cr"?cnPct(x[0]?x[1]/x[0]:null,2):cnNum(x[0]);
-  let h="",grp="";filas.forEach(f=>{const g=f.k.split("|")[0];if(g!==grp){grp=g;const gm=ms.map(m=>grpMes(g,m)),gt=PG[g]||[0,0];
-      h+=`<tr class="cn-gh ${g==="PAID"?"cn-paid":"cn-org"}"><td><span class="cn-dot"></span>${g}<small class="cn-tot">${cnNum(gt[0])} deals · CR ${cnPct(gt[0]?gt[1]/gt[0]:null,2)}</small></td>${gm.map((x,i)=>`<td class="${enCurso.has(ms[i])?"cn-inm":""}">${celdaG(x)}</td>`).join("")}<td>${cnSpark(gm.map(x=>x[0]?x[1]/x[0]:null),g==="PAID"?"#f97316":"#3ddc97")}</td></tr>`}
-    const base=f.base,crP=f.sum[0]?f.sum[1]/f.sum[0]:0,cls=g==="PAID"?"cn-paid":"cn-org";
-    h+=`<tr class="cn-lf ${cls}"><td class="cn-l1${f.k.endsWith("SIN DATA")?" cn-sd":""}">${esc(cnNom(f.k))}<small class="cn-tot">${cnNum(f.sum[0])} deals · CR ${cnPct(crP,2)}</small></td>
-     ${ms.map((m,i)=>{const x=M.por[f.k]?.[m];const v=f.vals[i];return`<td class="cn-hm${enCurso.has(m)?" cn-inm":""}" style="${V.ver==="cr"?heat(v,base):""}" title="${ymTxt(m)}: ${x?cnNum(x[0])+" deals creados, "+cnNum(x[iw])+(cdEv?" won cerrados ese mes":" won (todos, a día de hoy)"):"sin deals"}">${V.ver==="cr"?(v==null?(x&&x[0]?`<span class="cn-poco">${cnNum(x[0])}</span>`:""):cnPct(v,2)):(x?cnNum(x[0]):"")}</td>`}).join("")}
-     <td>${cnSpark(f.vals,g==="PAID"?"#f97316":"#3ddc97")}</td></tr>`});
-  const tm=ms.map(m=>{const x=M.tot[m]||[0,0,0];return[x[0],x[iw]]});
-  h+=`<tr class="cn-gen"><td>TOTAL GENERAL</td>${tm.map((x,i)=>`<td class="${enCurso.has(ms[i])?"cn-inm":""}">${celdaG(x)}</td>`).join("")}<td>${cnSpark(tm.map(x=>x[0]?x[1]/x[0]:null),"#e6eaee")}</td></tr>`;
-  el.innerHTML=`<div class="mcab"><div><h2>Evolución del CR por canal</h2></div></div>
-   <div class="as-ctl"><div class="as-modo">${["12m",...anios.map(String)].map(r=>`<button class="btn${V.rango===r?" prim":""}" data-evr="${r}">${r==="12m"?"Últimos 12 meses":r}</button>`).join("")}</div>
-    <div class="as-modo"><button class="btn${V.ver==="cr"?" prim":""}" data-evv="cr">CR del mes</button><button class="btn${V.ver==="vol"?" prim":""}" data-evv="vol">Deals</button></div>${conCierre?`<button class="btn${cdEv?" prim":""}" data-evcd title="Aplica o quita el filtro de Closing Date">Closing Date: ${cdEv?"sí":"no"}</button>`:""}
-    <label>Mínimo por mes <select data-evmin>${[10,30,50,100].map(n=>`<option${n===V.min?" selected":""}>${n}</option>`).join("")}</select> deals</label>${cnBtns("c-captacion_evolucion")}${zBtn("canales")}</div>
-   <div class="as-tw"><table class="as-t cn-e cn-ev"><thead><tr><th class="as-n">Canal</th>${ms.map(m=>`<th class="${enCurso.has(m)?"cn-inm":""}">${ymTxt(m)}</th>`).join("")}<th>Tendencia</th></tr></thead><tbody>${h}</tbody></table></div>
-   <p class="as-nota">${conCierre&&!cdEv?`Closing Date: no. CR del mes = todos los deals won a día de hoy de los creados ese mes / deals creados ese mes (Created Time), se cerraran cuando se cerraran. Los meses antiguos han tenido más tiempo para cerrar, así que no son comparables con los recientes.`:conCierre?`Closing Date: sí. CR del mes = deals won de los creados ese mes con Closing Date anterior al día 1 del mes siguiente / deals creados ese mes (Created Time). Por ejemplo, el CR de enero son los won de los deals de enero cerrados antes del 1 de febrero. Así cada mes se mide con la misma ventana y los meses son comparables entre sí, sin esperar a que maduren.`:`CR = deals won / deals creados ese mes. Pendiente de cargar el Closing Date.`} El total junto a cada canal cuenta los deals del periodo y ${cdEv?"los won con Closing Date hasta el último mes mostrado":"todos sus won a día de hoy"}. El color compara el CR de cada mes con la media mensual del propio canal: verde por encima, rojo por debajo. Si un mes tiene menos deals que el mínimo, se muestra en gris solo el volumen. El mes en curso va en cursiva porque aún no ha terminado. Las filas ORGANIC y PAID y el TOTAL GENERAL muestran el CR de todo el grupo cada mes.</p>`}
+function pintarEvolucion(){/* pestaña oculta: código eliminado */}
 document.addEventListener("click",e=>{const r=e.target.closest("[data-evr]");if(r&&st.cnEv){st.cnEv.rango=r.dataset.evr;pintarEvolucion();return}
   const v=e.target.closest("[data-evv]");if(v&&st.cnEv){st.cnEv.ver=v.dataset.evv;pintarEvolucion();return}
   if(e.target.closest("[data-evcd]")&&st.cnEv){st.cnEv.cierre=st.cnEv.cierre===false;pintarEvolucion()}});
 document.addEventListener("change",e=>{const s=e.target.closest("[data-evmin]");if(s&&st.cnEv){st.cnEv.min=Number(s.value);pintarEvolucion()}});
 
-function pintarMix(){const el=document.getElementById("c-captacion_mix");if(!el||st.dentro!=="captacion")return;const C=st.canales;
-  if(!C||!(C.filas||[]).length||C.filas[0].length<5){el.innerHTML=`<div class="vacio">Álex está preparando los datos mensuales.</div>`;return}
-  const M=cnMensual(C),ult=M.meses[M.meses.length-1],V=st.cnMx||(st.cnMx={rango:"12m",nivel:"grupo"});
-  const ms=cnRango(V,M.meses,ult),anios=[...new Set(M.meses.map(m=>Math.floor(m/100)))];
-  const iwM=C.filas[0].length>=6?2:1,g=(m,f)=>Object.entries(M.por).reduce((t,[k,x])=>f(k)&&x[m]?[t[0]+x[m][0],t[1]+x[m][iwM]]:t,[0,0]);
-  const org=ms.map(m=>g(m,k=>k.startsWith("ORGANIC|"))),pai=ms.map(m=>g(m,k=>k.startsWith("PAID|")));
-  const medios=[...new Set(M.orden.map(k=>k.split("|").slice(0,2).join("|")))].filter(mk=>ms.some(m=>g(m,k=>k.startsWith(mk+"|")||k===mk)[0]));
-  const COL={"ORGANIC":["#3ddc97","#2fb57c","#7ee8b9","#1f8a5c","#a8f0cf","#5fd1a1","#147049","#c9f5df","#43c48d","#0e5a3a","#86dbb4","#2a9e6b","#b5ecd2","#1b7a52","#6fd6a6"],"PAID":["#f97316","#fb923c","#c2410c","#fdba74","#ea580c","#fed7aa"]};
-  const colM={};["ORGANIC","PAID"].forEach(G=>medios.filter(x=>x.startsWith(G)).forEach((x,i)=>colM[x]=COL[G][i%COL[G].length]));
-  const W=Math.max(560,ms.length*58),H=190,bw=Math.min(36,(W-40)/ms.length-10);
-  const barras=ms.map((m,i)=>{const t=org[i][0]+pai[i][0];if(!t)return"";const x=30+i*((W-40)/ms.length);let y=10,out="";
-    const segs=V.nivel==="grupo"?[["ORGANIC","#3ddc97",org[i][0]],["PAID","#f97316",pai[i][0]]]:medios.map(mk=>[mk,colM[mk],g(m,k=>k.startsWith(mk+"|")||k===mk)[0]]);
-    segs.forEach(([n,c,v])=>{const h=v/t*(H-20);if(h>0)out+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="${c}"><title>${ymTxt(m)} · ${esc(n.replace("|"," · "))}: ${cnNum(v)} deals (${cnPct(v/t)})</title></rect>`;y+=h});
-    return out+`<text x="${x+bw/2}" y="${H+4}" text-anchor="middle" class="cn-ax">${ymTxt(m)}</text><text x="${x+bw/2}" y="${10+org[i][0]/t*(H-20)/2+4}" text-anchor="middle" class="cn-bl">${V.nivel==="grupo"?Math.round(org[i][0]/t*100)+"%":""}</text>`}).join("");
-  const svg=`<svg class="cn-mix" viewBox="0 0 ${W} ${H+14}" width="100%" preserveAspectRatio="xMinYMin meet">${barras}</svg>`;
-  const leyenda=V.nivel==="grupo"?`<span><i style="background:#3ddc97"></i>Organic</span><span><i style="background:#f97316"></i>Paid</span>`:medios.map(mk=>`<span><i style="background:${colM[mk]}"></i>${esc(mk.split("|")[1])}<small>${mk.startsWith("PAID")?" paid":""}</small></span>`).join("");
-  const filas=[["Deals organic",org.map(x=>cnNum(x[0]))],["Deals paid",pai.map(x=>cnNum(x[0]))],["% paid (deals)",pai.map((x,i)=>cnPct(x[0]/((x[0]+org[i][0])||1)))],
-    ["Won organic",org.map(x=>cnNum(x[1]))],["Won paid",pai.map(x=>cnNum(x[1]))],["% paid (won)",pai.map((x,i)=>cnPct(x[1]/((x[1]+org[i][1])||1)))],
-    ["CR organic",org.map(x=>cnPct(x[0]?x[1]/x[0]:null,2))],["CR paid",pai.map(x=>cnPct(x[0]?x[1]/x[0]:null,2))]];
-  const tO=org.reduce((t,x)=>[t[0]+x[0],t[1]+x[1]],[0,0]),tP=pai.reduce((t,x)=>[t[0]+x[0],t[1]+x[1]],[0,0]);
-  const tbl2=V.nivel==="medio"?`<div class="as-tw"><table class="as-t cn-e"><thead><tr><th class="as-n">% de deals por medio</th>${ms.map(m=>`<th>${ymTxt(m)}</th>`).join("")}</tr></thead><tbody>${medios.map(mk=>`<tr class="cn-lf ${mk.startsWith("PAID")?"cn-paid":"cn-org"}"><td class="cn-l1"><i class="cn-sw" style="background:${colM[mk]}"></i>${esc(mk.split("|")[1])}</td>${ms.map((m,i)=>{const t=org[i][0]+pai[i][0],v=g(m,k=>k.startsWith(mk+"|")||k===mk)[0];return`<td>${t&&v?cnPct(v/t):""}</td>`}).join("")}</tr>`).join("")}</tbody></table></div>`:"";
-  el.innerHTML=`<div class="mcab"><div><h2>Mix Paid / Organic</h2></div></div>
-   <div class="as-ctl"><div class="as-modo">${["12m",...anios.map(String)].map(r=>`<button class="btn${V.rango===r?" prim":""}" data-mxr="${r}">${r==="12m"?"Últimos 12 meses":r}</button>`).join("")}</div>
-    <div class="as-modo"><button class="btn${V.nivel==="grupo"?" prim":""}" data-mxn="grupo">Organic vs Paid</button><button class="btn${V.nivel==="medio"?" prim":""}" data-mxn="medio">Por medio</button></div>${cnBtns("c-captacion_mix")}${zBtn("canales")}</div>
-   <div class="as-res"><div><b>${cnPct(tP[0]/((tP[0]+tO[0])||1))}</b><span>de los deals llegan por paid</span></div><div><b>${cnPct(tP[1]/((tP[1]+tO[1])||1))}</b><span>de las ventas (won) vienen de paid</span></div><div><b>${cnPct(tO[0]?tO[1]/tO[0]:null,2)}</b><span>CR organic</span></div><div><b>${cnPct(tP[0]?tP[1]/tP[0]:null,2)}</b><span>CR paid</span></div></div>
-   <div class="cn-mixw">${svg}<div class="cn-ley">${leyenda}</div></div>
-   <div class="as-tw"><table class="as-t cn-e"><thead><tr><th class="as-n">Mes de creación</th>${ms.map(m=>`<th>${ymTxt(m)}</th>`).join("")}<th>Total</th></tr></thead><tbody>
-    ${filas.map(([n,v],i)=>`<tr class="${i<3?"cn-r-d":i<6?"cn-r-w":"cn-r-c"}"><td class="as-n">${n}</td>${v.map(x=>`<td>${x}</td>`).join("")}<td><b>${[cnNum(tO[0]),cnNum(tP[0]),cnPct(tP[0]/((tP[0]+tO[0])||1)),cnNum(tO[1]),cnNum(tP[1]),cnPct(tP[1]/((tP[1]+tO[1])||1)),cnPct(tO[0]?tO[1]/tO[0]:null,2),cnPct(tP[0]?tP[1]/tP[0]:null,2)][i]}</b></td></tr>`).join("")}</tbody></table></div>${tbl2}
-   <p class="as-nota">Mix calculado con la misma clasificación del informe por canal: Organic (llamada, email, RRSS, generativa, blog, Google My Business, campaigns, trustpilot, SIN DATA...) y Paid (Bing, Google, Meta, Caminofy, ChatGPT Ads). Cada barra es el 100 % de los deals creados ese mes (Created Time). "Por medio" muestra el peso de cada medio dentro del total. El CR de los dos últimos meses todavía subirá porque muchos deals siguen abiertos.</p>`}
+function pintarMix(){/* pestaña oculta: código eliminado */}
 document.addEventListener("click",e=>{const r=e.target.closest("[data-mxr]");if(r&&st.cnMx){st.cnMx.rango=r.dataset.mxr;pintarMix();return}
   const n=e.target.closest("[data-mxn]");if(n&&st.cnMx){st.cnMx.nivel=n.dataset.mxn;pintarMix()}});
 
 /* ===== Captación: inversión, CPL, CPA y retorno por canal. Deals y won de Zoho; inversión e ingresos llegan de captacion_inversion/actual ===== */
-function pintarCPA(){const el=document.getElementById("c-captacion_cpa");if(!el||st.dentro!=="captacion")return;const C=st.canales;
-  if(!C||!(C.filas||[]).length||C.filas[0].length<5){el.innerHTML=`<div class="vacio">Álex está preparando los datos.</div>`;return}
-  const M=cnMensual(C),ult=M.meses[M.meses.length-1],y0=Math.floor(ult/100);
-  const V=st.cpV||(st.cpV={desde:y0*100+1,hasta:ult});const I=st.inversion||null;
-  const inv={};(I?.filas||[]).forEach(([k,ym,g,ing])=>{if(ym<V.desde||ym>V.hasta)return;const x=inv[k]||(inv[k]=[0,0]);x[0]+=g||0;x[1]+=ing||0});
-  const hayInv=Object.values(inv).some(x=>x[0]),hayIng=Object.values(inv).some(x=>x[1]);
-  const acw={};C.filas.forEach(f=>{const ym=f[2];if(ym<V.desde||ym>V.hasta)return;const k=cnClasif(f[0],f[1]).join("|"),x=acw[k]||(acw[k]=[0,0]);x[0]+=f[3];x[1]+=cnWonHasta(f,V.hasta)});
-  const dw=k=>acw[k]||[0,0];
-  const eur=n=>n==null?"":n<100&&n>0?n.toFixed(2).replace(".",",")+" €":Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";
-  const ph=`<span class="cp-ph">pendiente</span>`;
-  const SC=I?.sin_coste||[],sinC=keys=>keys.length&&keys.every(k=>SC.some(p=>k===p||k.startsWith(p+"|"))),sdc=`<span class="cp-ph" title="Coste sin conectar en Windsor">sin dato</span>`;
-  const fila=(nom,keys,cls,lvl,sd)=>{const r=keys.reduce((t,k)=>{const a=dw(k),b=inv[k]||[0,0];return[t[0]+a[0],t[1]+a[1],t[2]+b[0],t[3]+b[1]]},[0,0,0,0]);const[d,w,g,ing]=r;
-    const kc=keys.filter(k=>!sinC([k])||(inv[k]?.[0]||0)>0),rc=kc.reduce((t,k)=>{const a=dw(k),b=inv[k]||[0,0];return[t[0]+a[0],t[1]+a[1],t[2]+b[1]]},[0,0,0]);
-    const cpl=g&&rc[0]?g/rc[0]:null,cpa=g&&rc[1]?g/rc[1]:null,roas=g&&rc[2]?rc[2]/g:null,sc=hayInv&&!g&&sinC(keys);
-    return{html:`<tr class="${lvl===0?"cn-gh":lvl===1&&keys.length>1?"cn-par":"cn-lf"} ${cls}"><td class="${lvl===0?"":lvl===1?"cn-l1":"cn-l2"}${sd?" cn-sd":""}">${lvl===0?'<span class="cn-dot"></span>':""}${nom}</td>
-      <td>${sc?sdc:hayInv?(g?eur(g):(cls==="cn-org"?"–":eur(0))):ph}</td><td>${cnNum(d)}</td><td>${cnNum(w)}</td><td>${cnPct(d?w/d:null,2)}</td>
-      <td>${sc?sdc:hayInv?(cpl?eur(cpl):"–"):ph}</td><td>${sc?sdc:hayInv?(cpa?eur(cpa):"–"):ph}</td><td>${hayIng?(ing?eur(ing):"–"):ph}</td><td class="${roas!=null?(roas>=1?"cp-ok":"cp-ko"):""}">${sc?sdc:hayInv&&hayIng?(roas!=null?roas.toFixed(2).replace(".",",")+"×":"–"):ph}</td></tr>`,r}};
-  let h="",tot=[0,0,0,0];
-  for(const [G,L,cls] of [["PAID",CN_PAID,"cn-paid"],["ORGANIC",CN_ORG,"cn-org"]]){const all=M.orden.filter(k=>k.startsWith(G+"|"));const f0=fila(G,all,cls,0);h+=f0.html;f0.r.forEach((v,i)=>tot[i]+=v);
-    L.forEach(it=>{if(Array.isArray(it)){const ks=it[1].map(sb=>[G,it[0],sb].join("|"));if(!ks.some(k=>dw(k)[0]||inv[k]))return;h+=fila(it[0],ks,cls,1).html;if(ks.length>1)ks.forEach(k=>{if(dw(k)[0]||inv[k])h+=fila(k.split("|")[2],[k],cls,2,k.endsWith("SIN DATA")).html})}
-      else{const k=G+"|"+it;if(!dw(k)[0]&&!inv[k])return;h+=fila(it,[k],cls,1,it==="SIN DATA").html}})}
-  const[TD,TW,TG,TI]=tot;const cK=[...new Set([...Object.keys(acw),...Object.keys(inv)])].filter(k=>k.startsWith("PAID|")&&(!sinC([k])||(inv[k]?.[0]||0)>0)),PD=cK.reduce((t,k)=>t+dw(k)[0],0),PW=cK.reduce((t,k)=>t+dw(k)[1],0),PI=cK.reduce((t,k)=>t+(inv[k]?.[1]||0),0);
-  h+=`<tr class="cn-gen"><td>TOTAL</td><td>${hayInv?eur(TG):ph}</td><td>${cnNum(TD)}</td><td>${cnNum(TW)}</td><td>${cnPct(TD?TW/TD:null,2)}</td><td>${hayInv&&PD?eur(TG/PD):ph}</td><td>${hayInv&&PW?eur(TG/PW):ph}</td><td>${hayIng?eur(TI):ph}</td><td>${hayInv&&hayIng&&TG?(PI/TG).toFixed(2).replace(".",",")+"×":ph}</td></tr>`;
-  const ms=M.meses,opt=sel=>ms.map(m=>`<option value="${m}"${m===sel?" selected":""}>${ymTxt(m)}</option>`).join("");
-  const res=(ym,n)=>{let y=Math.floor(ym/100),m=ym%100-n;while(m<1){m+=12;y--}return y*100+m};
-  const pres=[["Este año",y0*100+1,ult],["Últimos 3 meses",res(ult,2),ult],["Mes pasado",res(ult,1),res(ult,1)],["Año pasado",(y0-1)*100+1,(y0-1)*100+12]].filter(p=>ms.includes(p[2])).map(([n,a,b])=>[n,Math.max(a,ms[0]),b]);
-  el.innerHTML=`<div class="mcab"><div><h2>CPA y retorno por canal</h2></div></div>
-   ${hayInv?"":`<div class="cp-aviso"><b>Inversión e ingresos pendientes de conectar.</b> Deals, won y CR ya son reales (Zoho, por mes de creación). La inversión llegará de Windsor.ai (Google Ads, Meta Ads, Bing, ChatGPT Ads y el coste de Caminofy) y los ingresos del importe de los deals won. En cuanto estén, las columnas marcadas como pendiente se rellenan solas.</div>`}
-   <div class="cn-fechas"><label>Desde <select data-cpf="desde">${opt(V.desde)}</select></label><label>Hasta <select data-cpf="hasta">${opt(V.hasta)}</select></label><div class="cn-pres">${pres.map(([n,a,b])=>`<button class="btn${V.desde===a&&V.hasta===b?" prim":""}" data-cppre="${a}-${b}">${n}</button>`).join("")}</div>${cnBtns("c-captacion_cpa")}${zBtn("canales")}</div>
-   <div class="as-res"><div><b>${hayInv?eur(TG):"–"}</b><span>invertido</span></div><div><b>${cnNum(TD)}</b><span>deals (leads)</span></div><div><b>${cnNum(TW)}</b><span>deals won</span></div><div><b>${hayInv&&PD?eur(TG/PD):"–"}</b><span>CPL medio de los canales con coste</span></div><div><b>${hayInv&&PW?eur(TG/PW):"–"}</b><span>CPA medio de los canales con coste</span></div><div><b>${hayInv&&hayIng&&TG?(PI/TG).toFixed(2).replace(".",",")+"×":"–"}</b><span>retorno (ROAS) de los canales con coste</span></div></div>
-   <div class="as-tw"><table class="as-t cn-e cp-t"><thead><tr><th class="as-n">Canal</th><th>Invertido</th><th>Deals</th><th>Won</th><th>CR</th><th>CPL</th><th>CPA</th><th>Ingresos won</th><th>Retorno</th></tr></thead><tbody>${h}</tbody></table></div>
-   ${I?.nota?`<p class="as-nota">${esc(I.nota)}${I.actualizado?` Inversión e ingresos actualizados el ${esc(I.actualizado.split("-").reverse().join("/"))}.`:""}</p>`:""}
-   <p class="as-nota">CPL = invertido / deals creados en el periodo. CPA = invertido / deals won (creados en el periodo y con Closing Date hasta el último mes del filtro). Retorno (ROAS) = ingresos de los deals won / invertido; por encima de 1× el canal devuelve más de lo que cuesta. Paid va primero porque es donde hay inversión; en Organic solo se rellenará si se le asigna coste (por ejemplo medios patrocinados o blog). Deals y won se cuentan por mes de creación del deal, igual que en las otras pestañas, así que el CPA de los meses recientes bajará a medida que se cierren ventas.</p>`}
+function pintarCPA(){/* pestaña oculta: código eliminado */}
 document.addEventListener("change",e=>{const s=e.target.closest("[data-cpf]");if(!s||!st.cpV)return;st.cpV[s.dataset.cpf]=Number(s.value);if(st.cpV.desde>st.cpV.hasta)[st.cpV.desde,st.cpV.hasta]=[st.cpV.hasta,st.cpV.desde];pintarCPA()});
 document.addEventListener("click",e=>{const b=e.target.closest("[data-cppre]");if(b&&st.cpV){const[a,c]=b.dataset.cppre.split("-").map(Number);st.cpV.desde=a;st.cpV.hasta=c;pintarCPA()}});
 
@@ -5042,14 +4812,7 @@ function pintarCR(){pintarCREvol();pintarCRImpacto();pintarCRTiempo();pintarCRPl
 
 /* ===== SEO para cada sala ===== */
 function seoBloque(x){return`<div class="titular bf-titular"><div class="eye">SEO te pasa</div><h3>${esc(x.titular||"")}</h3></div><ol class="prios">${(x.items||[]).map(i=>`<li class="prio"><div><h4>${esc(i.titulo)}</h4><p>${esc(i.dato)}</p><p class="bf-imp">→ ${esc(i.accion)}</p></div></li>`).join("")}</ol>`}
-function pintarSeoRed(){const S=st.seoRed,k=st.dentro;if(!k)return;
-  const vacio=`<div class="vacio">La sala de SEO está preparando lo que te pasa.</div>`;
-  if(k==="seo"){const el=document.getElementById("c-seo_red");if(!el)return;
-    el.innerHTML=`<div class="mcab"><div><h2>SEO para cada sala</h2><div class="fuente-mc" style="margin-top:6px">${S?esc(S.autor+" · "+S.fuente):""}</div></div><div class="meta">${S?.fecha?esc(hace(S.fecha)):""}</div></div>
-     ${S?`<p class="seo-res">${esc(S.resumen||"")}</p><div class="seo-grid">${Object.entries(S.salas||{}).map(([id,x])=>`<div class="directriz seo-card"><b>${esc(SEO_DEST[id]||id)}</b><p class="seo-t">${esc(x.titular||"")}</p><ul>${(x.items||[]).map(i=>`<li>${esc(i.titulo)}</li>`).join("")}</ul></div>`).join("")}</div>
-     <div class="seccion-t">Lo que SEO recibe de cada sala</div><div class="mc-sec"><table class="tabla bf-t"><thead><tr><th>Sala</th><th style="text-align:left">Qué manda a SEO</th></tr></thead><tbody>${(S.recibe||[]).map(r=>`<tr><td>${esc(r.sala)}</td><td style="text-align:left">${esc(r.que)}</td></tr>`).join("")}</tbody></table></div>`:vacio}`;return}
-  const el=document.getElementById("c-seo_"+k);if(!el)return;const x=S?.salas?.[k];
-  el.innerHTML=`<div class="mcab"><div><h2>Desde SEO</h2><div class="fuente-mc" style="margin-top:6px">${S?esc(S.fuente):""}</div></div><div class="meta">${S?.fecha?esc(hace(S.fecha)):""}</div></div>${x?seoBloque(x):vacio}`}
+function pintarSeoRed(){/* pestaña oculta: código eliminado */}
 
 /* ===== Meta Ads: auditoría de UTMs ===== */
 function pintarMetaUtm(){const el=document.getElementById("c-meta_utm");if(!el||st.dentro!=="metaads")return;const A=st.metaUtm;
@@ -6308,10 +6071,7 @@ function pintarBing(){if(st.dentro!=="bingads")return;const P=st.bingDoc,ids=["b
   ids.forEach(id=>{const e=document.getElementById("c-"+id);if(e&&typeof tzAplica==="function")try{tzAplica(e)}catch(_){}})}
 
 /* ===== Competencia: Mercados IT y PT (qué quieren, quién vende y en qué se enfoca la competencia) ===== */
-function pintarCompItpt(){const el=document.getElementById("c-comp_itpt");if(!el)return;const D=st.compItpt;
-  const cab=`<div class="mcab"><div><h2>Mercados IT y PT</h2><div class="fuente-mc" style="margin-top:6px">Italia, Brasil y Portugal: qué quieren, quién les vende el Camino y en qué se enfoca esa competencia</div></div><div class="meta">${D?.fecha?`actualizado ${esc(hace(D.fecha))}`:""}</div></div>`;
-  if(!D){el.innerHTML=`${cab}<div class="vacio">Inés y Marcos están leyendo los mercados italiano y portugués.</div>`;return}
-  try{el.innerHTML=cab+pintarCompItpt2(D)}catch(e){el.innerHTML=`${cab}<div class="vacio">No se pudo pintar el análisis: ${esc(e.message||String(e))}</div>`}}
+function pintarCompItpt(){/* pestaña oculta: código eliminado */}
 function pintarCompItpt2(D){const m=st.itptM||"it",M=D.mercados.find(x=>x.c===m)||D.mercados[0],Q=D.quieren[m]||{};
   const num=igGr,pc=v=>v==null?"–":String(v).replace(".",",")+" %",eur=v=>num(v)+" €";
   const kpi=(k)=>`<div><b>${k[2]==="eur"?eur(k[1]):k[2]==="num"?num(k[1]):esc(String(k[1]))}</b><span>${esc(k[0])}</span>${k[3]?`<small class="ia-k2">${esc(k[3])}</small>`:""}</div>`;
@@ -6816,14 +6576,7 @@ function regionMedio(i){if(i.region&&REG_ACT.some(r=>r[0]===i.region))return i.r
   if(/\.(de|at|ch)$/.test(h))return"de";
   if(/\.it$/.test(h))return"it";if(/\.pt$/.test(h))return"pt";if(/\.(es|gal|cat|eus)$/.test(h))return"es";
   const l=String(i.idioma||i.mercado||"").toLowerCase();return{es:"es",pt:"pt",it:"it",de:"de"}[l]||"otros"}
-function pintarActualidad(){const el=document.getElementById("c-radar_actualidad");if(!el)return;
-  const T=activos().filter(i=>i.plataforma==="prensa"),reg=st.actReg||"todos",cnt={};T.forEach(i=>{const r=regionMedio(i);cnt[r]=(cnt[r]||0)+1});
-  const F=reg==="todos"?T:T.filter(i=>regionMedio(i)===reg),RN=Object.fromEntries(REG_ACT);
-  const N=F.slice().sort((a,b)=>Date.parse(b.publicado||b.detectado||0)-Date.parse(a.publicado||a.detectado||0)).slice(0,st.actLim||15);
-  el.innerHTML=`<div class="mcab"><div><h2>Actualidad del Camino</h2><div class="fuente-mc" style="margin-top:6px">Noticias recientes que importan para Santiago Ways, por mercado del medio</div></div></div>
-   <div class="filtros">${REG_ACT.filter(([k])=>k==="todos"||cnt[k]||k!=="otros").map(([k,n])=>`<button class="chip" type="button" data-actreg="${k}" aria-pressed="${reg===k}">${esc(n)} <small>${k==="todos"?T.length:(cnt[k]||0)}</small></button>`).join("")}</div>
-   ${N.length?`<div class="act-l">${N.map(i=>`<a class="act-it" href="${esc(safeUrl(i.url))}" target="_blank" rel="noopener"><div class="act-meta">${esc(i.fuente||"")}${i.publicado||i.detectado?` · ${esc(hace(i.publicado||i.detectado))}`:""}${` · ${esc(RN[regionMedio(i)]||"")}`}</div><h4>${esc(i.titulo)}</h4>${i.resumen?`<p>${esc(corta(i.resumen,200))}</p>`:""}</a>`).join("")}</div>
-   ${F.length>N.length?`<button class="btn" type="button" id="actMas" style="margin:10px 20px 0">Ver más noticias</button>`:""}`:`<div class="vacio">${T.length?"No hay noticias de medios de este mercado todavía. Andrés lo tiene en su lista.":"Andrés está leyendo la prensa."}</div>`}`}
+function pintarActualidad(){/* pestaña oculta: código eliminado */}
 function pintarDatos(){
   const items=activos(),e=st.estado||{};
   const dia=items.filter(i=>Date.now()-Date.parse(i.detectado)<864e5).length;
