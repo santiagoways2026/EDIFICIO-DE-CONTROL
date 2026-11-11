@@ -174,3 +174,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 v228: oculto instagram_comp (competencia IG).
 - 11/11 v229: oculto i_instagram (Análisis por cuenta).
 - 11/11 v230: oculto instagram_mision (Misión, equipo y valores).
+- 11/11 v231: dash IG: cajas de captación (2×2) a la izquierda y gráfica de deals/ventas a la derecha (.igc-lado).
