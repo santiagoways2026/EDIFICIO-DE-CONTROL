@@ -153,3 +153,6 @@ Avisarle SIEMPRE, sin esperar a que pregunte, de cualquier alarma, caída de ren
 
 ## Regla de Álvaro (10/11/2026): automatizaciones como máximo una vez al día
 Ninguna tarea programada corre más de una vez al día salvo que Álvaro lo pida. Cambiadas a diario (hora de Madrid): Radar barrida 6:18, Radar capturas 10:48, Competencia ronda 8:27, Competencia exploración 8:13, YouTube vigías 6:47, Cerebro 7:28, Sala de Control 7:50, Diseño 9:47, Sales Dream Team 7:06. Para ahorrar tokens: subagentes pesados con modelo económico y resumen común (scratchpad cierre26/20_resumen.md).
+
+## Regla de Álvaro (11/11/2026): Seguimiento RRSS solo bajo petición
+Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkEx8zPfDFUQHspni8eYb) y «Seguimiento RRSS: lectura del día 1» (trig_01SUxoTJZFju2zQsvur62PtE). No lanzar ni actualizar el seguimiento de RRSS salvo que Álvaro lo pida. Prioridad: conservar tokens.
