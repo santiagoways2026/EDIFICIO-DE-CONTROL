@@ -1625,7 +1625,7 @@ MARCOS.push({id:"control_instagram",grupo:"control",dato:true,directo:true,nombr
 SALAS_ACT.openaiads=["openaiads","oai_dash","oai_camp","oai_anu","oai_crm","oai_plan"];SALAS_ACT.bingads=["bingads","bing_dash","bing_camp","bing_crm","bing_plan"];SALAS_ACT.cro=["cro","cro_dash","cro_backlog","cro_tests","cro_analytics","cro_result"];
 /* Las directrices entre salas (Desde SEO, SEO para cada sala, brief de Control a Diseño) siguen circulando por la base de datos y las rutinas, pero sin pestaña.
    En YouTube, la auditoría y la estrategia Hub & Spoke quedan retiradas de momento */
-const MODS_OCULTOS=new Set(["tiktok_mision","tiktok_datos","community_roadmap","youtube_roadmap","youtube_mision","youtube_datos","instagram_cuentas","instagram_comp","i_instagram","instagram_mision","listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
+const MODS_OCULTOS=new Set(["comp_itpt","comp_nuevos","comprrss","tiktok_mision","tiktok_datos","community_roadmap","youtube_roadmap","youtube_mision","youtube_datos","instagram_cuentas","instagram_comp","i_instagram","instagram_mision","listado","seo_red","o_audit","o_plan","g_seo","radar_actualidad","bitacora","d_brief","youtube_audit","youtube_hub",...(ED.modsNo||[])]);
 for(let i=MARCOS.length-1;i>=0;i--)if(MODS_OCULTOS.has(MARCOS[i].id))MARCOS.splice(i,1);
 Object.values(SALAS_ACT).forEach(a=>{for(let i=a.length-1;i>=0;i--)if(MODS_OCULTOS.has(a[i]))a.splice(i,1)});
 /* Pasillos: trazados en coordenadas del mundo; los paquetes recorren cada pasillo en el sentido del flujo */
@@ -2268,7 +2268,7 @@ function pintarCompExp(){const X=st.compExp,ya=new Set((st.players||[]).map(p=>p
   if(b){const P=X?.practicas||[],salas=[...new Set(P.map(x=>x.sala).filter(Boolean))],f=st.bpSala||"todas",L=P.filter(x=>f==="todas"||x.sala===f);
     b.innerHTML=cab("Best practices del travel de nicho","Marcos estudia a quien lo está haciendo bien en viajes de nicho y propone cómo aplicarlo, siempre con fuente")+
     (P.length?`<div class="tabs" style="padding:0 20px 10px">${["todas",...salas].map(x=>`<button class="tab" data-bpsala="${esc(x)}" aria-pressed="${f===x}">${x==="todas"?"Todas las salas":esc(x)}</button>`).join("")}</div>
-    <ol class="prios">${L.map(x=>`<li class="prio"><div><h4>${esc(x.empresa)}: ${esc(x.practica)}</h4><p>${esc(x.ejemplo||"")}</p>${x.dato?`<p><b>Dato:</b> ${esc(x.dato)}</p>`:""}<p class="bf-imp">→ ${esc(x.aplicar||"")}</p><div class="imeta"><span class="cx-sala">${esc(x.sala||"")}</span><span>${fu(x.fuentes)}</span></div></div></li>`).join("")}</ol>`:vacio("Marcos"));}
+    <div class="yb-grid">${L.map(x=>`<div class="yb-t" title="${esc([x.practica,x.ejemplo,x.dato?"Dato: "+x.dato:"",x.aplicar?"Aplicar: "+x.aplicar:""].filter(Boolean).join("\n"))}"><span class="sint-ic">${sintIc(x.practica+" "+(x.ejemplo||""))}</span><div><b>${esc(x.empresa)}</b><small style="color:#e6eaee;font-size:12.5px">${esc(sintCorta(x.practica,90))}</small>${x.aplicar?`<small>👉 ${esc(sintCorta(x.aplicar,80))}</small>`:""}${x.sala?`<span class="cx-sala" style="margin-top:6px;display:inline-block">${esc(x.sala)}</span>`:""}</div></div>`).join("")}</div><p class="as-nota">Pasa el ratón por una tarjeta para ver el ejemplo, el dato y la fuente.</p>`:vacio("Marcos"));}
 }
 document.addEventListener("click",async e=>{const t=e.target.closest("[data-bpsala]");if(t){st.bpSala=t.dataset.bpsala;pintarCompExp();return}
   const v=e.target.closest("[data-vigilar]");if(!v)return;const c=(st.compExp?.candidatos||[]).find(x=>x.id===v.dataset.vigilar);if(!c||!st.db)return;
@@ -2295,9 +2295,8 @@ function pintarCompetencia(){pintarCompExp();pintarCompItpt();
     </div>
     <ul class="alertas">${lista.length?lista.slice(0,st.cLimite).map(c=>{const t=TIPOS_C[c.tipo]||{n:c.tipo,c:"#7f8a99"};return`<li class="alerta">
       <div class="cuando">${LOGOS[c.player]?`<span class="pl-logo" title="${esc(nombre(c.player))}">${logoP(c.player,18)}</span>`:`<b>${esc(nombre(c.player))}</b>`}${esc(hace(c.detectado))}${c.fecha?`<br>suceso: ${esc(new Date(c.fecha).toLocaleDateString("es-ES",{day:"numeric",month:"short"}))}`:""}</div>
-      <div style="min-width:0"><div class="imeta"><span class="tipo" style="--c:${t.c}">${esc(t.n)}</span>${c.impacto?`<span class="impacto ${esc(c.impacto)}">${esc(c.impacto)}</span>`:""}<span>por ${esc(c.agente||"el equipo")}</span>${c.url?`<a href="${esc(safeUrl(c.url))}" target="_blank" rel="noopener">fuente ↗</a>`:""}</div>
-        <h4>${esc(c.titulo)}</h4><p>${esc(c.detalle||"")}</p>
-        ${c.antes||c.despues?`<div class="difs"><div class="dif antes">${esc(corta(c.antes||"(no existía)",600))}</div><div class="dif despues">${esc(corta(c.despues||"(eliminado)",600))}</div></div>`:""}
+      <div style="min-width:0"><div class="imeta"><span class="tipo" style="--c:${t.c}">${esc(t.n)}</span>${c.impacto?`<span class="impacto ${esc(c.impacto)}">${esc(c.impacto)}</span>`:""}${c.url?`<a href="${esc(safeUrl(c.url))}" target="_blank" rel="noopener">fuente ↗</a>`:""}</div>
+        <h4 title="${esc([c.detalle,c.antes?"Antes: "+c.antes:"",c.despues?"Ahora: "+c.despues:""].filter(Boolean).join("\n"))}">${esc(sintCorta(c.titulo,110))}</h4>
         ${c.implicacion?`<div class="porque" style="margin-top:8px">${esc(c.implicacion)}</div>`:""}</div></li>`}).join(""):`<li class="vacio"><b>${st.conectado?"El equipo está en su primera investigación":"Conectando con la sala"}</b>Aquí aparecerá cada cambio detectado, con el antes y el después cuando sea un cambio de web o de precio.</li>`}</ul>
     ${lista.length>st.cLimite?`<button class="btn mas" id="cMas">Mostrar ${Math.min(20,lista.length-st.cLimite)} más</button>`:""}`;
   $("#cPlayer").value=st.cPlayer;$("#cImpacto").value=st.cImpacto;
@@ -4515,7 +4514,7 @@ function pintarRrss(){const el=document.getElementById("c-community_rrss");if(!e
   el.innerHTML=`<div class="mcab"><div><h2>Seguimiento RRSS</h2><div class="fuente-mc" style="margin-top:6px">${esc(X.archivo||"Excel de seguimiento")} en vivo: Metricool (11 cuentas propias y competidores), Zoho CRM y lecturas de fin de mes</div></div><div class="meta">${estado}</div></div>
     <div class="as-ctl"><div class="as-modo rr-vistas">${Object.entries(RR_V).map(([k,n])=>chip("v",k,n,V.v===k)).join("")}</div></div>
     <div class="ia-per">${MS.length?`De enero a ${rrMesL(hoyYm)} de ${Math.floor(hoyYm/100)} (${rrMesL(hoyYm)} en curso).`:""} CRM de Zoho del ${esc(rrF(String(CRM.fecha).slice(0,10)))}. Próxima lectura de competidores: ${esc(rrF(LM.proxima||""))}.</div>
-    ${(D.avisos||[]).length?`<div class="rr-aviso">⚠ Rutina nocturna: ${D.avisos.map(esc).join("; ")}.${D.avisos.some(x=>/conector/i.test(x))?" Hay que añadir los conectores de Metricool y Zoho CRM a la rutina «Seguimiento RRSS» en claude.ai; mientras, Metricool se lee en vivo al abrir la página y el CRM se queda en la última carga.":""}</div>`:""}
+    ${false&&(D.avisos||[]).length?`<div class="rr-aviso">⚠ Rutina nocturna: ${D.avisos.map(esc).join("; ")}.${D.avisos.some(x=>/conector/i.test(x))?" Hay que añadir los conectores de Metricool y Zoho CRM a la rutina «Seguimiento RRSS» en claude.ai; mientras, Metricool se lee en vivo al abrir la página y el CRM se queda en la última carga.":""}</div>`:""}
     ${cuerpo}
     <p class="as-nota">${(D.notas||[]).map(esc).join(" ")} Deals CRM: ${esc(CRM.fuente)}.</p>`}
 document.addEventListener("click",e=>{if(!st.rrV)return;const b=e.target.closest("[data-rrv],[data-rrred],[data-rrmet]");if(!b||!b.closest("#c-community_rrss"))return;
