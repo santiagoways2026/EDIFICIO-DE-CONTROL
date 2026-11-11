@@ -198,3 +198,4 @@ Desactivadas las tareas «Seguimiento RRSS: actualización diaria» (trig_018mkE
 - 11/11 (v250): Captación sin «CPA y retorno por canal», «Mix Paid / Organic» ni «Evolución del CR por canal» (MODS_OCULTOS). Quedan Inversión/CPL/CPA, Deals y CR por canal y Tiempo de conversión.
 - 11/11: Sala de Control solo los lunes 6:53 (Madrid) y Cerebro los lunes 6:33, justo antes. Fuera de eso solo se actualiza cuando Álvaro lo pida (fire_trigger).
 - 11/11 (v251): modo ligero siempre activo (animaciones decorativas apagadas) y botón «Modo ligero» eliminado.
+- 11/11: semanales los lunes (Madrid): SEO técnico 5:32, Competencia ronda 5:47, Community 6:07, Auditoría SEO 6:17, Cerebro 6:33, Control 6:53, Lifecycle 7:22. Siguen diarias: errores de posts y Google Ads (esta sesión) y Sales Dream Team.
