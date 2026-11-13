@@ -1,6 +1,6 @@
 # Construye cache.json con las llamadas a Zoho Suite hechas en este chat (desde la transcripción)
 import json,re,os,sys
-F='/root/.claude/projects/-home-user/d31d6c59-019f-5e35-92c4-4a675a8a9318.jsonl'
+F=os.environ.get('TRANSCRIPT','/root/.claude/projects/-home-user/d31d6c59-019f-5e35-92c4-4a675a8a9318.jsonl')
 since=sys.argv[1] if len(sys.argv)>1 else ''
 uses={};res={}
 for line in open(F):
