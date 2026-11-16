@@ -33,16 +33,16 @@ h1{{font-size:54px;font-weight:800;line-height:1.1}} .hl{{display:inline-block;b
 .pr{{position:absolute;right:96px;top:72px;background:{K};color:#fff;border-radius:16px;padding:20px 26px;width:470px}}
 .pr b{{color:#C6E07A}} .pr p{{font-size:21px;line-height:1.4}}</style></head><body>
 <h1>Meta Ads: más deals, más baratos</h1><h1><span class="hl">y convirtiendo mejor</span></h1>
-<div class="pr"><p><b>Proyección de octubre</b><br>CR final <b>2,6 a 3 %</b> (objetivo 2 %)<br>CPA <b>600 a 700 €</b> por venta<br>Se confirma a mediados de diciembre</p></div>
+<div class="pr"><p><b>Proyección de octubre</b><br>CR final <b>2,6 a 3 %</b> (objetivo 2 %)<br>Coste por venta <b>sigue bajando</b><br>Se confirma a mediados de diciembre</p></div>
 <div class="kp">
 {tile('Inversión octubre','11,0 k€','+20 % frente a 9,1 k€ de media',False)}
 {tile('Deals en CRM','611','+71 % frente a 357 de media')}
 {tile('CPL (coste por deal)','18 €','−30 % frente a 25,6 €')}
 {tile('CR a 30 días','2,0 %','frente a 1,5 % en jul-sep')}
-{tile('CPA hoy (oct inmaduro)','1.001 €','jul-sep: 915 €; proyectado 600-700 €',False)}
+{tile('Coste por venta','−40 %','jun-sep frente a ene-mar')}
 </div>
 <div class="ch"><div><p class="ct">Deals de Meta en el CRM por mes de creación</p>{c1}</div>
 <div><p class="ct">Conversión a venta a 30 días <span class="cs">(misma edad para todos los meses; línea: objetivo 2 %)</span></p>{c2}</div></div>
-<div class="ft"><span><b style="color:#506718">UTMs revisadas en todo el histórico: el crecimiento es real y viene de las audiencias píxel (69 → 386 deals). Por medir: cuánto es incremental.</b><br>Antes del recorte (ene-mar): 40 k€ al mes, CR 1,4-2,5 %, CPA 1.300-2.300 €. 11 ventas en octubre: una venta mueve el CR unas 3 décimas.<br>Fuente: Zoho CRM (deals con utm_source meta, a 16/11/2026) y Meta Ads por Windsor (gasto a 14/11/2026). Noviembre en curso, fuera del gráfico.</span></div>
+<div class="ft"><span><b style="color:#506718">UTMs revisadas en todo el histórico: el crecimiento es real y viene de las audiencias píxel (69 → 386 deals). Por medir: cuánto es incremental.</b><br>Antes del recorte (ene-mar): 40 k€ al mes y CR de 1,4 a 2,5 %; en abril se dejó solo remarketing. 11 ventas en octubre: una venta mueve el CR unas 3 décimas.<br>Fuente: Zoho CRM (deals con utm_source meta, a 16/11/2026) y Meta Ads por Windsor (gasto a 14/11/2026). Noviembre en curso, fuera del gráfico.</span></div>
 </body></html>'''
 open('meta_direccion.html','w').write(html)
