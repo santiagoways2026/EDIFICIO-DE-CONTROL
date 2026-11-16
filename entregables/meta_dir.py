@@ -43,6 +43,6 @@ h1{{font-size:54px;font-weight:800;line-height:1.1}} .hl{{display:inline-block;b
 </div>
 <div class="ch"><div><p class="ct">Deals de Meta en el CRM por mes de creación</p>{c1}</div>
 <div><p class="ct">Conversión a venta a 30 días <span class="cs">(misma edad para todos los meses; línea: objetivo 2 %)</span></p>{c2}</div></div>
-<div class="ft"><span>Comparación: octubre frente a la media de julio a septiembre. Antes del recorte (ene-mar): 40 k€ al mes, CR 1,4-2,5 %, CPA 1.300-2.300 €. Octubre tiene 11 ventas: una venta mueve el CR unas 3 décimas.<br>Fuente: Zoho CRM (deals con utm_source meta, a 16/11/2026) y Meta Ads por Windsor (gasto a 14/11/2026). Noviembre en curso, fuera del gráfico.</span></div>
+<div class="ft"><span><b style="color:#506718">UTMs revisadas en todo el histórico: el crecimiento es real y viene de las audiencias píxel (69 → 386 deals). Por medir: cuánto es incremental.</b><br>Antes del recorte (ene-mar): 40 k€ al mes, CR 1,4-2,5 %, CPA 1.300-2.300 €. 11 ventas en octubre: una venta mueve el CR unas 3 décimas.<br>Fuente: Zoho CRM (deals con utm_source meta, a 16/11/2026) y Meta Ads por Windsor (gasto a 14/11/2026). Noviembre en curso, fuera del gráfico.</span></div>
 </body></html>'''
 open('meta_direccion.html','w').write(html)
