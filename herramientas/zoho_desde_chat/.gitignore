@@ -1,0 +1,5 @@
+# Datos de trabajo del refresco desde el chat (resultados de Zoho y copias de documentos): no se versionan
+cache*.json
+need_*.json
+docs/
+out/
